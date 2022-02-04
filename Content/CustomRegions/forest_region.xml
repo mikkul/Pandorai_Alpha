@@ -39,7 +39,7 @@
 			</location>
 			<inventory>
 				<choice>
-					<invItem name="FireballSpell" number="4" />
+					<invItem name="FireArrowSpell" number="4" />
 					<invItem name="SpeedPotion" number="3" />
 				</choice>
 			</inventory>

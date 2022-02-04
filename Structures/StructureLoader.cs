@@ -51,6 +51,8 @@ namespace Pandorai.Structures
 			{ "Destructible", typeof(Destructible) },
 			{ "RegionPedestal", typeof(RegionPedestal) },
 			{ "LightEmitter", typeof(LightEmitter) },
+			{ "Door", typeof(Door) },
+			{ "Dialogue", typeof(Dialogue) },
 		};
 	}
 }

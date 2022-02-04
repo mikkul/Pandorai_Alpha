@@ -74,9 +74,12 @@ namespace Pandorai.Items
 
 		static Dictionary<string, Type> effectTypeLegend = new Dictionary<string, Type>
 		{
-			{ "RestoreHP", typeof(RestoreHP) },
+			{ "ModifyHP", typeof(ModifyHP) },
 			{ "CastFireball", typeof(CastFireball) },
 			{ "CastWave", typeof(CastWave) },
+			{ "SpawnSpikes", typeof(SpawnSpikes) },
+			{ "ModifySpeed", typeof(ModifySpeed) },
+			{ "ModifyStealth", typeof(ModifyStealth) },
 		};
 	}
 }

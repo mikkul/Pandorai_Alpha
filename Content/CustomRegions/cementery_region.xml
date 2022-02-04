@@ -45,7 +45,7 @@
 		<structure name="Door" number="9-12">
 		</structure>
 
-		<item name="FireballSpell" number="3-4" />
+		<item name="FireArrowSpell" number="3-4" />
 
 		<item name="SpeedPotion" number="3-4" />
 		

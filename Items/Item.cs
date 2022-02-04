@@ -52,6 +52,7 @@ namespace Pandorai.Items
 		Spell = 1,
 		Food = 2,
 		Offensive = 4,
-		Other = 8,
+		Clothes = 8,
+		Other = 16,
 	}
 }

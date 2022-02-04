@@ -2,7 +2,7 @@
 
 namespace Pandorai.Effects
 {
-	public class RestoreHP : Effect
+	public class ModifyHP : Effect
 	{
 		public int Amount;
 
