@@ -1,0 +1,34 @@
+﻿<customRegion name="KeeperLibrary" floorColor="#de663e" borderColor="#f2b566" sample="goldenSample">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="19" height="13" />
+	</dimensions>
+	<content>
+
+		<entrance name="MainEntrance" number="1" />
+
+		<structure name="Door" number="3">
+			<location>
+				<proximity to="MainEntrance" distance="very close" />
+			</location>
+		</structure>
+
+		<structure name="BookStand" number="6-8">
+			<location>
+				<layer where="border" />
+				<proximity to="MainEntrance" distance="very far" tolerance="4" />
+			</location>
+		</structure>
+
+		<creature name="Keeper" number="1" />
+
+		<trigger name="LeaveLibraryTrigger">
+			<location>
+				<proximity to="MainEntrance" distance="very close" />
+			</location>
+		</trigger>
+
+	</content>
+</customRegion>
+

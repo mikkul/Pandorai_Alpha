@@ -1,0 +1,15 @@
+{
+	"TileData": [
+		[2, 0, 0, 1],
+		[0, 0, 0, 0],
+		[0, 0, 0, 1],
+		[1, 1, 1, 1]
+	],
+	"Legend": [
+		{"Key": 0, "Value": "Empty"},
+		{"Key": 1, "Value": "Wall"},
+		{"Key": 2, "Value": "StairsUp"}
+	],
+	"Level": "Underground",
+	"DesiredLocation": {"X": 0, "Y": 0}
+}

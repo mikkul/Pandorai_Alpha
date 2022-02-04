@@ -1,0 +1,86 @@
+<customRegion name="Cementery" floorColor="#a9c2b0" borderColor="#5b7d6b" sample="wfcSample2">
+	<location>
+		<proximity to="Forest" distance="close" />
+		<proximity to="Shrine" distance="very close" />
+	</location>
+	<dimensions>
+		<rectangle width="30-40" height="15">
+			<rectangle width="10" height="25-30" placement="left" offsetX="-10" offsetY="5" />
+			<rectangle width="10" height="25-30" placement="right" offsetX="-10" offsetY="5" />
+		</rectangle>
+	</dimensions>
+	<content>
+		
+		<choice>
+			<group weight="0">
+				<creature name="Spider" number="2-3" />
+				<creature name="Rat" number="4-7" />
+			</group>
+			<group weight="20">
+				<creature name="Skeleton" number="4-6">
+					<location>
+						<proximity to="StairsDown" distance="close" />
+					</location>
+				</creature>
+				<group chance="100">
+					<structure name="WarriorTomb" number="1" />
+					<creature name="ShadowWarrior" number="1">
+						<location>
+							<proximity to="WarriorTomb" distance="very close" />
+						</location>
+					</creature>
+				</group>
+			</group>
+		</choice>
+
+		<structure name="Grave" number="30-40">
+		</structure>
+		
+		<structure name="Torch" number="6-8">
+			<location>
+				<layer where="border" />
+			</location>
+		</structure>
+		
+		<structure name="Door" number="9-12">
+		</structure>
+
+		<item name="FireballSpell" number="3-4" />
+
+		<item name="SpeedPotion" number="3-4" />
+		
+		<item name="HealthPotion" number="3">
+			<location>
+				<proximity to="Chest" distance="close" />
+				<proximity to="StairsDown" distance="far" />
+			</location>
+		</item>
+		<item name="StoneSpikesSpell" number="4">
+			<location>
+				<choice>
+					<proximity to="StairsDown" distance="very close" />
+					<proximity to="Door" distance="very close" />
+				</choice>
+			</location>
+		</item>
+
+		<structure name="Chest" number="3-4">
+			<location>
+				<layer thickness="2" where="border" offset="0" />
+				<proximity to="MainEntrance" distance="close" />
+			</location>
+			<inventory>
+				<choice>
+					<invItem name="YellowKey" number="2-3" chance="75" />
+					<invItem name="HealthPotion" number="1-2" chance="50" />
+				</choice>
+				<invItem name="TransformSpell" number="1" chance="20" />
+			</inventory>
+		</structure>
+
+		<entrance name="MainEntrance" number="2">
+			
+		</entrance>
+		
+	</content>
+</customRegion>

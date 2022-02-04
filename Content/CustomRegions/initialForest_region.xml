@@ -1,0 +1,52 @@
+﻿<customRegion name="InitialForest" floorColor="#4b9c50" borderColor="#2c693d" sample="forestWithPathSample">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="40-50" height="30-40" fillInterior="false">
+			<rectangle width="15" height="15" placement="center" offsetX="0" offsetY="0" />
+		</rectangle>
+	</dimensions>
+	<content>
+
+		<structure name="Chest" number="1">
+			<location>
+				<layer where="center" />
+			</location>
+			<inventory>
+				<invItem name="HealthPotion" number="2-3" />
+			</inventory>
+		</structure>
+
+		<structure name="Barrel" number="8-11">
+			<inventory>
+				<invItem name="HealthPotion" number="1" chance="50" />
+			</inventory>
+		</structure>
+
+		<structure name="RegionPedestal" number="2">
+			<location>
+				<layer where="center" />
+			</location>
+		</structure>
+
+		<creature name="Spider" number="10">
+			<location>
+			</location>
+		</creature>
+
+		<creature name="Seeker" number="1">
+			<location>
+				<proximity to="RegionPedestal" distance="close" />
+			</location>
+		</creature>
+
+		<creature name="Traveller" number="0" />
+
+		<item name="RegionGem" number="2">
+			<location>
+				<proximity to="Seeker" distance="close" />
+			</location>
+		</item>
+
+	</content>
+</customRegion>

@@ -1,0 +1,46 @@
+﻿<!index  >-2
+<!type   >Exit
+#
+<!index  >0
+<!type   >Start
+<method>SetHeroName(Hero)
+<method>SetNPCName(Keeper)
+<if   >firstMeeting
+	   <method>SetBool(firstMeeting, false)
+	   <method>SetLead(1)
+</if  >
+<else >
+	   <method>SetLead(-1)
+</else>
+#
+<!index  >1
+<!type   >NPCSay
+<!content>Took you long to answer my call, huh?
+<method>SetLead(2)
+#
+<!index  >2
+<!type   >HeroSay
+<!content>What's the matter?
+<method>SetLead(3)
+#
+<!index  >3
+<!type   >NPCSay
+<!content>I think you've grown up enough to help me with something
+<method>SetLead(4)
+#
+<!index  >4
+<!type   >NPCSay
+<!content>I need you to collect... //TODO: FInish this
+<method>SetLead(18)
+#
+<!index  >18
+<!type   >NPCSay
+<!content>Make me proud
+<method>GiveHeroItem(YellowKey)
+<method>GiveHeroItem(TransformSpell)
+<method>SetLead(19)
+#
+<!index  >19
+<!type   >NPCSay
+<!content>I'll return as quickly as possible
+<method>SetLead(-2)

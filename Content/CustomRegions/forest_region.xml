@@ -1,0 +1,63 @@
+﻿<customRegion name="Forest" floorColor="#4b9c50" borderColor="#2c693d" sample="forestSample">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="50-60" height="50-60" fillInterior="false">
+			<rectangle width="20" height="20" placement="center" offsetX="0" offsetY="0" />
+		</rectangle>
+	</dimensions>
+	<content>
+
+		<creature name="Seeker" number="2-3" />
+		<creature name="Spider" number="8-12" />
+
+		<item name="StealthCape" number="1">
+			<location>
+				<proximity to="WarriorTomb" distance="far" />
+			</location>
+		</item>
+		<creature name="Spider" number="7-9">
+			<location>
+				<proximity to="StealthCape" distance="close" />
+			</location>
+		</creature>
+		<creature name="Spider" number="3-4">
+			<location>
+				<proximity to="StealthCape" distance="very close" />
+			</location>
+		</creature>
+
+		<structure name="WarriorTomb" number="1">
+			<location>
+				<layer where="center" />
+			</location>
+		</structure>
+
+		<structure name="Chest" number="2">
+			<location>
+				<proximity to="WarriorTomb" distance="very close" />
+			</location>
+			<inventory>
+				<choice>
+					<invItem name="FireballSpell" number="4" />
+					<invItem name="SpeedPotion" number="3" />
+				</choice>
+			</inventory>
+		</structure>
+
+		<structure name="Grave" number="36-42">
+			<location>
+				<layer thickness="3" where="center" offset="4" />
+				<proximity to="WarriorTomb" distance="close" tolerance="4" />
+			</location>
+		</structure>
+
+		<creature name="Seeker" number="4">
+			<location>
+				<layer thickness="3" where="center" offset="2" />
+				<proximity to="WarriorTomb" distance="close" tolerance="4" />
+			</location>
+		</creature>
+
+	</content>
+</customRegion>

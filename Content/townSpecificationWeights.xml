@@ -1,0 +1,9 @@
+<weights>
+	<level no="1">
+		<CastleExistance>
+			<None>18</None>
+			<InnerCastle>4</InnerCastle>
+			<Citadel>0</Citadel>
+		</CastleExistance>
+	</level>
+</weights>

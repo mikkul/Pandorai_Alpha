@@ -1,0 +1,86 @@
+<prefabs>
+	<prefab name="rectangle">
+		<points>
+			<point id="1">
+				<x>-1</x>
+				<y>-1</y>
+			</point>
+			<point id="2">
+				<x>1</x>
+				<y>-1</y>
+			</point>
+			<point id="3">
+				<x>1</x>
+				<y>1</y>
+			</point>
+			<point id="4">
+				<x>-1</x>
+				<y>1</y>
+			</point>
+		</points>
+		<constraints>
+			<constraint type="Horizontal">
+				<id>1</id>
+				<id>4</id>
+			</constraint>
+			<constraint type="Horizontal">
+				<id>2</id>
+				<id>3</id>
+			</constraint>
+			<constraint type="Vertical">
+				<id>1</id>
+				<id>2</id>
+			</constraint>
+			<constraint type="Vertical">
+				<id>3</id>
+				<id>4</id>
+			</constraint>
+		</constraints>
+		<edges>
+			<edge type="Line">
+				<id>1</id>
+				<id>2</id>
+			</edge>
+			<edge type="Line">
+				<id>2</id>
+				<id>3</id>
+			</edge>
+			<edge type="Line">
+				<id>3</id>
+				<id>4</id>
+			</edge>
+			<edge type="Line">
+				<id>4</id>
+				<id>1</id>
+			</edge>
+		</edges>
+	</prefab>
+	<prefab name="half-circle">
+		<points>
+			<point id="1">
+				<x>-1</x>
+				<y>0</y>
+			</point>
+			<point id="2">
+				<x>1</x>
+				<y>0</y>
+			</point>
+		</points>
+		<constraints>
+			<constraint type="Vertical">
+				<id>1</id>
+				<id>2</id>
+			</constraint>
+		</constraints>
+		<edges>
+			<edge type="Arc" angle="180">
+				<id>1</id>
+				<id>2</id>
+			</edge>
+			<edge type="Line">
+				<id>2</id>
+				<id>1</id>
+			</edge>
+		</edges>
+	</prefab>
+</prefabs>

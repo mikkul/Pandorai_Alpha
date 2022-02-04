@@ -1,0 +1,150 @@
+<!index  >-2
+<!type   >Exit
+#
+<!index  >0
+<!type   >Start
+<method>SetHeroName(Hero)
+<method>SetNPCName(Jack)
+<if   >firstMeeting
+	   <method>AddOption(1)
+	   <method>SetBool(firstMeeting, false)
+	   <method>SetLead(-1)
+</if  >
+<else >
+	   <method>SetLead(2)
+</else>
+#
+<!index  >1
+<!type   >HeroOption
+<!content>Where am I?
+<method>SetLead(3)
+#
+<!index  >2
+<!type   >NPCSay
+<!content>We meet again
+<method>SetLead(-1)
+<if>notRagedYet
+	<method>AddOption(18)
+	<method>SetBool(notRagedYet, false)
+</if>
+#
+<!index  >3
+<!type   >HeroSay
+<!content>Where am I?
+<method>SetLead(4)
+#
+<!index  >4
+<!type   >NPCSay
+<!content>In the prison. You have been captured
+<method>AddOption(5)
+<method>AddOption(6)
+<method>AddOption(14)
+<method>SetLead(-1)
+#
+<!index  >5
+<!type   >HeroOption
+<!content>Where can I get a weapon?
+<method>SetLead(7)
+#
+<!index  >6
+<!type   >HeroOption
+<!content>How can I get out of here?
+<method>SetLead(10)
+#
+<!index  >7
+<!type   >HeroSay
+<!content>Where can I get a weapon?
+<method>SetLead(8)
+#
+<!index  >8
+<!type   >NPCSay
+<!content>You can take my sword
+<method>SetLead(9)
+#
+<!index  >9
+<!type   >HeroSay
+<!content>Thank you, kind sir.
+<method>SetLead(-1)
+#
+<!index  >10
+<!type   >HeroSay
+<!content>How can I get out of here?
+<method>SetLead(11)
+#
+<!index  >11
+<!type   >NPCSay
+<!content>You need to somehow get past the guards.
+<method>SetLead(12)
+#
+<!index  >12
+<!type   >NPCSay
+<!content>Although you are most likely going to get caught
+<method>SetLead(13)
+#
+<!index  >13
+<!type   >NPCSay
+<!content>Maybe if you used went up those stairs... Take my key to open the door
+<method>SetLead(-1)
+<method>GiveHeroItem(YellowKey)
+#
+<!index  >14
+<!type   >ForeverHeroOption
+<!content>Gotta go
+<method>SetLead(15)
+#
+<!index  >15
+<!type   >HeroSay
+<!content>Thank you for your help, but I gotta go now.
+<method>SetLead(16)
+#
+<!index  >16
+<!type   >HeroSay
+<!content>Maybe we will meet again one day
+<method>SetLead(17)
+#
+<!index  >17
+<!type   >NPCSay
+<!content>Farewell
+<method>SetLead(-2)
+#
+<!index  >18
+<!type   >ForeverHeroOption
+<!content>I don't like you
+<method>SetLead(19)
+#
+<!index  >19
+<!type   >HeroSay
+<!content>I've heard you tried to kill me while I was sleeping! I hate you. Don't ever come close to me!
+<method>SetLead(20)
+#
+<!index  >20
+<!type   >NPCSay
+<!content>That's not true!
+<method>SetLead(21)
+<method>AddOption(22)
+#
+<!index  >21
+<!type   >NPCSay
+<!content>You've been lied to!
+<method>SetLead(-1)
+#
+<!index  >22
+<!type   >HeroOption
+<!content>Alright, I believe you
+<method>SetLead(23)
+#
+<!index  >23
+<!type   >HeroSay
+<!content>Alright, I believe you.
+<method>SetLead(24)
+#
+<!index  >24
+<!type   >HeroSay
+<!content>I'm sorry for what I said earlier
+<method>SetLead(25)
+#
+<!index  >25
+<!type   >NPCSay
+<!content>It's fine. I forgive you :)
+<method>SetLead(-1)
+<method>RemoveOption(18)

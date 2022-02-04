@@ -1,0 +1,54 @@
+﻿<customRegion name="Temple" floorColor="#d1b94d" borderColor="#d1ae0f" sample="goldenSample">
+	<location>
+		<proximity to="Cementery" distance="very far" />
+	</location>
+	<dimensions>
+		<rectangle width="35-45" height="12-18" />
+	</dimensions>
+	<content>
+		
+		<creature name="StoneGuardian" number="4">
+			<location>
+				<layer where="border" />
+				<proxmity to="MainEntrance" distance="far" />
+			</location>
+		</creature>
+
+		<structure name="Torch" number="6-8">
+			<location>
+				<layer where="border" />
+			</location>
+		</structure>
+
+		<entrance name="MainEntrance" number="2">
+			<location>
+				<proximity to="Chest" distance="farthest" />
+			</location>
+		</entrance>
+
+		<structure name="Chest" number="2">
+			<location>
+				<stripe direction="across" position="100" />
+			</location>
+		</structure>
+
+		<item name="HealthPotion" number="2">
+			<location>
+				<proximity to="Chest" distance="very close" />
+			</location>
+		</item>
+
+		<item name="TransformSpell" number="2">
+			<location>
+				<proximity to="Chest" distance="very close" />
+			</location>
+		</item>
+
+		<trigger name="StoneGuardianAwake">
+			<location>
+				<stripe direction="across" position="10" />
+			</location>
+		</trigger>
+		
+	</content>
+</customRegion>

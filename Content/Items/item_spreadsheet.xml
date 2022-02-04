@@ -1,0 +1,50 @@
+﻿<items>
+	<item id="Error" texture="8" consumable="False" name="Error" description="Item doesn't exist" tooltipColor="red" />
+	<item id="HealthPotion" texture="58" consumable="True" name="Health Potion" tooltipColor="green" description="Restores health" type="Food">
+		<effect name="ModifyHP">
+			<Amount>90</Amount>
+		</effect>
+	</item>
+	<item id="FireArrowSpell" texture="69" consumable="True" name="Fire arrow spell" tooltipColor="orange" description="Allows user to cast fire arrows" type="Spell/Offensive">
+		<effect name="CastFireball">
+			<Damage>30</Damage>
+			<Pierce>2</Pierce>
+			<Range>7</Range>
+		</effect>
+	</item>
+	<item id="FireballRune" texture="69" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive">
+		<effect name="CastFireball">
+			<Damage>75</Damage>
+			<Pierce>3</Pierce>
+			<Range>6</Range>
+		</effect>
+	</item>
+	<item id="MassDestructionRune" texture="73" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive">
+		<effect name="CastWave">
+			<Damage>350</Damage>
+			<Range>6</Range>
+		</effect>
+	</item>
+	<item id="RegionGem" texture="76" consumable="False" name="Region Gem" colorTint="#38cdff" tooltipColor="blue" description="Place on a pedestal to take control of a region" type="Other">
+	</item>
+	<item id="TransformSpell" texture="7" consumable="True" name="Transformation Spell" tooltipColor="blue" description="Allows user to turn into another creature" type="Spell">
+	</item>
+	<item id="StoneSpikesSpell" texture="59" consumable="True" name="Stone spikes spell" tooltipColor="orange" description="Allows user to spawn stone spikes on orthognally adjacent tiles that damage creatures" type="Spell/Offensive">
+		<effect name="SpawnSpikes">
+			<Damage>60</Damage>
+		</effect>
+	</item>
+	<item id="SpeedPotion" texture="71" consumable="True" name="Speed Potion" tooltipColor="green" description="Makes the user move faster" type="Food">
+		<effect name="ModifySpeed">
+			<Amount>-2</Amount>
+			<Duration>20</Duration>
+		</effect>
+	</item>
+	<item id="YellowKey" texture="4" consumable="False" name="Yellow key" colorTint="#ffff00" tooltipColor="white" description="An ordinary key" type="Other"></item>
+	<item id="BlueKey" texture="4" consumable="False" name="Blue key" colorTint="#0000ff" tooltipColor="white" description="An ordinary key" type="Other"></item>
+	<item id="StealthCape" texture="70" consumable="false" name="Stealth cape" tooltipColor="green" description="Makes the user less visible to other creatures" type="Clothes">
+		<effect name="ModifyStealth">
+			<Amount>3</Amount>
+		</effect>
+	</item>
+</items>

@@ -1,0 +1,293 @@
+﻿<creatures>
+	<creature id="Spider" texture="8" maxHP="80" health="80" meleeDamage="18" class="Monster" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>8</index>
+				<index>8</index>
+				<index>8</index>
+				<index>8</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>8</index>
+				<index>8</index>
+				<index>8</index>
+				<index>8</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>6</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Orthogonal</Movement>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="Rat" texture="12" maxHP="50" health="50" meleeDamage="10" class="Monster" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>12</index>
+				<index>12</index>
+				<index>12</index>
+				<index>12</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>12</index>
+				<index>12</index>
+				<index>12</index>
+				<index>12</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>4</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Orthogonal</Movement>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="Skeleton" texture="13" maxHP="120" health="120" meleeDamage="24" class="Monster" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>5</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Diagonal</Movement>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="ShadowWarrior" texture="14" maxHP="240" health="240" meleeDamage="48" class="Monster" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>14</index>
+				<index>14</index>
+				<index>14</index>
+				<index>14</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>14</index>
+				<index>14</index>
+				<index>14</index>
+				<index>14</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>5</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Diagonal</Movement>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="15" class="Temple" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+				<class>Monster</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>11</index>
+				<index>11</index>
+				<index>11</index>
+				<index>11</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>11</index>
+				<index>11</index>
+				<index>11</index>
+				<index>11</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>7</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="ChaseTarget">
+				<Movement>Orthogonal</Movement>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>15</index>
+				<index>15</index>
+				<index>15</index>
+				<index>15</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>15</index>
+				<index>15</index>
+				<index>15</index>
+				<index>15</index>
+			</IdleTextureIndices>
+			<Inventory>
+				<item name="FireballRune" number="1" />
+			</Inventory>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnDistance">
+				<Range>6</Range>
+			</behaviour>
+			<behaviour name="ParalelPosition">
+			</behaviour>
+			<behaviour name="SpellCaster">
+				<Priority>Offensive</Priority>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="Traveller" texture="10" maxHP="200" health="200" meleeDamage="10" class="Human" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Monster</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+			</IdleTextureIndices>
+			<Inventory>
+				<item name="FireArrowSpell" number="4" />
+			</Inventory>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="Talkative">
+				<DialogueName>sampleDial</DialogueName>
+			</behaviour>
+			<behaviour name="AggroOnDistance">
+				<Range>5</Range>
+			</behaviour>
+			<behaviour name="SpellCaster">
+				<Priority>Offensive</Priority>
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Orthogonal</Movement>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="Keeper" texture="10" maxHP="500" health="500" meleeDamage="10" class="Human" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Monster</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+				<index>10</index>
+			</IdleTextureIndices>
+			<Inventory>
+				<item name="FireArrowRune" number="1" />
+				<item name="MassDestructionRune" number="1" />
+			</Inventory>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="Talkative">
+				<DialogueName>keeperDial</DialogueName>
+			</behaviour>
+			<behaviour name="SpellCaster">
+				<Priority>Offensive</Priority>
+			</behaviour>
+		</behaviours>
+	</creature>
+
+	<creature id="Hero" texture="0" maxHP="200" health="200" meleeDamage="20" class="Human" corpseTexture="68">
+		<modifiers>
+			<EnemyClasses>
+				<class>Monster</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>4</index>
+				<index>5</index>
+				<index>6</index>
+				<index>7</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>0</index>
+				<index>1</index>
+				<index>2</index>
+				<index>3</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="AllSeeingVision">
+				<RangeLimit>7</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+		</behaviours>
+	</creature>
+</creatures>

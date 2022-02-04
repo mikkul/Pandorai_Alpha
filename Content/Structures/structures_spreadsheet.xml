@@ -1,0 +1,74 @@
+﻿<structures>
+	<structure id="Chest" texture="60">
+		<behaviour name="Container">
+			<ClosedTexture>60</ClosedTexture>
+			<OpenTexture>61</OpenTexture>
+		</behaviour>
+	</structure>
+	<structure id="Corpse" texture="68">
+		<behaviour name="Container">
+			<ClosedTexture>68</ClosedTexture>
+			<OpenTexture>68</OpenTexture>
+		</behaviour>
+	</structure>
+	<structure id="Barrel" texture="74">
+		<behaviour name="Container">
+			<ClosedTexture>74</ClosedTexture>
+			<OpenTexture>75</OpenTexture>
+		</behaviour>
+		<behaviour name="Destructible">
+			<Force>Fire</Force>
+		</behaviour>
+		<behaviour name="Armor">
+			<Hits>3</Hits>
+		</behaviour>
+	</structure>
+	<structure id="RegionPedestal" texture="77">
+		<behaviour name="LightEmitter">
+			<Color>#256ad9</Color>
+			<Radius>100</Radius>
+			<Intensity>0.5</Intensity>
+		</behaviour>
+		<behaviour name="RegionPedestal">
+		</behaviour>
+	</structure>
+	<structure id="BookStand" texture="72">
+		<behaviour name="Destructible">
+			<Force>Fire</Force>
+		</behaviour>
+		<behaviour name="Armor">
+			<Hits>1</Hits>
+		</behaviour>
+	</structure>
+	<structure id="Door" texture="6">
+		<behaviour name="Door">
+			<RequiredKey>YellowKey</RequiredKey>
+		</behaviour>
+		<behaviour name="Destructible">
+			<Force>Fire</Force>
+		</behaviour>
+		<behaviour name="Armor">
+			<Hits>4</Hits>
+		</behaviour>
+	</structure>
+	<structure id="Torch" texture="62">
+		<behaviour name="LightEmitter">
+			<Color>#ffffee</Color>
+			<Radius>100</Radius>
+			<Intensity>0.5</Intensity>
+		</behaviour>
+	</structure>
+	<structure id="Grave" texture="66">
+		<behaviour name="Destructible">
+			<Force>Fire</Force>
+		</behaviour>
+		<behaviour name="Armor">
+			<Hits>1</Hits>
+		</behaviour>
+	</structure>
+	<structure id="WarriorTomb" texture="67">
+		<behaviour name="Dialogue">
+			<DialogueName>warriorTombInteraction</DialogueName>
+		</behaviour>
+	</structure>
+</structures>

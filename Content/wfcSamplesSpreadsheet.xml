@@ -1,0 +1,47 @@
+﻿<samples>
+	<sample name="forestWithPathSample" isPeriodic="false">
+		<tileLegend>
+			<tile color="#000000" type="wall" multiplier="1.0" />
+			<tile color="#ff0000" type="floor" />
+			<tile color="#ffff00" type="path" multiplier="0.5" />
+			<tile color="#ffffff" type="empty" />
+			<tile color="#00ff00" type="mud" multiplier="3.0" />
+		</tileLegend>
+	</sample>
+	<sample name="forestSample" isPeriodic="false">
+		<tileLegend>
+			<tile color="#000000" type="wall" />
+			<tile color="#ff0000" type="floor" />
+			<tile color="#ffffff" type="empty" />
+			<tile color="#00ff00" type="mud" />
+		</tileLegend>
+	</sample>
+	<sample name="roomSample1" isPeriodic="true">
+		<tileLegend>
+			<tile color="#000000" type="wall" />
+			<tile color="#ff0000" type="floor" />
+			<tile color="#ffffff" type="empty" />
+		</tileLegend>
+	</sample>
+	<sample name="goldenSample" isPeriodic="true">
+		<tileLegend>
+			<tile color="#000000" type="wall" />
+			<tile color="#ff0000" type="wall" />
+			<tile color="#ffffff" type="empty" />
+		</tileLegend>
+	</sample>
+	<sample name="wfcSample2" isPeriodic="true">
+		<tileLegend>
+			<tile color="#000000" type="wall" />
+			<tile color="#ff0000" type="floor" />
+			<tile color="#ffffff" type="empty" />
+		</tileLegend>
+	</sample>
+	<sample name="wikaSample" isPeriodic="true">
+		<tileLegend>
+			<tile color="#000000" type="wall" />
+			<tile color="#ff0000" type="floor" />
+			<tile color="#ffffff" type="empty" />
+		</tileLegend>
+	</sample>
+</samples>
