@@ -84,6 +84,7 @@ namespace Pandorai.MapGeneration
 						}
 						if (safetyCounter++ > 1000)
 						{
+							Console.WriteLine("Safety counter reached 1000");
 							game.CreatureManager.Creatures.Clear(); // first clear everything
 							LightingManager.ClearLightSources();
 							ParticleSystemManager.Clear();
@@ -121,9 +122,11 @@ namespace Pandorai.MapGeneration
 					foreach (var creature in regInfo.CreatureInfo)
 					{
 						// adjust positions to the world coords
-						creature.MapIndex += new Point(randomLocationX, randomLocationY);
-						creature.Position = creature.MapIndex.ToVector2() * game.Options.TileSize;
-						game.CreatureManager.AddCreature(creature);
+						var creatureClone = creature.Clone();
+						creatureClone.MapIndex = creature.MapIndex;
+						creatureClone.MapIndex += new Point(randomLocationX, randomLocationY);
+						creatureClone.Position = creatureClone.MapIndex.ToVector2() * game.Options.TileSize;
+						game.CreatureManager.AddCreature(creatureClone);
 					}
 
 					regInfo.TileInfo.CopyTo(map, randomLocationX, randomLocationY);

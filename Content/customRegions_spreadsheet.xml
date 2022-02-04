@@ -1,7 +1,7 @@
 ﻿<regions>
 	<region name="Forest" number="1" />
-	<region name="InitialForest" number="0" />
-	<region name="Cementery" number="0" />
-	<region name="Temple" number="0" />
-	<region name="KeeperLibrary" number="0" />
+	<region name="InitialForest" number="1" />
+	<region name="Cementery" number="1" />
+	<region name="Temple" number="1" />
+	<region name="KeeperLibrary" number="1" />
 </regions>
