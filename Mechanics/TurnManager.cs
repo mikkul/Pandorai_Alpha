@@ -1,14 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Myra.Graphics2D.UI;
-using Pandorai.Cheats;
 using Pandorai.Creatures;
-using Pandorai.Tilemaps;
-using System;
-using System.Diagnostics;
+using PriorityQueues;
 
 namespace Pandorai.Mechanics
 {
-	public enum TurnState
+    public enum TurnState
 	{
 		WaitingForPlayer,
 		PlayerTurn,
@@ -25,6 +21,8 @@ namespace Pandorai.Mechanics
 		public event EmptyEventHandler EnemyTurnCame;
 		public event EmptyEventHandler EnemyTurnEnded;
 		public event MovementRequestHandler SomeoneIsReadyToMove;
+
+		private BinaryPriorityQueue<Creature> priorityQueue;
 
 		public float PercentageCompleted;
 
