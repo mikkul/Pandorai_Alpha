@@ -30,8 +30,8 @@ namespace Pandorai.Mechanics
 
 		public int TurnCount = 0;
 
-		public int heroTurnTime = 150;
-		public int enemyTurnTime = 120;
+		public int heroTurnTime = 100;
+		public int enemyTurnTime = 50;
 
 		float timeSinceTurnStart;
 

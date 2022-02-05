@@ -62,6 +62,10 @@ namespace Pandorai.Creatures
 
 		public int Stealth = 0;
 
+		public int Speed;
+
+		public int TurnTime;
+
 		public Inventory Inventory;
 
 		public ActiveMap LevelPresent;
