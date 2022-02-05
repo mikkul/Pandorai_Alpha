@@ -150,8 +150,12 @@
 				<RangeLimit>7</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision"></behaviour>
 			<behaviour name="ChaseTarget">
 				<Movement>Orthogonal</Movement>
+			</behaviour>
+			<behaviour name="Awakening">
+				<IsAwake>false</IsAwake>
 			</behaviour>
 		</behaviours>
 	</creature>

@@ -1,33 +1,40 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
+using Pandorai.Creatures.Behaviours;
 using Pandorai.Rendering;
 
 namespace Pandorai.Triggers
 {
 	public static partial class Trigger
 	{
-		//private static StoneGuardian dummyStoneGuardian = new StoneGuardian(null);
+		private static Creature _dummyStoneGuardian;
 
 		public static void StoneGuardianAwake(Creature incomingCreature)
 		{
-			//if (!dummyStoneGuardian.EnemyClasses.Contains(incomingCreature.Class)) return;
+			if(_dummyStoneGuardian == null)
+			{
+				_dummyStoneGuardian = Game1.game.CreatureManager.Creatures.FirstOrDefault(x => x.Id == "StoneGuardian");
+			}
 
-			//float range = 15f;
+			if (_dummyStoneGuardian == null || !_dummyStoneGuardian.EnemyClasses.Contains(incomingCreature.Class)) return;
 
-			//foreach (var creature in incomingCreature.game.CreatureManager.Creatures)
-			//{
-			//	if (creature.GetType() != typeof(StoneGuardian)) continue;
+			float range = 15f;
 
-			//	float dist = Vector2.DistanceSquared(creature.Position, incomingCreature.Position);
-			//	if (dist < (range * incomingCreature.game.Map.TileSize) * (range * incomingCreature.game.Map.TileSize))
-			//	{
-			//		StoneGuardian otherGuardian = (StoneGuardian)creature;
-			//		if (!otherGuardian.IsAwaken)
-			//		{
-			//			otherGuardian.Awake();
-			//		}
-			//	}
-			//}
+			foreach (var creature in incomingCreature.game.CreatureManager.Creatures)
+			{
+				if (creature.Id != "StoneGuardian") continue;
+
+				float dist = Vector2.DistanceSquared(creature.Position, incomingCreature.Position);
+				if (dist < (range * incomingCreature.game.Map.TileSize) * (range * incomingCreature.game.Map.TileSize))
+				{
+					var awakeningBehaviour = creature.GetBehaviour<Awakening>() as Awakening;
+					if(awakeningBehaviour != null)
+					{
+						awakeningBehaviour.Awake(incomingCreature);
+					}
+				}
+			}
 		}
 	}
 }

@@ -84,6 +84,7 @@ namespace Pandorai.Creatures
 			{ "NormalVision", typeof(NormalVision) },
 			{ "AllSeeingVision", typeof(AllSeeingVision) },
 			{ "AggroOnVision", typeof(AggroOnVision) },
+			{ "Awakening", typeof(Awakening) },
 		};
 	}
 }

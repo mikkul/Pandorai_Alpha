@@ -14,15 +14,9 @@ namespace Pandorai.Creatures.Behaviours
 		public NormalVision()
 		{
 			FOV = new FieldOfView(BlocksLight, SetVisibility, GetDistance);
-			VisibleTiles = new List<Point>();
 		}
 
-		public override void Bind()
-		{
-			Owner.TurnEnded += CalculateFOV;
-		}
-
-		void CalculateFOV()
+		protected override void CalculateFOV()
 		{
 			VisibleTiles.Clear();
 			FOV.Compute(Owner.MapIndex, RangeLimit);

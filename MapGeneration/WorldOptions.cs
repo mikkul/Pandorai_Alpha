@@ -8,7 +8,7 @@ namespace Pandorai.MapGeneration
 {
 	public static class WorldOptions
 	{
-		public const int Width = 100;
+		public const int Width = 140;
 		public const int Height = 100;
 
 		public static int RegionPathwayPasses = 3;
