@@ -1,19 +1,21 @@
+using System;
 using Pandorai.Creatures;
+using Pandorai.UI;
 
 namespace Pandorai.Effects
 {
     public class ModifySpeed : Effect
     {
         public int Amount;
+        private string _modifier;
         public int Duration;
-
-        private int TurnCounter;
 
         public override void SetAttribute(string name, string value)
         {
             if (name == "Amount")
             {
                 Amount = int.Parse(value);
+                _modifier = Amount > 0 ? "increased" : "decreased";
             }
             else if (name == "Duration")
             {
@@ -21,21 +23,32 @@ namespace Pandorai.Effects
             }
         }
 
-        private Creature _usingCreature;
-
         public override void Use(Creature usingCreature)
         {
-            _usingCreature = usingCreature;
-            usingCreature.Speed += Amount;
-            usingCreature.TurnCame += CheckDuration;
-        }
+            int turnCounter = 0;
 
-        private void CheckDuration()
-        {
-            TurnCounter++;
-            if (TurnCounter >= Duration)
+            usingCreature.Speed += Amount;
+            usingCreature.TurnEnded += checkDuration;
+
+            void checkDuration()
             {
-                _usingCreature.Speed -= Amount;
+                turnCounter++;
+                if (turnCounter >= Duration)
+                {
+                    usingCreature.Speed -= Amount;
+
+                    usingCreature.TurnEnded -= checkDuration;
+
+                    if(usingCreature.IsPossessedCreature())
+                    {
+                        MessageLog.DisplayMessage($"The {_modifier} speed effect wore off");
+                    }
+                }
+            };
+            
+            if(usingCreature.IsPossessedCreature())
+            {
+                MessageLog.DisplayMessage($"Your speed {_modifier}");
             }
         }
     }
