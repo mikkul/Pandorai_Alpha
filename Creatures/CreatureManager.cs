@@ -1,16 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Pandorai.Mechanics;
 using Pandorai.Tilemaps;
 using Pandorai.Utility;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic;
 
 namespace Pandorai.Creatures
 {
-	public delegate void CreatureOnTileHandler(Creature creature, TileInfo info);
+    public delegate void CreatureOnTileHandler(Creature creature, TileInfo info);
 
 	public class CreatureManager
 	{
@@ -163,8 +159,22 @@ namespace Pandorai.Creatures
 			bool isSomeoneReady = false;
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
+				Creatures[i].Energy += Creatures[i].Speed;
+
+				if(Creatures[i].IsPossessedCreature())
+				{
+					continue;
+				}
+
+				bool readyForTurn = false;
+				if(Creatures[i].Energy >= Game1.game.TurnManager.EnergyThreshold)
+				{
+					Creatures[i].Energy -= Game1.game.TurnManager.EnergyThreshold;
+					readyForTurn = Creatures[i].ReadyForTurn();
+				}
+
 				bool inRange = game.Camera.Viewport.Enlarge(100, 100).Contains(game.Camera.GetViewportPosition(Creatures[i].Position));
-				if (Creatures[i] != game.Player.PossessedCreature && inRange && Creatures[i].ReadyForTurn())
+				if (inRange && readyForTurn)
 				{
 					isSomeoneReady = true;
 				}

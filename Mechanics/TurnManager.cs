@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
-using PriorityQueues;
 
 namespace Pandorai.Mechanics
 {
@@ -22,14 +22,14 @@ namespace Pandorai.Mechanics
 		public event EmptyEventHandler EnemyTurnEnded;
 		public event MovementRequestHandler SomeoneIsReadyToMove;
 
-		private BinaryPriorityQueue<Creature> priorityQueue;
-
 		public float PercentageCompleted;
 
 		public int TurnCount = 0;
 
 		public int heroTurnTime = 100;
 		public int enemyTurnTime = 50;
+
+		public int EnergyThreshold = 100;
 
 		float timeSinceTurnStart;
 
@@ -49,14 +49,17 @@ namespace Pandorai.Mechanics
 			{
 				if(TurnState != previousState)
 				{
+					previousState = TurnState;
 					PlayerTurnCame?.Invoke();
+					CheckPlayerEnergy();
 				}
 			}
-
+			
 			if(TurnState == TurnState.PlayerTurn)
 			{
 				if(TurnState != previousState)
 				{
+					previousState = TurnState;
 					PercentageCompleted = 0;
 					timeSinceTurnStart = 0;
 					PlayerActionStarted?.Invoke();
@@ -76,6 +79,7 @@ namespace Pandorai.Mechanics
 			{
 				if(TurnState != previousState)
 				{
+					previousState = TurnState;
 					EnemyTurnCame?.Invoke();
 					timeSinceTurnStart = 0;
 					PercentageCompleted = 0;
@@ -95,11 +99,22 @@ namespace Pandorai.Mechanics
 					game.BasicTrivia.DisplayRandomTrivia(game);
 				}
 			}
-
-			previousState = TurnState;
 		}
 
-		public void HandleCreatureMovementRequest(Creature creature, Point desiredPoint)
+        private void CheckPlayerEnergy()
+        {
+			var possessedCreature = Game1.game.Player.PossessedCreature;
+			if(possessedCreature.Energy >= EnergyThreshold)
+			{
+				possessedCreature.Energy -= EnergyThreshold;
+			}
+			else
+			{
+				TurnState = TurnState.WaitingForEnemy;
+			}
+        }
+
+        public void HandleCreatureMovementRequest(Creature creature, Point desiredPoint)
 		{
 			if(creature == game.Player.PossessedCreature)
 			{
@@ -138,6 +153,7 @@ namespace Pandorai.Mechanics
 		public void SkipEnemyTurn()
 		{
 			TurnState = TurnState.WaitingForPlayer;
+			previousState = TurnState.EnemyTurn;
 			TurnCount++;
 			game.BasicTrivia.DisplayRandomTrivia(game);
 		}

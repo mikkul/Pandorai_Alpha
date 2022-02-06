@@ -12,7 +12,7 @@
 	<content>
 		
 		<choice>
-			<group weight="0">
+			<group weight="20">
 				<creature name="Spider" number="2-3" />
 				<creature name="Rat" number="4-7" />
 			</group>
@@ -22,7 +22,7 @@
 						<proximity to="StairsDown" distance="close" />
 					</location>
 				</creature>
-				<group chance="100">
+				<group chance="25">
 					<structure name="WarriorTomb" number="1" />
 					<creature name="ShadowWarrior" number="1">
 						<location>

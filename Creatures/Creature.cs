@@ -64,7 +64,7 @@ namespace Pandorai.Creatures
 
 		public int Speed;
 
-		public int TurnTime;
+		public int Energy;
 
 		public Inventory Inventory;
 
@@ -122,6 +122,7 @@ namespace Pandorai.Creatures
 				CorpseTextureIndex = CorpseTextureIndex,
 				MeleeHitDamage = MeleeHitDamage,
 				Stealth = Stealth,
+				Speed = Speed,
 				MovingTextureIndices = MovingTextureIndices,
 				IdleTextureIndices = IdleTextureIndices,
 				Class = Class,

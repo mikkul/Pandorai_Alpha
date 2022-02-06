@@ -11,6 +11,8 @@ namespace Pandorai.Creatures.Behaviours
 
 		public sealed override void Bind()
 		{
+			// it's stupid, but it has to be like this for a reason
+			Owner.TurnCame += CalculateVisibleTiles;
 			Owner.TurnEnded += CalculateVisibleTiles;
 		}
 

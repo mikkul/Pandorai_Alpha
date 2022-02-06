@@ -1,5 +1,5 @@
 ﻿<creatures>
-	<creature id="Spider" texture="8" maxHP="80" health="80" meleeDamage="18" class="Monster" corpseTexture="68">
+	<creature id="Spider" texture="8" maxHP="80" health="80" meleeDamage="18" class="Monster" corpseTexture="68" speed="24">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -31,7 +31,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="Rat" texture="12" maxHP="50" health="50" meleeDamage="10" class="Monster" corpseTexture="68">
+	<creature id="Rat" texture="12" maxHP="50" health="50" meleeDamage="10" class="Monster" corpseTexture="68" speed="34">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -62,7 +62,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="Skeleton" texture="13" maxHP="120" health="120" meleeDamage="24" class="Monster" corpseTexture="68">
+	<creature id="Skeleton" texture="13" maxHP="120" health="120" meleeDamage="24" class="Monster" corpseTexture="68" speed="26">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -94,7 +94,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="ShadowWarrior" texture="14" maxHP="240" health="240" meleeDamage="48" class="Monster" corpseTexture="68">
+	<creature id="ShadowWarrior" texture="14" maxHP="240" health="240" meleeDamage="48" class="Monster" corpseTexture="68" speed="27">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -126,7 +126,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="15" class="Temple" corpseTexture="68">
+	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="15" class="Temple" corpseTexture="68" speed="20">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -160,7 +160,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68">
+	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68" speed="25">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -195,7 +195,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="Traveller" texture="10" maxHP="200" health="200" meleeDamage="10" class="Human" corpseTexture="68">
+	<creature id="Traveller" texture="10" maxHP="200" health="200" meleeDamage="10" class="Human" corpseTexture="68" speed="30">
 		<modifiers>
 			<EnemyClasses>
 				<class>Monster</class>
@@ -234,7 +234,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="Keeper" texture="10" maxHP="500" health="500" meleeDamage="10" class="Human" corpseTexture="68">
+	<creature id="Keeper" texture="10" maxHP="500" health="500" meleeDamage="10" class="Human" corpseTexture="68" speed="30">
 		<modifiers>
 			<EnemyClasses>
 				<class>Monster</class>
@@ -268,7 +268,7 @@
 		</behaviours>
 	</creature>
 
-	<creature id="Hero" texture="0" maxHP="200" health="200" meleeDamage="20" class="Human" corpseTexture="68">
+	<creature id="Hero" texture="0" maxHP="200" health="200" meleeDamage="20" class="Human" corpseTexture="68" speed="30">
 		<modifiers>
 			<EnemyClasses>
 				<class>Monster</class>

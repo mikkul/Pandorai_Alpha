@@ -28,6 +28,7 @@ namespace Pandorai.Creatures
 				creature.MaxHealth = int.Parse(node.GetAttribute("maxHP"));
 				creature.Health = int.Parse(node.GetAttribute("health"));
 				creature.MeleeHitDamage = int.Parse(node.GetAttribute("meleeDamage"));
+				creature.Speed = int.Parse(node.GetAttribute("speed"));
 				creature.Class = (CreatureClass)Enum.Parse(typeof(CreatureClass), node.GetAttribute("class"));
 				creature.CorpseTextureIndex = int.Parse(node.GetAttribute("corpseTexture"));
 				if (node.HasAttribute("stealth"))
