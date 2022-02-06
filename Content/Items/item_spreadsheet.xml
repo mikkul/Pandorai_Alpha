@@ -31,7 +31,7 @@
 	</item>
 	<item id="StoneSpikesSpell" texture="59" consumable="True" name="Stone spikes spell" tooltipColor="orange" description="Allows user to spawn stone spikes on orthognally adjacent tiles that damage creatures" type="Spell/Offensive">
 		<effect name="SpawnSpikes">
-			<Damage>60</Damage>
+			<Damage>100</Damage>
 		</effect>
 	</item>
 	<item id="SpeedPotion" texture="71" consumable="True" name="Speed Potion" tooltipColor="green" description="Makes the user move faster" type="Food">

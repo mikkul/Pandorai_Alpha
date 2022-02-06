@@ -1,4 +1,7 @@
+using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
+using Pandorai.ParticleSystems;
+using Pandorai.Utility;
 
 namespace Pandorai.Effects
 {
@@ -14,9 +17,27 @@ namespace Pandorai.Effects
 			}
         }
 
-        public override void Use(Creature usingCreature)
+        public override void Use(Creature user)
         {
-            throw new System.NotImplementedException();
+            if (user.IsPossessedCreature() && Game1.game.Player.IsInteractingWithSomeone)
+            {
+                return;
+            }
+
+            var pos = user.MapIndex;
+			var attackedTiles = GenHelper.GetNeighbours(pos);
+
+			foreach (var tile in attackedTiles)
+			{
+                Game1.game.GameStateManager.AddSynchronizedAction(() => Game1.game.CreatureManager.GetCreature(tile)?.GetHit(Damage));
+				var system = new PSExplosion(tile.ToVector2() * Game1.game.Map.TileSize, 50, Game1.game.squareTexture, 500, 25, 5, Color.SlateGray, true, Game1.game);
+				ParticleSystemManager.AddSystem(system, true);
+			}
+
+            if (user.IsPossessedCreature())
+            {
+                Game1.game.TurnManager.PlayerIsReady();
+            }
         }
     }
 }
