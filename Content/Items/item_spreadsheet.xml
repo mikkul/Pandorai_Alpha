@@ -36,7 +36,7 @@
 	</item>
 	<item id="SpeedPotion" texture="71" consumable="True" name="Speed Potion" tooltipColor="green" description="Makes the user move faster" type="Food">
 		<effect name="ModifySpeed">
-			<Amount>-2</Amount>
+			<Amount>30</Amount>
 			<Duration>20</Duration>
 		</effect>
 	</item>
