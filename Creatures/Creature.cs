@@ -110,6 +110,7 @@ namespace Pandorai.Creatures
 				{
 					Structure = corpse,
 				};
+				corpse.BindBehaviours();
 			};
 		}
 

@@ -253,7 +253,7 @@
 				<index>10</index>
 			</IdleTextureIndices>
 			<Inventory>
-				<item name="FireArrowRune" number="1" />
+				<item name="FireballRune" number="1" />
 				<item name="MassDestructionRune" number="1" />
 			</Inventory>
 		</modifiers>
@@ -289,7 +289,7 @@
 		</modifiers>
 		<behaviours>
 			<behaviour name="NormalVision">
-				<RangeLimit>7</RangeLimit>
+				<RangeLimit>5</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
 		</behaviours>
