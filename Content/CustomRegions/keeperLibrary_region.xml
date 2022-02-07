@@ -21,6 +21,8 @@
 			</location>
 		</structure>
 
+		<item name="MassDestructionRune" number="1"></item>
+
 		<creature name="Keeper" number="1" />
 
 		<trigger name="LeaveLibraryTrigger">

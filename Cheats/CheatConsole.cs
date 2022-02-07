@@ -78,7 +78,7 @@ namespace Pandorai.Cheats
 
 						if (x != 0 && y != 0)
 						{
-							game.CreatureManager.GetCreature(new Point(x, y))?.GetHit(9999);
+							game.CreatureManager.GetCreature(new Point(x, y))?.GetHit(9999, Game1.game.Player.PossessedCreature);
 						}
 					}
 				}

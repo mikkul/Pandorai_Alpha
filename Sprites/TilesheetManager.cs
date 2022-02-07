@@ -103,7 +103,7 @@ namespace Pandorai.Sprites
 
 			AddMapSprite(448, 192, 64, 64, 0, 0); // book stand 72
 
-			AddMapSprite(448, 192, 64, 64, 0, 0); // mass destruction spell 73
+			AddMapSprite(576, 384, 64, 64, 0, 0); // mass destruction spell 73
 
 			AddMapSprite(512, 256, 64, 64, 0, 0); // barrel 74
 			AddMapSprite(576, 320, 64, 64, 0, 0); // barrel destroyed 75

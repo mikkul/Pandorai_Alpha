@@ -124,7 +124,7 @@ namespace Pandorai.Effects
 					{
 						if (pierceLeft > 0)
 						{
-							user.game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(Damage));
+							user.game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(Damage, user));
 							pierceLeft--;
 						}
 					}

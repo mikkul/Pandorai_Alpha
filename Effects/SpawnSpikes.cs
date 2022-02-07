@@ -29,7 +29,7 @@ namespace Pandorai.Effects
 
 			foreach (var tile in attackedTiles)
 			{
-                Game1.game.GameStateManager.AddSynchronizedAction(() => Game1.game.CreatureManager.GetCreature(tile)?.GetHit(Damage));
+                Game1.game.GameStateManager.AddSynchronizedAction(() => Game1.game.CreatureManager.GetCreature(tile)?.GetHit(Damage, user));
 				var system = new PSExplosion(tile.ToVector2() * Game1.game.Map.TileSize, 50, Game1.game.squareTexture, 500, 25, 5, Color.SlateGray, true, Game1.game);
 				ParticleSystemManager.AddSystem(system, true);
 			}

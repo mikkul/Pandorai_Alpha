@@ -19,7 +19,7 @@
 			<Range>6</Range>
 		</effect>
 	</item>
-	<item id="MassDestructionRune" texture="73" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive">
+	<item id="MassDestructionRune" texture="73" consumable="False" name="Mass Destruction Rune" colorTint="#7134eb" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive">
 		<effect name="CastWave">
 			<Damage>350</Damage>
 			<Range>6</Range>

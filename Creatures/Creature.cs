@@ -44,7 +44,7 @@ namespace Pandorai.Creatures
 		public bool NoClip = false;
 
 		public float MaxHealth;
-		internal float internalHealth;
+		private float internalHealth;
 		public float Health
 		{
 			get => internalHealth;
@@ -65,6 +65,8 @@ namespace Pandorai.Creatures
 		public int Speed;
 
 		public int Energy;
+
+		public CreatureStats Stats;
 
 		public Inventory Inventory;
 
@@ -128,6 +130,7 @@ namespace Pandorai.Creatures
 				Class = Class,
 				EnemyClasses = EnemyClasses,
 			};
+			clone.Stats = Stats.Clone(clone);
 			clone.Behaviours = new List<Behaviour>(Behaviours);
 			for (int i = 0; i < clone.Behaviours.Count; i++)
 			{
@@ -292,12 +295,13 @@ namespace Pandorai.Creatures
 			}
 		}
 
-		public void GetHit(float damage)
+		public void GetHit(float damage, Creature byWhom)
 		{
 			Health -= damage;
 			DamageFlash();
 			if (Health <= 0)
 			{
+				byWhom.Stats.Experience += CreatureStats.GetKillExperience(Stats.Level);
 				Health = 0;
 				IsAlive = false;
 				OnDeath();

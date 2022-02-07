@@ -77,7 +77,7 @@ namespace Pandorai.Effects
 					Creature tryCreature;
 					if((tryCreature = Game1.game.CreatureManager.GetCreature(tile)) != null)
 					{
-						Game1.game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(Damage));
+						Game1.game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(Damage, user));
 					}
 				}
 			};

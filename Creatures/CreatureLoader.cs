@@ -23,12 +23,14 @@ namespace Pandorai.Creatures
 			foreach (XmlElement node in doc.DocumentElement.ChildNodes)
 			{
 				Creature creature = new Creature(game);
+				creature.Stats = new CreatureStats(creature);
 				creature.Id = node.GetAttribute("id");
 				creature.TextureIndex = int.Parse(node.GetAttribute("texture"));
 				creature.MaxHealth = int.Parse(node.GetAttribute("maxHP"));
 				creature.Health = int.Parse(node.GetAttribute("health"));
 				creature.MeleeHitDamage = int.Parse(node.GetAttribute("meleeDamage"));
 				creature.Speed = int.Parse(node.GetAttribute("speed"));
+				creature.Stats.Level = int.Parse(node.GetAttribute("level"));
 				creature.Class = (CreatureClass)Enum.Parse(typeof(CreatureClass), node.GetAttribute("class"));
 				creature.CorpseTextureIndex = int.Parse(node.GetAttribute("corpseTexture"));
 				if (node.HasAttribute("stealth"))

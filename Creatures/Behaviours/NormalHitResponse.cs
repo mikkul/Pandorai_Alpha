@@ -9,7 +9,7 @@
 
 		private void TakeDamage(Creature incomingCreature)
 		{
-			Owner.GetHit(incomingCreature.MeleeHitDamage);
+			Owner.GetHit(incomingCreature.MeleeHitDamage, incomingCreature);
 		}
 
 		public override Behaviour Clone()
