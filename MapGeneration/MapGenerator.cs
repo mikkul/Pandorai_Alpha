@@ -20,7 +20,7 @@ namespace Pandorai.MapGeneration
 {
 	public class MapGenerator
 	{
-		public Game1 game;
+		public Game1 _game;
 
 		Random rng = new Random();
 
@@ -28,10 +28,12 @@ namespace Pandorai.MapGeneration
 
 		int[,] operatingArea;
 
-		public Regions Regions = new Regions();
+		public Regions Rooms = new Regions();
 
 		public Tile[,] GenerateMap(Game1 game, string regionSpreadsheet)
         {
+			_game = game;
+
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -55,17 +57,178 @@ namespace Pandorai.MapGeneration
                 }
             }
 
-            PlaceRegions(game, filledSpace, usedTiles, createdRegions);
+            PlaceRegions(filledSpace, usedTiles, createdRegions);
 
             FillUnusedSpace(usedTiles);
 
-			
+			ProcessRooms();
 
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
             return map;
         }
+
+		private void ProcessRooms()
+		{
+			operatingArea = new int[map.GetLength(0), map.GetLength(1)];
+			Rooms.OperatingArea = new int[map.GetLength(0), map.GetLength(1)];
+
+			List<Point> newRoomArea;
+			while((newRoomArea = FloodFillRoom()).Count > 0)
+			{
+				Region newRoom = new Region { Id = Rooms.RegionIdCounter++ };
+				newRoom.Area = newRoomArea;
+				Rooms.UpdateOpArea(newRoom.Area, newRoom.Id);
+				newRoom.Color = new Color(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
+				newRoom.Border = Rooms.CalculateRegionBorder(newRoom);
+
+				foreach (var point in newRoom.Area)
+				{
+					map[point.X, point.Y].BaseColor = newRoom.Color;
+				}
+
+				Rooms.AddRegion(newRoom);	
+			}
+
+			// the biggest "room" is in fact not a room
+			// so change its color to some default one
+			Region biggestRoom = null;
+			int biggestRoomArea = int.MinValue;
+			foreach (var room in Rooms.RegionList)
+			{
+				if(room.Area.Count > biggestRoomArea)
+				{
+					biggestRoom = room;
+					biggestRoomArea = room.Area.Count;
+				}
+			}
+			var defaultColor = Helper.GetColorFromHex("#966c4b");
+			foreach (var point in biggestRoom!.Area)
+			{
+				map[point.X, point.Y].BaseColor = defaultColor;
+			}
+
+			// remove rooms that are too small to be considered rooms
+			List<Region> roomsToBeRemoved = new List<Region>();
+			int notARoomThreshold = 10;
+			foreach (var room in Rooms.RegionList)
+			{
+				if(room.Area.Count < notARoomThreshold)
+				{
+					roomsToBeRemoved.Add(room);
+				}
+			}
+			foreach (var roomToBeRemoved in roomsToBeRemoved)
+			{
+				Rooms.RegionList.Remove(roomToBeRemoved);
+			}
+
+			// enlarge small rooms
+			foreach (var room in Rooms.RegionList)
+			{
+				if(room == biggestRoom)
+				{
+					continue;
+				}
+
+				// room is already big enough
+				if(room.Area.Count >= WorldOptions.MinimalRoomSize)
+				{
+					continue;
+				}
+
+				while (room.Area.Count < WorldOptions.MinimalRoomSize)
+				{
+					var addedArea = new List<Point>(room.Border);
+					for (int i = addedArea.Count - 1; i >= 0; i--)
+					{
+						if (addedArea[i].X <= 1 || addedArea[i].X >= WorldOptions.Width - 1 || addedArea[i].Y <= 1 || addedArea[i].Y >= WorldOptions.Height - 1)
+						{
+							addedArea.RemoveAt(i);
+						}
+					}
+					room.Area.AddRange(addedArea);
+					Rooms.UpdateOpArea(addedArea, room.Id);
+
+					foreach (var point in addedArea)
+					{
+						map[point.X, point.Y].BaseType = 0;
+						map[point.X, point.Y].BaseTextureIndex = 0;
+						map[point.X, point.Y].CollisionFlag = false;
+						map[point.X, point.Y].BaseColor = room.Color;
+					}
+
+					room.Border = Rooms.CalculateRegionBorder(room);
+				}
+
+				room.ProcessInterior(map);
+
+				foreach (var point in room.Border)
+				{
+					map[point.X, point.Y].BaseType = 1;
+					map[point.X, point.Y].BaseTextureIndex = 1;
+					map[point.X, point.Y].CollisionFlag = true;
+					map[point.X, point.Y].BaseColor = Color.White;
+				}
+			}
+		
+			// place doors/room entries
+			Pandorai.Utility.Range roomEntryCountRange = new Pandorai.Utility.Range(1, 3);
+			foreach (var room in Rooms.RegionList)
+			{
+				int entryCount = roomEntryCountRange.GetRandom(_game.mainRng);
+				for (int i = 0; i < entryCount; i++)
+				{
+					var randomBorderPoint = room.Border.GetRandomElement(_game.mainRng);
+					map[randomBorderPoint.X, randomBorderPoint.Y].BaseType = 0;
+					map[randomBorderPoint.X, randomBorderPoint.Y].BaseTextureIndex = 0;
+					map[randomBorderPoint.X, randomBorderPoint.Y].CollisionFlag = false;
+					map[randomBorderPoint.X, randomBorderPoint.Y].BaseColor = room.Color;
+				}
+			}
+		}
+
+		private List<Point> FloodFillRoom()
+		{
+			Stack<Point> openList = new Stack<Point>();
+			List<Point> closedList = new List<Point>();
+
+			for (int X = 0; X < map.GetLength(0); X++)
+			{
+				for (int Y = 0; Y < map.GetLength(1); Y++)
+				{
+					if (operatingArea[X, Y] == 0 && map[X, Y].BaseType == 0 && map[X, Y].BaseColor == Color.White)
+					{
+						openList.Push(new Point(X, Y));
+						goto EndLoop;
+					}
+				}
+			}
+
+			EndLoop:
+
+			while (openList.Count > 0)
+			{
+				var currentTile = openList.Pop();
+
+				var neighbours = GenHelper.GetNeighbours(currentTile);
+
+				foreach (var neighbour in neighbours)
+				{
+					if (map[neighbour.X, neighbour.Y].BaseType == 0 && operatingArea[neighbour.X, neighbour.Y] == 0 && map[neighbour.X, neighbour.Y].BaseColor == Color.White)
+					{
+						openList.Push(neighbour);
+					}
+					operatingArea[neighbour.X, neighbour.Y] = 1;
+				}
+
+				closedList.Add(currentTile);
+				operatingArea[currentTile.X, currentTile.Y] = 1;
+			}
+
+			return closedList;
+		}
 
         private void FillUnusedSpace(List<Point> usedTiles)
         {
@@ -122,7 +285,7 @@ namespace Pandorai.MapGeneration
             }
         }
 
-        private void PlaceRegions(Game1 game, List<Rectangle> filledSpace, List<Point> usedTiles, List<RegMapInfo> createdRegions)
+        private void PlaceRegions(List<Rectangle> filledSpace, List<Point> usedTiles, List<RegMapInfo> createdRegions)
         {
             foreach (var regInfo in createdRegions)
             {
@@ -150,13 +313,13 @@ namespace Pandorai.MapGeneration
                     if (safetyCounter++ > 1000)
                     {
                         Console.WriteLine("Safety counter reached 1000");
-                        game.CreatureManager.Creatures.Clear(); // first clear everything
+                        _game.CreatureManager.Creatures.Clear(); // first clear everything
                         LightingManager.ClearLightSources();
                         ParticleSystemManager.Clear();
                         usedTiles.Clear();
                         filledSpace.Clear();
                         map.Populate(() => null);
-                        PlaceRegions(game, filledSpace, usedTiles, createdRegions);
+                        PlaceRegions(filledSpace, usedTiles, createdRegions);
                         return;
                     }
                 }
@@ -183,8 +346,8 @@ namespace Pandorai.MapGeneration
                     var creatureClone = creature.Clone();
                     creatureClone.MapIndex = creature.MapIndex;
                     creatureClone.MapIndex += new Point(randomLocationX, randomLocationY);
-                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * game.Options.TileSize;
-                    game.CreatureManager.AddCreature(creatureClone);
+                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * _game.Options.TileSize;
+                    _game.CreatureManager.AddCreature(creatureClone);
                 }
 
                 regInfo.TileInfo.CopyTo(map, randomLocationX, randomLocationY);

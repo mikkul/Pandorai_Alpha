@@ -12,7 +12,7 @@ namespace Pandorai.MapGeneration
 		public const int Height = 100;
 
 		public static int RegionPathwayPasses = 3;
-		public static int MinimalRoomSize = 30;
+		public static int MinimalRoomSize = 40;
 
 		public static List<Area> Areas;
 

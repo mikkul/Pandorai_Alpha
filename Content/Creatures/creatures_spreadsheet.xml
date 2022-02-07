@@ -288,7 +288,7 @@
 			</IdleTextureIndices>
 		</modifiers>
 		<behaviours>
-			<behaviour name="AllSeeingVision">
+			<behaviour name="NormalVision">
 				<RangeLimit>7</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
