@@ -31,169 +31,167 @@ namespace Pandorai.MapGeneration
 		public Regions Regions = new Regions();
 
 		public Tile[,] GenerateMap(Game1 game, string regionSpreadsheet)
-		{
-			var stopwatch = new Stopwatch();
-			stopwatch.Start();
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
 
-			map = new Tile[WorldOptions.Width, WorldOptions.Height];
-			map.Populate(() => null);
+            map = new Tile[WorldOptions.Width, WorldOptions.Height];
+            map.Populate(() => null);
 
-			CustomRegionLoader customRegLoader = new CustomRegionLoader(regionSpreadsheet);
+            CustomRegionLoader customRegLoader = new CustomRegionLoader(regionSpreadsheet);
 
-			List<Rectangle> filledSpace = new List<Rectangle>();
+            List<Rectangle> filledSpace = new List<Rectangle>();
 
-			List<Point> usedTiles = new List<Point>();
+            List<Point> usedTiles = new List<Point>();
 
-			List<RegMapInfo> createdRegions = new List<RegMapInfo>();
+            List<RegMapInfo> createdRegions = new List<RegMapInfo>();
 
-			foreach (var reg in customRegLoader.Regions)
-			{
-				for (int i = 0; i < reg.number; i++)
-				{
-					var regInfo = GenerateRegion(reg.template);
-					createdRegions.Add(regInfo);
-				}
-			}
+            foreach (var reg in customRegLoader.Regions)
+            {
+                for (int i = 0; i < reg.number; i++)
+                {
+                    var regInfo = GenerateRegion(reg.template);
+                    createdRegions.Add(regInfo);
+                }
+            }
 
-			PlaceRegions();
+            PlaceRegions(game, filledSpace, usedTiles, createdRegions);
 
-			void PlaceRegions()
-			{
-				foreach (var regInfo in createdRegions)
-				{
-					int randomLocationX;
-					int randomLocationY;
-					bool isGoodFit;
+            FillUnusedSpace(usedTiles);
 
-					int safetyCounter = 0;
+			
 
-					do
-					{
-						isGoodFit = true;
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
-						randomLocationX = rng.Next(1, WorldOptions.Width - regInfo.TileInfo.GetLength(0) - 1);
-						randomLocationY = rng.Next(1, WorldOptions.Height - regInfo.TileInfo.GetLength(1) - 1);
+            return map;
+        }
 
-						foreach (var rectangle in filledSpace)
-						{
-							if (rectangle.Intersects(new Rectangle(randomLocationX, randomLocationY, regInfo.TileInfo.GetLength(0), regInfo.TileInfo.GetLength(1))))
-							{
-								isGoodFit = false;
-								break;
-							}
-						}
-						if (safetyCounter++ > 1000)
-						{
-							Console.WriteLine("Safety counter reached 1000");
-							game.CreatureManager.Creatures.Clear(); // first clear everything
-							LightingManager.ClearLightSources();
-							ParticleSystemManager.Clear();
-							usedTiles.Clear();
-							filledSpace.Clear();
-							map.Populate(() => null);
-							PlaceRegions();
-							return;
-						}
-					}
-					while (!isGoodFit);
-					Console.WriteLine("placed region");
+        private void FillUnusedSpace(List<Point> usedTiles)
+        {
+            AreaDataType[,] constraint = new AreaDataType[WorldOptions.Width, WorldOptions.Height];
+            constraint.Populate(AreaDataType.Free);
+            foreach (var point in usedTiles)
+            {
+                constraint[point.X, point.Y] = AreaDataType.Locked;
+            }
+            for (int x = 0; x < WorldOptions.Width; x++)
+            {
+                for (int y = 0; y < WorldOptions.Height; y++)
+                {
+                    if (x == 0 || y == 0 || x == WorldOptions.Width - 1 || y == WorldOptions.Height - 1)
+                        constraint[x, y] = AreaDataType.Locked;
+                }
+            }
 
-					usedTiles.AddRange(regInfo.TakenSpace.Select(p => p + new Point(randomLocationX, randomLocationY)));
+            var sample = WFCSampleLoader.Samples["goldenSample"];
+            var output = WFCGenerator.GetOutput(sample, sample.IsPeriodic, false, WorldOptions.Width, WorldOptions.Height, constraint);
+            for (int x = 0; x < WorldOptions.Width; x++)
+            {
+                for (int y = 0; y < WorldOptions.Height; y++)
+                {
+                    if (map[x, y] != null && map[x, y].BaseColor != Color.White) continue;
 
-					filledSpace.Add(new Rectangle(randomLocationX, randomLocationY, regInfo.TileInfo.GetLength(0), regInfo.TileInfo.GetLength(1)));
+                    var pixelColor = System.Drawing.Color.FromArgb(output[x, y]).ToXnaColor();
+                    var tileType = sample.TileColorLegend[pixelColor];
 
-					foreach (var tile in regInfo.TileInfo)
-					{
-						// correct map indexes for structures
-						if (tile.HasStructure())
-						{
-							/*tile.MapObject.Structure.Tile = new TileInfo(tile.MapObject.Structure.Tile.Index + new Point(randomLocationX, randomLocationY), tile);*/
-							tile.MapObject.Structure.Tile.Index += new Point(randomLocationX, randomLocationY);
-							tile.MapObject.Structure.BindBehaviours();
-							//if (tile.MapObject.Structure.GetType() == typeof(Torch))
-							//{
-							//	Torch torch = (Torch)tile.MapObject.Structure;
-							//	torch.LightSource.Position += new Vector2(randomLocationX * game.Options.TileSize, randomLocationY * game.Options.TileSize);
-							//	torch.FireParticles.CentralPosition += new Vector2(randomLocationX * game.Options.TileSize, randomLocationY * game.Options.TileSize);
-							//}
-						}
-					}
+                    if (tileType == TileType.Empty)
+                    {
+                        map[x, y] = new Tile(0, 0, false);
+                    }
+                    else if (tileType == TileType.Wall)
+                    {
+                        map[x, y] = new Tile(1, 9, true);
+                    }
+                    else if (tileType == TileType.Floor)
+                    {
+                        map[x, y] = new Tile(0, 0, false);
+                    }
+                    else if (tileType == TileType.Path)
+                    {
+                        map[x, y] = new Tile(0, 0, false);
+                    }
+                    else if (tileType == TileType.Mud)
+                    {
+                        map[x, y] = new Tile(0, 0, false);
+                    }
 
-					foreach (var creature in regInfo.CreatureInfo)
-					{
-						// adjust positions to the world coords
-						var creatureClone = creature.Clone();
-						creatureClone.MapIndex = creature.MapIndex;
-						creatureClone.MapIndex += new Point(randomLocationX, randomLocationY);
-						creatureClone.Position = creatureClone.MapIndex.ToVector2() * game.Options.TileSize;
-						game.CreatureManager.AddCreature(creatureClone);
-					}
+                    if (x == 0 || y == 0 || x == WorldOptions.Width - 1 || y == WorldOptions.Height - 1)
+                        map[x, y] = new Tile(1, 9, true);
+                }
+            }
+        }
 
-					regInfo.TileInfo.CopyTo(map, randomLocationX, randomLocationY);
-					//Debugger.Break();
-				}
-			}
+        private void PlaceRegions(Game1 game, List<Rectangle> filledSpace, List<Point> usedTiles, List<RegMapInfo> createdRegions)
+        {
+            foreach (var regInfo in createdRegions)
+            {
+                int randomLocationX;
+                int randomLocationY;
+                bool isGoodFit;
 
-			// fill in unused space
-			AreaDataType[,] constraint = new AreaDataType[WorldOptions.Width, WorldOptions.Height];
-			constraint.Populate(AreaDataType.Free);
-			foreach (var point in usedTiles)
-			{
-				constraint[point.X, point.Y] = AreaDataType.Locked;
-			}
-			for (int x = 0; x < WorldOptions.Width; x++)
-			{
-				for (int y = 0; y < WorldOptions.Height; y++)
-				{
-					if (x == 0 || y == 0 || x == WorldOptions.Width - 1 || y == WorldOptions.Height - 1)
-						constraint[x, y] = AreaDataType.Locked;
-				}
-			}
+                int safetyCounter = 0;
 
-			var sample = WFCSampleLoader.Samples["goldenSample"];
-			var output = WFCGenerator.GetOutput(sample, sample.IsPeriodic, false, WorldOptions.Width, WorldOptions.Height, constraint);
-			for (int x = 0; x < WorldOptions.Width; x++)
-			{
-				for (int y = 0; y < WorldOptions.Height; y++)
-				{
-					if (map[x, y] != null && map[x, y].BaseColor != Color.White) continue;
+                do
+                {
+                    isGoodFit = true;
 
-					var pixelColor = System.Drawing.Color.FromArgb(output[x, y]).ToXnaColor();
-					var tileType = sample.TileColorLegend[pixelColor];
+                    randomLocationX = rng.Next(1, WorldOptions.Width - regInfo.TileInfo.GetLength(0) - 1);
+                    randomLocationY = rng.Next(1, WorldOptions.Height - regInfo.TileInfo.GetLength(1) - 1);
 
-					if (tileType == TileType.Empty)
-					{
-						map[x, y] = new Tile(0, 0, false);
-					}
-					else if (tileType == TileType.Wall)
-					{
-						map[x, y] = new Tile(1, 9, true);
-					}
-					else if(tileType == TileType.Floor)
-					{
-						map[x, y] = new Tile(0, 0, false);
-					}
-					else if (tileType == TileType.Path)
-					{
-						map[x, y] = new Tile(0, 0, false);
-					}
-					else if (tileType == TileType.Mud)
-					{
-						map[x, y] = new Tile(0, 0, false);
-					}
+                    foreach (var rectangle in filledSpace)
+                    {
+                        if (rectangle.Intersects(new Rectangle(randomLocationX, randomLocationY, regInfo.TileInfo.GetLength(0), regInfo.TileInfo.GetLength(1))))
+                        {
+                            isGoodFit = false;
+                            break;
+                        }
+                    }
+                    if (safetyCounter++ > 1000)
+                    {
+                        Console.WriteLine("Safety counter reached 1000");
+                        game.CreatureManager.Creatures.Clear(); // first clear everything
+                        LightingManager.ClearLightSources();
+                        ParticleSystemManager.Clear();
+                        usedTiles.Clear();
+                        filledSpace.Clear();
+                        map.Populate(() => null);
+                        PlaceRegions(game, filledSpace, usedTiles, createdRegions);
+                        return;
+                    }
+                }
+                while (!isGoodFit);
+                Console.WriteLine("placed region");
 
-					if (x == 0 || y == 0 || x == WorldOptions.Width - 1 || y == WorldOptions.Height - 1)
-						map[x, y] = new Tile(1, 9, true);
-				}
-			}
+                usedTiles.AddRange(regInfo.TakenSpace.Select(p => p + new Point(randomLocationX, randomLocationY)));
 
-			stopwatch.Stop();
-			Console.WriteLine(stopwatch.ElapsedMilliseconds);
+                filledSpace.Add(new Rectangle(randomLocationX, randomLocationY, regInfo.TileInfo.GetLength(0), regInfo.TileInfo.GetLength(1)));
 
-			return map;
-		}
+                foreach (var tile in regInfo.TileInfo)
+                {
+                    // correct map indexes for structures
+                    if (tile.HasStructure())
+                    {
+                        tile.MapObject.Structure.Tile.Index += new Point(randomLocationX, randomLocationY);
+                        tile.MapObject.Structure.BindBehaviours();
+                    }
+                }
 
-		private RegMapInfo GenerateRegion(CustomRegion region)
+                foreach (var creature in regInfo.CreatureInfo)
+                {
+                    // adjust positions to the world coords
+                    var creatureClone = creature.Clone();
+                    creatureClone.MapIndex = creature.MapIndex;
+                    creatureClone.MapIndex += new Point(randomLocationX, randomLocationY);
+                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * game.Options.TileSize;
+                    game.CreatureManager.AddCreature(creatureClone);
+                }
+
+                regInfo.TileInfo.CopyTo(map, randomLocationX, randomLocationY);
+            }
+        }
+
+        private RegMapInfo GenerateRegion(CustomRegion region)
 		{
 			var info = new RegMapInfo();
 

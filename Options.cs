@@ -64,6 +64,7 @@ namespace Pandorai
 			newIsFullscreen = oldIsFullScreen;
 
 			ResolutionList.Add(new Point(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height));
+			ResolutionList.Add(new Point(1200, 800));
 			ResolutionList.Add(new Point(800, 600));
 		}
 

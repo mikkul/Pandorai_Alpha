@@ -109,6 +109,7 @@ namespace Pandorai.Dialogues
 
 		public static void ShowOptions(List<DialogueOption> options, Dialogue dialogueInstance)
 		{
+			HideOptions();
 			foreach (var option in options)
 			{
 				OptionsStack.Widgets.Add(OptionButton(option, dialogueInstance));
