@@ -40,15 +40,17 @@
 			<Hits>1</Hits>
 		</behaviour>
 	</structure>
-	<structure id="Door" texture="6">
+	<structure id="YellowDoor" texture="6" colorTint="#edd63e">
 		<behaviour name="Door">
 			<RequiredKey>YellowKey</RequiredKey>
 		</behaviour>
 		<behaviour name="Destructible">
 			<Force>Fire</Force>
 		</behaviour>
-		<behaviour name="Armor">
-			<Hits>4</Hits>
+	</structure>
+	<structure id="BlueDoor" texture="6" colorTint="#4287f5">
+		<behaviour name="Door">
+			<RequiredKey>BlueKey</RequiredKey>
 		</behaviour>
 	</structure>
 	<structure id="Torch" texture="62">

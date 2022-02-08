@@ -41,6 +41,7 @@ namespace Pandorai.Structures
 			{
 				Id = Id,
 				Texture = Texture,
+				ColorTint = ColorTint,
 				Behaviours = new List<Behaviour>(Behaviours),
 			};
 			for (int i = 0; i < clone.Behaviours.Count; i++)

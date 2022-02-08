@@ -8,7 +8,7 @@
 
 		<entrance name="MainEntrance" number="1" />
 
-		<structure name="Door" number="3">
+		<structure name="BlueDoor" number="3">
 			<location>
 				<proximity to="MainEntrance" distance="very close" />
 			</location>

@@ -42,7 +42,7 @@
 			</location>
 		</structure>
 		
-		<structure name="Door" number="9-12">
+		<structure name="YellowDoor" number="9-12">
 		</structure>
 
 		<item name="FireArrowSpell" number="3-4" />

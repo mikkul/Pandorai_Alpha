@@ -40,8 +40,8 @@
 			<Duration>20</Duration>
 		</effect>
 	</item>
-	<item id="YellowKey" texture="4" consumable="False" name="Yellow key" colorTint="#ffff00" tooltipColor="white" description="An ordinary key" type="Other"></item>
-	<item id="BlueKey" texture="4" consumable="False" name="Blue key" colorTint="#0000ff" tooltipColor="white" description="An ordinary key" type="Other"></item>
+	<item id="YellowKey" texture="4" consumable="False" name="Yellow key" colorTint="#edd63e" tooltipColor="white" description="An ordinary key" type="Other"></item>
+	<item id="BlueKey" texture="4" consumable="False" name="Blue key" colorTint="#4287f5" tooltipColor="white" description="An ordinary key" type="Other"></item>
 	<item id="StealthCape" texture="70" consumable="false" name="Stealth cape" tooltipColor="green" description="Makes the user less visible to other creatures" type="Clothes">
 		<effect name="ModifyStealth">
 			<Amount>3</Amount>

@@ -513,7 +513,7 @@ namespace Pandorai.Tilemaps
 
 			game.GraphicsDevice.SetRenderTarget(renderTarget);
 
-			spriteBatch.Begin();
+			spriteBatch.Begin(blendState: BlendState.AlphaBlend);
 
 			for (int y = -tilesRenderedVertically; y < tilesRenderedVertically; y++)
 			{

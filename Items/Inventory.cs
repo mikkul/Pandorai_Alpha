@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 using System.Timers;
 using Myra.Graphics2D;
 using Pandorai.UI;
-using System.Diagnostics;
+using System.Linq;
 
 namespace Pandorai.Items
 {
@@ -379,6 +379,28 @@ namespace Pandorai.Items
             game.Options.AdjustGUI();
         }
 
+        public void RemoveElement(string itemName, int amount = 1)
+		{
+            if (!ContainsItem(itemName)) return;
+
+            var itemEntry = FindItem(itemName);
+
+            itemEntry.Amount -= amount;
+            int index = Items.IndexOf(itemEntry);
+
+            if (itemEntry.Amount <= 0)
+			{
+                ReplaceSlot(new EmptyItem(), 1, index);
+			}
+
+            if (Owner == Owner.game.Player.PossessedCreature)
+            {
+                DisplayAsMainInventory();
+            }
+            Sidekick.DisplaySlots();
+            game.Options.AdjustGUI();
+        }
+
         public void ReplaceSlot(Item item, int amount, int slotIndex)
 		{
             Items[slotIndex].Item = item;
@@ -396,21 +418,22 @@ namespace Pandorai.Items
 
         public bool ContainsItem(Item item)
 		{
-            bool contains = false;
-			foreach (var entry in Items)
-			{
-                if(entry.Item.Id == item.Id)
-				{
-                    contains = true;
-                    break;
-				}
-			}
-            return contains;
+            return Items.Any(x => x.Item.Id == item.Id);
+		}
+
+        public bool ContainsItem(string itemName)
+		{
+            return Items.Any(x => x.Item.Id == itemName);
 		}
 
         public InventoryEntry FindItem(Item item)
 		{
             return Items.Find(i => i.Item.Id == item.Id);
+		}
+
+        public InventoryEntry FindItem(string itemName)
+		{
+            return Items.Find(i => i.Item.Id == itemName);
 		}
 	}
 }

@@ -7,6 +7,7 @@ namespace Pandorai.Structures.Behaviours
 		public int ClosedTexture;
 		public int OpenTexture;
         public string RequiredKey;
+		public float OpacityMultiplier = 0.25f;
 		public bool IsOpened = false;
 
 		public override void SetAttribute(string name, string value)
@@ -47,7 +48,26 @@ namespace Pandorai.Structures.Behaviours
 
         public override void Interact(Creature creature)
         {
-            throw new System.NotImplementedException();
+            if(!IsOpened)
+			{
+				if (creature.Inventory.ContainsItem(RequiredKey))
+				{
+					creature.Inventory.RemoveElement(RequiredKey);
+					Game1.game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, false);
+					Structure.ColorTint *= OpacityMultiplier;
+					IsOpened = true;
+				}
+				else
+				{
+					// play sound or something
+				}
+			}
+			else
+			{
+				IsOpened = false;
+				Structure.ColorTint *= 1 / OpacityMultiplier;
+				Game1.game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, true);
+			}
         }
 
         public override void ForceHandler(ForceType force)

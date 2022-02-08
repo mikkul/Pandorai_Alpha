@@ -36,7 +36,7 @@
 <!index  >18
 <!type   >NPCSay
 <!content>Make me proud
-<method>GiveHeroItem(YellowKey)
+<method>GiveHeroItem(BlueKey)
 <method>GiveHeroItem(TransformSpell)
 <method>SetLead(19)
 #
