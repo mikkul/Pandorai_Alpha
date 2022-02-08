@@ -79,7 +79,7 @@ namespace Pandorai.Items
 			{ "CastWave", typeof(CastWave) },
 			{ "SpawnSpikes", typeof(SpawnSpikes) },
 			{ "ModifySpeed", typeof(ModifySpeed) },
-			{ "ModifyStealth", typeof(ModifyStealth) },
+			{ "StealthEquipableItem", typeof(StealthEquipableItem) },
 		};
 	}
 }

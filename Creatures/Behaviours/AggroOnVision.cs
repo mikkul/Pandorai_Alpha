@@ -21,6 +21,17 @@ namespace Pandorai.Creatures.Behaviours
 				var tryCreature = Owner.game.CreatureManager.GetCreature(tile);
 				if (tryCreature == null) continue;
 
+				float dist = Vector2.DistanceSquared(tryCreature.Position, Owner.Position);
+				var normalVision = Owner.GetBehaviour<NormalVision>() as NormalVision;
+				if(normalVision != null)
+				{
+					int realAggroRange = normalVision.RangeLimit - tryCreature.Stealth;
+					if (dist > (realAggroRange * Owner.game.Map.TileSize) * (realAggroRange * Owner.game.Map.TileSize))
+					{
+						continue;
+					}
+				}
+
 				if(Owner.EnemyClasses.Contains(tryCreature.Class))
 				{
 					Owner.Target = tryCreature.MapIndex;
