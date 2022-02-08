@@ -948,11 +948,11 @@ namespace Pandorai.MapGeneration
 					tile.CollisionFlag = true;
 					if(tile.TooltipInfo == null)
 					{
-						// tile.TooltipInfo = new ImageTooltip
-						// {
-						// 	Title = entitySpec.Name,
-						// 	Image = TilesheetManager.MapSpritesheetTexture.ExtractSubtexture(TilesheetManager.MapObjectSpritesheet[structureInstance.Texture].Rect, game.GraphicsDevice),
-						// };
+						tile.TooltipInfo = new ImageTooltip
+						{
+							Title = entitySpec.Name,
+							Image = TilesheetManager.MapSpritesheetTexture.ExtractSubtexture(TilesheetManager.MapObjectSpritesheet[structureInstance.Texture].Rect, Game1.game.GraphicsDevice),
+						};
 					}
 				}
 				else if (node.Type == NodeType.Item)
