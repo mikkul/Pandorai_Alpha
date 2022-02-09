@@ -26,7 +26,7 @@
 	<structure id="RegionPedestal" texture="77">
 		<behaviour name="LightEmitter">
 			<Color>#256ad9</Color>
-			<Radius>100</Radius>
+			<Radius>500</Radius>
 			<Intensity>0.5</Intensity>
 		</behaviour>
 		<behaviour name="RegionPedestal">
@@ -35,9 +35,6 @@
 	<structure id="BookStand" texture="72">
 		<behaviour name="Destructible">
 			<Force>Fire</Force>
-		</behaviour>
-		<behaviour name="Armor">
-			<Hits>1</Hits>
 		</behaviour>
 	</structure>
 	<structure id="YellowDoor" texture="6" colorTint="#edd63e">

@@ -351,27 +351,51 @@ namespace Pandorai.Utility
 		}
 	}
 
-	public struct Range
-	{
-		public int Min;
-		public int Max;
-
-		private static Range zero = new Range(0, 0);
-		public static Range Zero { get => zero; }
-
-		public Range(int min, int max)
-		{
-			Min = min;
-			Max = max;
+    public struct Range
+    {
+        public int Min;
+        public int Max;
+        public float Weight 
+		{ 
+			get => weight; 
+			set
+			{
+				if(value < -1) weight = -1;
+				else if(value > 1) weight = 1;
+				else weight = value;
+			} 
 		}
 
-		public int GetRandom(Random rng)
-		{
-			return rng.Next(Min, Max + 1);
-		}
-	}
+        private static Range zero = new Range(0, 0);
+        private float weight;
+		private Dictionary<int, float> numberProbabilities;
 
-	public enum ExpansionDirection
+        public static Range Zero { get => zero; }
+
+        public Range(int min, int max) : this(min, max, 0f)
+        {
+        }
+
+        public Range(int min, int max, float weight) : this()
+        {
+            Min = min;
+            Max = max;
+            Weight = weight;
+			numberProbabilities = new Dictionary<int, float>();
+			for (int i = Min; i <= Max; i++)
+			{
+				//numberProbabilities[i] = Max - i
+			}
+        }
+
+        public int GetRandom(Random rng)
+        {
+
+            return rng.Next(Min, Max + 1);
+        }
+    }
+
+    public enum ExpansionDirection
 	{
 		Out,
 		In,
