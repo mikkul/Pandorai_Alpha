@@ -1,4 +1,4 @@
-﻿<customRegion name="Temple" floorColor="#d1b94d" borderColor="#d1ae0f" sample="wfcSample2">
+﻿<customRegion name="Temple" floorColor="#d1b94d" borderColor="#d1ae0f" musicTheme="Temple_theme" sample="wfcSample2">
 	<location>
 		<proximity to="Cementery" distance="very far" />
 	</location>

@@ -23,6 +23,7 @@ using Pandorai.Utility;
 using Pandorai.Tooltips;
 using Pandorai.UI;
 using Pandorai.MapGeneration.CustomRegions;
+using Pandorai.Sounds;
 
 namespace Pandorai
 {
@@ -295,6 +296,8 @@ namespace Pandorai
 
             CustomRegionLoader.LoadRegionTemplates(Path.Combine(Content.RootDirectory, "CustomRegions"));
             WFCSampleLoader.InitSamples(Path.Combine(Content.RootDirectory, "WFCSamples"), Path.Combine(Content.RootDirectory, "wfcSamplesSpreadsheet.xml"), this);
+
+            SoundManager.LoadSounds("Music", "Sounds");
         }
 
         /// <summary>
@@ -498,6 +501,8 @@ namespace Pandorai
             CreatureManager.EndCreaturesTurn();
 
             GameStarted?.Invoke();
+
+            SoundManager.PlayMusic("Main_theme");
         }
 
         public void TogglePauseGame()

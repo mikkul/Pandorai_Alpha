@@ -1,4 +1,4 @@
-<customRegion name="Cementery" floorColor="#a9c2b0" borderColor="#5b7d6b" sample="wfcSample2">
+<customRegion name="Cementery" floorColor="#a9c2b0" borderColor="#5b7d6b" musicTheme="Cementery_theme" sample="wfcSample2">
 	<location>
 		<proximity to="Forest" distance="close" />
 		<proximity to="Shrine" distance="very close" />

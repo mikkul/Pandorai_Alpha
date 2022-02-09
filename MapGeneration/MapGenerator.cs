@@ -15,6 +15,7 @@ using Pandorai.Tooltips;
 using Pandorai.Sprites;
 using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
+using Pandorai.Sounds;
 
 namespace Pandorai.MapGeneration
 {
@@ -281,6 +282,16 @@ namespace Pandorai.MapGeneration
 
                     if (x == 0 || y == 0 || x == WorldOptions.Width - 1 || y == WorldOptions.Height - 1)
                         map[x, y] = new Tile(1, 9, true);
+
+					// play main music theme
+					map[x, y].CreatureCame += incomingCreature =>
+					{
+						if(!incomingCreature.IsPossessedCreature())
+						{
+							return;
+						}
+						SoundManager.PlayMusic("Main_theme");
+					};
                 }
             }
         }
@@ -533,6 +544,25 @@ namespace Pandorai.MapGeneration
 
 			//
 			info.TileInfo = tileData;
+
+			//
+			if(!string.IsNullOrEmpty(region.MusicThemeName))
+			{
+				foreach (var tile in info.TileInfo)
+				{
+					tile.CreatureCame += incomingCreature =>
+					{
+						if(!incomingCreature.IsPossessedCreature())
+						{
+							return;
+						}
+
+						SoundManager.PlayMusic(region.MusicThemeName);
+					};
+				}
+			}
+
+			//
 
 			void recursiveSetPositions(DimensionAreaInfo nextSpec)
 			{

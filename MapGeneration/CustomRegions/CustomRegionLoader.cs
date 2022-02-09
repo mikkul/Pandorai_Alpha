@@ -64,6 +64,11 @@ namespace Pandorai.MapGeneration.CustomRegions
 				region.BorderColor.A = 255;
 			}
 
+			if (root.HasAttribute("musicTheme"))
+			{
+				region.MusicThemeName = root.GetAttribute("musicTheme");
+			}
+
 			foreach (XmlElement locSpec in root.SelectSingleNode("//customRegion/location").ChildNodes)
 			{
 				LocationSpecifier spec = null;
