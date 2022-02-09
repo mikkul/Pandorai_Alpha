@@ -80,6 +80,7 @@ namespace Pandorai.Items
 			{ "SpawnSpikes", typeof(SpawnSpikes) },
 			{ "ModifySpeed", typeof(ModifySpeed) },
 			{ "StealthEquipableItem", typeof(StealthEquipableItem) },
+			{ "TransformSpell", typeof(TransformSpell) },
 		};
 	}
 }
