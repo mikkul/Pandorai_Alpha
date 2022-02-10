@@ -1,6 +1,6 @@
 ﻿<items>
 	<item id="Error" texture="8" consumable="False" name="Error" description="Item doesn't exist" tooltipColor="red" />
-	<item id="HealthPotion" texture="58" consumable="True" name="Health Potion" tooltipColor="green" description="Restores health" type="Food">
+	<item id="HealthPotion" texture="58" consumable="True" name="Health Potion" tooltipColor="green" description="Restores health" type="Food" sound="bottle">
 		<effect name="ModifyHP">
 			<Amount>90</Amount>
 		</effect>
@@ -37,7 +37,7 @@
 			<Damage>100</Damage>
 		</effect>
 	</item>
-	<item id="SpeedPotion" texture="71" consumable="True" name="Speed Potion" tooltipColor="green" description="Makes the user move faster" type="Food">
+	<item id="SpeedPotion" texture="71" consumable="True" name="Speed Potion" tooltipColor="green" description="Makes the user move faster" type="Food" sound="bottle">
 		<effect name="ModifySpeed">
 			<Amount>30</Amount>
 			<Duration>20</Duration>
@@ -45,7 +45,7 @@
 	</item>
 	<item id="YellowKey" texture="4" consumable="False" name="Yellow key" colorTint="#edd63e" tooltipColor="white" description="An ordinary key" type="Other"></item>
 	<item id="BlueKey" texture="4" consumable="False" name="Blue key" colorTint="#4287f5" tooltipColor="white" description="An ordinary key" type="Other"></item>
-	<item id="StealthCape" texture="70" consumable="false" name="Stealth cape" tooltipColor="green" description="Makes the user less visible to other creatures" type="Clothes">
+	<item id="StealthCape" texture="70" consumable="false" name="Stealth cape" tooltipColor="green" description="Makes the user less visible to other creatures" type="Clothes" sound="cloth">
 		<effect name="StealthEquipableItem">
 			<Amount>3</Amount>
 		</effect>

@@ -170,6 +170,18 @@
 /processorParam:TextureFormat=Color
 /build:smokeParticle.png
 
+#begin Sounds/explosion_low.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/explosion_low.wav
+
+#begin Sounds/fireball0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/fireball0.wav
+
 #begin Sounds/Sound_pack_1/battle/magic1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -746,6 +758,276 @@
 /processorParam:Quality=Best
 /build:Sounds/Sound_pack_1/world/door.wav
 
+#begin Sounds/Sound_pack_2/Ambience_Cave_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Ambience_Cave_00.wav
+
+#begin Sounds/Sound_pack_2/Dragon_Growl_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Dragon_Growl_00.wav
+
+#begin Sounds/Sound_pack_2/Dragon_Growl_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Dragon_Growl_01.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_00.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_01.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_02.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_03.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_04.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_05.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_06.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_07.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_07.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_08.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_08.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_09.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Dirt_09.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_00.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_01.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_02.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_03.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_04.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_05.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_06.wav
+
+#begin Sounds/Sound_pack_2/Footsteps/Footstep_Water_07.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Footsteps/Footstep_Water_07.wav
+
+#begin Sounds/Sound_pack_2/Goblin_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Goblin_00.wav
+
+#begin Sounds/Sound_pack_2/Goblin_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Goblin_01.wav
+
+#begin Sounds/Sound_pack_2/Goblin_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Goblin_02.wav
+
+#begin Sounds/Sound_pack_2/Goblin_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Goblin_03.wav
+
+#begin Sounds/Sound_pack_2/Goblin_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Goblin_04.wav
+
+#begin Sounds/Sound_pack_2/Inventory_Open_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Inventory_Open_00.wav
+
+#begin Sounds/Sound_pack_2/Inventory_Open_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Inventory_Open_01.wav
+
+#begin Sounds/Sound_pack_2/Jingle_Achievement_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Jingle_Achievement_00.wav
+
+#begin Sounds/Sound_pack_2/Jingle_Lose_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Jingle_Lose_00.wav
+
+#begin Sounds/Sound_pack_2/Jingle_Win_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Jingle_Win_00.wav
+
+#begin Sounds/Sound_pack_2/Menu_Select_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Menu_Select_00.wav
+
+#begin Sounds/Sound_pack_2/Pickup_Gold_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Pickup_Gold_00.wav
+
+#begin Sounds/Sound_pack_2/Pickup_Gold_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Pickup_Gold_01.wav
+
+#begin Sounds/Sound_pack_2/Pickup_Gold_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Pickup_Gold_02.wav
+
+#begin Sounds/Sound_pack_2/Pickup_Gold_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Pickup_Gold_03.wav
+
+#begin Sounds/Sound_pack_2/Pickup_Gold_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Pickup_Gold_04.wav
+
+#begin Sounds/Sound_pack_2/Spell_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Spell_00.wav
+
+#begin Sounds/Sound_pack_2/Spell_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Spell_01.wav
+
+#begin Sounds/Sound_pack_2/Spell_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Spell_02.wav
+
+#begin Sounds/Sound_pack_2/Spell_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Spell_03.wav
+
+#begin Sounds/Sound_pack_2/Spell_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Spell_04.wav
+
+#begin Sounds/Sound_pack_2/Trap_00.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Trap_00.wav
+
+#begin Sounds/Sound_pack_2/Trap_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Trap_01.wav
+
+#begin Sounds/Sound_pack_2/Trap_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_2/Trap_02.wav
+
 #begin Sounds/Steps_sound_pack_1/stepdirt_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -877,6 +1159,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/Steps_sound_pack_1/stepwood_2.wav
+
+#begin Sounds/teleport.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/teleport.wav
 
 #begin tilesheet.png
 /importer:TextureImporter

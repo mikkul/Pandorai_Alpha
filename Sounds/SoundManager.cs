@@ -28,7 +28,7 @@ namespace Pandorai.Sounds
                     filePath = filePath.Remove(0, 1);
                 }
                 var song = Game1.game.Content.Load<Song>(filePath);
-                _music[Path.GetFileName(filePath)] = song;
+                _music.Add(Path.GetFileName(filePath), song);
             }
 
             foreach (var fullFilePath in soundFiles)
@@ -40,7 +40,7 @@ namespace Pandorai.Sounds
                     filePath = filePath.Remove(0, 1);
                 }
                 var soundEffect = Game1.game.Content.Load<SoundEffect>(filePath);
-                _sounds[Path.GetFileName(filePath)] = soundEffect;
+                _sounds.Add(Path.GetFileName(filePath), soundEffect);
             }    
         }
         

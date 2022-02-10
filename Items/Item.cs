@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.Effects;
+using Pandorai.Sounds;
 using System.Collections.Generic;
 
 namespace Pandorai.Items
@@ -11,6 +12,7 @@ namespace Pandorai.Items
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public int Texture { get; set; }
+		public string SoundEffectName { get; set; }
 		public bool Equipped { get; set; } = false;
 		public bool Consumable { get; set; }
 		public Color TooltipColor { get; set; } = Color.Gray;
@@ -20,6 +22,11 @@ namespace Pandorai.Items
 
 		public void Use(Creature creature)
 		{
+			if(!string.IsNullOrEmpty(SoundEffectName))
+			{
+				SoundManager.PlaySound(SoundEffectName);
+			}
+
 			foreach (var effect in Effects)
 			{
 				effect.Use(creature);
@@ -38,6 +45,7 @@ namespace Pandorai.Items
 				Name = Name,
 				Description = Description,
 				Texture = Texture,
+				SoundEffectName = SoundEffectName,
 				Consumable = Consumable,
 				TooltipColor = TooltipColor,
 				ColorTint = ColorTint,

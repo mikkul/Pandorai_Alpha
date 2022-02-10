@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Myra.Graphics2D.UI;
 using Pandorai.Rendering;
+using Pandorai.Sounds;
 using System;
 
 namespace Pandorai
@@ -47,6 +48,7 @@ namespace Pandorai
 		{
 			ShakeX.StartShaking();
 			ShakeY.StartShaking();
+			SoundManager.PlaySound("");
 		}
 
 		public Vector2 GetViewportPosition(Vector2 worldPosition)

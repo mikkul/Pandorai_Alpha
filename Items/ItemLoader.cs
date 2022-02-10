@@ -40,6 +40,8 @@ namespace Pandorai.Items
 					item.ColorTint = Helper.GetColorFromHex(node.GetAttribute("colorTint"));
 				if (node.HasAttribute("description"))
 					item.Description = node.GetAttribute("description");
+				if (node.HasAttribute("sound"))
+					item.SoundEffectName = node.GetAttribute("sound");
 
 				var types = Helper.GetStringChoice(node.GetAttribute("type"));
 				foreach (var type in types)

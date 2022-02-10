@@ -2,6 +2,7 @@ using System.Timers;
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.ParticleSystems;
+using Pandorai.Sounds;
 using Pandorai.Tilemaps;
 
 namespace Pandorai.Effects
@@ -66,6 +67,8 @@ namespace Pandorai.Effects
                         effectTimer.Dispose();
                     };
                     effectTimer.Start();
+
+                    SoundManager.PlaySound("spell");
                 }
             }
         }
