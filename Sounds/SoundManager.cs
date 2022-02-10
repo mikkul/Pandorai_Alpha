@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Timers;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 
 namespace Pandorai.Sounds
@@ -11,11 +12,13 @@ namespace Pandorai.Sounds
         public static string CurrentSong { get; private set; }
 
         private static Dictionary<string, Song> _music = new();
+        private static Dictionary<string, SoundEffect> _sounds = new();
 
         public static void LoadSounds(string musicFolderPath, string soundEffectsFolderPath)
         {
             var musicFiles = Directory.EnumerateFiles(Path.Combine(Game1.game.Content.RootDirectory, musicFolderPath));
-            var soundFiles = Directory.EnumerateFiles(Path.Combine(Game1.game.Content.RootDirectory, soundEffectsFolderPath));
+            var soundFiles = Directory.EnumerateFiles(Path.Combine(Game1.game.Content.RootDirectory, soundEffectsFolderPath), "*.*", SearchOption.AllDirectories);
+
             foreach (var fullFilePath in musicFiles)
             {
                 var filePath = Path.ChangeExtension(fullFilePath, null);
@@ -26,6 +29,26 @@ namespace Pandorai.Sounds
                 }
                 var song = Game1.game.Content.Load<Song>(filePath);
                 _music[Path.GetFileName(filePath)] = song;
+            }
+
+            foreach (var fullFilePath in soundFiles)
+            {
+                var filePath = Path.ChangeExtension(fullFilePath, null);
+                filePath = filePath.Replace(Game1.game.Content.RootDirectory, null);
+                if(filePath[0] == '/')
+                {
+                    filePath = filePath.Remove(0, 1);
+                }
+                var soundEffect = Game1.game.Content.Load<SoundEffect>(filePath);
+                _sounds[Path.GetFileName(filePath)] = soundEffect;
+            }    
+        }
+        
+        public static void PlaySound(string name)
+        {
+            if(_sounds.ContainsKey(name))
+            {
+                _sounds[name].CreateInstance().Play();
             }
         }
 

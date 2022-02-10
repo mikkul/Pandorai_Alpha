@@ -170,6 +170,714 @@
 /processorParam:TextureFormat=Color
 /build:smokeParticle.png
 
+#begin Sounds/Sound_pack_1/battle/magic1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/magic1.wav
+
+#begin Sounds/Sound_pack_1/battle/spell.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/spell.wav
+
+#begin Sounds/Sound_pack_1/battle/swing.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/swing.wav
+
+#begin Sounds/Sound_pack_1/battle/swing2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/swing2.wav
+
+#begin Sounds/Sound_pack_1/battle/swing3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/swing3.wav
+
+#begin Sounds/Sound_pack_1/battle/sword-unsheathe.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/sword-unsheathe.wav
+
+#begin Sounds/Sound_pack_1/battle/sword-unsheathe2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/sword-unsheathe2.wav
+
+#begin Sounds/Sound_pack_1/battle/sword-unsheathe3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/sword-unsheathe3.wav
+
+#begin Sounds/Sound_pack_1/battle/sword-unsheathe4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/sword-unsheathe4.wav
+
+#begin Sounds/Sound_pack_1/battle/sword-unsheathe5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/battle/sword-unsheathe5.wav
+
+#begin Sounds/Sound_pack_1/interface/interface1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/interface/interface1.wav
+
+#begin Sounds/Sound_pack_1/interface/interface2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/interface/interface2.wav
+
+#begin Sounds/Sound_pack_1/interface/interface3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/interface/interface3.wav
+
+#begin Sounds/Sound_pack_1/interface/interface4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/interface/interface4.wav
+
+#begin Sounds/Sound_pack_1/interface/interface5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/interface/interface5.wav
+
+#begin Sounds/Sound_pack_1/interface/interface6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/interface/interface6.wav
+
+#begin Sounds/Sound_pack_1/inventory/armor-light.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/armor-light.wav
+
+#begin Sounds/Sound_pack_1/inventory/beads.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/beads.wav
+
+#begin Sounds/Sound_pack_1/inventory/bottle.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/bottle.wav
+
+#begin Sounds/Sound_pack_1/inventory/bubble.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/bubble.wav
+
+#begin Sounds/Sound_pack_1/inventory/bubble2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/bubble2.wav
+
+#begin Sounds/Sound_pack_1/inventory/bubble3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/bubble3.wav
+
+#begin Sounds/Sound_pack_1/inventory/chainmail1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/chainmail1.wav
+
+#begin Sounds/Sound_pack_1/inventory/chainmail2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/chainmail2.wav
+
+#begin Sounds/Sound_pack_1/inventory/cloth-heavy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/cloth-heavy.wav
+
+#begin Sounds/Sound_pack_1/inventory/cloth.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/cloth.wav
+
+#begin Sounds/Sound_pack_1/inventory/coin.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/coin.wav
+
+#begin Sounds/Sound_pack_1/inventory/coin2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/coin2.wav
+
+#begin Sounds/Sound_pack_1/inventory/coin3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/coin3.wav
+
+#begin Sounds/Sound_pack_1/inventory/metal-ringing.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/metal-ringing.wav
+
+#begin Sounds/Sound_pack_1/inventory/metal-small1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/metal-small1.wav
+
+#begin Sounds/Sound_pack_1/inventory/metal-small2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/metal-small2.wav
+
+#begin Sounds/Sound_pack_1/inventory/metal-small3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/metal-small3.wav
+
+#begin Sounds/Sound_pack_1/inventory/wood-small.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/inventory/wood-small.wav
+
+#begin Sounds/Sound_pack_1/misc/burp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/misc/burp.wav
+
+#begin Sounds/Sound_pack_1/misc/random1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/misc/random1.wav
+
+#begin Sounds/Sound_pack_1/misc/random2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/misc/random2.wav
+
+#begin Sounds/Sound_pack_1/misc/random3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/misc/random3.wav
+
+#begin Sounds/Sound_pack_1/misc/random4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/misc/random4.wav
+
+#begin Sounds/Sound_pack_1/misc/random5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/misc/random5.wav
+
+#begin Sounds/Sound_pack_1/misc/random6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/misc/random6.wav
+
+#begin Sounds/Sound_pack_1/NPC/beetle/bite-small.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/beetle/bite-small.wav
+
+#begin Sounds/Sound_pack_1/NPC/beetle/bite-small2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/beetle/bite-small2.wav
+
+#begin Sounds/Sound_pack_1/NPC/beetle/bite-small3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/beetle/bite-small3.wav
+
+#begin Sounds/Sound_pack_1/NPC/giant/giant1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/giant/giant1.wav
+
+#begin Sounds/Sound_pack_1/NPC/giant/giant2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/giant/giant2.wav
+
+#begin Sounds/Sound_pack_1/NPC/giant/giant3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/giant/giant3.wav
+
+#begin Sounds/Sound_pack_1/NPC/giant/giant4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/giant/giant4.wav
+
+#begin Sounds/Sound_pack_1/NPC/giant/giant5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/giant/giant5.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr1.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr10.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr11.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr12.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr13.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr14.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr15.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr2.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr3.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr4.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr5.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr6.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr7.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr8.wav
+
+#begin Sounds/Sound_pack_1/NPC/gutteral beast/mnstr9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/gutteral beast/mnstr9.wav
+
+#begin Sounds/Sound_pack_1/NPC/misc/wolfman.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/misc/wolfman.wav
+
+#begin Sounds/Sound_pack_1/NPC/ogre/ogre1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/ogre/ogre1.wav
+
+#begin Sounds/Sound_pack_1/NPC/ogre/ogre2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/ogre/ogre2.wav
+
+#begin Sounds/Sound_pack_1/NPC/ogre/ogre3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/ogre/ogre3.wav
+
+#begin Sounds/Sound_pack_1/NPC/ogre/ogre4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/ogre/ogre4.wav
+
+#begin Sounds/Sound_pack_1/NPC/ogre/ogre5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/ogre/ogre5.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade1.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade10.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade11.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade12.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade13.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade14.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade15.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade2.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade3.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade4.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade5.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade6.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade7.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade8.wav
+
+#begin Sounds/Sound_pack_1/NPC/shade/shade9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/shade/shade9.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime1.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime10.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime2.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime3.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime4.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime5.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime6.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime7.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime8.wav
+
+#begin Sounds/Sound_pack_1/NPC/slime/slime9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/NPC/slime/slime9.wav
+
+#begin Sounds/Sound_pack_1/world/door.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_1/world/door.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_1.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_2.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_3.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_4.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_5.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_6.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_7.wav
+
+#begin Sounds/Steps_sound_pack_1/stepdirt_8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepdirt_8.wav
+
+#begin Sounds/Steps_sound_pack_1/stepsnow_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepsnow_1.wav
+
+#begin Sounds/Steps_sound_pack_1/stepsnow_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepsnow_2.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_1.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_2.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_3.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_4.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_5.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_6.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_7.wav
+
+#begin Sounds/Steps_sound_pack_1/stepstone_8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepstone_8.wav
+
+#begin Sounds/Steps_sound_pack_1/stepwater_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepwater_1.wav
+
+#begin Sounds/Steps_sound_pack_1/stepwater_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepwater_2.wav
+
+#begin Sounds/Steps_sound_pack_1/stepwood_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepwood_1.wav
+
+#begin Sounds/Steps_sound_pack_1/stepwood_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Steps_sound_pack_1/stepwood_2.wav
+
 #begin tilesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
