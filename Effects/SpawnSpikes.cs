@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.ParticleSystems;
+using Pandorai.Sounds;
 using Pandorai.Utility;
 
 namespace Pandorai.Effects
@@ -38,6 +39,8 @@ namespace Pandorai.Effects
             {
                 Game1.game.TurnManager.PlayerIsReady();
             }
+
+            SoundManager.PlaySound("freeze0");
         }
     }
 }

@@ -92,8 +92,14 @@ namespace Pandorai.Sounds
                 fadeOutElapsedTime += fadeOutTimer.Interval;
                 if(fadeOutElapsedTime > SongTransitionMs)
                 {
-                    MediaPlayer.Play(_music[name]);
-                    MediaPlayer.IsRepeating = true;
+                    try
+                    {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(_music["Break_theme"]);
+                        MediaPlayer.Play(_music[name]);
+                    }
+                    catch(System.Exception){}
+                    
                     fadeInTimer.Start();
                     fadeOutTimer.Stop();
                     fadeOutTimer.Dispose();

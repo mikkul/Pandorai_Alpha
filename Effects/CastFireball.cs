@@ -7,6 +7,7 @@ using Pandorai.ParticleSystems;
 using System.Timers;
 using Pandorai.Structures;
 using Pandorai.Utility;
+using Pandorai.Sounds;
 
 namespace Pandorai.Effects
 {
@@ -154,6 +155,7 @@ namespace Pandorai.Effects
 
 				effectTimer.Start();
 				damageTimer.Start();
+				SoundManager.PlaySound("fireball0");
 			};
 
 			TileInteractionManager.TileClick += UseHandler;

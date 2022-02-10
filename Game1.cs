@@ -24,6 +24,7 @@ using Pandorai.Tooltips;
 using Pandorai.UI;
 using Pandorai.MapGeneration.CustomRegions;
 using Pandorai.Sounds;
+using Microsoft.Xna.Framework.Media;
 
 namespace Pandorai
 {
@@ -298,6 +299,7 @@ namespace Pandorai
             WFCSampleLoader.InitSamples(Path.Combine(Content.RootDirectory, "WFCSamples"), Path.Combine(Content.RootDirectory, "wfcSamplesSpreadsheet.xml"), this);
 
             SoundManager.LoadSounds("Music", "Sounds");
+            MediaPlayer.IsRepeating = true;
         }
 
         /// <summary>
