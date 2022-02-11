@@ -1166,6 +1166,66 @@
 /processorParam:Quality=Best
 /build:Sounds/Sound_pack_2/Trap_02.wav
 
+#begin Sounds/Sound_pack_3/FX141.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX141.wav
+
+#begin Sounds/Sound_pack_3/FX142.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX142.wav
+
+#begin Sounds/Sound_pack_3/FX143.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX143.wav
+
+#begin Sounds/Sound_pack_3/FX144.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX144.wav
+
+#begin Sounds/Sound_pack_3/FX145.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX145.wav
+
+#begin Sounds/Sound_pack_3/FX146.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX146.wav
+
+#begin Sounds/Sound_pack_3/FX147.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX147.wav
+
+#begin Sounds/Sound_pack_3/FX148.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX148.wav
+
+#begin Sounds/Sound_pack_3/FX149.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX149.wav
+
+#begin Sounds/Sound_pack_3/FX150.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Sound_pack_3/FX150.wav
+
 #begin Sounds/Steps_sound_pack_1/stepdirt_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

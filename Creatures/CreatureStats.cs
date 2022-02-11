@@ -1,5 +1,6 @@
 using System;
 using Pandorai.ParticleSystems;
+using Pandorai.Sounds;
 using Pandorai.UI;
 using Pandorai.Utility;
 
@@ -99,6 +100,7 @@ namespace Pandorai.Creatures
             if(_owner.IsPossessedCreature())
             {
                 MessageLog.DisplayMessage($"You have advanced to level {Level}");
+                SoundManager.PlaySound("FX146");
 
                 var effectTime = 4000;
 
