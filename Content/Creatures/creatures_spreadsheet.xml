@@ -109,9 +109,11 @@
 			</behaviour>
 		</behaviours>
 		<sounds>
-			<Attack></Attack>
-			<Hurt></Hurt>
-			<Death></Death>
+			<Attack>beads</Attack>
+			<Hurt>crack10</Hurt>
+			<Death>crack01</Death>
+			<Death>crack03</Death>
+			<Death>crack04</Death>
 			<Aggro>freeze0</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
@@ -149,10 +151,12 @@
 			</behaviour>
 		</behaviours>
 		<sounds>
-			<Attack></Attack>
-			<Hurt></Hurt>
-			<Death></Death>
-			<Aggro></Aggro>
+			<Attack>beads</Attack>
+			<Hurt>crack10</Hurt>
+			<Death>crack01</Death>
+			<Death>crack03</Death>
+			<Death>crack04</Death>
+			<Aggro>freeze0</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
 		</sounds>		
@@ -360,6 +364,8 @@
 		</behaviours>
 		<sounds>
 			<Attack>swing</Attack>
+			<Attack>swing2</Attack>
+			<Attack>swing3</Attack>
 			<Hurt>humanYell1</Hurt>
 			<Hurt>humanYell2</Hurt>
 			<Hurt>humanYell3</Hurt>

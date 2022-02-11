@@ -34,6 +34,7 @@ namespace Pandorai.Effects
 
 			Game1.game.Camera.CameraShake = new Rendering.Shake((int)time + 250, 60, 30, Game1.game.mainRng);
 			Game1.game.Camera.ShakeCamera();
+			SoundManager.PlaySound("explosion_low");
 
 			Timer effectTimer = new Timer(time);
 			effectTimer.Elapsed += (s, a) =>

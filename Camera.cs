@@ -48,7 +48,6 @@ namespace Pandorai
 		{
 			ShakeX.StartShaking();
 			ShakeY.StartShaking();
-			SoundManager.PlaySound("explosion_low");
 		}
 
 		public Vector2 GetViewportPosition(Vector2 worldPosition)

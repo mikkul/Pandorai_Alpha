@@ -188,6 +188,216 @@
 /processorParam:TextureFormat=Color
 /build:smokeParticle.png
 
+#begin Sounds/Crunch_sound_pack_1/crack01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack01.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack02.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack03.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack04.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack05.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack06.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack07.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack07.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack08.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack08.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack09.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack09.wav
+
+#begin Sounds/Crunch_sound_pack_1/crack10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/crack10.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood01.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood02.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood03.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood04.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood05.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood06.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood07.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood07.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood08.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood08.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood09.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood09.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood10.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood11.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood12.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood13.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood14.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood15.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood16.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood17.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood18.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood18.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood19.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood19.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood20.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood20.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood21.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood21.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood22.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood22.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood23.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood23.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood24.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood24.wav
+
+#begin Sounds/Crunch_sound_pack_1/impactwood25.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Crunch_sound_pack_1/impactwood25.wav
+
 #begin Sounds/explosion_low.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

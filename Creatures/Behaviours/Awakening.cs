@@ -1,4 +1,5 @@
 using Pandorai.Rendering;
+using Pandorai.Sounds;
 
 namespace Pandorai.Creatures.Behaviours
 {
@@ -16,6 +17,7 @@ namespace Pandorai.Creatures.Behaviours
             IsAwake = true;
             Game1.game.Camera.CameraShake = new Shake(1000, 120, 25, Game1.game.mainRng);
 			Game1.game.Camera.ShakeCamera();
+            SoundManager.PlaySound("explosion_low");
             EnableVision();
 
             var hpBarTimer = new System.Timers.Timer(1000);
