@@ -116,6 +116,12 @@
 /processorParam:Quality=Best
 /build:Music/Temple_theme.ogg
 
+#begin Music/Title_screen.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Title_screen.mp3
+
 #begin new_map_tilesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1207,4 +1213,3 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tilesheet2.png
-

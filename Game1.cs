@@ -450,11 +450,11 @@ namespace Pandorai
                 spriteBatch.End();
             }
 
-			//try // some weird error popped up once so i put it in try catch block
-			//{
+			try // some weird error popped up once so i put it in try catch block
+			{
 				desktop.Render();
-			//}
-			//catch (Exception) { }
+			}
+			catch (Exception) { }
 
 			mouseSparkle.Draw(spriteBatch);
 
@@ -474,6 +474,7 @@ namespace Pandorai
 
         public async Task StartGame()
 		{
+            IsGamePaused = true;
             desktop.Root.FindWidgetById("continueButton").Enabled = true;
             Player.IsDead = false;
 
