@@ -7,6 +7,7 @@ using System;
 using Pandorai.Cheats;
 using Pandorai.Dialogues;
 using Myra.Graphics2D.UI.Properties;
+using System.Threading.Tasks;
 
 namespace Pandorai.UI
 {
@@ -30,11 +31,15 @@ namespace Pandorai.UI
 
             var centerButtons = MainMenu();
 
+            var loadingScreen = LoadingScreen();
+            loadingScreen.Visible = false;
+
             var gameScreen = GameScreen();
             gameScreen.Visible = false;
 
             rootPanel.Widgets.Add(centerButtons);
             rootPanel.Widgets.Add(gameScreen);
+            rootPanel.Widgets.Add(loadingScreen);
 
             return rootPanel;
         }
@@ -52,16 +57,40 @@ namespace Pandorai.UI
             game.Options.AdjustGUI();
         }
 
+        static Widget LoadingScreen()
+        {
+            var mainPanel = new Panel
+            {
+                Id = "loadingScreen",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            var loadingLabel = new Label
+            {
+                Id = "loadingTextLabel",
+                Text = "Loading",
+            };
+
+            mainPanel.Widgets.Add(loadingLabel);
+
+            return mainPanel;
+        }
+
         static Widget MainMenu()
 		{
+            Stylesheet.Current.ButtonStyle.Height = 25;
+            Stylesheet.Current.ButtonStyle.Background = new SolidBrush(Color.Black);
+            Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(Color.Black);
+
             VerticalStackPanel centerButtonsHolder = new VerticalStackPanel
             {
                 Id = "mainMenu",
                 Spacing = 5,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Background = new SolidBrush(new Color(0.6f, 0.5f, 0.45f, 1f)),
-                Padding = new Thickness(15, 25)
+                Padding = new Thickness(15, 25),
+                Width = 100,
             };
 
             var continueButton = new TextButton
@@ -69,10 +98,8 @@ namespace Pandorai.UI
                 Id = "continueButton",
                 Text = "Continue",
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Width = 80,
-                Height = 25,
-                Enabled = false
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Enabled = false,
             };
 
             continueButton.Click += (s, a) =>
@@ -84,23 +111,19 @@ namespace Pandorai.UI
             {
                 Text = "New game",
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Width = 90,
-                Height = 25
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
 
             playButton.Click += (s, a) =>
             {
-                game.StartGame();
+                Task.Run(() => game.StartGame());
             };
 
             var optionsButton = new TextButton
             {
                 Text = "Options",
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Width = 75,
-                Height = 25
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
 
             optionsButton.Click += (s, a) =>
@@ -114,9 +137,7 @@ namespace Pandorai.UI
             {
                 Text = "Exit",
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Width = 50,
-                Height = 25
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
 
             exitButton.Click += (s, a) =>

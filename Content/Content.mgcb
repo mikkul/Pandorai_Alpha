@@ -98,6 +98,12 @@
 /processorParam:Quality=Best
 /build:Music/Forest_dark_theme.ogg
 
+#begin Music/Loading.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Loading.mp3
+
 #begin Music/Main_theme.ogg
 /importer:OggImporter
 /processor:SongProcessor

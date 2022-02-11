@@ -16,6 +16,7 @@ using Pandorai.Sprites;
 using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Sounds;
+using System.Threading.Tasks;
 
 namespace Pandorai.MapGeneration
 {
@@ -30,6 +31,12 @@ namespace Pandorai.MapGeneration
 		int[,] operatingArea;
 
 		public Regions Rooms = new Regions();
+
+		public async Task<Tile[,]> GenerateMapAsync(Game1 game, string regionSpreadsheet)
+		{
+			var map = await Task.FromResult(GenerateMap(game, regionSpreadsheet));
+			return map;
+		}
 
 		public Tile[,] GenerateMap(Game1 game, string regionSpreadsheet)
         {

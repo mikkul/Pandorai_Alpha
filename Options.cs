@@ -17,7 +17,7 @@ namespace Pandorai
 
 		public const int DefaultUnitSize = 64;
 
-		public Color ClearColor = new Color(0.4f, 0.35f, 0.3f, 1f);
+		public Color ClearColor = new Color(0.0f, 0.0f, 0.0f, 1f);
 
 		public float TilesOutsideFOVDarkening = -0.45f;
 

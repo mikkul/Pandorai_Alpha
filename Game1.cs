@@ -25,6 +25,8 @@ using Pandorai.UI;
 using Pandorai.MapGeneration.CustomRegions;
 using Pandorai.Sounds;
 using Microsoft.Xna.Framework.Media;
+using System.Threading.Tasks;
+using System.Timers;
 
 namespace Pandorai
 {
@@ -51,6 +53,8 @@ namespace Pandorai
         Texture2D fogTexture;
 
         SpriteFont defaultFont;
+
+        Timer _loadingAnimationTimer;
 
         public Map Map;
 
@@ -300,6 +304,22 @@ namespace Pandorai
 
             SoundManager.LoadSounds("Music", "Sounds");
             MediaPlayer.IsRepeating = true;
+
+            SoundManager.PlayMusic("Title_screen");
+
+            _loadingAnimationTimer = new Timer(500);
+            _loadingAnimationTimer.Elapsed += (s, a) =>
+            {
+                var loadingTextLabel = desktop.Root.FindWidgetById("loadingTextLabel") as Label;
+                if(loadingTextLabel.Text.EndsWith("..."))
+                {
+                    loadingTextLabel.Text = "Loading";
+                }
+                else
+                {
+                    loadingTextLabel.Text += ".";
+                }
+            };
         }
 
         /// <summary>
@@ -452,29 +472,13 @@ namespace Pandorai
             base.Draw(gameTime);
         }
 
-        public void StartGame()
+        public async Task StartGame()
 		{
-            ToggleMainMenu();
-            IsGameStarted = true;
-            IsGamePaused = false;
             desktop.Root.FindWidgetById("continueButton").Enabled = true;
             Player.IsDead = false;
 
             //
             LightingManager.RefreshRenderTarget(GraphicsDevice, Camera);
-
-            // load underground
-            /*Map.SwitchActiveMap(ActiveMap.Underground);
-
-            CreatureManager.Creatures.Clear(); // first clear everything
-            LightingManager.ClearLightSources();
-            ParticleSystemManager.Clear();
-
-            UndergroundMapGenerator = new MapGenerator { game = this }; // then load everything
-            Map.UndergroundTiles = UndergroundMapGenerator.GenerateMap(ActiveMap.Underground, this);
-            Map.SwitchActiveMap(ActiveMap.Underground);
-            Map.UpdateTileTextures();
-            ItemPopulation.PopulateItems(Map, this);*/
 
             // load surface
             Map.SwitchActiveMap(ActiveMap.Surface);
@@ -483,9 +487,15 @@ namespace Pandorai
             LightingManager.ClearLightSources();
             ParticleSystemManager.Clear();
 
+            // display loading sreeen and music
+            SoundManager.PlayMusic("Loading");
+            desktop.Root.FindWidgetById("mainMenu").Visible = false;
+            desktop.Root.FindWidgetById("loadingScreen").Visible = true;
+            _loadingAnimationTimer.Start();
+
             //
             var mapGenerator = new MapGenerator();
-            Map.Tiles = mapGenerator.GenerateMap(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
+            Map.Tiles = await mapGenerator.GenerateMapAsync(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
 
             //Map.SwitchActiveMap(ActiveMap.Surface);
             Map.UpdateTileTextures();
@@ -505,6 +515,12 @@ namespace Pandorai
             GameStarted?.Invoke();
 
             SoundManager.PlayMusic("Main_theme");
+            desktop.Root.FindWidgetById("loadingScreen").Visible = false;
+            desktop.Root.FindWidgetById("gameScreen").Visible = true;
+            _loadingAnimationTimer.Stop();
+
+            IsGameStarted = true;
+            IsGamePaused = false;
         }
 
         public void TogglePauseGame()
