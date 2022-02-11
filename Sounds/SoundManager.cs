@@ -44,11 +44,13 @@ namespace Pandorai.Sounds
             }    
         }
         
-        public static void PlaySound(string name)
+        public static void PlaySound(string name, float volume = 1f)
         {
             if(_sounds.ContainsKey(name))
             {
-                _sounds[name].CreateInstance().Play();
+                var soundInstance = _sounds[name].CreateInstance();
+                soundInstance.Volume = volume;
+                soundInstance.Play();
             }
         }
 

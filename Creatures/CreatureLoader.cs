@@ -77,20 +77,23 @@ namespace Pandorai.Creatures
 					switch (sound.Name)
 					{
 						case "Attack":
-							creature.Sounds.Attack = sound.InnerText;
+							creature.Sounds.AttackSounds.Add(sound.InnerText);
 							break;
 						case "Hurt":
-							creature.Sounds.Hurt = sound.InnerText;
+							creature.Sounds.HurtSounds.Add(sound.InnerText);
 							break;
 						case "Death":
-							creature.Sounds.Death = sound.InnerText;
+							creature.Sounds.DeathSounds.Add(sound.InnerText);
 							break;
 						case "Aggro":
-							creature.Sounds.Aggro = sound.InnerText;
+							creature.Sounds.AggroSounds.Add(sound.InnerText);
 							break;
 						case "Ambient":
-							creature.Sounds.Ambient = sound.InnerText;
+							creature.Sounds.AmbientSounds.Add(sound.InnerText);
 							break;
+						case "Footstep":
+							creature.Sounds.FootstepSounds.Add(sound.InnerText);
+							break;							
 						default:
 							break;
 					}

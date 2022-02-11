@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
+using Pandorai.Sounds;
 using System;
 
 namespace Pandorai.Mechanics
@@ -15,6 +16,7 @@ namespace Pandorai.Mechanics
 
 			creature.IsMoving = true;
 			creature.SetMovementTexture(desiredPoint);
+			SoundManager.PlaySound(creature.Sounds.Footstep, 0.35f);
 
 			creature.game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
 			creature.game.Map.RequestTileCollisionFlagChange(desiredPoint, true);
