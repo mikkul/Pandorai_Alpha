@@ -8,11 +8,8 @@ using Pandorai.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using Pandorai.MapGeneration.CustomRegions;
-using Pandorai.Tooltips;
-using Pandorai.Sprites;
 using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Sounds;
@@ -182,19 +179,77 @@ namespace Pandorai.MapGeneration
 			}
 		
 			// place doors/room entries
-			Pandorai.Utility.Range roomEntryCountRange = new Pandorai.Utility.Range(1, 3);
+			int[] roomEntryCountWeights = new int[] { 1, 2, 2, 2, 2, 3, 3 };
+			bool[] isRoomDooredWeights = new bool[] { false, true };
 			foreach (var room in Rooms.RegionList)
 			{
-				int entryCount = roomEntryCountRange.GetRandom(_game.mainRng);
+				bool isDoor = isRoomDooredWeights.GetRandomElement(Game1.game.mainRng);
+				int entryCount = roomEntryCountWeights.GetRandomElement(Game1.game.mainRng);
 				for (int i = 0; i < entryCount; i++)
 				{
-					var randomBorderPoint = room.Border.GetRandomElement(_game.mainRng);
-					map[randomBorderPoint.X, randomBorderPoint.Y].BaseType = 0;
-					map[randomBorderPoint.X, randomBorderPoint.Y].BaseTextureIndex = 0;
-					map[randomBorderPoint.X, randomBorderPoint.Y].CollisionFlag = false;
-					map[randomBorderPoint.X, randomBorderPoint.Y].BaseColor = room.Color;
+					int safetyCounter = 0;
+					Point randomBorderPoint;
+					do
+					{
+						randomBorderPoint = room.Border.GetRandomElement(_game.mainRng);
+						safetyCounter++;
+					}
+					while(!isGoodEntrance(randomBorderPoint) && safetyCounter < 1000);
+
+					bool isGoodEntrance(Point point)
+					{
+						int floorCount = 0;
+						int wallCount = 0;
+						var neighbours = GenHelper.GetNeighbours(point);
+						foreach (var neighbour in neighbours)
+						{
+							if (!map.IsPointInBounds(neighbour))
+							{
+								break;
+							}
+
+							if (map[neighbour.X, neighbour.Y].BaseType == 0 && map[neighbour.X, neighbour.Y].BaseColor == room.Color)
+							{
+								floorCount++;
+							}
+							else if (map[neighbour.X, neighbour.Y].BaseType == 1)
+							{
+								wallCount++;
+							}
+						}
+						return floorCount == 1 && wallCount == 2;
+					}
+
+					var tile = map[randomBorderPoint.X, randomBorderPoint.Y];
+					tile.BaseType = 0;
+					tile.BaseTextureIndex = 0;
+					tile.CollisionFlag = false;
+					tile.BaseColor = room.Color;
+					if(isDoor)
+					{
+						Structure structureInstance = StructureLoader.GetStructure("YellowDoor");
+						structureInstance.Tile = new TileInfo(randomBorderPoint, tile);
+
+						tile.MapObject = new MapObject(ObjectType.Interactive, 0)
+						{
+							Structure = structureInstance,
+						};
+						tile.CollisionFlag = true;
+						structureInstance.BindBehaviours();
+					}
 				}
 			}
+		
+			// fill rooms with content
+			foreach (var room in Rooms.RegionList)
+			{
+				FillRoomWithContent(room);
+			}
+		}
+
+		private void FillRoomWithContent(Region room)
+		{
+
 		}
 
 		private List<Point> FloodFillRoom()

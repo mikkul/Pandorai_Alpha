@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.ParticleSystems;
+using Pandorai.Sounds;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Tilemaps;
 using System;
@@ -92,6 +93,7 @@ namespace Pandorai.Structures
 			Tile.Tile.MapObject = null;
 			Tile.Tile.CollisionFlag = false;
 			ParticleSystemManager.AddSystem(new PSExplosion(Tile.Index.ToVector2() * game.Options.TileSize, 25, game.smokeParticleTexture, 1000, 90, 30, Color.Gray, true, game), true);
+			SoundManager.PlaySound("impactwood11");
 		}
 	}
 
