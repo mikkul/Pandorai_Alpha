@@ -31,9 +31,9 @@
 		</behaviours>
 		<sounds>
 			<Attack>bite-small2</Attack>
-			<Hurt></Hurt>
-			<Death></Death>
-			<Aggro></Aggro>
+			<Hurt>monster-9</Hurt>
+			<Death>monster-14</Death>
+			<Aggro>Monster-2</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
 		</sounds>
@@ -69,10 +69,10 @@
 			</behaviour>
 		</behaviours>
 		<sounds>
-			<Attack></Attack>
-			<Hurt></Hurt>
-			<Death></Death>
-			<Aggro></Aggro>
+			<Attack>Monster-4</Attack>
+			<Hurt>Monster-10</Hurt>
+			<Death>Monster-16</Death>
+			<Aggro>Monster-1</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
 		</sounds>		
@@ -237,7 +237,7 @@
 			<Attack></Attack>
 			<Hurt></Hurt>
 			<Death></Death>
-			<Aggro></Aggro>
+			<Aggro>i_see_you_voice</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
 		</sounds>		

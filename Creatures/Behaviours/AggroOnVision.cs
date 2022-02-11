@@ -7,6 +7,10 @@ namespace Pandorai.Creatures.Behaviours
 {
 	public class AggroOnVision : Behaviour
 	{
+		private Creature _lastTargetCreature;
+		private int _targetResetCounter;
+		private int _targetResetThreshold = 10;
+
 		public override void Bind()
 		{
 			Owner.TurnCame += CheckAggro;
@@ -16,6 +20,8 @@ namespace Pandorai.Creatures.Behaviours
 		{
 			Vision vision = Owner.GetBehaviour<Vision>() as Vision;
 			if (vision == null) return;
+
+			bool hasTarget = false;
 
 			foreach (var tile in vision.VisibleTiles)
 			{
@@ -35,11 +41,28 @@ namespace Pandorai.Creatures.Behaviours
 
 				if(Owner.EnemyClasses.Contains(tryCreature.Class))
 				{
-					SoundManager.PlaySound(Owner.Sounds.Aggro);
+					if(_lastTargetCreature != tryCreature)
+					{
+						SoundManager.PlaySound(Owner.Sounds.Aggro);
+					}
+
 					Owner.Target = tryCreature.MapIndex;
 					var aggroFlash = new PSImplosion(Owner.Position, 25, Game1.game.fireParticleTexture, 1000, Game1.game.Map.TileSize / 2, 20, Color.Purple, true, Game1.game);
 					ParticleSystemManager.AddSystem(aggroFlash, true);
+
+					_lastTargetCreature = tryCreature;
+					hasTarget = true;
 					break;
+				}
+			}
+
+			if(!hasTarget)
+			{
+				_targetResetCounter++;
+				if(_targetResetCounter >= _targetResetThreshold)
+				{
+					_targetResetCounter = 0;
+					_lastTargetCreature = null;
 				}
 			}
 		}

@@ -5,6 +5,10 @@ namespace Pandorai.Creatures.Behaviours
 {
 	public class AggroOnDistance : Behaviour
 	{
+		private Creature _lastTargetCreature;
+		private int _targetResetCounter;
+		private int _targetResetThreshold = 10;
+
 		public int Range;
 
 		public override Behaviour Clone()
@@ -32,6 +36,8 @@ namespace Pandorai.Creatures.Behaviours
 		{
 			float lowestDist = int.MaxValue;
 
+			Creature targetCreature = null;
+
 			foreach (var creature in Owner.game.CreatureManager.Creatures)
 			{
 				if (Owner.EnemyClasses.Contains(creature.Class))
@@ -48,13 +54,29 @@ namespace Pandorai.Creatures.Behaviours
 						{
 							lowestDist = dist;
 							Owner.Target = creature.MapIndex;
+							targetCreature = creature;
 						}
 					}
 				}
 			}
 			if(Owner.Target != Owner.MapIndex)
 			{
-				SoundManager.PlaySound(Owner.Sounds.Aggro);
+				if(targetCreature != _lastTargetCreature)
+				{
+					SoundManager.PlaySound(Owner.Sounds.Aggro);
+				}
+
+				_lastTargetCreature = targetCreature;
+			}
+
+			if(targetCreature == null)
+			{
+				_targetResetCounter++;
+				if(_targetResetCounter >= _targetResetThreshold)
+				{
+					_targetResetCounter = 0;
+					_lastTargetCreature = null;
+				}
 			}
 		}
 	}

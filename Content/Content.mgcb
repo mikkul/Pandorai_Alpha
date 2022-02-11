@@ -206,6 +206,120 @@
 /processorParam:Quality=Best
 /build:Sounds/freeze0.wav
 
+#begin Sounds/i_see_you_voice.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/i_see_you_voice.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-1.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-10.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-11.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-11.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-12.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-12.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-13.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-13.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-14.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-14.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-15.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-16.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-17.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-18.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-18.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-2.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-3.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-4.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-5.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-6.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-7.wav
+
+#begin Sounds/Monster_sound_pack_1/Monster-8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/Monster-8.wav
+
+#begin Sounds/Monster_sound_pack_1/monster-9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Monster_sound_pack_1/monster-9.wav
+
 #begin Sounds/Sound_pack_1/battle/magic1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1213,3 +1327,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tilesheet2.png
+
