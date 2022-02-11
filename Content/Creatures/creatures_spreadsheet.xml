@@ -70,8 +70,8 @@
 		</behaviours>
 		<sounds>
 			<Attack>Monster-4</Attack>
-			<Hurt>Monster-10</Hurt>
-			<Death>Monster-16</Death>
+			<Hurt>monster-10</Hurt>
+			<Death>monster-16</Death>
 			<Aggro>Monster-1</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
@@ -112,7 +112,7 @@
 			<Attack></Attack>
 			<Hurt></Hurt>
 			<Death></Death>
-			<Aggro></Aggro>
+			<Aggro>freeze0</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
 		</sounds>		
@@ -235,8 +235,9 @@
 		</behaviours>
 		<sounds>
 			<Attack></Attack>
-			<Hurt></Hurt>
-			<Death></Death>
+			<Hurt>shade14</Hurt>
+			<Hurt>shade15</Hurt>
+			<Death>shade9</Death>
 			<Aggro>i_see_you_voice</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
@@ -359,8 +360,12 @@
 		</behaviours>
 		<sounds>
 			<Attack>swing</Attack>
-			<Hurt></Hurt>
-			<Death></Death>
+			<Hurt>humanYell1</Hurt>
+			<Hurt>humanYell2</Hurt>
+			<Hurt>humanYell3</Hurt>
+			<Hurt>humanYell4</Hurt>
+			<Hurt>humanYell5</Hurt>
+			<Death>humanDeath1</Death>
 			<Aggro></Aggro>
 			<Ambient></Ambient>
 			<Footstep>stepdirt_1</Footstep>

@@ -100,12 +100,12 @@ namespace Pandorai.Creatures
             {
                 MessageLog.DisplayMessage($"You have advanced to level {Level}");
 
-                var effectTime = 2500;
+                var effectTime = 4000;
 
                 Game1.game.Camera.CameraShake = new Rendering.Shake(effectTime, 40, 15, Game1.game.mainRng);
                 Game1.game.Camera.ShakeCamera();
 
-                var wavePS = new PSExplosion(Game1.game.Player.PossessedCreature.Position, 300, Game1.game.smokeParticleTexture, effectTime, 200f, 100, Helper.GetColorFromHex("#8610e0"), true, Game1.game);
+                var wavePS = new PSExplosion(Game1.game.Player.PossessedCreature.Position, 300, Game1.game.smokeParticleTexture, effectTime, 200f, 100, Helper.GetColorFromHex("#f5dd42"), true, Game1.game);
                 ParticleSystemManager.AddSystem(wavePS, true);
             }
         }

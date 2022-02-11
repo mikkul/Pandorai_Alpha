@@ -1304,6 +1304,138 @@
 /processorParam:Quality=Best
 /build:Sounds/teleport.wav
 
+#begin Sounds/Voice_sound_pack_1/humanDeath1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/humanDeath1.wav
+
+#begin Sounds/Voice_sound_pack_1/humanDeath2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/humanDeath2.wav
+
+#begin Sounds/Voice_sound_pack_1/humanYell1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/humanYell1.wav
+
+#begin Sounds/Voice_sound_pack_1/humanYell2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/humanYell2.wav
+
+#begin Sounds/Voice_sound_pack_1/humanYell3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/humanYell3.wav
+
+#begin Sounds/Voice_sound_pack_1/humanYell4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/humanYell4.wav
+
+#begin Sounds/Voice_sound_pack_1/humanYell5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/humanYell5.wav
+
+#begin Sounds/Voice_sound_pack_1/preview.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/preview.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieDeath1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieDeath1.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieDeath2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieDeath2.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieDeath3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieDeath3.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieDeath4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieDeath4.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell1.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell10.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell2.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell3.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell4.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell5.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell6.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell7.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell8.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell8.wav
+
+#begin Sounds/Voice_sound_pack_1/zombieYell9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Voice_sound_pack_1/zombieYell9.wav
+
 #begin tilesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

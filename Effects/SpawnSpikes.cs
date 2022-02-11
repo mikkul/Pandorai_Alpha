@@ -40,7 +40,7 @@ namespace Pandorai.Effects
                 Game1.game.TurnManager.PlayerIsReady();
             }
 
-            SoundManager.PlaySound("freeze0");
+            SoundManager.PlaySound("Trap_01");
         }
     }
 }
