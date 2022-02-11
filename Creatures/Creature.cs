@@ -10,6 +10,7 @@ using System.Timers;
 using Pandorai.Structures;
 using Pandorai.Creatures.Behaviours;
 using System.Linq;
+using Pandorai.Sounds;
 
 namespace Pandorai.Creatures
 {
@@ -68,6 +69,8 @@ namespace Pandorai.Creatures
 
 		public CreatureStats Stats;
 
+		public CreatureSounds Sounds = new CreatureSounds();
+
 		public Inventory Inventory;
 
 		public ActiveMap LevelPresent;
@@ -102,6 +105,7 @@ namespace Pandorai.Creatures
 
 			Died += () =>
 			{
+				SoundManager.PlaySound(Sounds.Death);
 				var corpse = StructureLoader.GetStructure("Corpse");
 				corpse.Tile = TileInfo.GetInfo(MapIndex, game);
 				var container = (Structures.Behaviours.Container)corpse.Behaviours.Find(x => x.GetType() == typeof(Structures.Behaviours.Container));
@@ -130,6 +134,7 @@ namespace Pandorai.Creatures
 				IdleTextureIndices = IdleTextureIndices,
 				Class = Class,
 				EnemyClasses = EnemyClasses,
+				Sounds = Sounds.Clone(),
 			};
 			clone.Stats = Stats.Clone(clone);
 			clone.Behaviours = new List<Behaviour>(Behaviours);
@@ -201,6 +206,7 @@ namespace Pandorai.Creatures
 
 		public void Hit(Creature incomingCreature)
 		{
+			SoundManager.PlaySound(incomingCreature.Sounds.Attack);
 			GotHit?.Invoke(incomingCreature);
 		}
 
@@ -298,6 +304,7 @@ namespace Pandorai.Creatures
 
 		public void GetHit(float damage, Creature byWhom)
 		{
+			SoundManager.PlaySound(Sounds.Hurt);
 			Health -= damage;
 			DamageFlash();
 			if (Health <= 0)

@@ -1,6 +1,7 @@
 ﻿using Pandorai.ParticleSystems;
 using Microsoft.Xna.Framework;
 using System;
+using Pandorai.Sounds;
 
 namespace Pandorai.Creatures.Behaviours
 {
@@ -34,6 +35,7 @@ namespace Pandorai.Creatures.Behaviours
 
 				if(Owner.EnemyClasses.Contains(tryCreature.Class))
 				{
+					SoundManager.PlaySound(Owner.Sounds.Aggro);
 					Owner.Target = tryCreature.MapIndex;
 					var aggroFlash = new PSImplosion(Owner.Position, 25, Game1.game.fireParticleTexture, 1000, Game1.game.Map.TileSize / 2, 20, Color.Purple, true, Game1.game);
 					ParticleSystemManager.AddSystem(aggroFlash, true);

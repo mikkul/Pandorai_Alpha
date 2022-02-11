@@ -29,6 +29,13 @@
 				<Movement>Orthogonal</Movement>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack>bite-small2</Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>
 	</creature>
 
 	<creature id="Rat" texture="12" maxHP="50" health="50" meleeDamage="10" class="Monster" corpseTexture="68" speed="34" level="1">
@@ -60,6 +67,13 @@
 				<Movement>Orthogonal</Movement>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 
 	<creature id="Skeleton" texture="13" maxHP="120" health="120" meleeDamage="24" class="Monster" corpseTexture="68" speed="26" level="2">
@@ -92,6 +106,13 @@
 				<Movement>Diagonal</Movement>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 
 	<creature id="ShadowWarrior" texture="14" maxHP="240" health="240" meleeDamage="48" class="Monster" corpseTexture="68" speed="27" level="7">
@@ -124,6 +145,13 @@
 				<Movement>Diagonal</Movement>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 
 	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="15" class="Temple" corpseTexture="68" speed="20" level="3">
@@ -158,6 +186,13 @@
 				<IsAwake>false</IsAwake>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 
 	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68" speed="25" level="5">
@@ -193,6 +228,13 @@
 				<Priority>Offensive</Priority>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 
 	<creature id="Traveller" texture="10" maxHP="200" health="200" meleeDamage="10" class="Human" corpseTexture="68" speed="30" level="2">
@@ -232,6 +274,13 @@
 				<Movement>Orthogonal</Movement>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 
 	<creature id="Keeper" texture="10" maxHP="10000" health="10000" meleeDamage="10" class="Human" corpseTexture="68" speed="30"  level="100">
@@ -266,6 +315,13 @@
 				<Priority>Offensive</Priority>
 			</behaviour>
 		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 
 	<creature id="Hero" texture="0" maxHP="200" health="200" meleeDamage="20" class="Human" corpseTexture="68" speed="30" level="0">
@@ -293,5 +349,12 @@
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
 		</behaviours>
+		<sounds>
+			<Attack>swing</Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+		</sounds>		
 	</creature>
 </creatures>

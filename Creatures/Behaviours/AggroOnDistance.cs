@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Pandorai.Sounds;
 
 namespace Pandorai.Creatures.Behaviours
 {
@@ -50,6 +51,10 @@ namespace Pandorai.Creatures.Behaviours
 						}
 					}
 				}
+			}
+			if(Owner.Target != Owner.MapIndex)
+			{
+				SoundManager.PlaySound(Owner.Sounds.Aggro);
 			}
 		}
 	}

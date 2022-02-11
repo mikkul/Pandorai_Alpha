@@ -72,6 +72,30 @@ namespace Pandorai.Creatures
 					creature.Behaviours.Add(behaviourInstance);
 				}
 
+				foreach (XmlElement sound in node.SelectSingleNode("./sounds").ChildNodes)
+				{
+					switch (sound.Name)
+					{
+						case "Attack":
+							creature.Sounds.Attack = sound.InnerText;
+							break;
+						case "Hurt":
+							creature.Sounds.Hurt = sound.InnerText;
+							break;
+						case "Death":
+							creature.Sounds.Death = sound.InnerText;
+							break;
+						case "Aggro":
+							creature.Sounds.Aggro = sound.InnerText;
+							break;
+						case "Ambient":
+							creature.Sounds.Ambient = sound.InnerText;
+							break;
+						default:
+							break;
+					}
+				}
+
 				creatureTemplates.Add(creature.Id, creature);
 			}
 		}
