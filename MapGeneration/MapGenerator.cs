@@ -180,7 +180,7 @@ namespace Pandorai.MapGeneration
 		
 			// place doors/room entries
 			int[] roomEntryCountWeights = new int[] { 1, 2, 2, 2, 2, 3, 3 };
-			bool[] isRoomDooredWeights = new bool[] { false, true };
+			bool[] isRoomDooredWeights = new bool[] { false, true, true };
 			foreach (var room in Rooms.RegionList)
 			{
 				bool isDoor = isRoomDooredWeights.GetRandomElement(Game1.game.mainRng);
@@ -227,15 +227,7 @@ namespace Pandorai.MapGeneration
 					tile.BaseColor = room.Color;
 					if(isDoor)
 					{
-						Structure structureInstance = StructureLoader.GetStructure("YellowDoor");
-						structureInstance.Tile = new TileInfo(randomBorderPoint, tile);
-
-						tile.MapObject = new MapObject(ObjectType.Interactive, 0)
-						{
-							Structure = structureInstance,
-						};
-						tile.CollisionFlag = true;
-						structureInstance.BindBehaviours();
+						PlaceStructure("YellowDoor", randomBorderPoint);
 					}
 				}
 			}
@@ -249,7 +241,87 @@ namespace Pandorai.MapGeneration
 
 		private void FillRoomWithContent(Region room)
 		{
+			Random rng = Game1.game.mainRng;
+			room.ProcessInterior(map);
 
+			// place torches
+			for (int i = 0; i < 2; i++)
+			{
+				var position = GetRandomUntakenPosition(room.InteriorLayers[0]);
+				PlaceStructure("Torch", position);
+			}
+
+			// place chests
+			for (int i = 0; i < 2; i++)
+			{
+				bool doPlace = rng.NextFloat() < 0.2f;
+				if(!doPlace)
+				{
+					continue;
+				}
+				var position = GetRandomUntakenPosition(room.InteriorLayers[0]);
+				var chest = PlaceStructure("Chest", position);
+				var chestContainer = (Container)chest.Behaviours.Find(x => x.GetType() == typeof(Container));
+				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "MassDestructionRune" };
+				var weightsSet1 = new[] { 3, 10, 4, 1 };
+				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 2);
+				foreach (var itemName in chosenItems1)
+				{
+					if(itemName == "")
+					{
+						continue;
+					}
+					var itemInstance = ItemLoader.GetItem(itemName);
+					chestContainer.Inventory.AddElement(itemInstance);
+				}
+			}
+		}
+
+		private List<string> GetWeightedChoices(string[] itemSet, int[] weightsSet, int numberOfItems = 1)
+		{
+			int totalNumber = weightsSet.Sum();
+			List<string> weightedChoiceSet = new();
+			for (int i = 0; i < itemSet.Length; i++)
+			{
+				for (int n = 0; n < weightsSet[i]; n++)
+				{
+					weightedChoiceSet.Add(itemSet[i]);
+				}
+			}
+
+			List<string> chosenItems = new();
+			for (int i = 0; i < numberOfItems; i++)
+			{
+				chosenItems.Add(weightedChoiceSet.GetRandomElement(Game1.game.mainRng));
+			}
+
+			return chosenItems;
+		}
+
+		private Point GetRandomUntakenPosition(List<Point> possiblePoints)
+		{
+			Point position;
+			do
+			{
+				position = possiblePoints.GetRandomElement(Game1.game.mainRng);
+			}
+			while(map[position.X, position.Y].MapObject != null);
+
+			return position;
+		}
+
+		private Structure PlaceStructure(string structureName, Point point)
+		{
+			var tile = map[point.X, point.Y];
+			Structure structureInstance = StructureLoader.GetStructure(structureName);
+			structureInstance.Tile = new TileInfo(point, tile);
+			tile.MapObject = new MapObject(ObjectType.Interactive, 0)
+			{
+				Structure = structureInstance,
+			};
+			tile.CollisionFlag = true;
+			structureInstance.BindBehaviours();
+			return structureInstance;
 		}
 
 		private List<Point> FloodFillRoom()

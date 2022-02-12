@@ -53,8 +53,8 @@
 	<structure id="Torch" texture="62">
 		<behaviour name="LightEmitter">
 			<Color>#ffff00</Color>
-			<Radius>250</Radius>
-			<Intensity>0.25</Intensity>
+			<Radius>300</Radius>
+			<Intensity>0.20</Intensity>
 		</behaviour>
 	</structure>
 	<structure id="Grave" texture="66">
