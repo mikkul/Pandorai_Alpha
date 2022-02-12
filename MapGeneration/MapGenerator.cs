@@ -262,10 +262,18 @@ namespace Pandorai.MapGeneration
 				var position = GetRandomUntakenPosition(room.InteriorLayers[0]);
 				var chest = PlaceStructure("Chest", position);
 				var chestContainer = (Container)chest.Behaviours.Find(x => x.GetType() == typeof(Container));
-				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "MassDestructionRune" };
+
+				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "RedKey" };
 				var weightsSet1 = new[] { 3, 10, 4, 1 };
 				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 2);
-				foreach (var itemName in chosenItems1)
+
+				var itemSet2 = new[] { "", "HealthPotion", "FireArrowSpell", "SpeedPotion" };
+				var weightsSet2 = new[] { 6, 3, 7, 2 };
+				var chosenItems2 = GetWeightedChoices(itemSet1, weightsSet1, 1);
+
+				var chosenItems = chosenItems1.Concat(chosenItems2);
+
+				foreach (var itemName in chosenItems)
 				{
 					if(itemName == "")
 					{
@@ -275,6 +283,57 @@ namespace Pandorai.MapGeneration
 					chestContainer.Inventory.AddElement(itemInstance);
 				}
 			}
+
+			// place barrels
+			for (int i = 0; i < 3; i++)
+			{
+				bool doPlace = rng.NextFloat() < 0.6f;
+				if(!doPlace)
+				{
+					continue;
+				}
+				var position = GetRandomUntakenPosition(room.Area);
+				var barrel = PlaceStructure("Barrel", position);
+				var barrelContainer = (Container)barrel.Behaviours.Find(x => x.GetType() == typeof(Container));
+
+				var itemSet1 = new[] { "", "HealthPotion" };
+				var weightsSet1 = new[] { 10, 3 };
+				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 1);
+
+				foreach (var itemName in chosenItems1)
+				{
+					if(itemName == "")
+					{
+						continue;
+					}
+					var itemInstance = ItemLoader.GetItem(itemName);
+					barrelContainer.Inventory.AddElement(itemInstance);
+				}
+			}
+
+			// place monsters
+			for (int i = 0; i < 7; i++)
+			{
+				bool doPlace = rng.NextFloat() < 0.5f;
+				if(!doPlace)
+				{
+					continue;
+				}
+
+				var creatureSet1 = new[] { "Rat", "Spider" };
+				var weightsSet1 = new[] { 3, 1 };
+				var chosenCreatures1 = GetWeightedChoices(creatureSet1, weightsSet1, 1);
+
+				foreach (var creatureName in chosenCreatures1)
+				{
+					if(creatureName == "")
+					{
+						continue;
+					}
+					var position = GetRandomUntakenPosition(room.Area);
+					var creatureInstance = PlaceCreature(creatureName, position);
+				}
+			}					
 		}
 
 		private List<string> GetWeightedChoices(string[] itemSet, int[] weightsSet, int numberOfItems = 1)
@@ -308,6 +367,17 @@ namespace Pandorai.MapGeneration
 			while(map[position.X, position.Y].MapObject != null);
 
 			return position;
+		}
+
+		private Creature PlaceCreature(string creatureName, Point point)
+		{
+			Creature creatureInstance = CreatureLoader.GetCreature(creatureName);
+			creatureInstance.MapIndex = point;
+			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * _game.Options.TileSize;
+			var tile = map[point.X, point.Y];
+			tile.CollisionFlag = true;
+			_game.CreatureManager.AddCreature(creatureInstance);
+			return creatureInstance;
 		}
 
 		private Structure PlaceStructure(string structureName, Point point)

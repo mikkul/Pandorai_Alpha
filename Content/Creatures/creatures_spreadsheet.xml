@@ -355,6 +355,10 @@
 				<index>2</index>
 				<index>3</index>
 			</IdleTextureIndices>
+			<Inventory>
+				<item name="YellowKey" number="3" />
+				<item name="HealthPotion" number="1" />
+			</Inventory>
 		</modifiers>
 		<behaviours>
 			<behaviour name="AllSeeingVision">
