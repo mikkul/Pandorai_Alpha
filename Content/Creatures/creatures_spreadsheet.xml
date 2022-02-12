@@ -1,5 +1,5 @@
 ﻿<creatures>
-	<creature id="Spider" texture="8" maxHP="80" health="80" meleeDamage="18" class="Monster" corpseTexture="68" speed="24" level="1">
+	<creature id="Spider" texture="8" maxHP="80" health="80" meleeDamage="24" class="Monster" corpseTexture="68" speed="26" level="1">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -26,7 +26,11 @@
 			<behaviour name="AggroOnVision">
 			</behaviour>
 			<behaviour name="ChaseTarget">
-				<Movement>Orthogonal</Movement>
+				<Movement>Diagonal</Movement>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>3</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
 			</behaviour>
 		</behaviours>
 		<sounds>
@@ -39,7 +43,7 @@
 		</sounds>
 	</creature>
 
-	<creature id="Rat" texture="12" maxHP="50" health="50" meleeDamage="10" class="Monster" corpseTexture="68" speed="34" level="1">
+	<creature id="Rat" texture="12" maxHP="50" health="50" meleeDamage="15" class="Monster" corpseTexture="68" speed="55" level="1">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -67,6 +71,10 @@
 			<behaviour name="ChaseTarget">
 				<Movement>Orthogonal</Movement>
 			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>2</MaxDistanceFromHome>
+				<Movement>Orthogonal</Movement>
+			</behaviour>
 		</behaviours>
 		<sounds>
 			<Attack>Monster-4</Attack>
@@ -78,7 +86,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Skeleton" texture="13" maxHP="120" health="120" meleeDamage="24" class="Monster" corpseTexture="68" speed="26" level="2">
+	<creature id="Skeleton" texture="13" maxHP="120" health="120" meleeDamage="36" class="Monster" corpseTexture="68" speed="30" level="2">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -107,6 +115,10 @@
 			<behaviour name="ChaseTarget">
 				<Movement>Diagonal</Movement>
 			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>3</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
+			</behaviour>
 		</behaviours>
 		<sounds>
 			<Attack>beads</Attack>
@@ -120,7 +132,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="ShadowWarrior" texture="14" maxHP="240" health="240" meleeDamage="48" class="Monster" corpseTexture="68" speed="27" level="7">
+	<creature id="ShadowWarrior" texture="14" maxHP="240" health="240" meleeDamage="72" class="Monster" corpseTexture="68" speed="28" level="7">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -162,7 +174,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="15" class="Temple" corpseTexture="68" speed="20" level="3">
+	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="19" class="Temple" corpseTexture="68" speed="60" level="3">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -183,7 +195,7 @@
 		</modifiers>
 		<behaviours>
 			<behaviour name="NormalVision">
-				<RangeLimit>7</RangeLimit>
+				<RangeLimit>10</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
 			<behaviour name="AggroOnVision"></behaviour>
@@ -204,7 +216,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68" speed="25" level="5">
+	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68" speed="45" level="5">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
