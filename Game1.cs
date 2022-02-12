@@ -475,6 +475,7 @@ namespace Pandorai
         public async Task StartGame()
 		{
             IsGamePaused = true;
+            IsGameStarted = false;
             desktop.Root.FindWidgetById("continueButton").Enabled = true;
             Player.IsDead = false;
 
@@ -496,7 +497,7 @@ namespace Pandorai
 
             //
             var mapGenerator = new MapGenerator();
-            Map.Tiles = await mapGenerator.GenerateMapAsync(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
+            Map.Tiles = mapGenerator.GenerateMap(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
 
             //Map.SwitchActiveMap(ActiveMap.Surface);
             Map.UpdateTileTextures();
