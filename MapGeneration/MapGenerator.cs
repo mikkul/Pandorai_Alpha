@@ -29,6 +29,8 @@ namespace Pandorai.MapGeneration
 
 		public Regions Rooms = new Regions();
 
+		public Point StartingPoint;
+
 		public async Task<Tile[,]> GenerateMapAsync(Game1 game, string regionSpreadsheet)
 		{
 			var map = await Task.FromResult(GenerateMap(game, regionSpreadsheet));

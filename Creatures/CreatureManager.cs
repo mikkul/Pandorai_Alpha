@@ -199,5 +199,13 @@ namespace Pandorai.Creatures
 				Creatures[i].EndTurn();
 			}
 		}
+
+		public void FirstLoadCreatures()
+		{
+			for (int i = Creatures.Count - 1; i >= 0; i--)
+			{
+				Creatures[i].EndTurn();
+			}
+		}
 	}
 }

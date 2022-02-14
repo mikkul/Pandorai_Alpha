@@ -33,7 +33,7 @@
     <Content Include="Content\CustomRegions\initialForest_region.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\CustomRegions\keeperLibrary_region.xml">
+    <Content Include="Content\CustomRegions\startingRoom_region.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\CustomRegions\temple_region.xml">

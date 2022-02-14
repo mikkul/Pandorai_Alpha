@@ -27,6 +27,7 @@ using Pandorai.Sounds;
 using Microsoft.Xna.Framework.Media;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Linq;
 
 namespace Pandorai
 {
@@ -502,9 +503,8 @@ namespace Pandorai
             //Map.SwitchActiveMap(ActiveMap.Surface);
             Map.UpdateTileTextures();
 
-            var hero = CreatureLoader.GetCreature("Hero");
+            var hero = CreatureManager.Creatures.Single(c => c.Id == "Hero");
             Player.PossessedCreature = hero;
-            CreatureManager.AddCreature(hero);
 
             //
             Sidekick.Init();
@@ -512,7 +512,8 @@ namespace Pandorai
             Sidekick.DisplaySlots();
             Options.AdjustGUI();
 
-            CreatureManager.EndCreaturesTurn();
+            CreatureManager.FirstLoadCreatures();
+            Player.FinishTurn();
 
             GameStarted?.Invoke();
 

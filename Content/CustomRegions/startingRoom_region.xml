@@ -1,4 +1,4 @@
-﻿<customRegion name="KeeperLibrary" floorColor="#de663e" borderColor="#f2b566" sample="roomSample1">
+﻿<customRegion name="StartingRoom" floorColor="#de663e" borderColor="#f2b566" sample="roomSample1">
 	<location>
 	</location>
 	<dimensions>
@@ -8,7 +8,13 @@
 
 		<entrance name="MainEntrance" number="1" />
 
-		<structure name="BlueDoor" number="3">
+		<creature name="Hero" number="1">
+			<location>
+				<layer where="center" />
+			</location>
+		</creature>
+
+		<structure name="YellowDoor" number="3">
 			<location>
 				<proximity to="MainEntrance" distance="very close" />
 			</location>
@@ -21,16 +27,10 @@
 			</location>
 		</structure>
 
-		<item name="MassDestructionRune" number="1"></item>
+		<item name="YellowKey" number="3"></item>
 
-		<creature name="Keeper" number="1" />
-
-		<trigger name="LeaveLibraryTrigger">
-			<location>
-				<proximity to="MainEntrance" distance="very close" />
-			</location>
-		</trigger>
-
+		<item name="HealthPotion" number="1"></item>
+		
 	</content>
 </customRegion>
 
