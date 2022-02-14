@@ -4,4 +4,5 @@
 	<region name="Cementery" number="2" />
 	<region name="Temple" number="1" />
 	<region name="KeeperLibrary" number="1" />
+	<region name="AltarRoom" number="2" />
 </map>

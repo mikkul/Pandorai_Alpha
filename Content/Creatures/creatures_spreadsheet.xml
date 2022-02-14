@@ -174,7 +174,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="19" class="Temple" corpseTexture="68" speed="60" level="3">
+	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="19" class="Temple" corpseTexture="68" speed="45" level="4">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -200,7 +200,7 @@
 			<behaviour name="NormalHitResponse" />
 			<behaviour name="AggroOnVision"></behaviour>
 			<behaviour name="ChaseTarget">
-				<Movement>Orthogonal</Movement>
+				<Movement>Diagonal</Movement>
 			</behaviour>
 			<behaviour name="Awakening">
 				<IsAwake>false</IsAwake>

@@ -1,0 +1,32 @@
+<customRegion name="AltarRoom" floorColor="#ff7878" borderColor="#ffbfcd" sample="roomSample1">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="15" height="15" />
+	</dimensions>
+	<content>
+
+		<entrance name="MainEntrance" number="1" />
+
+		<structure name="BlueDoor" number="3">
+			<location>
+				<proximity to="MainEntrance" distance="very close" />
+			</location>
+		</structure>
+        
+        <structure name="PowerAltar" number="1">
+            <location>
+                <layer where="center" />
+            </location>
+        </structure>
+
+		<structure name="BookStand" number="5-8">
+			<location>
+				<layer where="border" />
+				<proximity to="MainEntrance" distance="very far" tolerance="4" />
+			</location>
+		</structure>
+
+	</content>
+</customRegion>
+

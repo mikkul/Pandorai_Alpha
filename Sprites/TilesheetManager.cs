@@ -110,6 +110,8 @@ namespace Pandorai.Sprites
 
 			AddMapSprite(576, 384, 64, 64, 0, 0); // region gem 76
 			AddMapSprite(576, 448, 64, 64, 0, 0); // gem pedestal 77
+
+			AddMapSprite(512, 128, 64, 64, 0, 0); // power altar 78
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

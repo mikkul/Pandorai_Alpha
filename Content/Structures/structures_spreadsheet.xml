@@ -70,4 +70,14 @@
 			<DialogueName>warriorTombInteraction</DialogueName>
 		</behaviour>
 	</structure>
+	<structure id="PowerAltar" texture="78">
+		<behaviour name="Dialogue">
+			<DialogueName>powerAltarInteraction</DialogueName>
+		</behaviour>
+		<behaviour name="LightEmitter">
+			<Color>#fff67d</Color>
+			<Radius>350</Radius>
+			<Intensity>0.40</Intensity>
+		</behaviour>
+	</structure>	
 </structures>
