@@ -51,7 +51,7 @@ namespace Pandorai.Items
 
 				foreach (XmlElement effect in node.ChildNodes)
 				{
-					Type effectType = effectTypeLegend[effect.GetAttribute("name")];
+					Type effectType = TypeLegends.Effects[effect.GetAttribute("name")];
 					Effect effectInstance = (Effect)Activator.CreateInstance(effectType);
 					foreach (XmlElement modifier in effect.ChildNodes)
 					{
@@ -72,17 +72,6 @@ namespace Pandorai.Items
 			{ "red", Color.Red },
 			{ "blue", Color.Blue },
 			{ "white", Color.Wheat }
-		};
-
-		static Dictionary<string, Type> effectTypeLegend = new Dictionary<string, Type>
-		{
-			{ "ModifyHP", typeof(ModifyHP) },
-			{ "CastFireball", typeof(CastFireball) },
-			{ "CastWave", typeof(CastWave) },
-			{ "SpawnSpikes", typeof(SpawnSpikes) },
-			{ "ModifySpeed", typeof(ModifySpeed) },
-			{ "StealthEquipableItem", typeof(StealthEquipableItem) },
-			{ "TransformSpell", typeof(TransformSpell) },
 		};
 	}
 }

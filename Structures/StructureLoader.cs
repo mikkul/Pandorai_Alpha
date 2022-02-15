@@ -31,7 +31,7 @@ namespace Pandorai.Structures
 
 				foreach (XmlElement behaviour in node.ChildNodes)
 				{
-					Type effectType = behaviourTypeLegend[behaviour.GetAttribute("name")];
+					Type effectType = TypeLegends.StructureBehaviours[behaviour.GetAttribute("name")];
 					Behaviour behaviourInstance = (Behaviour)Activator.CreateInstance(effectType);
 					foreach (XmlElement modifier in behaviour.ChildNodes)
 					{
@@ -43,16 +43,5 @@ namespace Pandorai.Structures
 				structureTemplates.Add(structure.Id, structure);
 			}
 		}
-
-		static Dictionary<string, Type> behaviourTypeLegend = new Dictionary<string, Type>
-		{
-			{ "Container", typeof(Container) },
-			{ "Armor", typeof(Armor) },
-			{ "Destructible", typeof(Destructible) },
-			{ "RegionPedestal", typeof(RegionPedestal) },
-			{ "LightEmitter", typeof(LightEmitter) },
-			{ "Door", typeof(Door) },
-			{ "Dialogue", typeof(Dialogue) },
-		};
 	}
 }

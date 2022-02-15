@@ -11,6 +11,8 @@ using Pandorai.Mechanics;
 using Myra.Graphics2D.UI;
 using Pandorai.Items;
 using Pandorai.Creatures;
+using Pandorai.Effects;
+using Pandorai.Conditions;
 
 namespace Pandorai.Dialogues
 {
@@ -114,9 +116,24 @@ namespace Pandorai.Dialogues
 						Console.WriteLine(warningMsg);
 					}
 				}
-				else if(action.Type == "action")
+				else if(action.Type == "effect")
 				{
-					action.Action?.Invoke();
+					Match nameParamMatch = Regex.Match(action.Value, @"(.+)\((.+)\)");
+					var effectName = nameParamMatch.Groups[1].Value;
+
+					var effectParams = nameParamMatch.Groups[2].Value;
+					var effectAttributes = effectParams.Split(';');
+
+					Type effectType = TypeLegends.Effects[effectName];
+					Effect effectInstance = (Effect)Activator.CreateInstance(effectType);
+
+					foreach (var attribute in effectAttributes)
+					{
+						var split = attribute.Split('=');
+						var attributeName = split[0];
+						var attributeValue = split[1];
+						effectInstance.SetAttribute(attributeName, attributeValue);
+					}
 				}
 			}
 			// check for type and do something about it
@@ -251,7 +268,32 @@ namespace Pandorai.Dialogues
 			bool isForever = optionNode.Type == "ForeverHeroOption";
 			string optContent = optionNode.Content;
 
-			dialogueOptions.Add(new DialogueOption(optContent, intIndex, isForever));
+			var dialogueOption = new DialogueOption(optContent, intIndex, isForever);
+
+			var conditions = optionNode.Actions.Where(x => x.Type == "condition");
+			foreach (var condition in conditions)
+			{
+				Match nameParamMatch = Regex.Match(condition.Value, @"(.+)\((.+)\)");
+				var conditionName = nameParamMatch.Groups[1].Value;
+
+				var conditionParams = nameParamMatch.Groups[2].Value;
+				var conditionAttributes = conditionParams.Split(';');
+
+				Type conditionType = TypeLegends.Conditions[conditionName];
+				Condition conditionInstance = (Condition)Activator.CreateInstance(conditionType);
+
+				foreach (var attribute in conditionAttributes)
+				{
+					var split = attribute.Split('=');
+					var attributeName = split[0];
+					var attributeValue = split[1];
+					conditionInstance.SetAttribute(attributeName, attributeValue);
+				}
+
+				dialogueOption.Conditions.Add(conditionInstance);
+			}
+
+			dialogueOptions.Add(dialogueOption);
 		}
 
 		public void RemoveOption(string index)

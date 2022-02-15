@@ -6,7 +6,6 @@ namespace Pandorai.Dialogues
 	{
 		public string Type = null;
 		public string Value = null;
-		public Action Action = null;
 
 		public DialogueAction(string type, string value)
 		{

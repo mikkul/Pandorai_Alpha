@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using Pandorai.Conditions;
+using Pandorai.Creatures.Behaviours;
+using Pandorai.Effects;
+using Pandorai.Structures.Behaviours;
+
+namespace Pandorai
+{
+    public static class TypeLegends
+    {
+        public static Dictionary<string, Type> Effects = new Dictionary<string, Type>
+		{
+			{ "ModifyHP", typeof(ModifyHP) },
+			{ "CastFireball", typeof(CastFireball) },
+			{ "CastWave", typeof(CastWave) },
+			{ "SpawnSpikes", typeof(SpawnSpikes) },
+			{ "ModifySpeed", typeof(ModifySpeed) },
+			{ "StealthEquipableItem", typeof(StealthEquipableItem) },
+			{ "TransformSpell", typeof(TransformSpell) },
+		};
+
+        
+		public static Dictionary<string, Type> StructureBehaviours = new Dictionary<string, Type>
+		{
+			{ "Container", typeof(Container) },
+			{ "Armor", typeof(Armor) },
+			{ "Destructible", typeof(Destructible) },
+			{ "RegionPedestal", typeof(RegionPedestal) },
+			{ "LightEmitter", typeof(LightEmitter) },
+			{ "Door", typeof(Door) },
+			{ "Dialogue", typeof(Dialogue) },
+		};
+
+        public static Dictionary<string, Type> CreatureBehaviours = new Dictionary<string, Type>
+		{
+			{ "AggroOnDistance", typeof(AggroOnDistance) },
+			{ "ChaseTarget", typeof(ChaseTarget) },
+			{ "ParalelPosition", typeof(ParalelPosition) },
+			{ "SpellCaster", typeof(SpellCaster) },
+			{ "NormalHitResponse", typeof(NormalHitResponse) },
+			{ "Talkative", typeof(Talkative) },
+			{ "NormalVision", typeof(NormalVision) },
+			{ "AllSeeingVision", typeof(AllSeeingVision) },
+			{ "AggroOnVision", typeof(AggroOnVision) },
+			{ "Awakening", typeof(Awakening) },
+			{ "RandomWalk", typeof(RandomWalk) },
+		};
+
+        public static Dictionary<string, Type> Conditions = new Dictionary<string, Type>
+		{
+			{ "RequiredSkillPoints", typeof(RequiredSkillPointsCondition) },
+		};		
+    }
+}

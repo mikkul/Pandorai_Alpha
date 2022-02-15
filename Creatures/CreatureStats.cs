@@ -24,8 +24,9 @@ namespace Pandorai.Creatures
             get => _level;
             set
             {
+                var previous = _level;
                 _level = value;
-                SetLevel();
+                SetLevel(previous, value);
             }
         }
 
@@ -39,6 +40,8 @@ namespace Pandorai.Creatures
                 SetExperience(delta);
             }
         }
+
+        public int SkillPoints { get; set; }
 
         public int Health
         {
@@ -60,7 +63,7 @@ namespace Pandorai.Creatures
         public static int GetLevelFromExperience(int experience)
         {
             int level = -1;
-            for (int i = 0; i <= experience; i += 1000 + level * 100)
+            for (int i = 0; i <= experience; i += 1000 + level * 200)
             {
                 level++;
             }
@@ -71,6 +74,20 @@ namespace Pandorai.Creatures
         {
             var experience = (int)(Math.Pow(level, 1.2) * 100);
             return experience;
+        }
+
+        public static int GetSkillPointsFromLevel(int level)
+        {
+            int skillPoints;
+            if(level == 0)
+            {
+                skillPoints = 0;
+            }
+            else
+            {
+                skillPoints = 2;
+            }
+            return skillPoints;
         }
 
         public CreatureStats Clone(Creature newOwner)
@@ -95,8 +112,13 @@ namespace Pandorai.Creatures
             }
         }
 
-        private void SetLevel()
+        private void SetLevel(int previousLevel, int currentLevel)
         {
+            for (int i = previousLevel; i < currentLevel; i++)
+            {
+                SkillPoints += GetSkillPointsFromLevel(i + 1);
+            }
+
             if(_owner.IsPossessedCreature())
             {
                 MessageLog.DisplayMessage($"You have advanced to level {Level}");

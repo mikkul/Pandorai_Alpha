@@ -68,7 +68,7 @@ namespace Pandorai.Dialogues
 				{
 					string actionName = Regex.Match(actionMatch.Value, @"<(.+)>").Groups[1].Value;
 					string actionValue = null;
-					if (actionName == "action" || actionName == "if" || actionName == "method")
+					if (actionName == "action" || actionName == "if" || actionName == "method" || actionName == "condition")
 					{
 						actionValue = Regex.Match(actionMatch.Value, @">(.+)").Groups[1].Value;
 					}
@@ -122,8 +122,17 @@ namespace Pandorai.Dialogues
 			{
 				Text = option.Content,
 				Width = (int)(Options.oldResolution.X * 0.75f),
-				Padding = new Thickness(3)
+				Padding = new Thickness(3),
 			};
+
+			foreach (var condition in option.Conditions)
+			{
+				if(!condition.Check())
+				{
+					button.Enabled = false;
+					break;
+				}
+			}
 
 			button.Click += (s, a) =>
 			{

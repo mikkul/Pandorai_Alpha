@@ -63,7 +63,7 @@ namespace Pandorai.Creatures
 
 				foreach (XmlElement behaviour in node.SelectSingleNode("./behaviours").ChildNodes)
 				{
-					Type behaviourType = behaviourTypeLegend[behaviour.GetAttribute("name")];
+					Type behaviourType = TypeLegends.CreatureBehaviours[behaviour.GetAttribute("name")];
 					Behaviour behaviourInstance = (Behaviour)Activator.CreateInstance(behaviourType);
 					foreach (XmlElement modifier in behaviour.ChildNodes)
 					{
@@ -102,20 +102,5 @@ namespace Pandorai.Creatures
 				creatureTemplates.Add(creature.Id, creature);
 			}
 		}
-
-		static Dictionary<string, Type> behaviourTypeLegend = new Dictionary<string, Type>
-		{
-			{ "AggroOnDistance", typeof(AggroOnDistance) },
-			{ "ChaseTarget", typeof(ChaseTarget) },
-			{ "ParalelPosition", typeof(ParalelPosition) },
-			{ "SpellCaster", typeof(SpellCaster) },
-			{ "NormalHitResponse", typeof(NormalHitResponse) },
-			{ "Talkative", typeof(Talkative) },
-			{ "NormalVision", typeof(NormalVision) },
-			{ "AllSeeingVision", typeof(AllSeeingVision) },
-			{ "AggroOnVision", typeof(AggroOnVision) },
-			{ "Awakening", typeof(Awakening) },
-			{ "RandomWalk", typeof(RandomWalk) },
-		};
 	}
 }

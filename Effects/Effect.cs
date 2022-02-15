@@ -1,5 +1,4 @@
 ﻿using Pandorai.Creatures;
-using System.Runtime.CompilerServices;
 
 namespace Pandorai.Effects
 {
