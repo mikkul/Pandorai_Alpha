@@ -52,10 +52,10 @@
 			</location>
 		</structure>
 
-		<creature name="Seeker" number="4">
+		<creature name="Seeker" number="5">
 			<location>
-				<layer thickness="3" where="center" offset="2" />
-				<proximity to="WarriorTomb" distance="close" tolerance="4" />
+				<layer thickness="3" where="center" offset="1" />
+				<proximity to="WarriorTomb" distance="close" tolerance="3" />
 			</location>
 		</creature>
 

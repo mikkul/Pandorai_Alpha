@@ -229,7 +229,7 @@
 		<behaviours>
 			<behaviour name="NormalHitResponse" />
 			<behaviour name="AggroOnDistance">
-				<Range>6</Range>
+				<Range>7</Range>
 			</behaviour>
 			<behaviour name="ParalelPosition">
 			</behaviour>

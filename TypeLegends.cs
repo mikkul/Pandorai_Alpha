@@ -23,6 +23,7 @@ namespace Pandorai
 			{ "ModifyMaxMana", typeof(ModifyMaxMana) },
 			{ "ModifySkillPoints", typeof(ModifySkillPoints) },
 			{ "CastIceProjectile", typeof(CastIceProjectile) },
+			{ "ModifyStrength", typeof(ModifyStrength) },
 		};
 
         

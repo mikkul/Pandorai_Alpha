@@ -50,6 +50,11 @@
 			<RequiredKey>BlueKey</RequiredKey>
 		</behaviour>
 	</structure>
+	<structure id="RedDoor" texture="6" colorTint="#eb3b3b">
+		<behaviour name="Door">
+			<RequiredKey>RedKey</RequiredKey>
+		</behaviour>
+	</structure>	
 	<structure id="Torch" texture="62">
 		<behaviour name="LightEmitter">
 			<Color>#ffff00</Color>
