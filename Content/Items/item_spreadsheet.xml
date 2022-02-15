@@ -51,4 +51,11 @@
 			<Amount>3</Amount>
 		</effect>
 	</item>
+	<item id="IceArrowRune" texture="76" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive">
+		<effect name="CastIceProjectile">
+			<Damage>50</Damage>
+			<Pierce>4</Pierce>
+			<Range>7</Range>
+		</effect>
+	</item>
 </items>

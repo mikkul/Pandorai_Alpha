@@ -103,7 +103,8 @@ namespace Pandorai.Structures
 		None = 1,
 		Fire = 2,
 		Physical = 4,
-		All = Fire | Physical,
+		Ice = 8,
+		All = Fire | Physical | Ice,
 	}
 
 	public enum ForceResult

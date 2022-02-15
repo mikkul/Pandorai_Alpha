@@ -68,7 +68,7 @@ namespace Pandorai.Dialogues
 				{
 					string actionName = Regex.Match(actionMatch.Value, @"<(.+)>").Groups[1].Value;
 					string actionValue = null;
-					if (actionName == "action" || actionName == "if" || actionName == "method" || actionName == "condition")
+					if (actionName == "action" || actionName == "if" || actionName == "method" || actionName == "condition" || actionName == "effect")
 					{
 						actionValue = Regex.Match(actionMatch.Value, @">(.+)").Groups[1].Value;
 					}

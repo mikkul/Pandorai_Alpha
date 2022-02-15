@@ -60,10 +60,12 @@ namespace Pandorai.Creatures
         public int Speed { get; set; }
         public int Strength { get; set; }
 
+        public int FireResistance { get; set; }
+
         public static int GetLevelFromExperience(int experience)
         {
             int level = -1;
-            for (int i = 0; i <= experience; i += 1000 + level * 200)
+            for (int i = 0; i <= experience; i += 100 + level * 200)
             {
                 level++;
             }
@@ -95,6 +97,7 @@ namespace Pandorai.Creatures
             return new CreatureStats(newOwner)
             {
                 Level = Level,
+                FireResistance = FireResistance,
             };
         }
 
@@ -114,6 +117,9 @@ namespace Pandorai.Creatures
 
         private void SetLevel(int previousLevel, int currentLevel)
         {
+            Health = MaxHealth;
+            Mana = MaxMana;
+
             for (int i = previousLevel; i < currentLevel; i++)
             {
                 SkillPoints += GetSkillPointsFromLevel(i + 1);

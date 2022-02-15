@@ -174,7 +174,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="19" class="Temple" corpseTexture="68" speed="45" level="4">
+	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" meleeDamage="19" class="Temple" corpseTexture="68" speed="45" level="4" fireResistance="25">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -216,7 +216,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68" speed="45" level="5">
+	<creature id="Seeker" texture="15" maxHP="150" health="150" meleeDamage="10" class="Monster" corpseTexture="68" speed="45" level="5" fireResistance="100">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>

@@ -35,6 +35,8 @@ namespace Pandorai.Creatures
 				creature.CorpseTextureIndex = int.Parse(node.GetAttribute("corpseTexture"));
 				if (node.HasAttribute("stealth"))
 					creature.Stealth = int.Parse(node.GetAttribute("stealth"));
+				if (node.HasAttribute("fireResistance"))
+					creature.Stats.FireResistance = int.Parse(node.GetAttribute("fireResistance"));
 
 				foreach (XmlElement modifier in node.SelectSingleNode("./modifiers").ChildNodes)
 				{

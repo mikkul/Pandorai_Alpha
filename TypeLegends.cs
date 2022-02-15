@@ -18,6 +18,11 @@ namespace Pandorai
 			{ "ModifySpeed", typeof(ModifySpeed) },
 			{ "StealthEquipableItem", typeof(StealthEquipableItem) },
 			{ "TransformSpell", typeof(TransformSpell) },
+			{ "ModifyFireResistance", typeof(ModifyFireResistance) },
+			{ "ModifyMaxHP", typeof(ModifyMaxHP) },
+			{ "ModifyMaxMana", typeof(ModifyMaxMana) },
+			{ "ModifySkillPoints", typeof(ModifySkillPoints) },
+			{ "CastIceProjectile", typeof(CastIceProjectile) },
 		};
 
         

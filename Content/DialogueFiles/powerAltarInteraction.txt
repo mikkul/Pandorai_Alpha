@@ -18,31 +18,39 @@
 <condition>RequiredSkillPoints(Amount=1)
 <effect>ModifyMaxHP(Amount=50)
 <effect>ModifySkillPoints(Amount=-1)
-<method>SetLead(-1)
+<method>SetLead(7)
 #
 <!index  >2
 <!type   >ForeverHeroOption
 <!content>Increase attack by 5 (1 Skill point)
 <condition>RequiredSkillPoints(Amount=1)
-<method>SetLead(-1)
+<effect>ModifyStrength(Amount=5)
+<effect>ModifySkillPoints(Amount=-1)
+<method>SetLead(7)
 #
 <!index  >3
 <!type   >ForeverHeroOption
 <!content>Increase mana by 10 (1 Skill point)
 <condition>RequiredSkillPoints(Amount=1)
-<method>SetLead(-1)
+<effect>ModifyMaxMana(Amount=10)
+<effect>ModifySkillPoints(Amount=-1)
+<method>SetLead(7)
 #
 <!index  >4
 <!type   >ForeverHeroOption
 <!content>Grant Ice Arrow rune (3 Skill points)
 <condition>RequiredSkillPoints(Amount=3)
-<method>SetLead(-1)
+<method>GiveHeroItem(IceArrowRune)
+<effect>ModifySkillPoints(Amount=-3)
+<method>SetLead(7)
 #
 <!index  >5
 <!type   >ForeverHeroOption
 <!content>Grant 50% fire immunity (5 Skill points)
 <condition>RequiredSkillPoints(Amount=5)
-<method>SetLead(-1)
+<effect>ModifyFireResistance(Amount=50)
+<effect>ModifySkillPoints(Amount=-5)
+<method>SetLead(7)
 #
 <!index  >6
 <!type   >ForeverHeroOption

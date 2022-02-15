@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Pandorai.Mechanics;
-using Myra.Graphics2D.UI;
 using Pandorai.Items;
-using Pandorai.Creatures;
 using Pandorai.Effects;
 using Pandorai.Conditions;
 
@@ -134,6 +129,8 @@ namespace Pandorai.Dialogues
 						var attributeValue = split[1];
 						effectInstance.SetAttribute(attributeName, attributeValue);
 					}
+
+					effectInstance.Use(Game1.game.Player.PossessedCreature);
 				}
 			}
 			// check for type and do something about it
