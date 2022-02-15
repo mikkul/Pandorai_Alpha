@@ -12,8 +12,6 @@ namespace Pandorai.Cheats
 
 		public static bool Activated = true;
 
-		static int regionCounter = 0;
-
 		public static void HandleKeyInput(Keys key)
 		{
 			if (!Activated) return;

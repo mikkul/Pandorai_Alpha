@@ -30,7 +30,6 @@ namespace Pandorai.Mechanics
 		public static bool WasItemDragged = false;
 
 		static Vector2 position;
-		static float speed = 1;
 
 		static PSSparkles sparkles;
 

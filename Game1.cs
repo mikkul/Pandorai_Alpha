@@ -270,7 +270,7 @@ namespace Pandorai
 
             Options.TileSizeChanged += Map.UpdateMapRenderingOptions;
 
-            TileInteractionManager.TileHover += MapTooltip.DisplayMapTooltip;
+            //TileInteractionManager.TileHover += MapTooltip.DisplayMapTooltip;
 
             Map.TileSize = Options.TileSize;
             Map.SetAmountTilesRendered(Camera.Viewport.Width / Map.TileSize / 2 + 2, Camera.Viewport.Height / Map.TileSize / 2 + 2);
@@ -473,7 +473,7 @@ namespace Pandorai
             base.Draw(gameTime);
         }
 
-        public async Task StartGame()
+        public void StartGame()
 		{
             IsGamePaused = true;
             IsGameStarted = false;
