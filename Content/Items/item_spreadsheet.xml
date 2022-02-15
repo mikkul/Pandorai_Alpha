@@ -12,14 +12,14 @@
 			<Range>7</Range>
 		</effect>
 	</item>
-	<item id="FireballRune" texture="69" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive">
+	<item id="FireballRune" texture="83" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive">
 		<effect name="CastFireball">
 			<Damage>75</Damage>
 			<Pierce>3</Pierce>
 			<Range>6</Range>
 		</effect>
 	</item>
-	<item id="MassDestructionRune" texture="73" consumable="False" name="Mass Destruction Rune" colorTint="#7134eb" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive">
+	<item id="MassDestructionRune" texture="85" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive">
 		<effect name="CastWave">
 			<Damage>350</Damage>
 			<Range>6</Range>
@@ -43,15 +43,15 @@
 			<Duration>20</Duration>
 		</effect>
 	</item>
-	<item id="YellowKey" texture="4" consumable="False" name="Yellow key" colorTint="#edd63e" tooltipColor="white" description="An ordinary key" type="Other"></item>
-	<item id="BlueKey" texture="4" consumable="False" name="Blue key" colorTint="#4287f5" tooltipColor="white" description="A key key" type="Other"></item>
-	<item id="RedKey" texture="4" consumable="False" name="Red key" colorTint="#d12c2c" tooltipColor="white" description="A rare key" type="Other"></item>	
+	<item id="YellowKey" texture="79" consumable="False" name="Yellow key" tooltipColor="white" description="An ordinary key" type="Other"></item>
+	<item id="BlueKey" texture="4" consumable="False" name="Blue key" tooltipColor="white" description="A key" type="Other"></item>
+	<item id="RedKey" texture="80" consumable="False" name="Red key" tooltipColor="white" description="A rare key" type="Other"></item>	
 	<item id="StealthCape" texture="70" consumable="false" name="Stealth cape" tooltipColor="green" description="Makes the user less visible to other creatures" type="Clothes" sound="cloth">
 		<effect name="StealthEquipableItem">
 			<Amount>3</Amount>
 		</effect>
 	</item>
-	<item id="IceArrowRune" texture="76" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive">
+	<item id="IceArrowRune" texture="84" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive">
 		<effect name="CastIceProjectile">
 			<Damage>50</Damage>
 			<Pierce>4</Pierce>

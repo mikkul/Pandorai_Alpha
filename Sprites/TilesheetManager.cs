@@ -112,6 +112,16 @@ namespace Pandorai.Sprites
 			AddMapSprite(576, 448, 64, 64, 0, 0); // gem pedestal 77
 
 			AddMapSprite(512, 128, 64, 64, 0, 0); // power altar 78
+
+			AddMapSprite(0, 64, 64, 64, 6, 200); // yellow key 79
+			AddMapSprite(0, 640, 64, 64, 6, 200); // red key 80
+
+			AddMapSprite(192, 576, 64, 64, 0, 0); // ice arrow spell 81
+
+			AddMapSprite(384, 640, 64, 64, 0, 0); // empty rune 82
+			AddMapSprite(448, 640, 64, 64, 0, 0); // fireball rune 83
+			AddMapSprite(512, 640, 64, 64, 0, 0); // ice arrow rune 84
+			AddMapSprite(576, 640, 64, 64, 0, 0); // mass destruction rune 85
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)
