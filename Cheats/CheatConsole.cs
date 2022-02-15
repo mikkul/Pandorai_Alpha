@@ -25,8 +25,8 @@ namespace Pandorai.Cheats
 		{
 			Commands.Add("godmode", () =>
 			{
-				game.Player.PossessedCreature.MaxHealth = int.MaxValue;
-				game.Player.PossessedCreature.Health = int.MaxValue;
+				game.Player.PossessedCreature.Stats.MaxHealth = int.MaxValue;
+				game.Player.PossessedCreature.Stats.Health = int.MaxValue;
 			});
 
 			Commands.Add("activate", () =>

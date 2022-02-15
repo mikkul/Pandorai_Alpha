@@ -43,7 +43,7 @@ namespace Pandorai.Creatures.Behaviours
 				if (Owner.EnemyClasses.Contains(creature.Class))
 				{
 					float dist = Vector2.DistanceSquared(creature.Position, Owner.Position);
-					int realAggroRange = Range - creature.Stealth;
+					int realAggroRange = Range - creature.Stats.Stealth;
 					if (dist > (realAggroRange * Owner.game.Map.TileSize) * (realAggroRange * Owner.game.Map.TileSize))
 					{
 						continue;

@@ -73,7 +73,7 @@ namespace Pandorai.UI
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Stretch,
                 Width = 500,
-                Height = 500,
+                Height = 600,
             };
             
             PropertyGrid contentGrid = new PropertyGrid

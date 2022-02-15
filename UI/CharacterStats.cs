@@ -31,6 +31,8 @@ namespace Pandorai.UI
         public int Strength { get; private set; }
 
         [Category("E")]
+        public int Stealth { get; private set; }
+        [Category("E")]
         [DisplayName("Fire resistance")]
         public int FireResistance { get; private set; }
 
@@ -49,6 +51,7 @@ namespace Pandorai.UI
             Speed = stats.Speed;
             Strength = stats.Strength;
 
+            Stealth = stats.Stealth;
             FireResistance = stats.FireResistance;
         }
     }

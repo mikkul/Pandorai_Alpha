@@ -23,7 +23,7 @@ namespace Pandorai.Effects
         public override void Use(Creature user)
         {
             equiped ^= true;
-			user.Stealth += equiped ? Amount : -Amount;
+			user.Stats.Stealth += equiped ? Amount : -Amount;
 
 			if (equiped)
             {
@@ -38,7 +38,7 @@ namespace Pandorai.Effects
 			revertUse = creature =>
 			{
 				equiped = false;
-				user.Stealth -= Amount;
+				user.Stats.Stealth -= Amount;
 				user.Color *= 1 / Opacity;
 				user.GotHit -= revertUse;
 			};

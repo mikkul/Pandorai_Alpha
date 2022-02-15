@@ -16,7 +16,7 @@ namespace Pandorai.Effects
 
 		public override void Use(Creature usingCreature)
 		{
-			usingCreature.Health += Amount;
+			usingCreature.Stats.Health += Amount;
 		}
 	}
 }

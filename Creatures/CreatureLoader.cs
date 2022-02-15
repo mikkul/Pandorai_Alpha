@@ -26,17 +26,30 @@ namespace Pandorai.Creatures
 				creature.Stats = new CreatureStats(creature);
 				creature.Id = node.GetAttribute("id");
 				creature.TextureIndex = int.Parse(node.GetAttribute("texture"));
-				creature.MaxHealth = int.Parse(node.GetAttribute("maxHP"));
-				creature.Health = int.Parse(node.GetAttribute("health"));
-				creature.MeleeHitDamage = int.Parse(node.GetAttribute("meleeDamage"));
-				creature.Speed = int.Parse(node.GetAttribute("speed"));
+				creature.Stats.MaxHealth = int.Parse(node.GetAttribute("maxHP"));
+				creature.Stats.Health = int.Parse(node.GetAttribute("health"));
+				creature.Stats.Strength = int.Parse(node.GetAttribute("strength"));
+				creature.Stats.Speed = int.Parse(node.GetAttribute("speed"));
 				creature.Stats.Level = int.Parse(node.GetAttribute("level"));
 				creature.Class = (CreatureClass)Enum.Parse(typeof(CreatureClass), node.GetAttribute("class"));
 				creature.CorpseTextureIndex = int.Parse(node.GetAttribute("corpseTexture"));
+				if (node.HasAttribute("mana") && node.HasAttribute("maxMana"))
+				{
+					creature.Stats.Mana = int.Parse(node.GetAttribute("mana"));
+					creature.Stats.MaxMana = int.Parse(node.GetAttribute("maxMana"));
+				}
+				else if(node.HasAttribute("maxMana"))
+				{
+					creature.Stats.MaxMana = int.Parse(node.GetAttribute("maxMana"));
+				}
 				if (node.HasAttribute("stealth"))
-					creature.Stealth = int.Parse(node.GetAttribute("stealth"));
+				{
+					creature.Stats.Stealth = int.Parse(node.GetAttribute("stealth"));
+				}
 				if (node.HasAttribute("fireResistance"))
+				{
 					creature.Stats.FireResistance = int.Parse(node.GetAttribute("fireResistance"));
+				}
 
 				foreach (XmlElement modifier in node.SelectSingleNode("./modifiers").ChildNodes)
 				{

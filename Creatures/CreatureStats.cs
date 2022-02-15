@@ -46,20 +46,21 @@ namespace Pandorai.Creatures
         public int Health
         {
             get => _health;
-            set => _health = Math.Min(_health + value, MaxHealth);
+            set => _health = Math.Min(value, MaxHealth);
         }
         public int MaxHealth { get; set; }
 
         public int Mana
         {
             get => _mana;
-            set => _mana = Math.Min(_mana + value, MaxMana);
+            set => _mana = Math.Min(value, MaxMana);
         }
         public int MaxMana { get; set; }
 
         public int Speed { get; set; }
         public int Strength { get; set; }
 
+        public int Stealth { get; set; }
         public int FireResistance { get; set; }
 
         public static int GetLevelFromExperience(int experience)
@@ -97,6 +98,15 @@ namespace Pandorai.Creatures
             return new CreatureStats(newOwner)
             {
                 Level = Level,
+                Experience = Experience,
+                SkillPoints = SkillPoints,
+                MaxHealth = MaxHealth,
+                Health = Health,
+                MaxMana = MaxMana,
+                Mana = Mana,
+                Speed = Speed,
+                Strength = Strength,
+                Stealth = Stealth,
                 FireResistance = FireResistance,
             };
         }

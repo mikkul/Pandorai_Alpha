@@ -32,7 +32,7 @@ namespace Pandorai.Creatures.Behaviours
 				var normalVision = Owner.GetBehaviour<NormalVision>() as NormalVision;
 				if(normalVision != null)
 				{
-					int realAggroRange = normalVision.RangeLimit - tryCreature.Stealth;
+					int realAggroRange = normalVision.RangeLimit - tryCreature.Stats.Stealth;
 					if (dist > (realAggroRange * Owner.game.Map.TileSize) * (realAggroRange * Owner.game.Map.TileSize))
 					{
 						continue;

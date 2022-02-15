@@ -27,7 +27,7 @@ namespace Pandorai.Effects
         {
             int turnCounter = 0;
 
-            usingCreature.Speed += Amount;
+            usingCreature.Stats.Speed += Amount;
             usingCreature.TurnEnded += checkDuration;
 
             void checkDuration()
@@ -35,7 +35,7 @@ namespace Pandorai.Effects
                 turnCounter++;
                 if (turnCounter >= Duration)
                 {
-                    usingCreature.Speed -= Amount;
+                    usingCreature.Stats.Speed -= Amount;
 
                     usingCreature.TurnEnded -= checkDuration;
 

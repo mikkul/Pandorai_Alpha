@@ -44,26 +44,9 @@ namespace Pandorai.Creatures
 
 		public bool NoClip = false;
 
-		public float MaxHealth;
-		private float internalHealth;
-		public float Health
-		{
-			get => internalHealth;
-			set
-			{
-				if (value > MaxHealth) internalHealth = MaxHealth;
-				else internalHealth = value;
-			}
-		}
-		public float MeleeHitDamage;
-
 		public Color Color = new Color(1f, 1f, 1f, 1f);
 
 		public bool ShowHPBar = true;
-
-		public int Stealth = 0;
-
-		public int Speed;
 
 		public int Energy;
 
@@ -124,12 +107,7 @@ namespace Pandorai.Creatures
 			{
 				Id = Id,
 				TextureIndex = TextureIndex,
-				MaxHealth = MaxHealth,
-				Health = Health,
 				CorpseTextureIndex = CorpseTextureIndex,
-				MeleeHitDamage = MeleeHitDamage,
-				Stealth = Stealth,
-				Speed = Speed,
 				MovingTextureIndices = MovingTextureIndices,
 				IdleTextureIndices = IdleTextureIndices,
 				Class = Class,
@@ -305,12 +283,12 @@ namespace Pandorai.Creatures
 		public void GetHit(float damage, Creature byWhom)
 		{
 			SoundManager.PlaySound(Sounds.Hurt);
-			Health -= damage;
+			Stats.Health -= (int)damage;
 			DamageFlash();
-			if (Health <= 0)
+			if (Stats.Health <= 0)
 			{
 				byWhom.Stats.Experience += CreatureStats.GetKillExperience(Stats.Level);
-				Health = 0;
+				Stats.Health = 0;
 				IsAlive = false;
 				OnDeath();
 			}
@@ -358,7 +336,7 @@ namespace Pandorai.Creatures
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			var hpBarRect = new Rectangle(game.Camera.GetViewportPosition(Position - new Vector2(game.Map.TileSize * 0.375f, game.Map.TileSize * 0.5f)).ToPoint(), new Point((int)(Health / MaxHealth * game.Map.TileSize * 0.75f), game.Map.TileSize / 10));
+			var hpBarRect = new Rectangle(game.Camera.GetViewportPosition(Position - new Vector2(game.Map.TileSize * 0.375f, game.Map.TileSize * 0.5f)).ToPoint(), new Point((int)((float)Stats.Health / (float)Stats.MaxHealth * game.Map.TileSize * 0.75f), game.Map.TileSize / 10));
 			var destRect = new Rectangle(game.Camera.GetViewportPosition(Position - new Vector2(game.Map.TileSize / 2, game.Map.TileSize / 2)).ToPoint(), new Point(game.Map.TileSize));
 			if(ShowHPBar)
 				spriteBatch.Draw(game.squareTexture, hpBarRect, Color.Red);

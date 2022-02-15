@@ -159,7 +159,7 @@ namespace Pandorai.Creatures
 			bool isSomeoneReady = false;
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
-				Creatures[i].Energy += Creatures[i].Speed;
+				Creatures[i].Energy += Creatures[i].Stats.Speed;
 
 				if(Creatures[i].IsPossessedCreature())
 				{
