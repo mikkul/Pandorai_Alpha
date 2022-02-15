@@ -8,6 +8,8 @@ using Pandorai.Cheats;
 using Pandorai.Dialogues;
 using Myra.Graphics2D.UI.Properties;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input;
+using Pandorai.Creatures;
 
 namespace Pandorai.UI
 {
@@ -20,12 +22,17 @@ namespace Pandorai.UI
 
         static Panel oldInventoryPanel = null;
 
-		public static Widget LoadGUI(Game1 thisGame, Desktop thisDesktop)
+        static bool isCharacterStatsWindowOpen = false;
+        private static Window characterStatsWindow;
+
+        public static Widget LoadGUI(Game1 thisGame, Desktop thisDesktop)
 		{
             Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(new Color(0.6f, 0.6f, 0.6f, 1f));
 
             game = thisGame;
             desktop = thisDesktop;
+
+            InitCharacterStatsWindow();
 
             Panel rootPanel = new Panel();
 
@@ -55,6 +62,50 @@ namespace Pandorai.UI
             oldInventoryPanel = inventory;
 
             game.Options.AdjustGUI();
+        }
+
+        static void InitCharacterStatsWindow()
+        {
+            characterStatsWindow = new Window
+            {
+                Id = "characterStatsWindow",
+                Title = "Stats",
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Width = 500,
+                Height = 500,
+            };
+            
+            PropertyGrid contentGrid = new PropertyGrid
+            {
+                Id = "characterStatsPropertyGrid",
+            };
+
+            characterStatsWindow.Content = contentGrid;
+
+            Game1.game.InputManager.SingleKeyPress += k =>
+            {
+                if(k == Keys.C)
+                {
+                    if(isCharacterStatsWindowOpen)
+                    {
+                        isCharacterStatsWindowOpen = false;
+                        characterStatsWindow.Close();
+                    }
+                    else
+                    {
+                        isCharacterStatsWindowOpen = true;
+                        contentGrid = new PropertyGrid
+                        {
+                            Id = "characterStatsPropertyGrid",
+                        };
+                        var characterStats = new CharacterStats(Game1.game.Player.PossessedCreature.Stats);
+                        contentGrid.Object = characterStats;
+                        characterStatsWindow.Content = contentGrid;
+                        characterStatsWindow.ShowModal(desktop);
+                    }
+                }
+            };
         }
 
         static Widget LoadingScreen()
@@ -241,13 +292,18 @@ namespace Pandorai.UI
                 Width = (int)(Options.oldResolution.X * 0.75f)
             };
 
+            ScrollViewer dialogueOptionsScrollViewer = new ScrollViewer
+            {
+                Content = dialogueOptions,
+            };
+
             DialogueManager.NameLabel = nameLabel;
             DialogueManager.TextLabel = textLabel;
             DialogueManager.OptionsStack = dialogueOptions;
 
             mainPanel.Widgets.Add(nameLabel);
             mainPanel.Widgets.Add(textLabel);
-            mainPanel.Widgets.Add(dialogueOptions);
+            mainPanel.Widgets.Add(dialogueOptionsScrollViewer);
 
             return mainPanel;
 		}
