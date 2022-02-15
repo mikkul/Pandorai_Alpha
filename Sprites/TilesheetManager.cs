@@ -108,7 +108,7 @@ namespace Pandorai.Sprites
 			AddMapSprite(512, 256, 64, 64, 0, 0); // barrel 74
 			AddMapSprite(576, 320, 64, 64, 0, 0); // barrel destroyed 75
 
-			AddMapSprite(576, 384, 64, 64, 0, 0); // region gem 76
+			AddMapSprite(576, 384, 64, 64, 0, 0); // white gem 76
 			AddMapSprite(576, 448, 64, 64, 0, 0); // gem pedestal 77
 
 			AddMapSprite(512, 128, 64, 64, 0, 0); // power altar 78
@@ -122,6 +122,8 @@ namespace Pandorai.Sprites
 			AddMapSprite(448, 640, 64, 64, 0, 0); // fireball rune 83
 			AddMapSprite(512, 640, 64, 64, 0, 0); // ice arrow rune 84
 			AddMapSprite(576, 640, 64, 64, 0, 0); // mass destruction rune 85
+
+			AddMapSprite(512, 512, 64, 64, 0, 0); // region gem 86
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)
