@@ -30,7 +30,7 @@ namespace Pandorai.Creatures.Behaviours
             }
 
             bool eightDirections = Movement == "Diagonal";
-            List<Point> possibleMovementPoints = new() { Owner.MapIndex, Owner.MapIndex };
+            List<Point> possibleMovementPoints = new();
             if(eightDirections)
             {
                 possibleMovementPoints.AddRange(GenHelper.Get8Neighbours(Owner.MapIndex).ToList());
@@ -42,6 +42,9 @@ namespace Pandorai.Creatures.Behaviours
 
             var chosenPoint = possibleMovementPoints.GetRandomElement(Game1.game.mainRng);
             var distanceToHome = Vector2.Distance(chosenPoint.ToVector2(), _homePosition.ToVector2());
+
+            var targetTile = Game1.game.Map.GetTile(chosenPoint);
+
             if(chosenPoint != Owner.MapIndex && distanceToHome < MaxDistanceFromHome)
             {
                 Owner.Target = chosenPoint;
