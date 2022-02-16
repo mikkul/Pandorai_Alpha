@@ -29,8 +29,9 @@
 				<Movement>Diagonal</Movement>
 			</behaviour>
 			<behaviour name="PlaceWebs">
-				<Frequency>7</Frequency>
-				<Duration>14</Duration>
+				<FrequencyTurns>5</FrequencyTurns>
+				<WebDurabilityTurns>20</WebDurabilityTurns>
+				<EntanglementDurationEnergy>200</EntanglementDurationEnergy>
 			</behaviour>
 			<behaviour name="RandomWalk">
 				<MaxDistanceFromHome>3</MaxDistanceFromHome>
