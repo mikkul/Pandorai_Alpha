@@ -10,7 +10,8 @@ namespace Pandorai.Creatures.Behaviours
         public int MaxDistanceFromHome { get; set; }
         public string Movement { get; set; }
 
-        private Point _homePosition = Point.Zero;
+        private Point _homePosition;
+        private bool _isFirstTurn = true;
 
         public override void Bind()
         {
@@ -19,9 +20,11 @@ namespace Pandorai.Creatures.Behaviours
 
         private void Work()
         {
-            if(_homePosition == Point.Zero)
+            if(_isFirstTurn)
             {
                 _homePosition = Owner.MapIndex;
+                _isFirstTurn = false;
+                return;
             }
 
             if(Owner.Target != Owner.MapIndex)

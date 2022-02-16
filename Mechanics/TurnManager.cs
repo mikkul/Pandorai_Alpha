@@ -104,6 +104,11 @@ namespace Pandorai.Mechanics
         private void CheckPlayerEnergy()
         {
 			var possessedCreature = Game1.game.Player.PossessedCreature;
+			if(possessedCreature == null)
+			{
+				return;
+			}
+			possessedCreature.Energy += possessedCreature.Stats.Speed;
 			if(possessedCreature.Energy >= EnergyThreshold)
 			{
 				possessedCreature.Energy -= EnergyThreshold;

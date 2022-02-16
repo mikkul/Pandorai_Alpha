@@ -161,12 +161,12 @@ namespace Pandorai.Creatures
 			bool isSomeoneReady = false;
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
-				Creatures[i].Energy += Creatures[i].Stats.Speed;
-
 				if(Creatures[i].IsPossessedCreature())
 				{
 					continue;
 				}
+
+				Creatures[i].Energy += Creatures[i].Stats.Speed;
 
 				bool readyForTurn = false;
 				if(Creatures[i].Energy >= Game1.game.TurnManager.EnergyThreshold)
@@ -182,14 +182,16 @@ namespace Pandorai.Creatures
 				}
 			}
 
-			if (isSomeoneReady)
-			{
-				game.TurnManager.EnemyIsReady();
-			}
-			else
-			{
-				game.TurnManager.SkipEnemyTurn();
-			}
+			// if (isSomeoneReady)
+			// {
+			// 	game.TurnManager.EnemyIsReady();
+			// }
+			// else
+			// {
+			// 	game.TurnManager.SkipEnemyTurn();
+			// }
+
+			game.TurnManager.EnemyIsReady();
 		}
 
 		public void EndCreaturesTurn()

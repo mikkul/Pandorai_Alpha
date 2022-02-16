@@ -76,6 +76,10 @@
 			<behaviour name="ChaseTarget">
 				<Movement>Orthogonal</Movement>
 			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>2</MaxDistanceFromHome>
+				<Movement>Orthogonal</Movement>
+			</behaviour>
 		</behaviours>
 		<sounds>
 			<Attack>Monster-4</Attack>
@@ -114,6 +118,10 @@
 			<behaviour name="AggroOnVision">
 			</behaviour>
 			<behaviour name="ChaseTarget">
+				<Movement>Diagonal</Movement>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>1</MaxDistanceFromHome>
 				<Movement>Diagonal</Movement>
 			</behaviour>
 		</behaviours>
@@ -156,6 +164,10 @@
 			<behaviour name="AggroOnVision">
 			</behaviour>
 			<behaviour name="ChaseTarget">
+				<Movement>Diagonal</Movement>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>1</MaxDistanceFromHome>
 				<Movement>Diagonal</Movement>
 			</behaviour>
 		</behaviours>
@@ -202,6 +214,10 @@
 			<behaviour name="Awakening">
 				<IsAwake>false</IsAwake>
 			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>0</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
+			</behaviour>
 		</behaviours>
 		<sounds>
 			<Attack></Attack>
@@ -244,6 +260,10 @@
 			</behaviour>
 			<behaviour name="SpellCaster">
 				<Priority>Offensive</Priority>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>0</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
 			</behaviour>
 		</behaviours>
 		<sounds>
@@ -368,7 +388,7 @@
 			</Inventory>
 		</modifiers>
 		<behaviours>
-			<behaviour name="AllSeeingVision">
+			<behaviour name="NormalVision">
 				<RangeLimit>5</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
