@@ -51,6 +51,7 @@ namespace Pandorai
 			{ "AggroOnVision", typeof(AggroOnVision) },
 			{ "Awakening", typeof(Awakening) },
 			{ "RandomWalk", typeof(RandomWalk) },
+			{ "PlaceWebs", typeof(PlaceWebs) },
 		};
 
         public static Dictionary<string, Type> Conditions = new Dictionary<string, Type>

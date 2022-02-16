@@ -89,13 +89,13 @@ namespace Pandorai.MapGeneration
 						if(tileType == "Wall")
 						{
 							TileData[x, y].BaseType = 1;
-							TileData[x, y].BaseTextureIndex = 9;
+							TileData[x, y].SetTexture(9);
 							TileData[x, y].CollisionFlag = true;
 						}
 						else if(tileType == "Empty")
 						{
 							TileData[x, y].BaseType = 0;
-							TileData[x, y].BaseTextureIndex = 0;
+							TileData[x, y].SetTexture(0);
 							TileData[x, y].CollisionFlag = false;
 						}
 					}

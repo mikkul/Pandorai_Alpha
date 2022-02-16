@@ -161,7 +161,7 @@ namespace Pandorai.MapGeneration
 					foreach (var point in addedArea)
 					{
 						map[point.X, point.Y].BaseType = 0;
-						map[point.X, point.Y].BaseTextureIndex = 0;
+						map[point.X, point.Y].SetTexture(0);
 						map[point.X, point.Y].CollisionFlag = false;
 						map[point.X, point.Y].BaseColor = room.Color;
 					}
@@ -174,7 +174,7 @@ namespace Pandorai.MapGeneration
 				foreach (var point in room.Border)
 				{
 					map[point.X, point.Y].BaseType = 1;
-					map[point.X, point.Y].BaseTextureIndex = 1;
+					map[point.X, point.Y].SetTexture(1);
 					map[point.X, point.Y].CollisionFlag = true;
 					map[point.X, point.Y].BaseColor = Color.White;
 				}
@@ -224,7 +224,7 @@ namespace Pandorai.MapGeneration
 
 					var tile = map[randomBorderPoint.X, randomBorderPoint.Y];
 					tile.BaseType = 0;
-					tile.BaseTextureIndex = 0;
+					tile.SetTexture(0);
 					tile.CollisionFlag = false;
 					tile.BaseColor = room.Color;
 					if(isDoor)
@@ -678,7 +678,7 @@ namespace Pandorai.MapGeneration
 						tileData[x, y] = new Tile(0, 0, false)
 						{
 							BaseColor = Color.SaddleBrown,
-							IsSticky = true,
+							Modifier = TileModifier.Sticky,
 						};
 						availableTiles.Add(point);
 						availabilityMap[x, y] = 1;
@@ -1202,7 +1202,7 @@ namespace Pandorai.MapGeneration
 				else if(node.Type == NodeType.Entrance)
 				{
 					tile.BaseType = 0;
-					tile.BaseTextureIndex = 0;
+					tile.SetTexture(0);
 					tile.CollisionFlag = false;
 					tile.BaseColor = region.FloorColor;
 				}

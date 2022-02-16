@@ -15,11 +15,11 @@ namespace Pandorai.Tilemaps
 		public event ItemOnTileHandler ItemUsed;
 
 		public int BaseType;
-		public int BaseTextureIndex;
+		public List<int> TextureIndices = new();
 		public bool CollisionFlag; // true - solid object, there is collision; false - no collision, is passable
 		public bool IgnoreCollisionFlagOnSearch = false;
 
-		public bool IsSticky = false;
+		public TileModifier Modifier;
 
 		public bool IsDecal = false;
 		public Color DecalColor = Color.LightGreen;
@@ -38,10 +38,34 @@ namespace Pandorai.Tilemaps
 		public Tile(int baseType, int texture, bool flag)
 		{
 			BaseType = baseType;
-			BaseTextureIndex = texture;
+			TextureIndices.Add(texture);
 			CollisionFlag = flag;
 			MapObject = null;
 		}
+
+		public Tile(int baseType, List<int> textures, bool flag)
+		{
+			BaseType = baseType;
+			TextureIndices = textures;
+			CollisionFlag = flag;
+			MapObject = null;
+		}
+
+		public void SetTexture(int textureIndex)
+		{
+			TextureIndices.Clear();
+			TextureIndices.Add(textureIndex);
+		}
+
+		public void AddTexture(int textureIndex)
+		{
+			TextureIndices.Add(textureIndex);
+		}
+
+		public void RemoveTexture(int textureIndex)
+		{
+			TextureIndices.Remove(textureIndex);
+		}		
 
 		public void OnCreatureCame(Creature incomingCreature)
 		{
@@ -65,7 +89,7 @@ namespace Pandorai.Tilemaps
 
 		public Tile Copy()
 		{
-			return new Tile(BaseType, BaseTextureIndex, CollisionFlag)
+			return new Tile(BaseType, TextureIndices, CollisionFlag)
 			{
 				IgnoreCollisionFlagOnSearch = IgnoreCollisionFlagOnSearch,
 				IsDecal = IsDecal,

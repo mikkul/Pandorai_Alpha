@@ -340,7 +340,7 @@ namespace Pandorai.Tilemaps
 						if ((flag & ~0b000_00_000) == 0b011_11_011) tileTex = 54;
 						if ((flag & ~0b000_00_000) == 0b110_11_110) tileTex = 55;
 
-						Tiles[x, y].BaseTextureIndex = tileTex;
+						Tiles[x, y].SetTexture(tileTex);
 					}
 				}
 			}
@@ -553,7 +553,11 @@ namespace Pandorai.Tilemaps
 
 					if(isVisible)
 					{
-						spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.BaseTextureIndex].Rect, tile.BaseColor);
+						foreach (var textureIndex in tile.TextureIndices)
+						{
+							spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[textureIndex].Rect, tile.BaseColor);
+						}
+
 						if (tile.MapObject != null)
 						{
 							if (tile.MapObject.Item != null)
@@ -568,7 +572,10 @@ namespace Pandorai.Tilemaps
 					}
 					else if (!isBlackout)
 					{
-						spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.BaseTextureIndex].Rect, tile.BaseColor.Brighten(game.Options.TilesOutsideFOVDarkening));
+						foreach (var textureIndex in tile.TextureIndices)
+						{
+							spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[textureIndex].Rect, tile.BaseColor.Brighten(game.Options.TilesOutsideFOVDarkening));
+						}
 					}
 
 					if(tile.IsDecal)

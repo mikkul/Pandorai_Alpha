@@ -28,6 +28,14 @@
 			<behaviour name="ChaseTarget">
 				<Movement>Diagonal</Movement>
 			</behaviour>
+			<behaviour name="PlaceWebs">
+				<Frequency>7</Frequency>
+				<Duration>14</Duration>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>3</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
+			</behaviour>			
 		</behaviours>
 		<sounds>
 			<Attack>bite-small2</Attack>

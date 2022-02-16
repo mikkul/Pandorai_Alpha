@@ -23,8 +23,10 @@ namespace Pandorai.Tilemaps
 				{
 					bool isDiagonal = creature.MapIndex.X - desiredPoint.X != 0 && creature.MapIndex.Y - desiredPoint.Y != 0;
 
-					if(!game.Map.GetTile(creature.MapIndex).IsSticky || !isDiagonal)
+					if(!game.Map.GetTile(creature.MapIndex).Modifier.HasFlag(TileModifier.Sticky) || !isDiagonal)
+					{
 						AcceptedMovement?.Invoke(creature, desiredPoint);
+					}
 				}
 				else
 				{
