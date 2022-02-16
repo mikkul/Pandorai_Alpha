@@ -41,11 +41,10 @@ namespace Pandorai.Creatures.Behaviours
             }
 
             var chosenPoint = possibleMovementPoints.GetRandomElement(Game1.game.mainRng);
-            var distanceToHome = Vector2.Distance(chosenPoint.ToVector2(), _homePosition.ToVector2());
+            var targetDistanceToHome = Vector2.Distance(chosenPoint.ToVector2(), _homePosition.ToVector2());
+            var currentDistanceToHome = Vector2.Distance(Owner.MapIndex.ToVector2(), _homePosition.ToVector2());
 
-            var targetTile = Game1.game.Map.GetTile(chosenPoint);
-
-            if(chosenPoint != Owner.MapIndex && distanceToHome < MaxDistanceFromHome)
+            if(chosenPoint != Owner.MapIndex && (targetDistanceToHome <= MaxDistanceFromHome || targetDistanceToHome < currentDistanceToHome))
             {
                 Owner.Target = chosenPoint;
                 Owner.RequestMovement(chosenPoint);

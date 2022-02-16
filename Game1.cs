@@ -512,7 +512,7 @@ namespace Pandorai
             Sidekick.DisplaySlots();
             Options.AdjustGUI();
 
-            CreatureManager.FirstLoadCreatures();
+            //CreatureManager.FirstLoadCreatures();
             Player.FinishTurn();
 
             GameStarted?.Invoke();

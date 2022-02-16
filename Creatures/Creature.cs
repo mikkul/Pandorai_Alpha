@@ -339,8 +339,14 @@ namespace Pandorai.Creatures
 			var hpBarRect = new Rectangle(game.Camera.GetViewportPosition(Position - new Vector2(game.Map.TileSize * 0.375f, game.Map.TileSize * 0.5f)).ToPoint(), new Point((int)((float)Stats.Health / (float)Stats.MaxHealth * game.Map.TileSize * 0.75f), game.Map.TileSize / 10));
 			var destRect = new Rectangle(game.Camera.GetViewportPosition(Position - new Vector2(game.Map.TileSize / 2, game.Map.TileSize / 2)).ToPoint(), new Point(game.Map.TileSize));
 			if(ShowHPBar)
+			{
 				spriteBatch.Draw(game.squareTexture, hpBarRect, Color.Red);
+			}
 			spriteBatch.Draw(TilesheetManager.CreatureSpritesheetTexture, destRect, TilesheetManager.CreatureSpritesheet[TextureIndex].Rect, this.Color);
+			// if(Id == "Spider")
+			// {
+			// 	spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, destRect, TilesheetManager.MapObjectSpritesheet[0].Rect, Color.Purple * 0.6f);
+			// }
 		}
 	}
 }

@@ -147,7 +147,9 @@ namespace Pandorai.Creatures
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
 				if(game.Player.TilesInFOV.Contains(Creatures[i].MapIndex))
+				{
 					Creatures[i].Draw(spriteBatch);
+				}
 			}
 			spriteBatch.End();
 			game.GraphicsDevice.SetRenderTarget(null);

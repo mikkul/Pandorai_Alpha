@@ -588,6 +588,11 @@ namespace Pandorai.Tilemaps
 					{
 						spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), tile.HighlightColor);
 					}
+					// used to debug stuff
+					// if(tile.CollisionFlag)
+					// {
+					// 	spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), Color.Yellow * 0.30f);
+					// }
 				}
 			}
 

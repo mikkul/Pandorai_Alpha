@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
+using Pandorai.Utility;
 
 namespace Pandorai.Tilemaps
 {
@@ -17,6 +18,11 @@ namespace Pandorai.Tilemaps
 
 		public static void CheckMovementPosibility(Creature creature, Point desiredPoint)
 		{
+			if(!game.Map.Tiles.IsPointInBounds(desiredPoint))
+			{
+				return;
+			}
+
 			if(!creature.NoClip)
 			{
 				if(!game.Map.Tiles[desiredPoint.X, desiredPoint.Y].CollisionFlag)
