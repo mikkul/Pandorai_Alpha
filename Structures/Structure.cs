@@ -53,6 +53,11 @@ namespace Pandorai.Structures
 			return clone;
 		}
 
+		public T GetBehaviour<T>() where T : Behaviour
+		{
+			return (T)Behaviours.Find(x => x.GetType() == typeof(T));
+		}
+
 		public void BindBehaviours()
 		{
 			foreach (var behaviour in Behaviours)

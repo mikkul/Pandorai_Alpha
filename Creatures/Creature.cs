@@ -91,7 +91,7 @@ namespace Pandorai.Creatures
 				SoundManager.PlaySound(Sounds.Death);
 				var corpse = StructureLoader.GetStructure("Corpse");
 				corpse.Tile = TileInfo.GetInfo(MapIndex, game);
-				var container = (Structures.Behaviours.Container)corpse.Behaviours.Find(x => x.GetType() == typeof(Structures.Behaviours.Container));
+				var container = corpse.GetBehaviour<Pandorai.Structures.Behaviours.Container>();
 				container.Inventory.AddElements(Inventory.Items);
 				game.Map.GetTile(MapIndex).MapObject = new MapObject(ObjectType.Interactive, CorpseTextureIndex)
 				{

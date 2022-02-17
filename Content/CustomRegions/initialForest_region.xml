@@ -23,7 +23,7 @@
 			</inventory>
 		</structure>
 
-		<structure name="RegionPedestal" number="2">
+		<structure name="RegionPedestal" number="1">
 			<location>
 				<layer where="center" />
 			</location>
@@ -41,12 +41,6 @@
 		</creature>
 
 		<creature name="Traveller" number="0" />
-
-		<item name="RegionGem" number="2">
-			<location>
-				<proximity to="Seeker" distance="close" />
-			</location>
-		</item>
 
 	</content>
 </customRegion>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.ParticleSystems;
+using Pandorai.Sounds;
 using System.Collections.Generic;
 
 namespace Pandorai.Structures.Behaviours
@@ -62,6 +63,7 @@ namespace Pandorai.Structures.Behaviours
 			if((force & ForceType.Physical) == ForceType.Physical)
 			{
 				damage += 1;
+				SoundManager.PlaySound("crack10", 0.5f);
 			}
 			else if((force & ForceType.Fire) == ForceType.Fire)
 			{
@@ -77,6 +79,7 @@ namespace Pandorai.Structures.Behaviours
 			Hits -= damage;
 			if (Hits <= 0)
 			{
+				SoundManager.PlaySound("impactwood22", 0.5f);
 				foreach (var behaviour in holdedBehaviours)
 				{
 					Structure.Interacted += behaviour.Interact;

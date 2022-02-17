@@ -263,7 +263,7 @@ namespace Pandorai.MapGeneration
 				}
 				var position = GetRandomUntakenPosition(room.InteriorLayers[0]);
 				var chest = PlaceStructure("Chest", position);
-				var chestContainer = (Container)chest.Behaviours.Find(x => x.GetType() == typeof(Container));
+				var chestContainer = chest.GetBehaviour<Container>();
 
 				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "RedKey" };
 				var weightsSet1 = new[] { 3, 10, 4, 1 };
@@ -296,7 +296,7 @@ namespace Pandorai.MapGeneration
 				}
 				var position = GetRandomUntakenPosition(room.Area);
 				var barrel = PlaceStructure("Barrel", position);
-				var barrelContainer = (Container)barrel.Behaviours.Find(x => x.GetType() == typeof(Container));
+				var barrelContainer = barrel.GetBehaviour<Container>();
 
 				var itemSet1 = new[] { "", "HealthPotion" };
 				var weightsSet1 = new[] { 10, 3 };
@@ -1173,7 +1173,7 @@ namespace Pandorai.MapGeneration
 					structureInstance.Tile = new TileInfo(index, tile);
 					if (entry.Inventory.Count > 0)
 					{
-						Container container = (Container)structureInstance.Behaviours.Find(x => x.GetType() == typeof(Container));
+						Container container = structureInstance.GetBehaviour<Container>();
 						container.Inventory.AddElements(entry.Inventory);
 					}
 

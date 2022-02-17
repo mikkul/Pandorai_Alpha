@@ -1,4 +1,6 @@
-﻿using Pandorai.Creatures;
+﻿using System.Linq;
+using Pandorai.Creatures;
+using Pandorai.Structures.Behaviours;
 using Pandorai.Tilemaps;
 
 namespace Pandorai.Structures
@@ -13,8 +15,17 @@ namespace Pandorai.Structures
 			{
 				if (info.Tile.MapObject.Type == ObjectType.Interactive)
 				{
-					info.Tile.MapObject.Structure.Interact(incomingCreature);
-					incomingCreature.game.TurnManager.PlayerIsReady();
+					var armor = info.Tile.MapObject.Structure.GetBehaviour<Armor>();
+					if(armor != null && armor.Hits > 0)
+					{
+						info.Tile.MapObject.Structure.UseForce(ForceType.Physical);
+						incomingCreature.game.TurnManager.PlayerIsReady();
+					}
+					else
+					{
+						info.Tile.MapObject.Structure.Interact(incomingCreature);
+						incomingCreature.game.TurnManager.PlayerIsReady();
+					}
 				}
 			}
 		}
