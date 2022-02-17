@@ -154,7 +154,7 @@ namespace Pandorai
 
             viewportRenderer = new RenderHelper(this, () => ViewportTarget.Width, () => ViewportTarget.Height);
 
-            TurnManager.PlayerActionStarted += Player.StartTurn;
+            //TurnManager.PlayerActionStarted += Player.StartTurn;
             TurnManager.PlayerTurnEnded += Player.FinishTurn;
 
             TurnManager.EnemyTurnCame += CreatureManager.MakeCreaturesThink;

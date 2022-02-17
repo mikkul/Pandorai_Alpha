@@ -127,8 +127,11 @@ namespace Pandorai.Creatures
 
         private void SetLevel(int previousLevel, int currentLevel)
         {
-            Health = MaxHealth;
-            Mana = MaxMana;
+            if(currentLevel != 0)
+            {
+                Health = MaxHealth;
+                Mana = MaxMana;
+            }
 
             for (int i = previousLevel; i < currentLevel; i++)
             {

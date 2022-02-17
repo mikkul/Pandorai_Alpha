@@ -138,15 +138,20 @@ namespace Pandorai.Mechanics
 
 		private void SpawnGhost()
 		{
-			Creature spirit = new Creature(game);
+			Creature spirit = CreatureLoader.GetCreature("Spirit");
 			spirit.Position = PossessedCreature.Position;
-			//game.CreatureManager.AddCreature(spirit);
+			game.CreatureManager.AddCreature(spirit);
 			PossessedCreature = spirit;
-			//IsDead = true;
+			IsDead = true;
 		}
 
 		public void StartTurn()
 		{
+			if(!game.TurnManager.PlayerCanMove)
+			{
+				return;
+			}
+
 			game.Map.DisableTileInteraction();
 
 			if(!PossessedCreature.IsAlive)

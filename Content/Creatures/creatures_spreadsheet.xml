@@ -411,4 +411,36 @@
 			<Footstep>stepdirt_4</Footstep>
 		</sounds>		
 	</creature>
+	<creature id="Spirit" texture="9" maxHP="10000" health="1" strength="0" class="Spirit" corpseTexture="68" speed="100" level="0" noclip="true">
+		<modifiers>
+			<EnemyClasses>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>9</index>
+				<index>9</index>
+				<index>9</index>
+				<index>9</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>9</index>
+				<index>9</index>
+				<index>9</index>
+				<index>9</index>
+			</IdleTextureIndices>
+			<Inventory>
+			</Inventory>
+		</modifiers>
+		<behaviours>
+			<behaviour name="AllSeeingVision">
+			</behaviour>
+		</behaviours>
+		<sounds>
+			<Attack></Attack>
+			<Hurt></Hurt>
+			<Death></Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+			<Footstep></Footstep>
+		</sounds>		
+	</creature>
 </creatures>

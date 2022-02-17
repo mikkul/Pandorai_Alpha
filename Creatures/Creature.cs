@@ -113,6 +113,7 @@ namespace Pandorai.Creatures
 				Class = Class,
 				EnemyClasses = EnemyClasses,
 				Sounds = Sounds.Clone(),
+				NoClip = NoClip,
 			};
 			clone.Stats = Stats.Clone(clone);
 			clone.Behaviours = new List<Behaviour>(Behaviours);

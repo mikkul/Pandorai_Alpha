@@ -22,12 +22,14 @@ namespace Pandorai.Mechanics
 		public event EmptyEventHandler EnemyTurnEnded;
 		public event MovementRequestHandler SomeoneIsReadyToMove;
 
+		public bool PlayerCanMove;
+
 		public float PercentageCompleted;
 
 		public int TurnCount = 0;
 
-		public int heroTurnTime = 100;
-		public int enemyTurnTime = 50;
+		public int heroTurnTime = 60;
+		public int enemyTurnTime = 20;
 
 		public int EnergyThreshold = 100;
 
@@ -36,9 +38,19 @@ namespace Pandorai.Mechanics
 		Game1 game;
 
 		TurnState previousState = TurnState.OnHold;
-		public TurnState TurnState = TurnState.WaitingForPlayer;
+        private TurnState turnState = TurnState.WaitingForPlayer;
 
-		public TurnManager(Game1 _game)
+        public TurnState TurnState 
+		{ 
+			get => turnState; 
+			set 
+			{
+				Console.WriteLine($"{turnState} -> {value}");
+				turnState = value;
+		 	} 
+		}
+
+        public TurnManager(Game1 _game)
 		{
 			game = _game;
 		}
@@ -71,6 +83,7 @@ namespace Pandorai.Mechanics
 				if (PercentageCompleted >= 1.0f)
 				{
 					TurnState = TurnState.WaitingForEnemy;
+					PlayerCanMove = false;
 					PlayerTurnEnded?.Invoke();
 				}
 			}
@@ -112,10 +125,12 @@ namespace Pandorai.Mechanics
 			if(possessedCreature.Energy >= EnergyThreshold)
 			{
 				possessedCreature.Energy -= EnergyThreshold;
+				PlayerCanMove = true;
 			}
 			else
 			{
 				TurnState = TurnState.WaitingForEnemy;
+				PlayerCanMove = false;
 			}
         }
 

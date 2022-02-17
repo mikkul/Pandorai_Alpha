@@ -50,6 +50,10 @@ namespace Pandorai.Creatures
 				{
 					creature.Stats.FireResistance = int.Parse(node.GetAttribute("fireResistance"));
 				}
+				if (node.HasAttribute("noclip"))
+				{
+					creature.NoClip = true;
+				}
 
 				foreach (XmlElement modifier in node.SelectSingleNode("./modifiers").ChildNodes)
 				{
