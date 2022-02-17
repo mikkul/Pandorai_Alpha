@@ -80,47 +80,47 @@
 /processorParam:TextureFormat=Color
 /build:lightSource.png
 
-#begin Music/Break_theme.ogg
-/importer:OggImporter
-/processor:SongProcessor
+#begin Music/Break_theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Break_theme.ogg
+/build:Music/Break_theme.wav
 
-#begin Music/Cementery_theme.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Music/Cementery_theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Cementery_theme.mp3
+/build:Music/Cementery_theme.wav
 
-#begin Music/Forest_dark_theme.ogg
-/importer:OggImporter
-/processor:SongProcessor
+#begin Music/Forest_dark_theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Forest_dark_theme.ogg
+/build:Music/Forest_dark_theme.wav
 
-#begin Music/Loading.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Music/Loading.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Loading.mp3
+/build:Music/Loading.wav
 
-#begin Music/Main_theme.ogg
-/importer:OggImporter
-/processor:SongProcessor
+#begin Music/Main_theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Main_theme.ogg
+/build:Music/Main_theme.wav
 
-#begin Music/Temple_theme.ogg
-/importer:OggImporter
-/processor:SongProcessor
+#begin Music/Temple_theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Temple_theme.ogg
+/build:Music/Temple_theme.wav
 
-#begin Music/Title_screen.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Music/Title_screen.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Music/Title_screen.mp3
+/build:Music/Title_screen.wav
 
 #begin new_map_tilesheet.png
 /importer:TextureImporter

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Timers;
@@ -11,8 +12,10 @@ namespace Pandorai.Sounds
         public static int SongTransitionMs = 1000;
         public static string CurrentSong { get; private set; }
 
-        private static Dictionary<string, Song> _music = new();
+        private static Dictionary<string, SoundEffect> _music = new();
         private static Dictionary<string, SoundEffect> _sounds = new();
+
+        private static SoundEffectInstance _currentSongInstance;
 
         public static void LoadSounds(string musicFolderPath, string soundEffectsFolderPath)
         {
@@ -27,7 +30,7 @@ namespace Pandorai.Sounds
                 {
                     filePath = filePath.Remove(0, 1);
                 }
-                var song = Game1.game.Content.Load<Song>(filePath);
+                var song = Game1.game.Content.Load<SoundEffect>(filePath);
                 _music.Add(Path.GetFileName(filePath), song);
             }
 
@@ -70,6 +73,10 @@ namespace Pandorai.Sounds
 
         private static void TransitionToSong(string name)
         {
+            var songInstance = _music[name].CreateInstance();
+            songInstance.IsLooped = true;
+            songInstance.Volume = 0;
+
             int timerIncrementStep = 10;
             float volumeStep = (float)timerIncrementStep / (float)SongTransitionMs;
 
@@ -77,7 +84,11 @@ namespace Pandorai.Sounds
             double fadeInElapsedTime = 0;
             fadeInTimer.Elapsed += (s, a) =>
             {
-                MediaPlayer.Volume += volumeStep;
+                try
+                {
+                    songInstance.Volume += volumeStep;
+                }
+                catch(Exception){}
                 fadeInElapsedTime += fadeInTimer.Interval;
                 if(fadeInElapsedTime > SongTransitionMs)
                 {
@@ -90,17 +101,20 @@ namespace Pandorai.Sounds
             double fadeOutElapsedTime = 0;
             fadeOutTimer.Elapsed += (s, a) =>
             {
-                MediaPlayer.Volume -= volumeStep;
-                fadeOutElapsedTime += fadeOutTimer.Interval;
-                if(fadeOutElapsedTime > SongTransitionMs)
+                if(_currentSongInstance != null)
                 {
                     try
                     {
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(_music["Break_theme"]);
-                        MediaPlayer.Play(_music[name]);
+                        _currentSongInstance.Volume -= volumeStep;
                     }
-                    catch(System.Exception){}
+                    catch(Exception){}
+                }
+                fadeOutElapsedTime += fadeOutTimer.Interval;
+                if(fadeOutElapsedTime > SongTransitionMs)
+                {
+                    _currentSongInstance?.Stop();
+                    songInstance.Play();
+                    _currentSongInstance = songInstance;
                     
                     fadeInTimer.Start();
                     fadeOutTimer.Stop();
