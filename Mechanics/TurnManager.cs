@@ -45,7 +45,7 @@ namespace Pandorai.Mechanics
 			get => turnState; 
 			set 
 			{
-				Console.WriteLine($"{turnState} -> {value}");
+				//Console.WriteLine($"{turnState} -> {value}");
 				turnState = value;
 		 	} 
 		}

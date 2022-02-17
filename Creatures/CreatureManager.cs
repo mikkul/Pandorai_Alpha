@@ -158,7 +158,6 @@ namespace Pandorai.Creatures
 
 		public void MakeCreaturesThink()
 		{
-			bool isSomeoneReady = false;
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
 				if(Creatures[i].IsPossessedCreature())
@@ -168,28 +167,12 @@ namespace Pandorai.Creatures
 
 				Creatures[i].Energy += Creatures[i].Stats.Speed;
 
-				bool readyForTurn = false;
 				if(Creatures[i].Energy >= Game1.game.TurnManager.EnergyThreshold)
 				{
 					Creatures[i].Energy -= Game1.game.TurnManager.EnergyThreshold;
-					readyForTurn = Creatures[i].ReadyForTurn();
-				}
-
-				bool inRange = game.Camera.Viewport.Enlarge(100, 100).Contains(game.Camera.GetViewportPosition(Creatures[i].Position));
-				if (inRange && readyForTurn)
-				{
-					isSomeoneReady = true;
+					Creatures[i].ReadyForTurn();
 				}
 			}
-
-			// if (isSomeoneReady)
-			// {
-			// 	game.TurnManager.EnemyIsReady();
-			// }
-			// else
-			// {
-			// 	game.TurnManager.SkipEnemyTurn();
-			// }
 
 			game.TurnManager.EnemyIsReady();
 		}
