@@ -265,13 +265,13 @@ namespace Pandorai.MapGeneration
 				var chest = PlaceStructure("Chest", position);
 				var chestContainer = chest.GetBehaviour<Container>();
 
-				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "RedKey" };
-				var weightsSet1 = new[] { 3, 10, 4, 1 };
+				var itemSet1 = new[] { "", "YellowKey", "BlueKey" };
+				var weightsSet1 = new[] { 3, 10, 4 };
 				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 2);
 
 				var itemSet2 = new[] { "", "HealthPotion", "FireArrowSpell", "SpeedPotion" };
 				var weightsSet2 = new[] { 6, 3, 7, 2 };
-				var chosenItems2 = GetWeightedChoices(itemSet1, weightsSet1, 1);
+				var chosenItems2 = GetWeightedChoices(itemSet2, weightsSet2, 1);
 
 				var chosenItems = chosenItems1.Concat(chosenItems2);
 
@@ -314,7 +314,7 @@ namespace Pandorai.MapGeneration
 			}
 
 			// place monsters
-			for (int i = 0; i < 7; i++)
+			for (int i = 0; i < 4; i++)
 			{
 				bool doPlace = rng.NextFloat() < 0.5f;
 				if(!doPlace)

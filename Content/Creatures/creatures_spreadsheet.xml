@@ -1,5 +1,5 @@
 ﻿<creatures>
-	<creature id="Spider" texture="8" maxHP="80" health="80" strength="24" class="Monster" corpseTexture="68" speed="26" level="1">
+	<creature id="Spider" texture="8" maxHP="80" health="80" strength="21" class="Monster" corpseTexture="68" speed="25" level="1">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -48,7 +48,7 @@
 		</sounds>
 	</creature>
 
-	<creature id="Rat" texture="12" maxHP="50" health="50" strength="15" class="Monster" corpseTexture="68" speed="55" level="1">
+	<creature id="Rat" texture="12" maxHP="50" health="50" strength="10" class="Monster" corpseTexture="68" speed="48" level="1">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -229,7 +229,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Seeker" texture="15" maxHP="150" health="150" strength="10" class="Monster" corpseTexture="68" speed="45" level="5" fireResistance="100">
+	<creature id="Seeker" texture="15" maxHP="150" health="150" strength="10" class="Monster" corpseTexture="68" speed="35" level="5" fireResistance="100">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
