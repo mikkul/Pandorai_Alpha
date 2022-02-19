@@ -27,6 +27,8 @@ namespace Pandorai.MapGeneration
 
 		int[,] operatingArea;
 
+		Color _freeSpaceFloorColor = Helper.GetColorFromHex("#966c4b");
+
 		public Regions Rooms = new Regions();
 
 		public Point StartingPoint;
@@ -70,11 +72,42 @@ namespace Pandorai.MapGeneration
 
 			ProcessRooms();
 
+			PlaceTeleporters();
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
             return map;
         }
+
+		private void PlaceTeleporters()
+		{
+			var freeSpace = new List<Point>();
+			for (int x = 0; x < map.GetLength(0); x++)
+			{
+				for (int y = 0; y < map.GetLength(1); y++)
+				{
+					if(!map[x, y].CollisionFlag && map[x, y].BaseColor == _freeSpaceFloorColor)
+					{
+						freeSpace.Add(new Point(x, y));
+					}
+				}
+			}
+
+			int noOfTeleporterPairs = 4;
+			for (int i = 0; i < noOfTeleporterPairs; i++)
+			{
+				var randomColor = new Color(rng.Next(256), rng.Next(256), rng.Next(256));
+				for (int j = 0; j < 2; j++)
+				{
+					var randomPoint = freeSpace.GetRandomElement(Game1.game.mainRng);
+					var teleporterInstance = PlaceStructure("Teleporter", randomPoint);
+					teleporterInstance.ColorTint = randomColor;
+					var teleporterBehaviour = teleporterInstance.GetBehaviour<Teleporter>();
+					teleporterBehaviour.Id = i;
+				}
+			}
+		}
 
 		private void ProcessRooms()
 		{
@@ -110,10 +143,9 @@ namespace Pandorai.MapGeneration
 					biggestRoomArea = room.Area.Count;
 				}
 			}
-			var defaultColor = Helper.GetColorFromHex("#966c4b");
 			foreach (var point in biggestRoom!.Area)
 			{
-				map[point.X, point.Y].BaseColor = defaultColor;
+				map[point.X, point.Y].BaseColor = _freeSpaceFloorColor;
 			}
 
 			// remove rooms that are too small to be considered rooms
@@ -393,6 +425,7 @@ namespace Pandorai.MapGeneration
 			};
 			tile.CollisionFlag = true;
 			structureInstance.BindBehaviours();
+			StructureManager.AddStructure(structureInstance);
 			return structureInstance;
 		}
 
@@ -1171,6 +1204,7 @@ namespace Pandorai.MapGeneration
 				{
 					Structure structureInstance = StructureLoader.GetStructure(entitySpec.Name);
 					structureInstance.Tile = new TileInfo(index, tile);
+					StructureManager.AddStructure(structureInstance);
 					if (entry.Inventory.Count > 0)
 					{
 						Container container = structureInstance.GetBehaviour<Container>();

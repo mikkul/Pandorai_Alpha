@@ -163,6 +163,14 @@ namespace Pandorai
             InputManager.SingleKeyPress += GameStateManager.HandleInput;
             InputManager.SingleKeyPress += CheatConsole.ActivationHandler;
             InputManager.SingleKeyPress += CheatShortcuts.HandleKeyInput;
+            InputManager.SingleKeyPress += k =>
+            {
+                if(k == Keys.NumPad0)
+                {
+                    Options.TileSize = Options.DefaultUnitSize;
+                }
+            };
+
             InputManager.MouseMove += GameStateManager.CheckIfMouseOverViewport;
             InputManager.LMBClick += GameStateManager.CheckIfLMBClickInViewport;
             InputManager.RMBClick += GameStateManager.CheckIfRMBClickInViewport;

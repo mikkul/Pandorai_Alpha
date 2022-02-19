@@ -126,6 +126,8 @@ namespace Pandorai.Sprites
 			AddMapSprite(512, 512, 64, 64, 0, 0); // region gem 86
 
 			AddMapSprite(320, 448, 64, 64, 0, 0); // spider web 87
+
+			AddMapSprite(0, 704, 64, 64, 4, 300); // teleporter 88
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

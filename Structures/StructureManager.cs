@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Pandorai.Creatures;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Tilemaps;
@@ -7,6 +8,13 @@ namespace Pandorai.Structures
 {
 	public static class StructureManager
 	{
+		public static List<Structure> Structures = new();
+
+		public static void AddStructure(Structure structure)
+		{
+			Structures.Add(structure);
+		}
+
 		public static void CheckStructureInteraction(Creature incomingCreature, TileInfo info)
 		{
 			if (incomingCreature.Class != CreatureClass.Human) return;

@@ -84,5 +84,9 @@
 			<Radius>350</Radius>
 			<Intensity>0.40</Intensity>
 		</behaviour>
+	</structure>
+	<structure id="Teleporter" texture="88">
+		<behaviour name="Teleporter">
+		</behaviour>
 	</structure>	
 </structures>

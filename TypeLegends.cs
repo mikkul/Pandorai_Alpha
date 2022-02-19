@@ -36,6 +36,7 @@ namespace Pandorai
 			{ "LightEmitter", typeof(LightEmitter) },
 			{ "Door", typeof(Door) },
 			{ "Dialogue", typeof(Dialogue) },
+			{ "Teleporter", typeof(Teleporter) },
 		};
 
         public static Dictionary<string, Type> CreatureBehaviours = new Dictionary<string, Type>

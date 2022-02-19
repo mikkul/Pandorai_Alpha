@@ -86,6 +86,11 @@ namespace Pandorai.Mechanics
 					PlayerCanMove = false;
 					PlayerTurnEnded?.Invoke();
 				}
+
+				if((timeSinceTurnStart + dt * 1000) / heroTurnTime >= 1.0f)
+				{
+					PercentageCompleted = 1.0f;
+				}
 			}
 
 			if(TurnState == TurnState.WaitingForEnemy)
