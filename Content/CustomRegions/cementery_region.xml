@@ -1,7 +1,5 @@
 <customRegion name="Cementery" floorColor="#a9c2b0" borderColor="#5b7d6b" musicTheme="Cementery_theme" sample="wfcSample2">
 	<location>
-		<proximity to="Forest" distance="close" />
-		<proximity to="Shrine" distance="very close" />
 	</location>
 	<dimensions>
 		<rectangle width="30-40" height="15">
@@ -10,30 +8,16 @@
 		</rectangle>
 	</dimensions>
 	<content>
-		
-		<choice>
-			<group weight="20">
-				<creature name="Spider" number="2-3" />
-				<creature name="Rat" number="4-7" />
-			</group>
-			<group weight="20">
-				<creature name="Skeleton" number="4-6">
-					<location>
-						<proximity to="StairsDown" distance="close" />
-					</location>
-				</creature>
-				<group chance="25">
-					<structure name="WarriorTomb" number="1" />
-					<creature name="ShadowWarrior" number="1">
-						<location>
-							<proximity to="WarriorTomb" distance="very close" />
-						</location>
-					</creature>
-				</group>
-			</group>
-		</choice>
 
-		<structure name="Grave" number="30-40">
+		<creature name="Skeleton" number="8-10">
+			<location>
+			</location>
+		</creature>
+
+		<creature name="Spider" number="2-3" />
+		<creature name="Rat" number="2-4" />
+
+		<structure name="Grave" number="100-115">
 		</structure>
 		
 		<structure name="Torch" number="6-8">
@@ -42,43 +26,57 @@
 			</location>
 		</structure>
 		
-		<structure name="YellowDoor" number="9-12">
+		<structure name="YellowDoor" number="12-16">
 		</structure>
 
 		<item name="FireArrowSpell" number="3-4" />
 
-		<item name="SpeedPotion" number="3-4" />
+		<item name="SpeedPotion" number="1-2" />
 		
-		<item name="HealthPotion" number="3">
-			<location>
-				<proximity to="Chest" distance="close" />
-				<proximity to="StairsDown" distance="far" />
-			</location>
-		</item>
-		<item name="StoneSpikesSpell" number="4">
-			<location>
-				<choice>
-					<proximity to="StairsDown" distance="very close" />
-					<proximity to="Door" distance="very close" />
-				</choice>
-			</location>
+		<item name="SmallHealthPotion" number="5-6">
 		</item>
 
-		<structure name="Chest" number="3-4">
+		<item name="SmallManaPotion" number="3">
+		</item>		
+
+		<structure name="Chest" number="1">
 			<location>
-				<layer thickness="2" where="border" offset="0" />
-				<proximity to="MainEntrance" distance="close" />
+				<layer thickness="4" where="border" offset="0" />
+				<proximity to="MainEntrance" distance="far" tolerance="5" />
 			</location>
 			<inventory>
 				<choice>
-					<invItem name="YellowKey" number="2-3" chance="75" />
-					<invItem name="HealthPotion" number="1-2" chance="50" />
+					<invItem name="HealthPotion" number="1" chance="75" />
+					<invItem name="ManaPotion" number="1" chance="50" />
 				</choice>
-				<invItem name="TransformSpell" number="1" chance="20" />
+				<invItem name="StoneSpikesSpell" number="1" />
 			</inventory>
 		</structure>
 
-		<entrance name="MainEntrance" number="2">
+		<structure name="Chest" number="1">
+			<location>
+				<layer thickness="2" where="center" offset="4" />
+			</location>
+			<inventory>
+				<choice>
+					<invItem name="HealthPotion" number="1" chance="50" />
+					<invItem name="ManaPotion" number="1" chance="25" />
+				</choice>
+				<invItem name="StoneSpikesSpell" number="1" />
+			</inventory>
+		</structure>
+
+		<structure name="Chest" number="1">
+			<inventory>
+				<choice>
+					<invItem name="HealthPotion" number="1" chance="50" />
+					<invItem name="ManaPotion" number="1" chance="25" />
+				</choice>
+				<invItem name="StoneSpikesSpell" number="1" />
+			</inventory>
+		</structure>
+
+		<entrance name="MainEntrance" number="3">
 			
 		</entrance>
 		

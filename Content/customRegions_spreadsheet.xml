@@ -1,7 +1,8 @@
 ﻿<map>
 	<region name="Forest" number="1" />
 	<region name="InitialForest" number="1" />
-	<region name="Cementery" number="2" />
+	<region name="Cementery" number="1" />
+	<region name="CementeryHard" number="1" />
 	<region name="Temple" number="1" />
 	<region name="StartingRoom" number="1" />
 	<region name="AltarRoom" number="2" />

@@ -1,0 +1,75 @@
+<customRegion name="CementeryHard" floorColor="#a9c2b0" borderColor="#5b7d6b" musicTheme="Cementery_theme" sample="wfcSample2">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="30-40" height="15">
+			<rectangle width="10" height="25-30" placement="left" offsetX="-10" offsetY="5" />
+			<rectangle width="10" height="25-30" placement="right" offsetX="-10" offsetY="5" />
+		</rectangle>
+	</dimensions>
+	<content>
+
+        <structure name="WarriorTomb" number="1" />
+        <creature name="ShadowWarrior" number="1">
+            <location>
+                <proximity to="WarriorTomb" distance="very close" />
+            </location>
+        </creature>
+
+        <creature name="Skeleton" number="14-16">
+        </creature>
+
+        <creature name="Spider" number="4-5">
+            <location>
+                <proximity to="WarriorTomb" distance="close" tolerance="3" />
+            </location>
+        </creature>
+
+		<structure name="Grave" number="90-105">
+		</structure>
+		
+		<structure name="Torch" number="6-8">
+			<location>
+				<layer where="border" />
+			</location>
+		</structure>
+		
+		<structure name="YellowDoor" number="12-16">
+		</structure>
+
+		<item name="SpeedPotion" number="1" />
+		
+		<item name="HealthPotion" number="4">
+		</item>
+
+		<item name="ManaPotion" number="2">
+		</item>        
+
+		<structure name="Chest" number="1">
+			<location>
+				<layer thickness="2" where="border" offset="0" />
+				<proximity to="MainEntrance" distance="very far" />
+			</location>
+			<inventory>
+                <invItem name="HealthPotion" number="2" />
+                <invItem name="ManaPotion" number="2" />
+			</inventory>
+		</structure>
+
+		<structure name="Chest" number="2">
+			<inventory>
+				<choice>
+					<invItem name="HealthPotion" number="1" chance="50" />
+					<invItem name="ManaPotion" number="1" chance="25" />
+				</choice>
+				<invItem name="StoneSpikesSpell" number="2" />
+				<invItem name="SpeedPotion" number="2" />
+			</inventory>
+		</structure>        
+
+		<entrance name="MainEntrance" number="3">
+			
+		</entrance>
+		
+	</content>
+</customRegion>
