@@ -44,4 +44,11 @@
 			<tile color="#ffffff" type="empty" />
 		</tileLegend>
 	</sample>
+	<sample name="emptyRuinsSample" isPeriodic="true">
+		<tileLegend>
+			<tile color="#000000" type="wall" />
+			<tile color="#ff0000" type="floor" />
+			<tile color="#ffffff" type="empty" />
+		</tileLegend>
+	</sample>	
 </samples>

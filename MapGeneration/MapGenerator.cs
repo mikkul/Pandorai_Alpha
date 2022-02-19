@@ -94,17 +94,40 @@ namespace Pandorai.MapGeneration
 				}
 			}
 
-			int noOfTeleporterPairs = 4;
+			Color[] brightColors = new Color[]
+			{
+				Color.Yellow,
+				Color.Green,
+				Color.Red,
+				Color.Blue,
+				Color.Purple,
+				Color.Cyan,
+				Color.Orange,
+			};
+
+			int noOfTeleporterPairs = 7;
 			for (int i = 0; i < noOfTeleporterPairs; i++)
 			{
-				var randomColor = new Color(rng.Next(256), rng.Next(256), rng.Next(256));
-				for (int j = 0; j < 2; j++)
+				var color = brightColors[i];
+				for (int j = 0; j < 1; j++)
 				{
 					var randomPoint = freeSpace.GetRandomElement(Game1.game.mainRng);
 					var teleporterInstance = PlaceStructure("Teleporter", randomPoint);
-					teleporterInstance.ColorTint = randomColor;
+					teleporterInstance.ColorTint = color;
 					var teleporterBehaviour = teleporterInstance.GetBehaviour<Teleporter>();
 					teleporterBehaviour.Id = i;
+
+					var otherCorrespondingTeleporter = StructureManager.Structures.First(x =>
+					{
+						var otherTelBeh = x.GetBehaviour<Teleporter>();
+						if(otherTelBeh == null)
+						{
+							return false;
+						}
+						return x != teleporterInstance && x.Id == "Teleporter" && otherTelBeh.Id == -1;
+					});
+					otherCorrespondingTeleporter.ColorTint = color;
+					otherCorrespondingTeleporter.GetBehaviour<Teleporter>().Id = i;
 				}
 			}
 		}

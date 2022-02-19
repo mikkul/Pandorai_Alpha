@@ -589,9 +589,9 @@ namespace Pandorai.Tilemaps
 						spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), tile.HighlightColor);
 					}
 					// used to debug stuff
-					// if(tile.CollisionFlag && tile.BaseType == 0 && tile.MapObject == null && Game1.game.CreatureManager.GetCreature(tileIndex) == null)
+					// if(tile.HasStructure() && tile.MapObject.Structure.Id == "Teleporter")
 					// {
-					// 	spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), Color.Yellow * 0.85f);
+					// 	spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), Color.Yellow * 0.25f);
 					// }
 				}
 			}

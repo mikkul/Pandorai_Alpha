@@ -8,7 +8,7 @@ namespace Pandorai.Structures.Behaviours
 {
     public class Teleporter : Behaviour
     {
-        public int Id;
+        public int Id = -1;
 
 		public override void Bind()
 		{

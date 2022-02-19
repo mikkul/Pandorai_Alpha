@@ -1,0 +1,17 @@
+<customRegion name="TeleporterRing" floorColor="#a7ed9f" borderColor="#ffffff" sample="emptyRuinsSample">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="15" height="15" />
+	</dimensions>
+	<content>
+
+		<structure name="Teleporter" number="7">
+			<location>
+				<layer where="center" offset="2" />
+			</location>
+		</structure>
+
+	</content>
+</customRegion>
+
