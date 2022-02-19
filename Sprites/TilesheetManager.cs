@@ -128,6 +128,11 @@ namespace Pandorai.Sprites
 			AddMapSprite(320, 448, 64, 64, 0, 0); // spider web 87
 
 			AddMapSprite(0, 704, 64, 64, 4, 150); // teleporter 88
+
+			AddMapSprite(512, 0, 64, 64, 0, 0); // mana potion 89
+
+			AddMapSprite(448, 448, 64, 64, 0, 0); // small health potion 90
+			AddMapSprite(512, 448, 64, 64, 0, 0); // small mana potion 91
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

@@ -229,7 +229,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Seeker" texture="15" maxHP="150" health="150" strength="10" class="Monster" corpseTexture="68" speed="35" level="5" fireResistance="100">
+	<creature id="Seeker" texture="15" maxHP="150" health="150" strength="10" mana="10000" maxMana="10000" class="Monster" corpseTexture="68" speed="35" level="5" fireResistance="100">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -366,7 +366,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Hero" texture="0" maxHP="200" health="200" strength="20" class="Human" corpseTexture="68" speed="30" level="0">
+	<creature id="Hero" texture="0" maxHP="200" health="200" strength="20" maxMana="10" class="Human" corpseTexture="68" speed="30" level="0">
 		<modifiers>
 			<EnemyClasses>
 				<class>Monster</class>

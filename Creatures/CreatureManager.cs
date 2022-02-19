@@ -110,7 +110,7 @@ namespace Pandorai.Creatures
 		public void RemoveCreature(Creature creature)
 		{
 			Creatures.Remove(creature);
-			game.Map.RequestTileIgnoreFlagChange(creature.MapIndex, false);
+			game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
 		}
 
 		public void UpdateCreatures()

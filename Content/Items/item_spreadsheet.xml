@@ -1,28 +1,28 @@
 ﻿<items>
 	<item id="Error" texture="8" consumable="False" name="Error" description="Item doesn't exist" tooltipColor="red" />
-	<item id="HealthPotion" texture="58" consumable="True" name="Health Potion" tooltipColor="green" description="Restores health" type="Food" sound="bottle">
+	<item id="HealthPotion" texture="58" consumable="True" name="Health Potion" tooltipColor="green" description="Restores 100 health" type="Food" sound="bottle">
 		<effect name="ModifyHP">
-			<Amount>90</Amount>
+			<Amount>100</Amount>
 		</effect>
 	</item>
-	<item id="FireArrowSpell" texture="69" consumable="True" name="Fire arrow spell" tooltipColor="orange" description="Allows user to cast fire arrows" type="Spell/Offensive">
+	<item id="FireArrowSpell" texture="69" consumable="True" name="Fire arrow spell" tooltipColor="orange" description="Allows user to cast fire arrows" type="Spell/Offensive" requiredMana="5">
 		<effect name="CastFireball">
 			<Damage>30</Damage>
 			<Pierce>2</Pierce>
 			<Range>6</Range>
 		</effect>
 	</item>
-	<item id="FireballRune" texture="83" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive">
+	<item id="FireballRune" texture="83" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive" requiredMana="15">
 		<effect name="CastFireball">
 			<Damage>50</Damage>
 			<Pierce>3</Pierce>
-			<Range>6</Range>
+			<Range>6</Range>	
 		</effect>
 	</item>
-	<item id="MassDestructionRune" texture="85" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive">
+	<item id="MassDestructionRune" texture="85" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive" requiredMana="50">
 		<effect name="CastWave">
 			<Damage>350</Damage>
-			<Range>6</Range>
+			<Range>6</Range>	
 		</effect>
 	</item>
 	<item id="RegionGem" texture="86" consumable="False" name="Region Gem" tooltipColor="blue" description="Place on a pedestal to take control of a region" type="Other">
@@ -32,7 +32,7 @@
 			<Range>3</Range>
 		</effect>
 	</item>
-	<item id="StoneSpikesSpell" texture="59" consumable="True" name="Stone spikes spell" tooltipColor="orange" description="Allows user to spawn stone spikes on orthognally adjacent tiles that damage creatures" type="Spell/Offensive">
+	<item id="StoneSpikesSpell" texture="59" consumable="True" name="Stone spikes spell" tooltipColor="orange" description="Allows user to spawn stone spikes on orthognally adjacent tiles that damage creatures" type="Spell/Offensive" requiredMana="10">
 		<effect name="SpawnSpikes">
 			<Damage>100</Damage>
 		</effect>
@@ -51,11 +51,26 @@
 			<Amount>3</Amount>
 		</effect>
 	</item>
-	<item id="IceArrowRune" texture="84" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive">
+	<item id="IceArrowRune" texture="84" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive" requiredMana="10">
 		<effect name="CastIceProjectile">
 			<Damage>50</Damage>
 			<Pierce>4</Pierce>
 			<Range>6</Range>
+		</effect>
+	</item>
+	<item id="ManaPotion" texture="89" consumable="True" name="Mana Potion" tooltipColor="green" description="Restores 30 mana" type="Food" sound="bottle">
+		<effect name="ModifyMana">
+			<Amount>30</Amount>
+		</effect>
+	</item>
+	<item id="SmallHealthPotion" texture="90" consumable="True" name="Small health potion" tooltipColor="green" description="Restores 40 health" type="Food" sound="bottle">
+		<effect name="ModifyHP">
+			<Amount>40</Amount>
+		</effect>
+	</item>
+	<item id="SmallManaPotion" texture="91" consumable="True" name="Small mana potion" tooltipColor="green" description="Restores 5 mana" type="Food" sound="bottle">
+		<effect name="ModifyMana">
+			<Amount>5</Amount>
 		</effect>
 	</item>
 </items>

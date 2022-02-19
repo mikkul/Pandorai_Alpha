@@ -42,6 +42,8 @@ namespace Pandorai.Items
 					item.Description = node.GetAttribute("description");
 				if (node.HasAttribute("sound"))
 					item.SoundEffectName = node.GetAttribute("sound");
+				if (node.HasAttribute("requiredMana"))
+					item.RequiredMana = int.Parse(node.GetAttribute("requiredMana"));			
 
 				var types = Helper.GetStringChoice(node.GetAttribute("type"));
 				foreach (var type in types)

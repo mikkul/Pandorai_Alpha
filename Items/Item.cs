@@ -2,6 +2,7 @@
 using Pandorai.Creatures;
 using Pandorai.Effects;
 using Pandorai.Sounds;
+using Pandorai.UI;
 using System.Collections.Generic;
 
 namespace Pandorai.Items
@@ -15,6 +16,7 @@ namespace Pandorai.Items
 		public string SoundEffectName { get; set; }
 		public bool Equipped { get; set; } = false;
 		public bool Consumable { get; set; }
+		public int RequiredMana { get; set; }
 		public Color TooltipColor { get; set; } = Color.Gray;
 		public Color ColorTint { get; set; } = Color.White;
 		public ItemType Type { get; set; }
@@ -22,6 +24,14 @@ namespace Pandorai.Items
 
 		public void Use(Creature creature)
 		{
+			if(creature.Stats.Mana < RequiredMana)
+			{
+				MessageLog.DisplayMessage("You don't have enough mana to use this item");
+				return;
+			}
+
+			creature.Stats.Mana -= RequiredMana;
+
 			if(!string.IsNullOrEmpty(SoundEffectName))
 			{
 				SoundManager.PlaySound(SoundEffectName);
@@ -47,6 +57,7 @@ namespace Pandorai.Items
 				Texture = Texture,
 				SoundEffectName = SoundEffectName,
 				Consumable = Consumable,
+				RequiredMana = RequiredMana,
 				TooltipColor = TooltipColor,
 				ColorTint = ColorTint,
 				Type = Type,

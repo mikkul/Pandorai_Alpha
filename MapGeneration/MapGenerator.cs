@@ -14,6 +14,7 @@ using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Sounds;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Pandorai.MapGeneration
 {
@@ -308,6 +309,22 @@ namespace Pandorai.MapGeneration
 				PlaceStructure("Torch", position);
 			}
 
+			// place items
+			{
+				var itemSet = new[] { "", "YellowKey", "BlueKey", "SmallHealthPotion", "SmallManaPotion" };
+				var weightsSet = new[] { 6, 5, 2, 5, 3 };
+				var chosenItems = GetWeightedChoices(itemSet, weightsSet, 3);
+				foreach (var itemName in chosenItems)
+				{
+					if(itemName == "")
+					{
+						continue;
+					}
+					var position = GetRandomUntakenPosition(room.Area);
+					var item = PlaceItem(itemName, position);
+				}
+			}
+
 			// place chests
 			for (int i = 0; i < 2; i++)
 			{
@@ -426,6 +443,17 @@ namespace Pandorai.MapGeneration
 			return position;
 		}
 
+		private Item PlaceItem(string itemName, Point point)
+		{
+			Item itemInstance = ItemLoader.GetItem(itemName);
+			var tile = map[point.X, point.Y];
+			tile.MapObject = new MapObject(ObjectType.Collectible, 0)
+			{
+				Item = itemInstance,
+			};
+			return itemInstance;
+		}
+		
 		private Creature PlaceCreature(string creatureName, Point point)
 		{
 			Creature creatureInstance = CreatureLoader.GetCreature(creatureName);
