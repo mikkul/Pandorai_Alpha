@@ -183,7 +183,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="StoneGuardian" texture="11" maxHP="300" health="300" strength="19" class="Temple" corpseTexture="68" speed="45" level="4" fireResistance="25">
+	<creature id="StoneGuardian" texture="11" maxHP="240" health="240" strength="19" class="Temple" corpseTexture="68" speed="45" level="4" iceResistance="25">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -388,7 +388,7 @@
 			</Inventory>
 		</modifiers>
 		<behaviours>
-			<behaviour name="AllSeeingVision">
+			<behaviour name="NormalVision">
 				<RangeLimit>5</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />

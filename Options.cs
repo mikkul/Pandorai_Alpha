@@ -19,7 +19,7 @@ namespace Pandorai
 
 		public Color ClearColor = new Color(0.0f, 0.0f, 0.0f, 1f);
 
-		public float TilesOutsideFOVDarkening = -0.45f;
+		public float TilesOutsideFOVDarkening = -0.25f;
 
 		public static Point oldResolution;
 		public bool oldIsFullScreen;

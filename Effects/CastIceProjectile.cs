@@ -125,7 +125,7 @@ namespace Pandorai.Effects
 					{
 						if (pierceLeft > 0)
 						{
-							float actualDamage = Damage;
+							float actualDamage = Damage - Damage * (float)tryCreature.Stats.IceResistance / 100f;
 							user.game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(actualDamage, user));
 							pierceLeft--;
 						}

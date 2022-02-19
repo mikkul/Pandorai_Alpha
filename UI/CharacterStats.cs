@@ -32,9 +32,13 @@ namespace Pandorai.UI
 
         [Category("E")]
         public int Stealth { get; private set; }
-        [Category("E")]
+
+        [Category("F")]
         [DisplayName("Fire resistance")]
         public int FireResistance { get; private set; }
+        [Category("F")]
+        [DisplayName("Ice resistance")]
+        public int IceResistance { get; private set; }
 
         public CharacterStats(CreatureStats stats)
         {
@@ -52,7 +56,9 @@ namespace Pandorai.UI
             Strength = stats.Strength;
 
             Stealth = stats.Stealth;
+
             FireResistance = stats.FireResistance;
+            IceResistance = stats.IceResistance;
         }
     }
 }

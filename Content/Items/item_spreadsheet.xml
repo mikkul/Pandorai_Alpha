@@ -9,14 +9,14 @@
 		<effect name="CastFireball">
 			<Damage>30</Damage>
 			<Pierce>2</Pierce>
-			<Range>7</Range>
+			<Range>6</Range>
 		</effect>
 	</item>
 	<item id="FireballRune" texture="83" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive">
 		<effect name="CastFireball">
 			<Damage>50</Damage>
 			<Pierce>3</Pierce>
-			<Range>5</Range>
+			<Range>6</Range>
 		</effect>
 	</item>
 	<item id="MassDestructionRune" texture="85" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive">
@@ -55,7 +55,7 @@
 		<effect name="CastIceProjectile">
 			<Damage>50</Damage>
 			<Pierce>4</Pierce>
-			<Range>7</Range>
+			<Range>6</Range>
 		</effect>
 	</item>
 </items>

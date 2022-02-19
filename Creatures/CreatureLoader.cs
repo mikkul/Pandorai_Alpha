@@ -50,6 +50,10 @@ namespace Pandorai.Creatures
 				{
 					creature.Stats.FireResistance = int.Parse(node.GetAttribute("fireResistance"));
 				}
+				if (node.HasAttribute("iceResistance"))
+				{
+					creature.Stats.IceResistance = int.Parse(node.GetAttribute("iceResistance"));
+				}				
 				if (node.HasAttribute("noclip"))
 				{
 					creature.NoClip = true;

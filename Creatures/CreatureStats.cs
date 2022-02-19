@@ -61,7 +61,9 @@ namespace Pandorai.Creatures
         public int Strength { get; set; }
 
         public int Stealth { get; set; }
+
         public int FireResistance { get; set; }
+        public int IceResistance { get; set; }
 
         public static int GetLevelFromExperience(int experience)
         {
@@ -108,6 +110,7 @@ namespace Pandorai.Creatures
                 Strength = Strength,
                 Stealth = Stealth,
                 FireResistance = FireResistance,
+                IceResistance = IceResistance,
             };
         }
 
