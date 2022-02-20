@@ -2,8 +2,8 @@
 	<location>
 	</location>
 	<dimensions>
-		<rectangle width="50-60" height="50-60" fillInterior="false">
-			<rectangle width="20" height="20" placement="center" offsetX="0" offsetY="0" />
+		<rectangle width="40-50" height="40-50" fillInterior="false">
+			<rectangle width="16" height="16" placement="center" offsetX="0" offsetY="0" />
 		</rectangle>
 	</dimensions>
 	<content>

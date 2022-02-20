@@ -1706,6 +1706,42 @@
 /processorParam:Quality=Best
 /build:Sounds/Voice_sound_pack_1/zombieYell9.wav
 
+#begin Sounds/Wolf_sounds/wolf0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Wolf_sounds/wolf0.wav
+
+#begin Sounds/Wolf_sounds/wolf1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Wolf_sounds/wolf1.wav
+
+#begin Sounds/Wolf_sounds/wolf2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Wolf_sounds/wolf2.wav
+
+#begin Sounds/Wolf_sounds/wolf3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Wolf_sounds/wolf3.wav
+
+#begin Sounds/Wolf_sounds/wolf4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Wolf_sounds/wolf4.wav
+
+#begin Sounds/Wolf_sounds/wolf5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Wolf_sounds/wolf5.wav
+
 #begin tilesheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

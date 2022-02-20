@@ -2,8 +2,8 @@
 	<location>
 	</location>
 	<dimensions>
-		<rectangle width="40-50" height="30-40" fillInterior="false">
-			<rectangle width="15" height="15" placement="center" offsetX="0" offsetY="0" />
+		<rectangle width="35-45" height="30-40" fillInterior="false">
+			<rectangle width="14" height="14" placement="center" offsetX="0" offsetY="0" />
 		</rectangle>
 	</dimensions>
 	<content>
@@ -29,10 +29,25 @@
 			</location>
 		</structure>
 
-		<creature name="Spider" number="10">
+		<creature name="Spider" number="5">
 			<location>
 			</location>
 		</creature>
+
+		<creature name="Wolf" number="4">
+			<location>
+				<layer where="center" offset="4" />
+			</location>
+		</creature>
+
+		<creature name="Wolf" number="4">
+			<location>
+				<layer where="center" offset="7" />
+			</location>
+		</creature>
+
+		<creature name="Wolf" number="4">
+		</creature>		
 
 		<creature name="Seeker" number="1">
 			<location>

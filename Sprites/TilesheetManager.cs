@@ -160,6 +160,7 @@ namespace Pandorai.Sprites
 			AddCreatureSprite(0, 448, 64, 64, 0, 0); // skeleton idle 13
 			AddCreatureSprite(0, 512, 64, 64, 0, 0); // shadow warrior idle 14
 			AddCreatureSprite(0, 576, 64, 64, 0, 0); // seeker idle 15
+			AddCreatureSprite(0, 640, 64, 64, 0, 0); // wolf idle 16
 		}
 	}
 }

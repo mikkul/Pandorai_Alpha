@@ -1,15 +1,12 @@
-﻿using Pandorai.Creatures;
-using Pandorai.Items;
-using Pandorai.Structures;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Pandorai.MapGeneration
 {
 	public static class WorldOptions
 	{
-		public const int Width = 140;
-		public const int Height = 100;
+		public const int Width = 120;
+		public const int Height = 90;
 
 		public static int RegionPathwayPasses = 3;
 		public static int MinimalRoomSize = 40;
