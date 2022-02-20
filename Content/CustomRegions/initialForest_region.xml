@@ -55,7 +55,17 @@
 			</location>
 		</creature>
 
-		<creature name="Traveller" number="0" />
+		<structure name="Grave" number="1"></structure>
+		<item name="FireArrowSpell" number="1">
+			<location>
+				<proximity to="Grave" distance="very close" />
+			</location>
+		</item>
+		<item name="IceArrowSpell" number="1">
+			<location>
+				<proximity to="Grave" distance="very close" />
+			</location>
+		</item>
 
 	</content>
 </customRegion>

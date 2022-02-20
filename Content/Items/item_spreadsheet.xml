@@ -7,7 +7,7 @@
 	</item>
 	<item id="FireArrowSpell" texture="69" consumable="True" name="Fire arrow spell" tooltipColor="orange" description="Allows user to cast fire arrows" type="Spell/Offensive" requiredMana="5">
 		<effect name="CastFireball">
-			<Damage>30</Damage>
+			<Damage>50</Damage>
 			<Pierce>2</Pierce>
 			<Range>6</Range>
 		</effect>
@@ -75,6 +75,13 @@
 	</item>
 	<item id="BlinkPotion" texture="92" consumable="True" name="Potion of blink" tooltipColor="purple" description="Teleports you to a random location on the map" type="Food">
 		<effect name="Blink">
+		</effect>
+	</item>
+	<item id="IceArrowSpell" texture="81" consumable="True" name="Ice arrow spell" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive" requiredMana="5">
+		<effect name="CastIceProjectile">
+			<Damage>50</Damage>
+			<Pierce>2</Pierce>
+			<Range>6</Range>
 		</effect>
 	</item>	
 </items>

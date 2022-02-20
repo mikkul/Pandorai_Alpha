@@ -316,9 +316,16 @@ namespace Pandorai.MapGeneration
 
 			// place items
 			{
-				var itemSet = new[] { "", "YellowKey", "BlueKey", "SmallHealthPotion", "SmallManaPotion", "BlinkPotion" };
-				var weightsSet = new[] { 10, 9, 4, 9, 6, 5 };
-				var chosenItems = GetWeightedChoices(itemSet, weightsSet, 3);
+				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "SmallHealthPotion", "SmallManaPotion" };
+				var weightsSet1 = new[] { 10, 9, 4, 9, 6 };
+				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 3);
+
+				var itemSet2 = new[] { "", "BlinkPotion", "FireArrowSpell" };
+				var weightsSet2 = new[] { 14, 3, 6 };
+				var chosenItems2 = GetWeightedChoices(itemSet2, weightsSet2, 1);
+
+				var chosenItems = chosenItems1.Concat(chosenItems2);
+
 				foreach (var itemName in chosenItems)
 				{
 					if(itemName == "")
@@ -346,9 +353,9 @@ namespace Pandorai.MapGeneration
 				var weightsSet1 = new[] { 3, 10, 4 };
 				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 2);
 
-				var itemSet2 = new[] { "", "HealthPotion", "FireArrowSpell", "SpeedPotion" };
-				var weightsSet2 = new[] { 6, 3, 7, 2 };
-				var chosenItems2 = GetWeightedChoices(itemSet2, weightsSet2, 1);
+				var itemSet2 = new[] { "", "HealthPotion", "FireArrowSpell", "IceArrowSpell", "SpeedPotion" };
+				var weightsSet2 = new[] { 7, 3, 7, 3, 2 };
+				var chosenItems2 = GetWeightedChoices(itemSet2, weightsSet2, 2);
 
 				var chosenItems = chosenItems1.Concat(chosenItems2);
 
