@@ -35,8 +35,8 @@ namespace Pandorai.Creatures
 				creature.CorpseTextureIndex = int.Parse(node.GetAttribute("corpseTexture"));
 				if (node.HasAttribute("mana") && node.HasAttribute("maxMana"))
 				{
-					creature.Stats.Mana = int.Parse(node.GetAttribute("mana"));
 					creature.Stats.MaxMana = int.Parse(node.GetAttribute("maxMana"));
+					creature.Stats.Mana = int.Parse(node.GetAttribute("mana"));
 				}
 				else if(node.HasAttribute("maxMana"))
 				{

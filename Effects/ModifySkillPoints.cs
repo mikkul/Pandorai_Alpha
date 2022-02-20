@@ -1,4 +1,5 @@
 using Pandorai.Creatures;
+using Pandorai.Sounds;
 
 namespace Pandorai.Effects
 {
@@ -17,6 +18,7 @@ namespace Pandorai.Effects
         public override void Use(Creature usingCreature)
         {
             usingCreature.Stats.SkillPoints += Amount;
+            SoundManager.PlaySound("FX149");
         }
     }
 }
