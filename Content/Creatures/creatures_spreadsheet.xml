@@ -204,6 +204,9 @@
 				<index>14</index>
 				<index>14</index>
 			</IdleTextureIndices>
+			<Inventory>
+				<item name="RedKey" number="1" />
+			</Inventory>
 		</modifiers>
 		<behaviours>
 			<behaviour name="NormalVision">

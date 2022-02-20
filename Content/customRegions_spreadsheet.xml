@@ -5,6 +5,6 @@
 	<region name="CementeryHard" number="1" />
 	<region name="Temple" number="1" />
 	<region name="StartingRoom" number="1" />
-	<region name="AltarRoom" number="2" />
+	<region name="AltarRoom" number="1" />
 	<region name="TeleporterRing" number="1" />
 </map>

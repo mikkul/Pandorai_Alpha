@@ -2,14 +2,14 @@
 	<location>
 	</location>
 	<dimensions>
-		<rectangle width="40-50" height="40-50" fillInterior="false">
+		<rectangle width="35-45" height="35-45" fillInterior="false">
 			<rectangle width="16" height="16" placement="center" offsetX="0" offsetY="0" />
 		</rectangle>
 	</dimensions>
 	<content>
 
 		<creature name="Seeker" number="2-3" />
-		<creature name="Spider" number="8-12" />
+		<creature name="Spider" number="15-18" />
 
 		<item name="StealthCape" number="1">
 			<location>

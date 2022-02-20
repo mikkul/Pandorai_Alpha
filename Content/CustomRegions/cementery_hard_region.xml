@@ -9,11 +9,7 @@
 	</dimensions>
 	<content>
 
-        <structure name="WarriorTomb" number="1" />
         <creature name="ShadowWarrior" number="1">
-            <location>
-                <proximity to="WarriorTomb" distance="very close" />
-            </location>
         </creature>
 
         <creature name="Skeleton" number="14-16">

@@ -26,10 +26,13 @@
 			</location>
 		</entrance>
 
-		<structure name="Chest" number="2">
+		<structure name="Chest" number="1">
 			<location>
 				<stripe direction="across" position="100" />
 			</location>
+			<inventory>
+				<invItem name="RedKey" number="1" />
+			</inventory>
 		</structure>
 
 		<item name="HealthPotion" number="2">
