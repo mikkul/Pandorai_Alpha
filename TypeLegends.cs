@@ -25,6 +25,7 @@ namespace Pandorai
 			{ "CastIceProjectile", typeof(CastIceProjectile) },
 			{ "ModifyStrength", typeof(ModifyStrength) },
 			{ "ModifyMana", typeof(ModifyMana) },
+			{ "Blink", typeof(Blink) },
 		};
 
         

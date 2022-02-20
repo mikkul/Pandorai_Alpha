@@ -133,6 +133,8 @@ namespace Pandorai.Sprites
 
 			AddMapSprite(448, 448, 64, 64, 0, 0); // small health potion 90
 			AddMapSprite(512, 448, 64, 64, 0, 0); // small mana potion 91
+
+			AddMapSprite(448, 320, 64, 64, 0, 0); // potion of blink 92
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

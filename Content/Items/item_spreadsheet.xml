@@ -73,4 +73,8 @@
 			<Amount>5</Amount>
 		</effect>
 	</item>
+	<item id="BlinkPotion" texture="92" consumable="True" name="Potion of blink" tooltipColor="purple" description="Teleports you to a random location on the map" type="Food">
+		<effect name="Blink">
+		</effect>
+	</item>	
 </items>

@@ -30,6 +30,8 @@ namespace Pandorai.MapGeneration
 
 		Color _freeSpaceFloorColor = Helper.GetColorFromHex("#966c4b");
 
+		Dictionary<string, int> _maxAllowedItemCount;
+
 		public Regions Rooms = new Regions();
 
 		public Point StartingPoint;
@@ -46,6 +48,9 @@ namespace Pandorai.MapGeneration
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
+
+			_maxAllowedItemCount = new();
+			_maxAllowedItemCount["BlinkPotion"] = 2;
 
             map = new Tile[WorldOptions.Width, WorldOptions.Height];
             map.Populate(() => null);
@@ -311,8 +316,8 @@ namespace Pandorai.MapGeneration
 
 			// place items
 			{
-				var itemSet = new[] { "", "YellowKey", "BlueKey", "SmallHealthPotion", "SmallManaPotion" };
-				var weightsSet = new[] { 6, 5, 2, 5, 3 };
+				var itemSet = new[] { "", "YellowKey", "BlueKey", "SmallHealthPotion", "SmallManaPotion", "BlinkPotion" };
+				var weightsSet = new[] { 10, 9, 4, 9, 6, 5 };
 				var chosenItems = GetWeightedChoices(itemSet, weightsSet, 3);
 				foreach (var itemName in chosenItems)
 				{
@@ -445,12 +450,18 @@ namespace Pandorai.MapGeneration
 
 		private Item PlaceItem(string itemName, Point point)
 		{
+			if(_maxAllowedItemCount.ContainsKey(itemName) && ItemManager.GetItemCount(itemName) >= _maxAllowedItemCount[itemName])
+			{
+				return null;
+			}
+
 			Item itemInstance = ItemLoader.GetItem(itemName);
 			var tile = map[point.X, point.Y];
 			tile.MapObject = new MapObject(ObjectType.Collectible, 0)
 			{
 				Item = itemInstance,
 			};
+			ItemManager.AddItem(itemInstance);
 			return itemInstance;
 		}
 		
