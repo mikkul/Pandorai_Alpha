@@ -15,6 +15,7 @@ using Pandorai.Structures.Behaviours;
 using Pandorai.Sounds;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
+using Pandorai.Effects;
 
 namespace Pandorai.MapGeneration
 {
@@ -419,7 +420,26 @@ namespace Pandorai.MapGeneration
 					var position = GetRandomUntakenPosition(room.Area);
 					var creatureInstance = PlaceCreature(creatureName, position);
 				}
-			}					
+			}
+
+			// place traps
+			{
+				bool doPlace = rng.NextFloat() < 0.225f;
+				if(doPlace)
+				{
+					var position = GetRandomUntakenPosition(room.Area);
+					map[position.X, position.Y].CreatureCame += c =>
+					{
+						var spawnSpikesEffect = new SpawnSpikes
+						{
+							Damage = 45,
+						};
+						spawnSpikesEffect.Use(c);
+						c.GetHit(45f, c);
+						c.OnGotHit(c);
+					};
+				}
+			}				
 		}
 
 		private List<string> GetWeightedChoices(string[] itemSet, int[] weightsSet, int numberOfItems = 1)

@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.ParticleSystems;
 using Pandorai.Sounds;
+using Pandorai.Tilemaps;
 using Pandorai.Utility;
 
 namespace Pandorai.Effects
@@ -40,7 +41,10 @@ namespace Pandorai.Effects
                 Game1.game.TurnManager.PlayerIsReady();
             }
 
-            SoundManager.PlaySound("Trap_01");
+            if(user.MapIndex.IsInRangeOfPlayer())
+            {
+                SoundManager.PlaySound("Trap_01");
+            }
         }
     }
 }

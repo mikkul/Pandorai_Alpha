@@ -12,10 +12,23 @@ namespace Pandorai.Creatures.Behaviours
 
         private Point _homePosition;
         private bool _isFirstTurn = true;
+        private List<Point> _dangerousPoints = new();
 
         public override void Bind()
         {
             Owner.TurnCame += Work;
+            Owner.GotHit += RememberDangerousTiles;
+        }
+
+        private void RememberDangerousTiles(Creature creature)
+        {
+            // only tiles where the owner got hit by himself are traps
+            if(creature != Owner)
+            {
+                return;
+            }
+
+            _dangerousPoints.Add(Owner.MapIndex);
         }
 
         private void Work()
@@ -47,7 +60,7 @@ namespace Pandorai.Creatures.Behaviours
             var targetDistanceToHome = Vector2.Distance(chosenPoint.ToVector2(), _homePosition.ToVector2());
             var currentDistanceToHome = Vector2.Distance(Owner.MapIndex.ToVector2(), _homePosition.ToVector2());
 
-            if(chosenPoint != Owner.MapIndex && (targetDistanceToHome <= MaxDistanceFromHome || targetDistanceToHome < currentDistanceToHome))
+            if(chosenPoint != Owner.MapIndex && (targetDistanceToHome <= MaxDistanceFromHome || targetDistanceToHome < currentDistanceToHome) && !_dangerousPoints.Contains(chosenPoint))
             {
                 Owner.Target = chosenPoint;
                 Owner.RequestMovement(chosenPoint);

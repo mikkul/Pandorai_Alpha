@@ -88,7 +88,10 @@ namespace Pandorai.Creatures
 
 			Died += () =>
 			{
-				SoundManager.PlaySound(Sounds.Death);
+				if(MapIndex.IsInRangeOfPlayer())
+				{
+					SoundManager.PlaySound(Sounds.Death);
+				}
 				var corpse = StructureLoader.GetStructure("Corpse");
 				corpse.Tile = TileInfo.GetInfo(MapIndex, game);
 				var container = corpse.GetBehaviour<Pandorai.Structures.Behaviours.Container>();
@@ -167,7 +170,14 @@ namespace Pandorai.Creatures
 		{
 			Position = game.Map.SnapToGrid(Position);
 
-			MapIndex = game.Map.GetTileIndexByPosition(Position);
+			var newIndex = game.Map.GetTileIndexByPosition(Position);
+
+			if(newIndex == MapIndex)
+			{
+				return;
+			}
+
+			MapIndex = newIndex;
 
 			IsMoving = false;
 
@@ -181,6 +191,11 @@ namespace Pandorai.Creatures
 		public void OnDeath()
 		{
 			Died?.Invoke();
+		}
+
+		public void OnGotHit(Creature creature)
+		{
+			GotHit?.Invoke(creature);
 		}
 
 		public void Hit(Creature incomingCreature)
@@ -283,7 +298,10 @@ namespace Pandorai.Creatures
 
 		public void GetHit(float damage, Creature byWhom)
 		{
-			SoundManager.PlaySound(Sounds.Hurt);
+			if(MapIndex.IsInRangeOfPlayer())
+			{
+				SoundManager.PlaySound(Sounds.Hurt);
+			}
 			Stats.Health -= (int)damage;
 			DamageFlash();
 			if (Stats.Health <= 0)
