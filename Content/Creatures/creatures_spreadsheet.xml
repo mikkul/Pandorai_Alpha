@@ -235,11 +235,10 @@
 		</sounds>		
 	</creature>
 
-	<creature id="StoneGuardian" texture="11" maxHP="240" health="240" strength="19" class="Temple" corpseTexture="68" speed="45" level="5" iceResistance="25">
+	<creature id="StoneGuardian" texture="11" maxHP="240" health="240" strength="19" class="Monster" corpseTexture="68" speed="45" level="5" iceResistance="25">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
-				<class>Monster</class>
 			</EnemyClasses>
 			<MovingTextureIndices>
 				<index>11</index>
