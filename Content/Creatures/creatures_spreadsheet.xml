@@ -437,12 +437,11 @@
 				<index>3</index>
 			</IdleTextureIndices>
 			<Inventory>
-				<item name="PandoraiGem" number="1" />
 			</Inventory>
 		</modifiers>
 		<behaviours>
-			<behaviour name="AllSeeingVision">
-				<RangeLimit>5</RangeLimit>
+			<behaviour name="NormalVision">
+				<RangeLimit>6</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
 		</behaviours>

@@ -6,6 +6,7 @@ using Myra.Graphics2D.UI;
 using Microsoft.Xna.Framework;
 using System.Linq;
 using Pandorai.Creatures;
+using Pandorai.Items;
 
 namespace Pandorai.Cheats
 {
@@ -33,6 +34,17 @@ namespace Pandorai.Cheats
 			{
 				CheatShortcuts.Activated ^= true;
 			});
+
+			Commands.Add("modifystats", () =>
+			{
+				UI.GUI.ShowCheatsModifyStatsWindow();
+			});					
+
+			Commands.Add("giveitem", () =>
+			{
+				var itemName = CommandParameters[0];
+				game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem(itemName));
+			});			
 
 			Commands.Add("noclip", () =>
 			{

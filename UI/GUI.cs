@@ -64,6 +64,29 @@ namespace Pandorai.UI
             game.Options.AdjustGUI();
         }
 
+        public static void ShowCheatsModifyStatsWindow()
+        {
+            characterStatsWindow = new Window
+            {
+                Id = "cheatsModifycharacterStatsWindow",
+                Title = "Stats",
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Width = 500,
+                Height = 600,
+            };
+            
+            PropertyGrid contentGrid = new PropertyGrid
+            {
+                Id = "cheatsModifyCharacterStatsPropertyGrid",
+            };
+            contentGrid.Object = Game1.game.Player.PossessedCreature.Stats;
+
+            characterStatsWindow.Content = contentGrid;
+
+            characterStatsWindow.ShowModal(desktop);
+        }
+
         static void InitCharacterStatsWindow()
         {
             characterStatsWindow = new Window
