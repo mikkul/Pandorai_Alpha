@@ -23,12 +23,6 @@
 			</inventory>
 		</structure>
 
-		<structure name="RegionPedestal" number="1">
-			<location>
-				<layer where="center" />
-			</location>
-		</structure>
-
 		<creature name="Spider" number="5">
 			<location>
 			</location>
@@ -49,9 +43,9 @@
 		<creature name="Wolf" number="4">
 		</creature>		
 
-		<creature name="Seeker" number="1">
+		<creature name="Elder" number="1">
 			<location>
-				<proximity to="RegionPedestal" distance="close" />
+				<layer where="center" />
 			</location>
 		</creature>
 

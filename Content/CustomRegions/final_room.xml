@@ -1,0 +1,22 @@
+<customRegion name="FinalRoom" floorColor="#d896ff" borderColor="#c054ff" sample="roomSample1">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="10" height="20" />
+	</dimensions>
+	<content>
+
+		<entrance name="MainEntrance" number="1">
+            <location>
+				<proximity to="PandoraiPedestal" distance="farthest" />
+			</location>
+        </entrance>
+        
+        <structure name="PandoraiPedestal" number="1">
+            <location>
+                <stripe direction="across" position="100" />
+            </location>
+        </structure>
+
+	</content>
+</customRegion>

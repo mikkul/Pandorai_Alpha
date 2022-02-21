@@ -376,7 +376,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Keeper" texture="10" maxHP="10000" health="10000" strength="10" class="Human" corpseTexture="68" speed="30"  level="100">
+	<creature id="Elder" texture="10" maxHP="1000" health="1000" strength="10" class="Neutral" corpseTexture="68" speed="30"  level="10">
 		<modifiers>
 			<EnemyClasses>
 				<class>Monster</class>
@@ -402,7 +402,7 @@
 		<behaviours>
 			<behaviour name="NormalHitResponse" />
 			<behaviour name="Talkative">
-				<DialogueName>keeperDial</DialogueName>
+				<DialogueName>elderDial</DialogueName>
 			</behaviour>
 			<behaviour name="SpellCaster">
 				<Priority>Offensive</Priority>
@@ -437,6 +437,7 @@
 				<index>3</index>
 			</IdleTextureIndices>
 			<Inventory>
+				<item name="PandoraiGem" number="1" />
 			</Inventory>
 		</modifiers>
 		<behaviours>

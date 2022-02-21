@@ -7,4 +7,5 @@
 	<region name="StartingRoom" number="1" />
 	<region name="AltarRoom" number="1" />
 	<region name="TeleporterRing" number="1" />
+	<region name="FinalRoom" number="1" />
 </map>

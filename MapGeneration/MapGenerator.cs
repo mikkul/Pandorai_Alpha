@@ -819,6 +819,9 @@ namespace Pandorai.MapGeneration
 			regionObj.Color = region.FloorColor;
 			regionObj.ProcessInterior(tileData);
 
+			//
+			List<Point> entrances = new();
+
 			// populate area with content
 			List<ContentEntry> placedContent = new List<ContentEntry>();
 
@@ -869,6 +872,36 @@ namespace Pandorai.MapGeneration
 					positionContent(entry);
 				}
 			}
+
+			//
+			if(region.Name == "FinalRoom")
+			{
+				// place a corridor and 3 red doors blocking the entrance
+				var entrancePoint = entrances[0];
+				for (int i = 0; i < 3; i++)
+				{
+					var doorPoint = new Point(entrancePoint.X, entrancePoint.Y + i + 1);
+					var leftWallPoint = new Point(doorPoint.X - 1, doorPoint.Y);
+					var rightWallPoint = new Point(doorPoint.X + 1, doorPoint.Y);
+
+					var doorInstance = StructureLoader.GetStructure("RedDoor");
+					doorInstance.Tile = new TileInfo(doorPoint, tileData[doorPoint.X, doorPoint.Y]);
+					StructureManager.AddStructure(doorInstance);
+					tileData[doorPoint.X, doorPoint.Y].MapObject = new MapObject(ObjectType.Interactive, 0)
+					{
+						Structure = doorInstance,
+					};
+					tileData[doorPoint.X, doorPoint.Y].CollisionFlag = true;
+
+					tileData[leftWallPoint.X, leftWallPoint.Y].BaseType = 1;
+					tileData[leftWallPoint.X, leftWallPoint.Y].CollisionFlag = true;
+					tileData[leftWallPoint.X, leftWallPoint.Y].BaseColor = region.BorderColor;
+
+					tileData[rightWallPoint.X, rightWallPoint.Y].BaseType = 1;
+					tileData[rightWallPoint.X, rightWallPoint.Y].CollisionFlag = true;
+					tileData[rightWallPoint.X, rightWallPoint.Y].BaseColor = region.BorderColor;
+				}
+			}			
 
 			//
 			info.TileInfo = tileData;
@@ -1328,6 +1361,7 @@ namespace Pandorai.MapGeneration
 					tile.SetTexture(0);
 					tile.CollisionFlag = false;
 					tile.BaseColor = region.FloorColor;
+					entrances.Add(finalPosition);
 				}
 			}
 

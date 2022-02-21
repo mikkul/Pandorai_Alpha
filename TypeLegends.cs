@@ -34,7 +34,7 @@ namespace Pandorai
 			{ "Container", typeof(Container) },
 			{ "Armor", typeof(Armor) },
 			{ "Destructible", typeof(Destructible) },
-			{ "RegionPedestal", typeof(RegionPedestal) },
+			{ "PandoraiPedestal", typeof(PandoraiPedestal) },
 			{ "LightEmitter", typeof(LightEmitter) },
 			{ "Door", typeof(Door) },
 			{ "Dialogue", typeof(Dialogue) },

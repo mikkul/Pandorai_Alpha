@@ -25,7 +25,7 @@
 			<Range>6</Range>	
 		</effect>
 	</item>
-	<item id="RegionGem" texture="86" consumable="False" name="Region Gem" tooltipColor="blue" description="Place on a pedestal to take control of a region" type="Other">
+	<item id="PandoraiGem" texture="86" consumable="False" name="Gem of Pandorai" tooltipColor="blue" description="A shiny gem said to have magical power" type="Other">
 	</item>
 	<item id="TransformSpell" texture="7" consumable="True" name="Transformation Spell" tooltipColor="blue" description="Allows user to turn into another creature" type="Spell">
 		<effect name="TransformSpell">

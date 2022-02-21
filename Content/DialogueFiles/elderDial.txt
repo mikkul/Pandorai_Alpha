@@ -1,0 +1,114 @@
+<!index  >-2
+<!type   >Exit
+#
+<!index  >0
+<!type   >Start
+<method>SetHeroName(Hero)
+<method>SetNPCName(Elder)
+<method>AddOption(1)
+<method>AddOption(18)
+<method>SetLead(-1)
+#
+<!index  >1
+<!type   >HeroOption
+<!content>Who are you?
+<method>SetLead(2)
+#
+<!index  >2
+<!type   >HeroSay
+<!content>Who are you?
+<method>SetLead(3)
+#
+<!index  >3
+<!type   >NPCSay
+<!content>My name is Abdu-ghungi-xaverther-oman...
+<method>SetLead(4)
+#
+<!index  >4
+<!type   >NPCSay
+<!content>...but people call me Jim
+<method>AddOption(5)
+<method>SetLead(-1)
+#
+<!index  >5
+<!type   >HeroOption
+<!content>I'm looking for a shiny gem...
+<method>SetLead(6)
+#
+<!index  >6
+<!type   >HeroSay
+<!content>I'm looking for a blue gem that is said to have magical power.
+<method>SetLead(7)
+#
+<!index  >7
+<!type   >HeroSay
+<!content>Do you happen to know something about it?
+<method>SetLead(8)
+#
+<!index  >8
+<!type   >NPCSay
+<!content>Of course I do!
+<method>SetLead(9)
+#
+<!index  >9
+<!type   >NPCSay
+<!content>Here it is. You can have it.
+<method>SetLead(10)
+#
+<!index  >10
+<!type   >HeroSay
+<!content>Really? Just like that for free?
+<method>SetLead(11)
+#
+<!index  >11
+<!type   >NPCSay
+<!content>It's said to be magical, but I don't seem to be able to do anything with it.
+<method>SetLead(12)
+#
+<!index  >12
+<!type   >NPCSay
+<!content>To me it's useless
+<method>SetLead(13)
+#
+<!index  >13
+<!type   >NPCSay
+<!content>Maybe you will be able to find a way to use it's power
+<method>GiveHeroItem(PandoraiGem)
+<method>SetLead(14)
+#
+<!index  >14
+<!type   >HeroSay
+<!content>Thank you, Jim.
+<method>SetLead(15)
+#
+<!index  >15
+<!type   >HeroSay
+<!content>Maybe I will discover what to do with it
+<method>AddOption(16)
+<method>SetLead(-1)
+#
+<!index  >16
+<!type   >ForeverHeroOption
+<!content>So, how it's going?
+<method>SetLead(17)
+#
+<!index  >17
+<!type   >NPCSay
+<!content>It's been better.
+<method>SetLead(-1)
+#
+<!index  >18
+<!type   >ForeverHeroOption
+<!content>Leave
+<method>SetLead(19)
+#
+<!index  >19
+<!type   >HeroSay
+<!content>It was nice meeting you
+<method>SetLead(20)
+#
+<!index  >20
+<!type   >NPCSay
+<!content>Take care
+<method>SetLead(-2)
+#

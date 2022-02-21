@@ -71,6 +71,11 @@ namespace Pandorai.Sounds
             }
         }
 
+        public static void StopMusic()
+        {
+            _currentSongInstance?.Stop();
+        }
+
         private static void TransitionToSong(string name)
         {
             var songInstance = _music[name].CreateInstance();

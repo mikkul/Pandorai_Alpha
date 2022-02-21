@@ -23,13 +23,13 @@
 			<Hits>3</Hits>
 		</behaviour>
 	</structure>
-	<structure id="RegionPedestal" texture="77">
+	<structure id="PandoraiPedestal" texture="77">
 		<behaviour name="LightEmitter">
 			<Color>#256ad9</Color>
-			<Radius>500</Radius>
+			<Radius>1000</Radius>
 			<Intensity>0.5</Intensity>
 		</behaviour>
-		<behaviour name="RegionPedestal">
+		<behaviour name="PandoraiPedestal">
 		</behaviour>
 	</structure>
 	<structure id="BookStand" texture="72">
@@ -88,5 +88,5 @@
 	<structure id="Teleporter" texture="88">
 		<behaviour name="Teleporter">
 		</behaviour>
-	</structure>	
+	</structure>
 </structures>
