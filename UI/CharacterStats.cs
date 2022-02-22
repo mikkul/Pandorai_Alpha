@@ -10,6 +10,9 @@ namespace Pandorai.UI
         [Category("A")]
         public int Experience { get; private set; }
         [Category("A")]
+        [DisplayName("Experience required for next level")]
+        public int ExperienceForNextLevel { get; private set; }
+        [Category("A")]
         [DisplayName("Skill points")]
         public int SkillPoints { get; private set; }
 
@@ -42,6 +45,12 @@ namespace Pandorai.UI
 
         public CharacterStats(CreatureStats stats)
         {
+            ExperienceForNextLevel = 0;
+            while(CreatureStats.GetLevelFromExperience(ExperienceForNextLevel) != stats.Level + 1)
+            {
+                ExperienceForNextLevel += 100;
+            }
+
             Level = stats.Level;
             Experience = stats.Experience;
             SkillPoints = stats.SkillPoints;

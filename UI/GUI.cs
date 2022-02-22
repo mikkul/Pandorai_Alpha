@@ -95,8 +95,8 @@ namespace Pandorai.UI
                 Title = "Stats",
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Stretch,
-                Width = 500,
-                Height = 600,
+                Width = 700,
+                Height = 650,
             };
             
             PropertyGrid contentGrid = new PropertyGrid

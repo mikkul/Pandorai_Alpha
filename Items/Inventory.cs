@@ -194,7 +194,7 @@ namespace Pandorai.Items
                     {
                         if (!isTooltipVisible) return;
 
-                        currentTooltip.Left = (int)pos.X;
+                        currentTooltip.Left = (int)pos.X - (int)currentTooltip.Width;
                         currentTooltip.Top = (int)pos.Y;
                     };
 
@@ -220,8 +220,8 @@ namespace Pandorai.Items
                             Left = (int)game.InputManager.MousePos.X,
                             Top = (int)game.InputManager.MousePos.Y,
                             Background = new SolidBrush(Color.Black * 0.5f),
-                            Width = 180,
-                            Height = 120,
+                            Width = 200,
+                            Height = 200,
                             Enabled = false,
                             Border = new SolidBrush(item.TooltipColor),
                             BorderThickness = new Thickness(5),
@@ -239,10 +239,19 @@ namespace Pandorai.Items
                         stackPanel.Widgets.Add(new Label
                         {
                             Text = item.Description,
-                            HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Center,
                             Wrap = true,
                         });
+                        if(item.RequiredMana != 0)
+                        {
+                            stackPanel.Widgets.Add(new Label
+                            {
+                                Text = $"(requires {item.RequiredMana} mana)",
+                                VerticalAlignment = VerticalAlignment.Bottom,
+                                Wrap = true,
+                            }); 
+                        }
+                   
                         currentTooltip.Widgets.Add(stackPanel);
 
                         game.desktop.Widgets.Add(currentTooltip);

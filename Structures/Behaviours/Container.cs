@@ -69,6 +69,7 @@ namespace Pandorai.Structures.Behaviours
 				Width = 200,
 				Height = 250,
 			};
+			popupWindow.CloseButton.Visible = false;
 
 			void closeWindowOnSpace(Keys k)
 			{

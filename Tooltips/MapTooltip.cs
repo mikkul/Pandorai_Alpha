@@ -34,13 +34,16 @@ namespace Pandorai.Tooltips
 			var playerNeighbouringTiles = GenHelper.Get8Neighbours(game.Player.PossessedCreature.MapIndex);
 			if (currentTooltip != null || !playerNeighbouringTiles.Contains(info.Index)) return;
 
+			var width = 200;
+			var height = 200;
+
 			currentTooltip = new Panel
 			{
 				Left = (int)game.InputManager.MousePos.X,
 				Top = (int)game.InputManager.MousePos.Y,
 				Background = new SolidBrush(Color.Black * 0.5f),
-				Width = 150,
-				Height = 150,
+				Width = width,
+				Height = height,
 				Enabled = false,
 				Border = new SolidBrush(Color.DarkGray * 0.5f),
 				BorderThickness = new Thickness(5),
