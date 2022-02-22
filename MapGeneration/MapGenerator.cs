@@ -323,14 +323,18 @@ namespace Pandorai.MapGeneration
 			// place items
 			{
 				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "SmallHealthPotion", "SmallManaPotion" };
-				var weightsSet1 = new[] { 10, 9, 4, 9, 6 };
+				var weightsSet1 = new[] { 10, 9, 4, 9, 9 };
 				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 3);
 
-				var itemSet2 = new[] { "", "BlinkPotion", "FireArrowSpell" };
-				var weightsSet2 = new[] { 14, 3, 6 };
+				var itemSet2 = new[] { "", "FireArrowSpell" };
+				var weightsSet2 = new[] { 14, 6 };
 				var chosenItems2 = GetWeightedChoices(itemSet2, weightsSet2, 1);
 
-				var chosenItems = chosenItems1.Concat(chosenItems2);
+				var itemSet3 = new[] { "", "BlinkPotion" };
+				var weightsSet3 = new[] { 3, 1 };
+				var chosenItems3 = GetWeightedChoices(itemSet3, weightsSet3, 1);				
+
+				var chosenItems = chosenItems1.Concat(chosenItems2).Concat(chosenItems3);
 
 				foreach (var itemName in chosenItems)
 				{
@@ -388,8 +392,8 @@ namespace Pandorai.MapGeneration
 				var barrel = PlaceStructure("Barrel", position);
 				var barrelContainer = barrel.GetBehaviour<Container>();
 
-				var itemSet1 = new[] { "", "HealthPotion" };
-				var weightsSet1 = new[] { 10, 3 };
+				var itemSet1 = new[] { "", "HealthPotion", "ManaPotion" };
+				var weightsSet1 = new[] { 10, 3, 1 };
 				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 1);
 
 				foreach (var itemName in chosenItems1)

@@ -41,6 +41,12 @@
 			</location>
 		</item>
 
+		<item name="ManaPotion" number="1">
+			<location>
+				<proximity to="Chest" distance="very close" />
+			</location>
+		</item>		
+
 		<item name="TransformSpell" number="2">
 			<location>
 				<proximity to="Chest" distance="very close" />

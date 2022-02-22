@@ -71,6 +71,8 @@ namespace Pandorai.Structures.Behaviours
 
             DoFancyEffectsAndJingle();
 
+            Game1.game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem("MassDestructionRune"));
+
             MessageLog.DisplayMessage("You restored the altar of Pandorai!");
             MessageLog.DisplayMessage("You win!");
         }

@@ -14,6 +14,7 @@
 			</location>
 			<inventory>
 				<invItem name="HealthPotion" number="2-3" />
+				<invItem name="ManaPotion" number="1" />
 			</inventory>
 		</structure>
 

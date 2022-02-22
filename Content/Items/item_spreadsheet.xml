@@ -7,19 +7,19 @@
 	</item>
 	<item id="FireArrowSpell" texture="69" consumable="True" name="Fire arrow spell" tooltipColor="orange" description="Allows user to cast fire arrows" type="Spell/Offensive" requiredMana="5">
 		<effect name="CastFireball">
-			<Damage>50</Damage>
-			<Pierce>2</Pierce>
+			<Damage>100</Damage>
+			<Pierce>3</Pierce>
 			<Range>6</Range>
 		</effect>
 	</item>
 	<item id="FireballRune" texture="83" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive" requiredMana="15">
 		<effect name="CastFireball">
-			<Damage>50</Damage>
+			<Damage>100</Damage>
 			<Pierce>3</Pierce>
 			<Range>6</Range>	
 		</effect>
 	</item>
-	<item id="MassDestructionRune" texture="85" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive" requiredMana="50">
+	<item id="MassDestructionRune" texture="85" consumable="False" name="Mass Destruction Rune" tooltipColor="purple" description="Allows user to cast a wave that heavily damages all nearby creatures" type="Spell/Offensive" requiredMana="35">
 		<effect name="CastWave">
 			<Damage>350</Damage>
 			<Range>6</Range>	
@@ -32,7 +32,7 @@
 			<Range>3</Range>
 		</effect>
 	</item>
-	<item id="StoneSpikesSpell" texture="59" consumable="True" name="Stone spikes spell" tooltipColor="orange" description="Allows user to spawn stone spikes on orthognally adjacent tiles that damage creatures" type="Spell/Offensive" requiredMana="10">
+	<item id="StoneSpikesSpell" texture="59" consumable="True" name="Stone spikes spell" tooltipColor="orange" description="Allows user to spawn stone spikes on orthognally adjacent tiles that damage creatures" type="Spell/Offensive" requiredMana="5">
 		<effect name="SpawnSpikes">
 			<Damage>100</Damage>
 		</effect>
@@ -53,8 +53,8 @@
 	</item>
 	<item id="IceArrowRune" texture="84" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive" requiredMana="10">
 		<effect name="CastIceProjectile">
-			<Damage>50</Damage>
-			<Pierce>4</Pierce>
+			<Damage>90</Damage>
+			<Pierce>3</Pierce>
 			<Range>6</Range>
 		</effect>
 	</item>
@@ -79,8 +79,8 @@
 	</item>
 	<item id="IceArrowSpell" texture="81" consumable="True" name="Ice arrow spell" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive" requiredMana="5">
 		<effect name="CastIceProjectile">
-			<Damage>50</Damage>
-			<Pierce>2</Pierce>
+			<Damage>90</Damage>
+			<Pierce>3</Pierce>
 			<Range>6</Range>
 		</effect>
 	</item>	
