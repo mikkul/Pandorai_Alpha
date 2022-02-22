@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
+using Pandorai.Sounds;
 using Pandorai.UI;
 using Pandorai.Utility;
 
@@ -40,6 +41,7 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
+            SoundManager.PlaySound("teleport");
             creature.RequestMovement(freeTile);
         }
 

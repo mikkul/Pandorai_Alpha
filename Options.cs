@@ -24,7 +24,7 @@ namespace Pandorai
 		public static Point oldResolution;
 		public bool oldIsFullScreen;
 
-		public bool enableFPSCounter = true;
+		public bool enableFPSCounter = false;
 
 		public PropertyGrid TilePropGrid;
 		public ScrollViewer TilePropGridScroll;

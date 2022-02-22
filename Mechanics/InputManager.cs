@@ -79,23 +79,45 @@ namespace Pandorai.Mechanics
             Vector2 movement = Vector2.Zero;
             InputAction action = InputAction.None;
 
-            if (KeyboardState.IsKeyDown(Keys.W))
+            if (KeyboardState.IsKeyDown(Keys.W) || KeyboardState.IsKeyDown(Keys.Up) || KeyboardState.IsKeyDown(Keys.NumPad8))
             {
                 movement.Y = -1;
             }
-            else if (KeyboardState.IsKeyDown(Keys.S))
+            else if (KeyboardState.IsKeyDown(Keys.S) || KeyboardState.IsKeyDown(Keys.Down) || KeyboardState.IsKeyDown(Keys.NumPad2))
             {
                 movement.Y = 1;
             }
-            if (KeyboardState.IsKeyDown(Keys.A))
+            if (KeyboardState.IsKeyDown(Keys.A) || KeyboardState.IsKeyDown(Keys.Left) || KeyboardState.IsKeyDown(Keys.NumPad4))
             {
                 movement.X = -1;
             }
-            else if (KeyboardState.IsKeyDown(Keys.D))
+            else if (KeyboardState.IsKeyDown(Keys.D) || KeyboardState.IsKeyDown(Keys.Right) || KeyboardState.IsKeyDown(Keys.NumPad6))
             {
                 movement.X = 1;
             }
-            else if(KeyboardState.IsKeyDown(Keys.Space))
+
+            if (KeyboardState.IsKeyDown(Keys.NumPad7))
+            {
+                movement.Y = -1;
+                movement.X = -1;
+            }
+            else if (KeyboardState.IsKeyDown(Keys.NumPad9))
+            {
+                movement.Y = -1;
+                movement.X = 1;
+            }
+            else if (KeyboardState.IsKeyDown(Keys.NumPad1))
+            {
+                movement.X = -1;
+                movement.Y = 1;
+            }
+            else if (KeyboardState.IsKeyDown(Keys.NumPad3))
+            {
+                movement.X = 1;
+                movement.Y = 1;
+            }            
+
+            if(KeyboardState.IsKeyDown(Keys.Space))
 			{
                 action = InputAction.None;
 			}

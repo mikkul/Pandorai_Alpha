@@ -450,6 +450,10 @@ namespace Pandorai
                 spriteBatch.Begin();
                 spriteBatch.Draw(postProcessTexture, ViewportTarget.Bounds.Displace(Camera.ShakeX.Value, Camera.ShakeY.Value), Color.White);
                 spriteBatch.End();
+
+                spriteBatch.Begin();
+                spriteBatch.DrawString(defaultFont, TurnManager.TurnCount.ToString(), new Vector2(0, Camera.Viewport.Bottom - 20), Color.White);
+                spriteBatch.End();
             }
             else if(IsGameStarted)
 			{
@@ -473,10 +477,6 @@ namespace Pandorai
                 spriteBatch.DrawString(defaultFont, Math.Round(fpsCounter.framerate).ToString(), Vector2.Zero, Color.White);
                 spriteBatch.End();
 			}
-
-            spriteBatch.Begin();
-            spriteBatch.DrawString(defaultFont, TurnManager.TurnCount.ToString(), new Vector2(0, Camera.Viewport.Bottom - 20), Color.White);
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }
