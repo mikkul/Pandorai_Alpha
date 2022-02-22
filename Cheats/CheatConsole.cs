@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using System.Linq;
 using Pandorai.Creatures;
 using Pandorai.Items;
+using Pandorai.Creatures.Behaviours;
 
 namespace Pandorai.Cheats
 {
@@ -21,8 +22,9 @@ namespace Pandorai.Cheats
 		public static Dictionary<string, Action> Commands = new Dictionary<string, Action>();
 
 		public static bool IsActive = false;
+        private static Vision _originalPlayerVision;
 
-		public static void InitCommands()
+        public static void InitCommands()
 		{
 			Commands.Add("godmode", () =>
 			{
@@ -34,6 +36,27 @@ namespace Pandorai.Cheats
 			{
 				CheatShortcuts.Activated ^= true;
 			});
+
+			Commands.Add("allvision", () =>
+			{
+				var possesedCreature = Game1.game.Player.PossessedCreature;
+				if(_originalPlayerVision == null)
+				{
+					var allSeeingVision = new AllSeeingVision();
+					allSeeingVision.Owner = possesedCreature;
+					var originalVision = possesedCreature.GetBehaviour<Vision>();
+					possesedCreature.Behaviours.Remove(originalVision);
+					possesedCreature.Behaviours.Add(allSeeingVision);
+					_originalPlayerVision = originalVision;
+				}
+				else
+				{
+					var allSeeingVision = possesedCreature.GetBehaviour<AllSeeingVision>();
+					possesedCreature.Behaviours.Remove(allSeeingVision);
+					possesedCreature.Behaviours.Add(_originalPlayerVision);
+					_originalPlayerVision = null;
+				}
+			});			
 
 			Commands.Add("modifystats", () =>
 			{

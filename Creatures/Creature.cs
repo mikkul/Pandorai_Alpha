@@ -134,9 +134,9 @@ namespace Pandorai.Creatures
 			return Behaviours.Find(x => x.GetType().Name == name);
 		}
 
-		public Behaviour GetBehaviour<T>()
+		public T GetBehaviour<T>() where T : Behaviour
 		{
-			return Behaviours.Find(x => x is T);
+			return Behaviours.Find(x => x is T) as T;
 		}
 
 		public void RequestMovement(Point desiredPosition)

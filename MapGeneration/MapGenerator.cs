@@ -299,6 +299,11 @@ namespace Pandorai.MapGeneration
 			// fill rooms with content
 			foreach (var room in Rooms.RegionList)
 			{
+				if(room == biggestRoom)
+				{
+					continue;
+				}
+				
 				FillRoomWithContent(room);
 			}
 		}
