@@ -41,6 +41,7 @@ namespace Pandorai.Effects
 				user.Stats.Stealth -= Amount;
 				user.Color *= 1 / Opacity;
 				user.GotHit -= revertUse;
+                revertUse = null;
 			};
             user.GotHit += revertUse;
         }
