@@ -551,7 +551,7 @@ namespace Pandorai.Tilemaps
 
 					tilePosition = new Vector2(x * TileSize + finalTileOffset.X, y * TileSize + finalTileOffset.Y);
 
-					if(isVisible)
+					if(!isBlackout)
 					{
 						for (int i = 0; i < tile.TextureIndices.Count; i++)
 						{
@@ -570,14 +570,11 @@ namespace Pandorai.Tilemaps
 								spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.MapObject.Structure.Texture].Rect, tile.MapObject.Structure.ColorTint);
 							}
 						}
-					}
-					else if (!isBlackout)
-					{
-						for (int i = 0; i < tile.TextureIndices.Count; i++)
+
+						if(!isVisible)
 						{
-							Color tileColor = i == 0 ? tile.BaseColor.Brighten(game.Options.TilesOutsideFOVDarkening) : Color.White;
-							spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.TextureIndices[i]].Rect, tileColor);
-						}
+							spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize)), Color.Black * game.Options.TilesOutsideFOVDarkening);
+						}						
 					}
 
 					if(tile.IsDecal)

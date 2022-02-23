@@ -29,6 +29,11 @@ namespace Pandorai.Creatures.Behaviours
 
 		private void Talk(Creature incomingCreature)
 		{
+			if(!incomingCreature.IsPossessedCreature())
+			{
+				return;
+			}
+
 			Game1.game.Player.IsInteractingWithSomeone = true;
 			dialogue.ReadNode(0);
 		}

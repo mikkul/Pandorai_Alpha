@@ -79,7 +79,7 @@ namespace Pandorai.Structures.Behaviours
 			Hits -= damage;
 			if (Hits <= 0)
 			{
-				SoundManager.PlaySound("impactwood22", 0.5f);
+				SoundManager.PlaySound("impactwood22", 0.25f);
 				foreach (var behaviour in holdedBehaviours)
 				{
 					Structure.Interacted += behaviour.Interact;

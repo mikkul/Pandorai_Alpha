@@ -479,7 +479,7 @@ namespace Pandorai.MapGeneration
 			{
 				position = possiblePoints.GetRandomElement(Game1.game.mainRng);
 			}
-			while(map[position.X, position.Y].MapObject != null);
+			while(map[position.X, position.Y].CollisionFlag);
 
 			return position;
 		}
