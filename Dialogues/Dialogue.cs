@@ -8,6 +8,7 @@ using Pandorai.Mechanics;
 using Pandorai.Items;
 using Pandorai.Effects;
 using Pandorai.Conditions;
+using Pandorai.UI;
 
 namespace Pandorai.Dialogues
 {
@@ -43,6 +44,8 @@ namespace Pandorai.Dialogues
 
 		public void ReadNode(int index)
 		{
+			MessageLog.Hide();
+
 			if (index == -1)
 			{
 				return;
@@ -213,6 +216,7 @@ namespace Pandorai.Dialogues
 			if(index == -2)
 			{
 				game.Player.IsInteractingWithSomeone = false;
+				MessageLog.Show();
 			}
 		}
 

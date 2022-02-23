@@ -24,6 +24,16 @@ namespace Pandorai.UI
 			}
 		}
 
+		public static void Show()
+		{
+			panel.Visible = true;
+		}
+
+		public static void Hide()
+		{
+			panel.Visible = false;
+		}
+
 		public static Widget GUI()
 		{
 			panel = new VerticalStackPanel
