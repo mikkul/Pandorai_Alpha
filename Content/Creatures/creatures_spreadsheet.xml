@@ -140,7 +140,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="Skeleton" texture="13" maxHP="120" health="120" strength="36" class="Monster" corpseTexture="68" speed="30" level="2">
+	<creature id="Skeleton" texture="13" maxHP="140" health="140" strength="48" class="Monster" corpseTexture="68" speed="30" level="3">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -186,7 +186,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="ShadowWarrior" texture="14" maxHP="240" health="240" strength="72" class="Monster" corpseTexture="68" speed="28" level="7">
+	<creature id="ShadowWarrior" texture="14" maxHP="360" health="360" strength="101" class="Monster" corpseTexture="68" speed="28" level="7">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -235,7 +235,7 @@
 		</sounds>		
 	</creature>
 
-	<creature id="StoneGuardian" texture="11" maxHP="240" health="240" strength="19" class="Monster" corpseTexture="68" speed="45" level="5" iceResistance="25">
+	<creature id="StoneGuardian" texture="11" maxHP="240" health="240" strength="19" class="Monster" corpseTexture="68" speed="45" level="5" iceResistance="100">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>

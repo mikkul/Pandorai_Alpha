@@ -68,7 +68,7 @@ namespace Pandorai.Creatures
         public static int GetLevelFromExperience(int experience)
         {
             int level = -1;
-            for (int i = 0; i <= experience; i += 1000 + level * 200)
+            for (int i = 0; i <= experience; i += 1000 + level * 400)
             {
                 level++;
             }

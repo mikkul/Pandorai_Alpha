@@ -50,6 +50,12 @@
 			</location>
 		</creature>
 
+		<creature name="Seeker" number="1">
+			<location>
+				<layer where="center" />
+			</location>
+		</creature>		
+
 		<structure name="Grave" number="1"></structure>
 		<item name="FireArrowSpell" number="1">
 			<location>

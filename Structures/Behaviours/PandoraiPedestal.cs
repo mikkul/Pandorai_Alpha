@@ -46,6 +46,9 @@ namespace Pandorai.Structures.Behaviours
 				return;
 			}
 
+            creature.Stats.Health = creature.Stats.MaxHealth;
+            creature.Stats.Mana = creature.Stats.MaxMana;
+
 			DoFancyEffectsAndJingle();
 		}
 
@@ -65,9 +68,10 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
+            Game1.game.Player.PossessedCreature.Stats.Experience += 1500;
+
             Game1.game.Player.PossessedCreature.Inventory.RemoveElement(item);
             Structure.EnableBehaviour("LightEmitter");
-            activated = true;
 
             DoFancyEffectsAndJingle();
 
