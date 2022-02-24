@@ -494,7 +494,10 @@ namespace Pandorai
             // load surface
             Map.SwitchActiveMap(ActiveMap.Surface);
 
-            CreatureManager.Creatures.Clear(); // first clear everything
+            // first clear everything
+            CreatureManager.Creatures.Clear();
+            StructureManager.Structures.Clear();
+            ItemManager.Items.Clear();
             LightingManager.ClearLightSources();
             ParticleSystemManager.Clear();
 
