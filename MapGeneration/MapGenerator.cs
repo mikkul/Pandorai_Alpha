@@ -121,7 +121,7 @@ namespace Pandorai.MapGeneration
 							continue;
 						}
 						map[neighbour.X, neighbour.Y].CollisionFlag = false;
-						map[neighbour.X, neighbour.Y].BaseColor = Color.Red;
+						map[neighbour.X, neighbour.Y].BaseColor = _freeSpaceFloorColor;
 						map[neighbour.X, neighbour.Y].BaseType = 0;
 						map[neighbour.X, neighbour.Y].SetTexture(0);
 					}
