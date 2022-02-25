@@ -420,7 +420,7 @@ namespace Pandorai.MapGeneration
 				var chosenItems2 = GetWeightedChoices(itemSet2, weightsSet2, 1);
 
 				var itemSet3 = new[] { "", "BlinkPotion" };
-				var weightsSet3 = new[] { 3, 1 };
+				var weightsSet3 = new[] { 3, 3 };
 				var chosenItems3 = GetWeightedChoices(itemSet3, weightsSet3, 1);				
 
 				var chosenItems = chosenItems1.Concat(chosenItems2).Concat(chosenItems3);
@@ -439,7 +439,7 @@ namespace Pandorai.MapGeneration
 			// place chests
 			for (int i = 0; i < 2; i++)
 			{
-				bool doPlace = rng.NextFloat() < 0.2f;
+				bool doPlace = rng.NextFloat() < 0.3f;
 				if(!doPlace)
 				{
 					continue;
@@ -482,7 +482,7 @@ namespace Pandorai.MapGeneration
 				var barrelContainer = barrel.GetBehaviour<Container>();
 
 				var itemSet1 = new[] { "", "HealthPotion", "ManaPotion" };
-				var weightsSet1 = new[] { 10, 3, 1 };
+				var weightsSet1 = new[] { 9, 3, 1 };
 				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 1);
 
 				foreach (var itemName in chosenItems1)
