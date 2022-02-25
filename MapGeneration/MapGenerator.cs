@@ -79,7 +79,7 @@ namespace Pandorai.MapGeneration
 
 			ProcessRooms();
 
-			DoSomethingAboutUnreachableSpace();
+			//DoSomethingAboutUnreachableSpace(); nvm it makes things even worse
 
 			PlaceTeleporters();
 
