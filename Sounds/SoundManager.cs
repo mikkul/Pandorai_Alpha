@@ -26,7 +26,7 @@ namespace Pandorai.Sounds
             {
                 var filePath = Path.ChangeExtension(fullFilePath, null);
                 filePath = filePath.Replace(Game1.game.Content.RootDirectory, null);
-                if(filePath[0] == '/')
+                if (filePath.StartsWith("/") || filePath.StartsWith(@"\"))
                 {
                     filePath = filePath.Remove(0, 1);
                 }
@@ -38,7 +38,7 @@ namespace Pandorai.Sounds
             {
                 var filePath = Path.ChangeExtension(fullFilePath, null);
                 filePath = filePath.Replace(Game1.game.Content.RootDirectory, null);
-                if(filePath[0] == '/')
+                if (filePath.StartsWith("/") || filePath.StartsWith(@"\"))
                 {
                     filePath = filePath.Remove(0, 1);
                 }
