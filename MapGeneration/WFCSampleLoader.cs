@@ -4,6 +4,7 @@ using System.IO;
 using Pandorai.Utility;
 using System.Xml;
 using System;
+using System.Globalization;
 
 namespace Pandorai.MapGeneration
 {
@@ -42,7 +43,7 @@ namespace Pandorai.MapGeneration
 				float multiplier = 1.0f;
 				if(node.HasAttribute("multiplier"))
 				{
-					multiplier = float.Parse(node.GetAttribute("multiplier"));
+					multiplier = float.Parse(node.GetAttribute("multiplier"), CultureInfo.InvariantCulture.NumberFormat);
 				}
 				sample.TileColorLegend.Add(color, type);
 				sample.ColorMultiplierLegend.Add(color, multiplier);
