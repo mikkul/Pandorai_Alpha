@@ -45,6 +45,13 @@ namespace Pandorai.Effects
             {
                 SoundManager.PlaySound("Trap_01");
             }
+
+            DisplayMessage(user);
+        }
+
+		protected override string GetMessage()
+        {
+            return "You spawn stone spikes around you";
         }
     }
 }

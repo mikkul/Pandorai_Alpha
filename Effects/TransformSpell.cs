@@ -69,8 +69,14 @@ namespace Pandorai.Effects
                     effectTimer.Start();
 
                     SoundManager.PlaySound("spell");
+                    DisplayMessage(user);
                 }
             }
+        }
+
+		protected override string GetMessage()
+        {
+            return "You transform into another creature";
         }
     }
 }

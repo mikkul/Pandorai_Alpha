@@ -42,8 +42,22 @@ namespace Pandorai.Effects
 				user.Color *= 1 / Opacity;
 				user.GotHit -= revertUse;
                 revertUse = null;
+                DisplayMessage(user);
 			};
             user.GotHit += revertUse;
+            DisplayMessage(user);
+        }
+
+		protected override string GetMessage()
+        {
+            if(equiped)
+            {
+                return "You equip the stealth item";
+            }
+            else
+            {
+                return "You dequip the stealth item";
+            }
         }
     }
 }

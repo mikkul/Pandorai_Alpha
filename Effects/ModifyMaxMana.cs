@@ -17,6 +17,19 @@ namespace Pandorai.Effects
         public override void Use(Creature usingCreature)
         {
             usingCreature.Stats.MaxMana += Amount;
+            DisplayMessage(usingCreature);
+        }
+
+		protected override string GetMessage()
+        {
+            if(Amount > 0)
+            {
+                return $"Your max mana increased by \\c[green]{Amount}";
+            }
+            else
+            {
+                return $"Your max mana decreased by \\c[red]{-Amount}";
+            }
         }
     }
 }

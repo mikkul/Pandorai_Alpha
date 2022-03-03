@@ -21,10 +21,16 @@ namespace Pandorai.Effects
 
             usingCreature.RequestMovement(new Point(randomX, randomY));
             SoundManager.PlaySound("teleport");
+            DisplayMessage(usingCreature);
         }
 
         public override void SetAttribute(string name, string value)
         {
+        }
+
+        protected override string GetMessage()
+        {
+            return "You blink into a random location";
         }
     }
 }

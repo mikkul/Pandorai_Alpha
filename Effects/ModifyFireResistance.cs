@@ -17,6 +17,19 @@ namespace Pandorai.Effects
         public override void Use(Creature usingCreature)
         {
             usingCreature.Stats.FireResistance += Amount;
+            DisplayMessage(usingCreature);
+        }
+
+        protected override string GetMessage()
+        {
+            if(Amount > 0)
+            {
+                return $"Your fire resistance increased by \\c[green]{Amount}%";
+            }
+            else
+            {
+                return $"Your fire resistance decreased by \\c[red]{-Amount}%";
+            }
         }
     }
 }

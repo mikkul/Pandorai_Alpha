@@ -88,6 +88,12 @@ namespace Pandorai.Effects
 			damageTimer.Start();
 
 			SoundManager.PlaySound("Spell_02");
+			DisplayMessage(user);
 		}
-	}
+
+        protected override string GetMessage()
+        {
+            return "You cast a deadly wave";
+        }
+    }
 }

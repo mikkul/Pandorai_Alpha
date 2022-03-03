@@ -46,10 +46,19 @@ namespace Pandorai.Effects
                 }
             };
             
-            if(usingCreature.IsPossessedCreature())
-            {
-                MessageLog.DisplayMessage($"Your speed {_modifier}");
-            }
+            DisplayMessage(usingCreature);
         }
+
+		protected override string GetMessage()
+        {
+            if(Amount > 0)
+            {
+                return $"Your speed increased by \\c[green]{Amount}";
+            }
+            else
+            {
+                return $"Your speed decreased by \\c[red]{-Amount}";
+            }
+        }   
     }
 }

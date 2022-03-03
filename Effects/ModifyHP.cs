@@ -17,6 +17,19 @@ namespace Pandorai.Effects
 		public override void Use(Creature usingCreature)
 		{
 			usingCreature.Stats.Health += Amount;
+			DisplayMessage(usingCreature);
 		}
+
+		protected override string GetMessage()
+        {
+            if(Amount > 0)
+            {
+                return $"Your health increased by \\c[green]{Amount}";
+            }
+            else
+            {
+                return $"Your health decreased by \\c[red]{-Amount}";
+            }
+        }
 	}
 }

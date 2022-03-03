@@ -157,9 +157,15 @@ namespace Pandorai.Effects
 				effectTimer.Start();
 				damageTimer.Start();
 				SoundManager.PlaySound("fireball0");
+				DisplayMessage(user);
 			};
 
 			TileInteractionManager.TileClick += UseHandler;
 		}
-	}
+
+        protected override string GetMessage()
+        {
+            return "You cast an ice projectile";
+        }
+    }
 }
