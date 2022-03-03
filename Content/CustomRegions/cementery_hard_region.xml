@@ -59,7 +59,7 @@
 					<invItem name="ManaPotion" number="1" chance="25" />
 				</choice>
 				<invItem name="StoneSpikesSpell" number="2" />
-				<invItem name="SpeedPotion" number="2" />
+				<invItem name="SpeedPotion" number="1" />
 			</inventory>
 		</structure>        
 

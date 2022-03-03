@@ -12,6 +12,7 @@ using Pandorai.Creatures.Behaviours;
 using System.Linq;
 using Pandorai.Sounds;
 using Pandorai.UI;
+using Pandorai.ParticleSystems;
 
 namespace Pandorai.Creatures
 {
@@ -81,6 +82,8 @@ namespace Pandorai.Creatures
 		private byte damageFlashSpeed = 15;
 		private Timer damageFlashTimer1;
 		private Timer damageFlashTimer2;
+
+		private bool _savedByGod = false;
 
 		public Creature(Game1 _game)
 		{
@@ -316,20 +319,45 @@ namespace Pandorai.Creatures
 			DamageFlash();
 			if (Stats.Health <= 0)
 			{
-				if(byWhom.IsPossessedCreature())
+				if(this.IsPossessedCreature() && !_savedByGod)
 				{
-					MessageLog.DisplayMessage($"You killed the {this.Id}", Color.DarkGreen);
+					_savedByGod = true;
+					var chance = Game1.game.mainRng.NextDouble();
+					if(chance < 0.5)
+					{
+						Stats.Health = 1;
+						MessageLog.DisplayMessage("You have miraculously avoided death", Color.Pink);
+						SoundManager.PlaySound("FX148");
+						var particleSystemEffect = new PSImplosion(this.Position, 100, Game1.game.fireParticleTexture, 2000, Game1.game.Map.TileSize, 40, Color.Green, true, Game1.game);
+						ParticleSystemManager.AddSystem(particleSystemEffect, true);
+					}
+					else
+					{
+						NormalHit(byWhom);
+					}
 				}
-				else if(this.IsPossessedCreature())
-				{
-					MessageLog.DisplayMessage($"You got killed by a {byWhom.Id}!", Color.DarkRed);
-				}
-				byWhom.Stats.Experience += CreatureStats.GetKillExperience(Stats.Level);
-				Stats.Health = 0;
-				IsAlive = false;
-				OnDeath();
-			}
-		}
+				else
+                {
+                    NormalHit(byWhom);
+                }
+            }
+
+            void NormalHit(Creature byWhom)
+            {
+                if (byWhom.IsPossessedCreature())
+                {
+                    MessageLog.DisplayMessage($"You killed the {this.Id}", Color.DarkGreen);
+                }
+                else if (this.IsPossessedCreature())
+                {
+                    MessageLog.DisplayMessage($"You got killed by a {byWhom.Id}!", Color.DarkRed);
+                }
+                byWhom.Stats.Experience += CreatureStats.GetKillExperience(Stats.Level);
+                Stats.Health = 0;
+                IsAlive = false;
+                OnDeath();
+            }
+        }
 
 		public void Move(Point index)
 		{
