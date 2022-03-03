@@ -500,6 +500,7 @@ namespace Pandorai
             ItemManager.Items.Clear();
             LightingManager.ClearLightSources();
             ParticleSystemManager.Clear();
+            MessageLog.Clear();
 
             // display loading sreeen and music
             SoundManager.PlayMusic("Loading");

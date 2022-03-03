@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Myra.Graphics2D.UI;
+using Pandorai.UI;
 
 namespace Pandorai.Dialogues
 {
@@ -15,6 +15,8 @@ namespace Pandorai.Dialogues
 		private Random rng = new Random();
 
 		private List<int> lastTrivias = new List<int>();
+
+		private static string _sidekickThought = @"\c[#9160bf]...";
 
 		public Trivia(string _fileName)
 		{
@@ -31,6 +33,8 @@ namespace Pandorai.Dialogues
 					string line;
 					while((line = reader.ReadLine()) != null)
 					{
+						line = line.Insert(0, $"{_sidekickThought} ");
+						line = line.Insert(line.Length, $" {_sidekickThought}");
 						lines.Add(line);
 					}
 				}
@@ -56,10 +60,9 @@ namespace Pandorai.Dialogues
 
 		public void DisplayRandomTrivia(Game1 game)
 		{
-			if (game.TurnManager.TurnCount % 15 == 0 && !game.Player.IsInteractingWithSomeone)
+			if (game.TurnManager.TurnCount % 50 == 0)
 			{
-				DialogueManager.SetNameLabel("Hmm");
-				DialogueManager.SetTextContent(GetRandomTrivia());
+				MessageLog.DisplayMessage(GetRandomTrivia(), Color.Gray);
 			}
 		}
 	}
