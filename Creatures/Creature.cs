@@ -11,6 +11,7 @@ using Pandorai.Structures;
 using Pandorai.Creatures.Behaviours;
 using System.Linq;
 using Pandorai.Sounds;
+using Pandorai.UI;
 
 namespace Pandorai.Creatures
 {
@@ -298,6 +299,15 @@ namespace Pandorai.Creatures
 
 		public void GetHit(float damage, Creature byWhom)
 		{
+			if(byWhom.IsPossessedCreature())
+			{
+				MessageLog.DisplayMessage($"You hit the {this.Id} for {damage} damage", Color.Green);
+			}
+			else if(this.IsPossessedCreature())
+			{
+				MessageLog.DisplayMessage($"You got hit by a {byWhom.Id} for {damage} damage", Color.Red);
+			}
+
 			if(MapIndex.IsInRangeOfPlayer())
 			{
 				SoundManager.PlaySound(Sounds.Hurt);
@@ -306,6 +316,14 @@ namespace Pandorai.Creatures
 			DamageFlash();
 			if (Stats.Health <= 0)
 			{
+				if(byWhom.IsPossessedCreature())
+				{
+					MessageLog.DisplayMessage($"You killed the {this.Id}", Color.DarkGreen);
+				}
+				else if(this.IsPossessedCreature())
+				{
+					MessageLog.DisplayMessage($"You got killed by a {byWhom.Id}!", Color.DarkRed);
+				}
 				byWhom.Stats.Experience += CreatureStats.GetKillExperience(Stats.Level);
 				Stats.Health = 0;
 				IsAlive = false;

@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Xna.Framework;
 using Pandorai.ParticleSystems;
 using Pandorai.Sounds;
 using Pandorai.UI;
@@ -118,7 +119,7 @@ namespace Pandorai.Creatures
         {
             if(_owner.IsPossessedCreature())
             {
-                MessageLog.DisplayMessage($"You gained {delta} experience. Current experience: {Experience}");
+                MessageLog.DisplayMessage($"You gained {delta} experience", Color.LightGoldenrodYellow);
             }
 
             var newLevel = GetLevelFromExperience(Experience);
@@ -143,7 +144,7 @@ namespace Pandorai.Creatures
 
             if(_owner.IsPossessedCreature())
             {
-                MessageLog.DisplayMessage($"You have advanced to level {Level}");
+                MessageLog.DisplayMessage($"You have advanced to level {Level}!", Color.Yellow);
                 SoundManager.PlaySound("FX146");
 
                 var effectTime = 4000;
