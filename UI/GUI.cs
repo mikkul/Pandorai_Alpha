@@ -98,6 +98,7 @@ namespace Pandorai.UI
                 Width = 700,
                 Height = 650,
             };
+            characterStatsWindow.CloseButton.Visible = false;
             
             PropertyGrid contentGrid = new PropertyGrid
             {

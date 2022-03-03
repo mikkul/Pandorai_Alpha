@@ -119,7 +119,7 @@ namespace Pandorai.Creatures
         {
             if(_owner.IsPossessedCreature())
             {
-                MessageLog.DisplayMessage($"You gained {delta} experience", Color.LightGoldenrodYellow);
+                MessageLog.DisplayMessage($"You gained {delta} experience", Color.Yellow);
             }
 
             var newLevel = GetLevelFromExperience(Experience);
