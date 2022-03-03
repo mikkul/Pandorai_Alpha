@@ -20,7 +20,7 @@
 			</location>
 		</structure>
 
-		<structure name="BookStand" number="6-8">
+		<structure name="BookStand" number="4-5">
 			<location>
 				<layer where="border" />
 				<proximity to="MainEntrance" distance="very far" tolerance="4" />
@@ -33,4 +33,3 @@
 		
 	</content>
 </customRegion>
-

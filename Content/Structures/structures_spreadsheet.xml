@@ -33,6 +33,9 @@
 		</behaviour>
 	</structure>
 	<structure id="BookStand" texture="72">
+		<behaviour name="BookStand">
+			<ExperienceGained>50</ExperienceGained>
+		</behaviour>
 		<behaviour name="Destructible">
 			<Force>Fire</Force>
 		</behaviour>

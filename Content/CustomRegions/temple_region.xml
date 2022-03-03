@@ -26,6 +26,12 @@
 			</location>
 		</entrance>
 
+		<structure name="BookStand" number="5-6">
+			<location>
+				<layer where="border" />
+			</location>
+		</structure>
+
 		<structure name="Chest" number="1">
 			<location>
 				<stripe direction="across" position="100" />

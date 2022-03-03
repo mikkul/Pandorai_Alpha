@@ -409,6 +409,14 @@ namespace Pandorai.MapGeneration
 				PlaceStructure("Torch", position);
 			}
 
+			// place bookstands
+			for (int i = 0; i < 2; i++)
+			{
+				bool doPlace = rng.NextFloat() < 0.75f;
+				var position = GetRandomUntakenPosition(room.InteriorLayers[0]);
+				PlaceStructure("BookStand", position);
+			}
+
 			// place items
 			{
 				var itemSet1 = new[] { "", "YellowKey", "BlueKey", "SmallHealthPotion", "SmallManaPotion" };
