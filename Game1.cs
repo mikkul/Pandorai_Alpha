@@ -156,6 +156,7 @@ namespace Pandorai
 
             //TurnManager.PlayerActionStarted += Player.StartTurn;
             TurnManager.PlayerTurnEnded += Player.FinishTurn;
+            TurnManager.PlayerTurnEnded += Sidekick.ConsiderTips;
 
             TurnManager.EnemyTurnCame += CreatureManager.MakeCreaturesThink;
             TurnManager.EnemyTurnEnded += CreatureManager.EndCreaturesTurn;

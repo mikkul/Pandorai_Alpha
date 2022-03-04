@@ -538,6 +538,7 @@ namespace Pandorai.MapGeneration
 				if(doPlace)
 				{
 					var position = GetRandomUntakenPosition(room.Area);
+					map[position.X, position.Y].Modifier |= TileModifier.Trap;
 					map[position.X, position.Y].CreatureCame += c =>
 					{
 						var spawnSpikesEffect = new SpawnSpikes

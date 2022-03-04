@@ -3,6 +3,7 @@ using Pandorai.Creatures;
 using Pandorai.Effects;
 using Pandorai.Sounds;
 using Pandorai.UI;
+using System;
 using System.Collections.Generic;
 
 namespace Pandorai.Items
@@ -66,6 +67,7 @@ namespace Pandorai.Items
 		}
 	}
 
+	[Flags]
 	public enum ItemType
 	{
 		Spell = 1,

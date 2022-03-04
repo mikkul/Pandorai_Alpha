@@ -29,7 +29,7 @@ namespace Pandorai.Mechanics
 		static ImageTextButton selectedItemButton;
 		public static bool WasItemDragged = false;
 
-		static Vector2 position;
+		public static Vector2 position;
 
 		static PSSparkles sparkles;
 
@@ -49,6 +49,8 @@ namespace Pandorai.Mechanics
 		static float maxDistance = 12;
 		static float strafeDistance = 2;
 
+		static SidekickTips tips;
+
 		public static void Init()
 		{
 			game = Game1.game;
@@ -64,6 +66,8 @@ namespace Pandorai.Mechanics
 			sparkles = new PSSparkles(Vector2.Zero, 100, game.squareTexture, 1500, 35, 5, 1000, Color.Violet, true, game);
 
 			noise = new OpenSimplexNoise();
+			
+			tips = new SidekickTips();
 		}
 
 		public static void InitLate()
@@ -72,6 +76,11 @@ namespace Pandorai.Mechanics
 			ParticleSystemManager.AddSystem(sparkles, false);
 			thinkingTimer = 0;
 			newMovementChangeTime = 2500;
+		}
+
+		public static void ConsiderTips()
+		{
+			tips.Update();
 		}
 
 		public static void AdjustToTileSize(int oldSize, int newSize)
