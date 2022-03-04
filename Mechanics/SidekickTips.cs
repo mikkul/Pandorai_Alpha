@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.Items;
+using Pandorai.Structures.Behaviours;
 using Pandorai.Tilemaps;
 using Pandorai.UI;
 using Pandorai.Utility;
@@ -18,18 +16,25 @@ namespace Pandorai.Mechanics
         private Creature _creature;
 
         private List<Point> _lastSearchArea = new ();
+
+        private int _turnCounter;
+        private int _messageFrequency = 20;
         
         public void Update()
         {
             _creature = Game1.game.Player.PossessedCreature;
+            _turnCounter++;
             SearchArea();
-            //SearchValuableItems();
+            if(_turnCounter >= _messageFrequency)
+            {
+                _turnCounter = 0;
+            }
         }
 
         private void SearchArea()
         {
             List<Point> area = GetArea();
-            //DebugShowSearchedArea(area);
+            DebugShowSearchedArea(area);
             SearchValuableItems(area);
             SearchMonsters(area);
             SearchTraps(area);
@@ -43,7 +48,13 @@ namespace Pandorai.Mechanics
                 var tile = Game1.game.Map.GetTile(point);
                 if(tile.Modifier.HasFlag(TileModifier.Trap))
                 {
-                    MessageLog.DisplayMessage(@"\c[#9160bf]I sense a trap somewhere...");
+                    var dist = Vector2.Distance(point.ToVector2(), _creature.MapIndex.ToVector2());
+                    var chance = 1 - dist / (SearchRange + 1);
+                    chance = MathHelper.Clamp(chance, 0.15f, 0.75f);
+                    if(Game1.game.mainRng.NextFloat() < chance)
+                    {
+                        DisplayMessage(@"\c[#9160bf]I sense a trap somewhere", point);
+                    }
                 }
             }
         }
@@ -61,7 +72,13 @@ namespace Pandorai.Mechanics
 
                 if(creature.Stats.Level - _creature.Stats.Level > dangerLevelDifference)
                 {
-                    MessageLog.DisplayMessage(@"\c[#9160bf]There's something dangerous around...");
+                    var dist = Vector2.Distance(point.ToVector2(), _creature.MapIndex.ToVector2());
+                    var chance = 1 - dist / (SearchRange + 1);
+                    chance = MathHelper.Clamp(chance, 0.15f, 0.75f);
+                    if(Game1.game.mainRng.NextFloat() < chance)
+                    {
+                        DisplayMessage(@"\c[#9160bf]There's something dangerous", point);
+                    }
                 }
             }
         }
@@ -72,19 +89,108 @@ namespace Pandorai.Mechanics
             foreach (var point in area)
             {
                 var tile = Game1.game.Map.GetTile(point);
-                if(!tile.HasItem())
+
+                Item itemFound = null;
+
+                if(tile.HasItem())
+                {
+                    itemFound = tile.MapObject.Item;
+                }
+                else if(tile.HasStructure() && tile.MapObject.Structure.GetBehaviour<Container>() != null)
+                {
+                    var container = tile.MapObject.Structure.GetBehaviour<Container>();
+                    itemFound = container.Inventory.Items[0].Item;
+                }
+                else
                 {
                     continue;
                 }
 
                 foreach (var valuableType in valuableItemTypes)
                 {
-                    if(tile.MapObject.Item.Type.HasFlag(valuableType))
+                    if(itemFound.Type.HasFlag(valuableType))
                     {
-                        MessageLog.DisplayMessage(@"\c[#9160bf]There's a valuable object somwhere there...");
-                        break;
+                        var dist = Vector2.Distance(point.ToVector2(), _creature.MapIndex.ToVector2());
+                        var chance = 1 - dist / (SearchRange + 1);
+                        chance = MathHelper.Clamp(chance, 0.15f, 0.75f);
+                        if(Game1.game.mainRng.NextFloat() < chance)
+                        {
+                            DisplayMessage(@"\c[#9160bf]There's a valuable object somwhere", point);
+                            break;
+                        }
                     }
                 }
+            }
+        }
+
+        private void DisplayMessage(string message, Point point)
+        {
+            // add direction to the message
+            message += " at ";
+            int threshold = 3;
+            var horizontalDist = point.X - _creature.MapIndex.X;
+            var verticalDist = point.Y - _creature.MapIndex.Y;
+            if(verticalDist < 0)
+            {
+                message += "North";
+            }
+            else if(verticalDist > 0)
+            {
+                message += "South";
+            }
+            if(horizontalDist < 0)
+            {
+                message += "West";
+            }
+            else if(horizontalDist > 0)
+            {
+                message += "East";
+            }
+            // if(Math.Abs(Math.Abs(horizontalDist) - Math.Abs(verticalDist)) >= threshold)
+            // {
+            //     // show both directions
+            //     if(verticalDist < 0)
+            //     {
+            //         message += "North";
+            //     }
+            //     else if(verticalDist > 0)
+            //     {
+            //         message += "South";
+            //     }
+            //     if(horizontalDist < 0)
+            //     {
+            //         message += "West";
+            //     }
+            //     else if(horizontalDist > 0)
+            //     {
+            //         message += "East";
+            //     }
+            // }
+            // else
+            // {
+            //     // show only one direction
+            //     if(verticalDist < 0)
+            //     {
+            //         message += "North";
+            //     }
+            //     else if(verticalDist > 0)
+            //     {
+            //         message += "South";
+            //     }
+            //     else if(horizontalDist < 0)
+            //     {
+            //         message += "West";
+            //     }
+            //     else if(horizontalDist > 0)
+            //     {
+            //         message += "East";
+            //     }
+            // }
+
+            //
+            if(_turnCounter >= _messageFrequency)
+            {
+                MessageLog.DisplayMessage(message);
             }
         }
 

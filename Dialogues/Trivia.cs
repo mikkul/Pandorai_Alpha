@@ -16,7 +16,7 @@ namespace Pandorai.Dialogues
 
 		private List<int> lastTrivias = new List<int>();
 
-		private static string _sidekickThought = @"\c[#9160bf]...";
+		private static string _sidekickThought = @"\c[#c6bdc9]...";
 
 		public Trivia(string _fileName)
 		{
@@ -60,7 +60,7 @@ namespace Pandorai.Dialogues
 
 		public void DisplayRandomTrivia(Game1 game)
 		{
-			if (game.TurnManager.TurnCount % 50 == 0)
+			if (game.TurnManager.TurnCount % 100 == 0)
 			{
 				MessageLog.DisplayMessage(GetRandomTrivia(), Color.Gray);
 			}
