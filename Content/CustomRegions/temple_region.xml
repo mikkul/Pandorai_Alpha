@@ -26,6 +26,12 @@
 			</location>
 		</entrance>
 
+		<choice>
+			<item name="MediumEndurancePotion" number="1"></item>
+			<item name="MediumEnergyPotion" number="1"></item>
+			<item name="MediumStrengthPotion" number="1"></item>
+		</choice>
+
 		<structure name="BookStand" number="5-6">
 			<location>
 				<layer where="border" />

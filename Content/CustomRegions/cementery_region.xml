@@ -37,7 +37,13 @@
 		</item>
 
 		<item name="SmallManaPotion" number="3">
-		</item>		
+		</item>	
+
+		<choice>
+			<item name="MediumEndurancePotion" number="1"></item>
+			<item name="MediumEnergyPotion" number="1"></item>
+			<item name="MediumStrengthPotion" number="1"></item>
+		</choice>
 
 		<structure name="Chest" number="1">
 			<location>

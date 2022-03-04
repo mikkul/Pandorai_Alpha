@@ -27,6 +27,12 @@
 			</location>
 		</creature>
 
+		<choice>
+			<item name="LargeEndurancePotion" number="1"></item>
+			<item name="LargeEnergyPotion" number="1"></item>
+			<item name="LargeStrengthPotion" number="1"></item>
+		</choice>
+
 		<structure name="WarriorTomb" number="1">
 			<location>
 				<layer where="center" />

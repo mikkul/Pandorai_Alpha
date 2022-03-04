@@ -429,9 +429,13 @@ namespace Pandorai.MapGeneration
 
 				var itemSet3 = new[] { "", "BlinkPotion" };
 				var weightsSet3 = new[] { 3, 3 };
-				var chosenItems3 = GetWeightedChoices(itemSet3, weightsSet3, 1);				
+				var chosenItems3 = GetWeightedChoices(itemSet3, weightsSet3, 1);
 
-				var chosenItems = chosenItems1.Concat(chosenItems2).Concat(chosenItems3);
+				var itemSet4 = new[] { "", "SmallStrengthPotion", "SmallEndurancePotion", "SmallEnergyPotion" };
+				var weightsSet4 = new[] { 12, 3, 3, 3 };
+				var chosenItems4 = GetWeightedChoices(itemSet4, weightsSet4, 1);				
+
+				var chosenItems = chosenItems1.Concat(chosenItems2).Concat(chosenItems3).Concat(chosenItems4);
 
 				foreach (var itemName in chosenItems)
 				{
