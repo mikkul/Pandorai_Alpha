@@ -534,18 +534,14 @@ namespace Pandorai.MapGeneration
 
 			// place traps
 			{
-				bool doPlace = rng.NextFloat() < 0.225f;
+				bool doPlace = rng.NextFloat() < 0.5f;
 				if(doPlace)
 				{
 					var position = GetRandomUntakenPosition(room.Area);
 					map[position.X, position.Y].Modifier |= TileModifier.Trap;
+					map[position.X, position.Y].BaseColor = map[position.X, position.Y].BaseColor.Brighten(-0.2f);
 					map[position.X, position.Y].CreatureCame += c =>
 					{
-						var spawnSpikesEffect = new SpawnSpikes
-						{
-							Damage = 45,
-						};
-						spawnSpikesEffect.Use(c);
 						c.GetHit(45f, c);
 						c.OnGotHit(c);
 					};

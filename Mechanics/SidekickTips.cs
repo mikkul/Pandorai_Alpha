@@ -34,7 +34,7 @@ namespace Pandorai.Mechanics
         private void SearchArea()
         {
             List<Point> area = GetArea();
-            DebugShowSearchedArea(area);
+            //DebugShowSearchedArea(area);
             SearchValuableItems(area);
             SearchMonsters(area);
             SearchTraps(area);
