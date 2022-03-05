@@ -139,6 +139,9 @@ namespace Pandorai.Sprites
 			AddMapSprite(256, 704, 64, 64, 0, 0); // potion of endurance 93
 			AddMapSprite(320, 704, 64, 64, 0, 0); // potion of energy 94
 			AddMapSprite(384, 704, 64, 64, 0, 0); // potion of strength 95
+
+			AddMapSprite(448, 704, 64, 64, 0, 0); // slingshot 96
+			AddMapSprite(512, 704, 64, 64, 0, 0); // stone 97
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

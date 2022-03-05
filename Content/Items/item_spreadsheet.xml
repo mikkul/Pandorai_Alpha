@@ -146,5 +146,13 @@
 		<effect name="ModifyMana">
 			<Amount>6</Amount>
 		</effect>
-	</item>		
+	</item>
+	<item id="Slingshot" texture="96" consumable="False" name="Slingshot" tooltipColor="white" description="Allows user to shot stones" type="Offensive">
+		<effect name="Slingshot">
+			<Damage>10</Damage>
+			<Range>5</Range>
+		</effect>
+	</item>
+	<item id="Stone" texture="97" consumable="False" name="Stone" tooltipColor="white" description="Can be used as an ammunition" type="Other">
+	</item>	
 </items>

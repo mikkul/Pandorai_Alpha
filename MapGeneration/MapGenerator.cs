@@ -542,6 +542,11 @@ namespace Pandorai.MapGeneration
 					map[position.X, position.Y].BaseColor = map[position.X, position.Y].BaseColor.Brighten(-0.2f);
 					map[position.X, position.Y].CreatureCame += c =>
 					{
+						var spawnSpikesEffect = new SpawnSpikes
+						{
+							Damage = 0,
+						};
+						spawnSpikesEffect.Use(c);
 						c.GetHit(45f, c);
 						c.OnGotHit(c);
 					};

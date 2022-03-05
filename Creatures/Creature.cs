@@ -13,6 +13,7 @@ using System.Linq;
 using Pandorai.Sounds;
 using Pandorai.UI;
 using Pandorai.ParticleSystems;
+using Pandorai.Utility;
 
 namespace Pandorai.Creatures
 {
@@ -89,6 +90,9 @@ namespace Pandorai.Creatures
 		{
 			game = _game;
 			Inventory = new Inventory(this);
+
+			var stonesCount = Game1.game.mainRng.Next(0, 3);
+			Inventory.AddElement(ItemLoader.GetItem("Stone"), stonesCount);
 
 			Died += () =>
 			{

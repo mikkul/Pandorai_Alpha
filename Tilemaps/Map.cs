@@ -160,18 +160,18 @@ namespace Pandorai.Tilemaps
 				{
 					info.Tile.DecalColor = mouseHiglightDecalColor;
 				}
-
-				lastHoveredOverTile = info.Index;
 			}
 			else
 			{
-				Tiles[lastHoveredOverTile.X, lastHoveredOverTile.Y].DecalColor = Color.LightGreen;
+				Tiles[lastHoveredOverTile.X, lastHoveredOverTile.Y].DecalColor = Color.Gray * 0.5f;
 
 				if (highlightedTiles.Contains(info.Index))
 				{
-					info.Tile.DecalColor = Color.Yellow;
+					info.Tile.DecalColor = Color.Yellow * 0.5f;
 				}
 			}
+
+			lastHoveredOverTile = info.Index;
 		}
 
 		public void GenerateTilesFromTilemap()
@@ -379,7 +379,7 @@ namespace Pandorai.Tilemaps
 
 					Point pos = new Point(area.Left + x, area.Top + y);
 					Tiles[pos.X, pos.Y].IsDecal = true;
-					Tiles[pos.X, pos.Y].DecalColor = Color.LightGreen;
+					Tiles[pos.X, pos.Y].DecalColor = Color.Gray * 0.5f;
 					highlightedTiles.Add(pos);
 				}
 			}
@@ -393,7 +393,7 @@ namespace Pandorai.Tilemaps
 				if (!Tiles.IsPointInBounds(point)) continue;
 
 				Tiles[point.X, point.Y].IsDecal = true;
-				Tiles[point.X, point.Y].DecalColor = Color.LightGreen;
+				Tiles[point.X, point.Y].DecalColor = Color.Gray * 0.5f;
 				highlightedTiles.Add(point);
 			}
 		}

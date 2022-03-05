@@ -30,6 +30,8 @@
 		<item name="YellowKey" number="3"></item>
 
 		<item name="HealthPotion" number="1"></item>
+
+		<item name="Slingshot" number="1"></item>
 		
 	</content>
 </customRegion>
