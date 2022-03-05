@@ -75,5 +75,6 @@ namespace Pandorai.Items
 		Offensive = 4,
 		Clothes = 8,
 		Other = 16,
+		Ranged = 32,
 	}
 }

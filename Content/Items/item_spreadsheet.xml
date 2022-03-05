@@ -147,7 +147,7 @@
 			<Amount>6</Amount>
 		</effect>
 	</item>
-	<item id="Slingshot" texture="96" consumable="False" name="Slingshot" tooltipColor="white" description="Allows user to shot stones" type="Offensive">
+	<item id="Slingshot" texture="96" consumable="False" name="Slingshot" tooltipColor="white" description="Allows user to shot stones" type="Ranged/Offensive">
 		<effect name="Slingshot">
 			<Damage>10</Damage>
 			<Range>5</Range>

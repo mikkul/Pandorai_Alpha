@@ -92,6 +92,7 @@ namespace Pandorai.Creatures
 			Inventory = new Inventory(this);
 
 			var stonesCount = Game1.game.mainRng.Next(0, 3);
+			Inventory.RemoveElement("Stone", 9999);
 			Inventory.AddElement(ItemLoader.GetItem("Stone"), stonesCount);
 
 			Died += () =>

@@ -171,6 +171,7 @@ namespace Pandorai
                     Options.TileSize = Options.DefaultUnitSize;
                 }
             };
+            InputManager.SingleKeyPress += Player.HandleKeyInput;
 
             InputManager.MouseMove += GameStateManager.CheckIfMouseOverViewport;
             InputManager.LMBClick += GameStateManager.CheckIfLMBClickInViewport;

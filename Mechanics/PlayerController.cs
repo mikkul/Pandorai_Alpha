@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using Pandorai.Utility;
 using Pandorai.UI;
+using System.Linq;
 
 namespace Pandorai.Mechanics
 {
@@ -100,6 +101,18 @@ namespace Pandorai.Mechanics
 			}
 		}
 
+        public void HandleKeyInput(Keys key)
+        {
+            if(key == Keys.R) // use ranged weapon
+			{
+				var rangedWeapon = game.Player.PossessedCreature.Inventory.Items.FirstOrDefault(x => x.Item.Type.HasFlag(Items.ItemType.Ranged));
+				if(rangedWeapon != null)
+				{
+					rangedWeapon.Item.Use(game.Player.PossessedCreature);
+				}
+			}
+        }		
+
 		public void MoveByMouse(TileInfo tileInfo)
 		{
 			if (CheatConsole.IsActive || game.Player.IsInteractingWithSomeone || game.Map.AreTilesInteractive || HoldingControl || HoldingShift || PossessedCreature.IsMoving) return;
@@ -189,5 +202,5 @@ namespace Pandorai.Mechanics
 				}
 			}
 		}
-	}
+    }
 }
