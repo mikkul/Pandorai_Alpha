@@ -10,7 +10,7 @@ namespace Pandorai.Cheats
 	{
 		public static Game1 game;
 
-		public static bool Activated = false;
+		public static bool Activated = true;
 
 		public static void HandleKeyInput(Keys key)
 		{

@@ -83,10 +83,140 @@ namespace Pandorai.MapGeneration
 
 			PlaceTeleporters();
 
+			AddTerrain();
+
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
             return map;
+        }
+
+        private void AddTerrain()
+        {
+			AddLakes();
+        }
+
+        private void AddLakes()
+        {
+            int minLakeWidth = 10;
+			int minLakeHeight = 10;
+            int maxLakeWidth = 35;
+			int maxLakeHeight = 35;
+
+			int lakeCount = 0;
+			bool condition = false;
+			do
+			{
+				List<Point> lakeArea = GenerateLake(minLakeWidth, minLakeHeight, maxLakeWidth, maxLakeHeight);
+
+				foreach (var point in lakeArea)
+				{
+					if(!map.IsPointInBounds(point) || map[point.X, point.Y].CollisionFlag)
+					{
+						continue;
+					}
+					map[point.X, point.Y].BaseColor = Color.LightBlue;
+					map[point.X, point.Y].BaseType = 0;
+					map[point.X, point.Y].SetTexture(0);
+					map[point.X, point.Y].CollisionFlag = false;
+					map[point.X, point.Y].Modifier = TileModifier.Water;
+				}
+
+				condition = lakeCount++ < 2;
+			}
+			while(condition);
+        }
+
+		private enum LakeTile
+		{
+			Empty,
+			Water,
+		}
+
+        private List<Point> GenerateLake(int minLakeWidth, int minLakeHeight, int maxLakeWidth, int maxLakeHeight)
+        {
+			List<Point> area = new ();
+
+            int positionX = rng.Next(1, WorldOptions.Width - minLakeWidth);
+            int positionY = rng.Next(1, WorldOptions.Height - minLakeHeight);
+			int width = rng.Next(minLakeWidth, maxLakeWidth);
+			int height = rng.Next(minLakeHeight, maxLakeHeight);
+
+			LakeTile[,] grid = new LakeTile[width, height];
+
+			// random initial values
+			double emptySpaceThreshold = 0.45;
+			grid.Populate(() => rng.NextDouble() < emptySpaceThreshold ? LakeTile.Empty : LakeTile.Water);
+			grid.CreateBorder(LakeTile.Empty, 1);
+
+			// run the cellular automaton
+			int iterations = 10;
+			LakeTile[,] newGrid = new LakeTile[width, height];
+			for (int i = 0; i < iterations; i++)
+			{
+				for (int x = 0; x < width; x++)
+				{
+					for (int y = 0; y < height; y++)
+					{
+						var neighbours = GenHelper.Get8Neighbours(new Point(x, y));
+						int emptySpaceCount = 0;
+						foreach (var neighbour in neighbours)
+						{
+							if(!grid.IsPointInBounds(neighbour))
+							{
+								continue;
+							}
+							if(grid[neighbour.X, neighbour.Y] == LakeTile.Empty)
+							{
+								emptySpaceCount++;
+							}
+						}
+
+						newGrid[x, y] = LakeTile.Water;
+						if(grid[x, y] == LakeTile.Empty)
+						{
+							if(emptySpaceCount >= 4)
+							{
+								newGrid[x, y] = LakeTile.Empty;
+							}
+							if(emptySpaceCount < 2)
+							{
+								newGrid[x, y] = LakeTile.Water;
+							}
+						}
+						else
+						{
+							if(emptySpaceCount >= 5)
+							{
+								newGrid[x, y] = LakeTile.Empty;
+							}
+						}
+					}
+				}
+				grid = new LakeTile[width, height];
+				for (int x = 0; x < width; x++)
+				{
+					for (int y = 0; y < height; y++)
+					{
+						grid[x, y] = newGrid[x, y];
+					}
+				}
+				newGrid = new LakeTile[width, height];
+			}
+
+			//
+			for (int x = 0; x < width; x++)
+			{
+				for (int y = 0; y < height; y++)
+				{
+					if(grid[x, y] == LakeTile.Water)
+					{
+						area.Add(new Point(x + positionX, y + positionY));
+					}
+				}
+			}
+
+			return area;
         }
 
         private void DoSomethingAboutUnreachableSpace()

@@ -9,5 +9,6 @@ namespace Pandorai.Tilemaps
         Sticky = 1 << 0,
         Web = 1 << 1,
         Trap = 1 << 2,
+        Water = 1 << 3,
     }
 }
