@@ -149,10 +149,10 @@ namespace Pandorai.Creatures
 
                 var effectTime = 4000;
 
-                Game1.game.Camera.CameraShake = new Rendering.Shake(effectTime, 40, 15, Game1.game.mainRng);
-                Game1.game.Camera.ShakeCamera();
+                Main.Game.Camera.CameraShake = new Rendering.Shake(effectTime, 40, 15, Main.Game.MainRng);
+                Main.Game.Camera.ShakeCamera();
 
-                var wavePS = new PSExplosion(Game1.game.Player.PossessedCreature.Position, 300, Game1.game.smokeParticleTexture, effectTime, 200f, 100, Helper.GetColorFromHex("#f5dd42"), true, Game1.game);
+                var wavePS = new PSExplosion(Main.Game.Player.PossessedCreature.Position, 300, Main.Game.smokeParticleTexture, effectTime, 200f, 100, Helper.GetColorFromHex("#f5dd42"), true, Main.Game);
                 ParticleSystemManager.AddSystem(wavePS, true);
             }
         }

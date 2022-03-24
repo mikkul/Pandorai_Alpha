@@ -3,23 +3,24 @@ using Pandorai.Effects;
 using Pandorai.Utility;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Xml;
 
 namespace Pandorai.Items
 {
 	public static class ItemLoader
 	{
-		private static Dictionary<string, Item> itemTemplates = new Dictionary<string, Item>();
+		private static Dictionary<string, Item> _itemTemplates = new Dictionary<string, Item>();
 
 		public static Item GetItem(string name)
 		{
-			if(!itemTemplates.ContainsKey(name))
+			if(!_itemTemplates.ContainsKey(name))
 			{
-				return itemTemplates["Error"].Clone();
+				return _itemTemplates["Error"].Clone();
 			}
 			else
-				return itemTemplates[name].Clone();
+			{
+				return _itemTemplates[name].Clone();
+			}
 		}
 
 		public static void LoadItems(string spreadsheetPath)
@@ -62,11 +63,11 @@ namespace Pandorai.Items
 					item.Effects.Add(effectInstance);
 				}
 
-				itemTemplates.Add(item.Id, item);
+				_itemTemplates.Add(item.Id, item);
 			}
 		}
 
-		static Dictionary<string, Color> colorLegend = new Dictionary<string, Color>
+		private static Dictionary<string, Color> colorLegend = new Dictionary<string, Color>
 		{
 			{ "green", Color.Green },
 			{ "orange", Color.Orange },

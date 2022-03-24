@@ -10,7 +10,7 @@ namespace Pandorai.Structures.Behaviours
         {
             if (name == "DialogueName")
 			{
-				_dialogue = new Pandorai.Dialogues.Dialogue(value, Game1.game);
+				_dialogue = new Pandorai.Dialogues.Dialogue(value, Main.Game);
 			}
         }
 
@@ -34,12 +34,12 @@ namespace Pandorai.Structures.Behaviours
 
         public override void Interact(Creature creature)
         {
-            if(creature != Game1.game.Player.PossessedCreature)
+            if(creature != Main.Game.Player.PossessedCreature)
             {
                 return;
             }
 
-            Game1.game.Player.IsInteractingWithSomeone = true;
+            Main.Game.Player.IsInteractingWithSomeone = true;
             _dialogue.ReadNode(0);
         }
 

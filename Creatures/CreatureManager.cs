@@ -18,19 +18,19 @@ namespace Pandorai.Creatures
 		public List<Creature> UndergroundCreatures = new List<Creature>();
 		public List<Creature> SurfaceCreatures = new List<Creature>();
 
-		Game1 game;
+		private Main _game;
 
-		RenderTarget2D renderTarget;
+		private RenderTarget2D _renderTarget;
 
-		public CreatureManager(Game1 _game)
+		public CreatureManager(Main game)
 		{
-			game = _game;
-			renderTarget = new RenderTarget2D(game.GraphicsDevice, game.Camera.Viewport.Width, game.Camera.Viewport.Height);
+			_game = game;
+            _renderTarget = new RenderTarget2D(this._game.GraphicsDevice, this._game.Camera.Viewport.Width, this._game.Camera.Viewport.Height);
 		}
 
 		public void RefreshRenderTarget()
 		{
-			renderTarget = new RenderTarget2D(game.GraphicsDevice, game.Camera.Viewport.Width, game.Camera.Viewport.Height);
+			_renderTarget = new RenderTarget2D(_game.GraphicsDevice, _game.Camera.Viewport.Width, _game.Camera.Viewport.Height);
 		}
 
 		public void CheckCreatureInteraction(Creature incomingCreature, TileInfo info)
@@ -47,9 +47,9 @@ namespace Pandorai.Creatures
 					targetCreature.Interact(incomingCreature);
 				}
 
-				if(incomingCreature == game.Player.PossessedCreature)
+				if(incomingCreature == _game.Player.PossessedCreature)
 				{
-					game.TurnManager.PlayerIsReady();
+					_game.TurnManager.PlayerIsReady();
 				}
 			}
 		}
@@ -62,8 +62,8 @@ namespace Pandorai.Creatures
 		public void FinishCreatureMovement(Creature creature)
 		{
 			Point tileIndex = creature.MapIndex;
-			CreatureFinishedMovement?.Invoke(creature, new TileInfo(tileIndex, game.Map.Tiles[tileIndex.X, tileIndex.Y]));
-			game.Map.Tiles[tileIndex.X, tileIndex.Y].OnCreatureCame(creature);
+			CreatureFinishedMovement?.Invoke(creature, new TileInfo(tileIndex, _game.Map.Tiles[tileIndex.X, tileIndex.Y]));
+			_game.Map.Tiles[tileIndex.X, tileIndex.Y].OnCreatureCame(creature);
 		}
 
 		public void AdjustPositionsToTileSize(int oldSize, int newSize)
@@ -110,7 +110,7 @@ namespace Pandorai.Creatures
 		public void RemoveCreature(Creature creature)
 		{
 			Creatures.Remove(creature);
-			game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
+			_game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
 		}
 
 		public void UpdateCreatures()
@@ -128,7 +128,7 @@ namespace Pandorai.Creatures
 					continue;
 				}
 
-				if (Creatures[i] == game.Player.PossessedCreature)
+				if (Creatures[i] == _game.Player.PossessedCreature)
 				{
 					Creatures[i].UpdatePossessed();
 				}
@@ -141,19 +141,19 @@ namespace Pandorai.Creatures
 
 		public RenderTarget2D DrawCreatures(SpriteBatch spriteBatch)
 		{
-			game.GraphicsDevice.SetRenderTarget(renderTarget);
-			game.GraphicsDevice.Clear(Color.Transparent);
+			_game.GraphicsDevice.SetRenderTarget(_renderTarget);
+			_game.GraphicsDevice.Clear(Color.Transparent);
 			spriteBatch.Begin();
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
-				if(game.Player.TilesInFOV.Contains(Creatures[i].MapIndex))
+				if(_game.Player.TilesInFOV.Contains(Creatures[i].MapIndex))
 				{
 					Creatures[i].Draw(spriteBatch);
 				}
 			}
 			spriteBatch.End();
-			game.GraphicsDevice.SetRenderTarget(null);
-			return renderTarget;
+			_game.GraphicsDevice.SetRenderTarget(null);
+			return _renderTarget;
 		}
 
 		public void MakeCreaturesThink()
@@ -167,21 +167,21 @@ namespace Pandorai.Creatures
 
 				Creatures[i].Energy += Creatures[i].Stats.Speed;
 
-				if(Creatures[i].Energy >= Game1.game.TurnManager.EnergyThreshold)
+				if(Creatures[i].Energy >= Main.Game.TurnManager.EnergyThreshold)
 				{
-					Creatures[i].Energy -= Game1.game.TurnManager.EnergyThreshold;
+					Creatures[i].Energy -= Main.Game.TurnManager.EnergyThreshold;
 					Creatures[i].ReadyForTurn();
 				}
 			}
 
-			game.TurnManager.EnemyIsReady();
+			_game.TurnManager.EnemyIsReady();
 		}
 
 		public void EndCreaturesTurn()
 		{
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
-				if (Creatures[i] == game.Player.PossessedCreature) continue;
+				if (Creatures[i] == _game.Player.PossessedCreature) continue;
 
 				Creatures[i].EndTurn();
 			}

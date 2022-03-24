@@ -10,7 +10,7 @@ namespace Pandorai.Creatures.Behaviours
 		{
 			if (name == "DialogueName")
 			{
-				dialogue = new Dialogue(value, Game1.game);
+				dialogue = new Dialogue(value, Main.Game);
 			}
 		}
 
@@ -34,7 +34,7 @@ namespace Pandorai.Creatures.Behaviours
 				return;
 			}
 
-			Game1.game.Player.IsInteractingWithSomeone = true;
+			Main.Game.Player.IsInteractingWithSomeone = true;
 			dialogue.ReadNode(0);
 		}
 	}

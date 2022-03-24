@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Pandorai.Tilemaps;
@@ -50,7 +49,7 @@ namespace Pandorai.Creatures.Behaviours
             {
                 _turnCounter = 0;
                 // place a web
-                var tile = Game1.game.Map.GetTile(Owner.MapIndex);
+                var tile = Main.Game.Map.GetTile(Owner.MapIndex);
                 if(!_webs.Any(x => x.Tile == tile))
                 {
                     tile.Modifier |= TileModifier.Web;

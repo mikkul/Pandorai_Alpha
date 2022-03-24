@@ -15,72 +15,73 @@ namespace Pandorai.Mechanics
 	public static class Sidekick
 	{
 		public static Creature SlotsSpirit;
-
 		public static Texture2D Sprite;
 
-		static Game1 game;
-
-		static Widget previousGUI = null;
-
 		public static Item SelectedItem;
-		static Creature selectedItemOwner;
 		public static Widget DraggedItem;
-		static bool isDraggedItemDetached = false;
-		static ImageTextButton selectedItemButton;
+
 		public static bool WasItemDragged = false;
 
 		public static Vector2 position;
 
-		static PSSparkles sparkles;
+		private static Main _game;
 
-		static OpenSimplexNoise noise;
+		private static Widget _previousGUI = null;
 
-		static Random rng = new Random();
+		private static Creature _selectedItemOwner;
+		private static bool _isDraggedItemDetached = false;
+		private static ImageTextButton _selectedItemButton;
 
-		static float thinkingTimer = 0;
-		static float movementChangeTime = 1000;
-		static float newMovementChangeTime = 1000;
-		static double choiceOffset = 0;
-		static Action currentAction = Action.None;
-		static float lerpValue = 0;
-		static Vector2 desiredPos;
+		private static PSSparkles _sparkles;
 
-		static float safeDistance = 3;
-		static float maxDistance = 12;
-		static float strafeDistance = 2;
+		private static OpenSimplexNoise _noise;
 
-		static SidekickTips tips;
+		private static Random _rng = new Random();
+
+		private static float _thinkingTimer = 0;
+		private static float _movementChangeTime = 1000;
+		private static float _newMovementChangeTime = 1000;
+		private static double _choiceOffset = 0;
+		private static Action _currentAction = Action.None;
+		private static float _lerpValue = 0;
+		private static Vector2 _desiredPos;
+
+		private static float _safeDistance = 3;
+		private static float _maxDistance = 12;
+		private static float _strafeDistance = 2;
+
+		private static SidekickTips _tips;
 
 		public static void Init()
 		{
-			game = Game1.game;
+			_game = Main.Game;
 
-			SlotsSpirit = new Creature(game);
-			SlotsSpirit.Inventory = new Inventory(new Creature(game), 4)
+			SlotsSpirit = new Creature(_game);
+			SlotsSpirit.Inventory = new Inventory(new Creature(_game), 4)
 			{
 				Collumns = 4,
 				Rows = 1,
 				Id = "sidekickInventory"
 			};
 
-			sparkles = new PSSparkles(Vector2.Zero, 100, game.squareTexture, 1500, 35, 5, 1000, Color.Violet, true, game);
+			_sparkles = new PSSparkles(Vector2.Zero, 100, _game.squareTexture, 1500, 35, 5, 1000, Color.Violet, true, _game);
 
-			noise = new OpenSimplexNoise();
+			_noise = new OpenSimplexNoise();
 			
-			tips = new SidekickTips();
+			_tips = new SidekickTips();
 		}
 
 		public static void InitLate()
 		{
-			position = game.Player.PossessedCreature.Position - new Vector2(100, 100);
-			ParticleSystemManager.AddSystem(sparkles, false);
-			thinkingTimer = 0;
-			newMovementChangeTime = 2500;
+			position = _game.Player.PossessedCreature.Position - new Vector2(100, 100);
+			ParticleSystemManager.AddSystem(_sparkles, false);
+			_thinkingTimer = 0;
+			_newMovementChangeTime = 2500;
 		}
 
 		public static void ConsiderTips()
 		{
-			tips.Update();
+			_tips.Update();
 		}
 
 		public static void AdjustToTileSize(int oldSize, int newSize)
@@ -96,37 +97,37 @@ namespace Pandorai.Mechanics
 				DraggedItem.RemoveFromDesktop();
 				TileInteractionManager.OnItemRelease(SelectedItem);
 			}
-			isDraggedItemDetached = false;
+			_isDraggedItemDetached = false;
 			DraggedItem = null;
 
-			game.InputManager.MouseMove -= HandleItemDrag;
+			_game.InputManager.MouseMove -= HandleItemDrag;
 		}
 
 		public static void HandleItemSelection(Item item, Creature user, ImageTextButton button)
 		{
 			SelectedItem = item;
-			selectedItemOwner = user;
-			selectedItemButton = button;
-			game.InputManager.MouseMove += HandleItemDrag;
+			_selectedItemOwner = user;
+			_selectedItemButton = button;
+			_game.InputManager.MouseMove += HandleItemDrag;
 			WasItemDragged = false;
 		}
 
 		public static void HandleItemDrag(Vector2 pos)
 		{
 			WasItemDragged = true;
-			if(!isDraggedItemDetached)
+			if(!_isDraggedItemDetached)
 			{
 				DraggedItem = new Panel
 				{
-					Left = (int)game.InputManager.MousePos.X,
-					Top = (int)game.InputManager.MousePos.Y,
-					Width = selectedItemButton.Width,
-					Height = selectedItemButton.Height,
-					Background = selectedItemButton.Image,
+					Left = (int)_game.InputManager.MousePos.X,
+					Top = (int)_game.InputManager.MousePos.Y,
+					Width = _selectedItemButton.Width,
+					Height = _selectedItemButton.Height,
+					Background = _selectedItemButton.Image,
 				};
-				var root = (Panel)game.desktop.Root;
+				var root = (Panel)_game.desktop.Root;
 				root.Widgets.Add(DraggedItem);
-				isDraggedItemDetached = true;
+				_isDraggedItemDetached = true;
 			}
 			else
 			{
@@ -137,7 +138,7 @@ namespace Pandorai.Mechanics
 
 		public static void HandleItemRelease(Item item, Creature user, ImageTextButton button)
 		{
-			Inventory inv1 = selectedItemOwner.Inventory;
+			Inventory inv1 = _selectedItemOwner.Inventory;
 			Inventory inv2 = user.Inventory;
 
 			int amountFromSelectedItem;
@@ -181,7 +182,7 @@ namespace Pandorai.Mechanics
 			Proportion rowProp = new Proportion
 			{
 				Type = ProportionType.Pixels,
-				Value = Options.oldResolution.X / 16,
+				Value = Options.OldResolution.X / 16,
 			};
 			var gui = SlotsSpirit.Inventory.ConstructGUI(columnProp, rowProp, (i, c, b) =>
 			{
@@ -193,86 +194,86 @@ namespace Pandorai.Mechanics
 			});
 			gui.GridColumn = 0;
 			gui.GridRow = 0;
-			if(previousGUI != null)
+			if(_previousGUI != null)
 			{
-				GUI.inventorySlotsGrid.Widgets.Remove(previousGUI);
+				GUI.InventorySlotsGrid.Widgets.Remove(_previousGUI);
 			}
-			GUI.inventorySlotsGrid.Widgets.Add(gui);
-			previousGUI = gui;
+			GUI.InventorySlotsGrid.Widgets.Add(gui);
+			_previousGUI = gui;
 		}
 
 		public static void Update(GameTime dt)
 		{
-			SlotsSpirit.Position = game.Player.PossessedCreature.Position;
-			SlotsSpirit.MapIndex = game.Player.PossessedCreature.MapIndex;
+			SlotsSpirit.Position = _game.Player.PossessedCreature.Position;
+			SlotsSpirit.MapIndex = _game.Player.PossessedCreature.MapIndex;
 
 			Move(dt);
 
-			sparkles.CentralPosition = position;
+			_sparkles.CentralPosition = position;
 		}
 
 		public static void Draw(SpriteBatch batch)
 		{
-			var destRect = new Rectangle(game.Camera.GetViewportPosition(position - new Vector2(game.Map.TileSize / 2, game.Map.TileSize / 2)).ToPoint(), new Point(game.Map.TileSize));
+			var destRect = new Rectangle(_game.Camera.GetViewportPosition(position - new Vector2(_game.Map.TileSize / 2, _game.Map.TileSize / 2)).ToPoint(), new Point(_game.Map.TileSize));
 			batch.Draw(Sprite, destRect, Color.White);
 		}
 
 		private static void Move(GameTime dt)
 		{
-			thinkingTimer += (float)dt.ElapsedGameTime.TotalMilliseconds;
+			_thinkingTimer += (float)dt.ElapsedGameTime.TotalMilliseconds;
 
-			var playerPos = game.Player.PossessedCreature.Position;
+			var playerPos = _game.Player.PossessedCreature.Position;
 
-			if (thinkingTimer >= movementChangeTime) // changing movement
+			if (_thinkingTimer >= _movementChangeTime) // changing movement
 			{
-				movementChangeTime = newMovementChangeTime;
-				thinkingTimer = 0;
-				lerpValue = 0;
-				choiceOffset += 1;
-				var choiceNum = noise.Evaluate(choiceOffset, 0);
+				_movementChangeTime = _newMovementChangeTime;
+				_thinkingTimer = 0;
+				_lerpValue = 0;
+				_choiceOffset += 1;
+				var choiceNum = _noise.Evaluate(_choiceOffset, 0);
 				//var choiceNum = rng.NextDouble();
-				if(choiceNum < 0.25 || Vector2.Distance(playerPos, position) > maxDistance * game.Map.TileSize)
+				if(choiceNum < 0.25 || Vector2.Distance(playerPos, position) > _maxDistance * _game.Map.TileSize)
 				{
-					currentAction = Action.Following;
-					desiredPos = playerPos + Vector2.Normalize(position - playerPos) * safeDistance * game.Map.TileSize;
+					_currentAction = Action.Following;
+					_desiredPos = playerPos + Vector2.Normalize(position - playerPos) * _safeDistance * _game.Map.TileSize;
 				}
 				else if(choiceNum < 0.50)
 				{
-					currentAction = Action.SwitchingSide;
-					desiredPos = playerPos - Vector2.Normalize(position - playerPos) * safeDistance * game.Map.TileSize;
+					_currentAction = Action.SwitchingSide;
+					_desiredPos = playerPos - Vector2.Normalize(position - playerPos) * _safeDistance * _game.Map.TileSize;
 				}
 				else if(choiceNum < 0.80)
 				{
-					currentAction = Action.Strafing;
+					_currentAction = Action.Strafing;
 
-					float randomX = (float)noise.Evaluate(position.X, position.Y);
-					float randomY = (float)noise.Evaluate(position.Y, position.X);
+					float randomX = (float)_noise.Evaluate(position.X, position.Y);
+					float randomY = (float)_noise.Evaluate(position.Y, position.X);
 
-					desiredPos = position + Vector2.Normalize(new Vector2(randomX, randomY)) * strafeDistance * game.Map.TileSize;
+					_desiredPos = position + Vector2.Normalize(new Vector2(randomX, randomY)) * _strafeDistance * _game.Map.TileSize;
 				}
 				else
 				{
-					currentAction = Action.None;
+					_currentAction = Action.None;
 				}
 
-				newMovementChangeTime = rng.Next(500, 1500);
+				_newMovementChangeTime = _rng.Next(500, 1500);
 			}
 
-			if(currentAction == Action.Following)
+			if(_currentAction == Action.Following)
 			{
-				lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / movementChangeTime;
-				desiredPos = playerPos + Vector2.Normalize(position - playerPos) * safeDistance * game.Map.TileSize;
-				position = Vector2.Lerp(position, desiredPos, lerpValue);
+				_lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / _movementChangeTime;
+				_desiredPos = playerPos + Vector2.Normalize(position - playerPos) * _safeDistance * _game.Map.TileSize;
+				position = Vector2.Lerp(position, _desiredPos, _lerpValue);
 			}
-			else if(currentAction == Action.SwitchingSide)
+			else if(_currentAction == Action.SwitchingSide)
 			{
-				lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / movementChangeTime;
-				position = Vector2.Lerp(position, desiredPos, lerpValue);
+				_lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / _movementChangeTime;
+				position = Vector2.Lerp(position, _desiredPos, _lerpValue);
 			}
-			else if (currentAction == Action.Strafing)
+			else if (_currentAction == Action.Strafing)
 			{
-				lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / movementChangeTime;
-				position = Vector2.Lerp(position, desiredPos, lerpValue);
+				_lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / _movementChangeTime;
+				position = Vector2.Lerp(position, _desiredPos, _lerpValue);
 			}
 		}
 

@@ -11,36 +11,36 @@ namespace Pandorai.Tooltips
 {
 	public static class MapTooltip
 	{
-		static Game1 game;
-		static Panel currentTooltip = null;
-		static Point lastTile;
+		private static Main _game;
+		private static Panel _currentTooltip = null;
+		private static Point _lastTile;
 
-		public static void Init(Game1 _game)
+		public static void Init(Main _game)
 		{
-			game = _game;
+            MapTooltip._game = _game;
 		}
 
 		public static void DisplayMapTooltip(TileInfo info)
 		{
-			if (info.Index != lastTile)
+			if (info.Index != _lastTile)
 			{
-				if(currentTooltip != null)
-					currentTooltip.RemoveFromDesktop();
-				currentTooltip = null;
+				if(_currentTooltip != null)
+					_currentTooltip.RemoveFromDesktop();
+				_currentTooltip = null;
 			}
 
-			lastTile = info.Index;
+			_lastTile = info.Index;
 
-			var playerNeighbouringTiles = GenHelper.Get8Neighbours(game.Player.PossessedCreature.MapIndex);
-			if (currentTooltip != null || !playerNeighbouringTiles.Contains(info.Index)) return;
+			var playerNeighbouringTiles = GenHelper.Get8Neighbours(_game.Player.PossessedCreature.MapIndex);
+			if (_currentTooltip != null || !playerNeighbouringTiles.Contains(info.Index)) return;
 
 			var width = 200;
 			var height = 200;
 
-			currentTooltip = new Panel
+			_currentTooltip = new Panel
 			{
-				Left = (int)game.InputManager.MousePos.X,
-				Top = (int)game.InputManager.MousePos.Y,
+				Left = (int)_game.InputManager.MousePos.X,
+				Top = (int)_game.InputManager.MousePos.Y,
 				Background = new SolidBrush(Color.Black * 0.5f),
 				Width = width,
 				Height = height,
@@ -87,8 +87,8 @@ namespace Pandorai.Tooltips
 				}
 			}
 
-			currentTooltip.Widgets.Add(stackPanel);
-			game.desktop.Widgets.Add(currentTooltip);
+			_currentTooltip.Widgets.Add(stackPanel);
+			_game.desktop.Widgets.Add(_currentTooltip);
 		}
 	}
 }

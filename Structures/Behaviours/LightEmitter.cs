@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.Rendering;
-using Pandorai.Tilemaps;
-using System;
 
 namespace Pandorai.Structures.Behaviours
 {
@@ -12,16 +10,16 @@ namespace Pandorai.Structures.Behaviours
 		public int Radius;
 		public float Intesity = 1.0f;
 
-		private LightSource lightSource;
+		private LightSource _lightSource;
 
 		public override void Bind()
 		{
-			lightSource = LightingManager.AddLightSource(Structure.Tile.Index.ToVector2() * Game1.game.Map.TileSize, Radius, Color, Intesity);
+			_lightSource = LightingManager.AddLightSource(Structure.Tile.Index.ToVector2() * Main.Game.Map.TileSize, Radius, Color, Intesity);
 		}
 
 		public override void Unbind()
 		{
-			LightingManager.RemoveLightSource(lightSource);
+			LightingManager.RemoveLightSource(_lightSource);
 		}
 
 		public override void SetAttribute(string name, string value)

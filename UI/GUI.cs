@@ -3,34 +3,31 @@ using Myra.Graphics2D.UI;
 using Microsoft.Xna.Framework;
 using Myra.Graphics2D.Brushes;
 using Myra.Graphics2D.UI.Styles;
-using System;
-using Pandorai.Cheats;
 using Pandorai.Dialogues;
 using Myra.Graphics2D.UI.Properties;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
-using Pandorai.Creatures;
 
 namespace Pandorai.UI
 {
 	static class GUI
 	{
-        static Game1 game;
-        static Desktop desktop;
+        public static Grid InventorySlotsGrid;
 
-        public static Grid inventorySlotsGrid;
+        private static Main _game;
+        private static Desktop _desktop;
 
-        static Panel oldInventoryPanel = null;
+        private static Panel _oldInventoryPanel = null;
 
-        static bool isCharacterStatsWindowOpen = false;
-        private static Window characterStatsWindow;
+        private static bool _isCharacterStatsWindowOpen = false;
+        private static Window _characterStatsWindow;
 
-        public static Widget LoadGUI(Game1 thisGame, Desktop thisDesktop)
+        public static Widget LoadGUI(Main thisGame, Desktop thisDesktop)
 		{
             Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(new Color(0.6f, 0.6f, 0.6f, 1f));
 
-            game = thisGame;
-            desktop = thisDesktop;
+            _game = thisGame;
+            _desktop = thisDesktop;
 
             InitCharacterStatsWindow();
 
@@ -53,20 +50,20 @@ namespace Pandorai.UI
 
         public static void DisplayInventory(Panel inventory)
 		{
-            if (oldInventoryPanel != null) inventorySlotsGrid.Widgets.Remove(oldInventoryPanel);
+            if (_oldInventoryPanel != null) InventorySlotsGrid.Widgets.Remove(_oldInventoryPanel);
 
             inventory.GridColumn = 0;
             inventory.GridRow = 1;
 
-            inventorySlotsGrid.Widgets.Add(inventory);
-            oldInventoryPanel = inventory;
+            InventorySlotsGrid.Widgets.Add(inventory);
+            _oldInventoryPanel = inventory;
 
-            game.Options.AdjustGUI();
+            _game.Options.AdjustGUI();
         }
 
         public static void ShowCheatsModifyStatsWindow()
         {
-            characterStatsWindow = new Window
+            _characterStatsWindow = new Window
             {
                 Id = "cheatsModifycharacterStatsWindow",
                 Title = "Stats",
@@ -80,16 +77,16 @@ namespace Pandorai.UI
             {
                 Id = "cheatsModifyCharacterStatsPropertyGrid",
             };
-            contentGrid.Object = Game1.game.Player.PossessedCreature.Stats;
+            contentGrid.Object = Main.Game.Player.PossessedCreature.Stats;
 
-            characterStatsWindow.Content = contentGrid;
+            _characterStatsWindow.Content = contentGrid;
 
-            characterStatsWindow.ShowModal(desktop);
+            _characterStatsWindow.ShowModal(_desktop);
         }
 
-        static void InitCharacterStatsWindow()
+        private static void InitCharacterStatsWindow()
         {
-            characterStatsWindow = new Window
+            _characterStatsWindow = new Window
             {
                 Id = "characterStatsWindow",
                 Title = "Stats",
@@ -98,41 +95,41 @@ namespace Pandorai.UI
                 Width = 700,
                 Height = 650,
             };
-            characterStatsWindow.CloseButton.Visible = false;
+            _characterStatsWindow.CloseButton.Visible = false;
             
             PropertyGrid contentGrid = new PropertyGrid
             {
                 Id = "characterStatsPropertyGrid",
             };
 
-            characterStatsWindow.Content = contentGrid;
+            _characterStatsWindow.Content = contentGrid;
 
-            Game1.game.InputManager.SingleKeyPress += k =>
+            Main.Game.InputManager.SingleKeyPress += k =>
             {
                 if(k == Keys.C)
                 {
-                    if(isCharacterStatsWindowOpen)
+                    if(_isCharacterStatsWindowOpen)
                     {
-                        isCharacterStatsWindowOpen = false;
-                        characterStatsWindow.Close();
+                        _isCharacterStatsWindowOpen = false;
+                        _characterStatsWindow.Close();
                     }
                     else
                     {
-                        isCharacterStatsWindowOpen = true;
+                        _isCharacterStatsWindowOpen = true;
                         contentGrid = new PropertyGrid
                         {
                             Id = "characterStatsPropertyGrid",
                         };
-                        var characterStats = new CharacterStats(Game1.game.Player.PossessedCreature.Stats);
+                        var characterStats = new CharacterStats(Main.Game.Player.PossessedCreature.Stats);
                         contentGrid.Object = characterStats;
-                        characterStatsWindow.Content = contentGrid;
-                        characterStatsWindow.ShowModal(desktop);
+                        _characterStatsWindow.Content = contentGrid;
+                        _characterStatsWindow.ShowModal(_desktop);
                     }
                 }
             };
         }
 
-        static Widget LoadingScreen()
+        private static Widget LoadingScreen()
         {
             var mainPanel = new Panel
             {
@@ -152,7 +149,7 @@ namespace Pandorai.UI
             return mainPanel;
         }
 
-        static Widget MainMenu()
+        private static Widget MainMenu()
 		{
             Stylesheet.Current.ButtonStyle.Height = 25;
             Stylesheet.Current.ButtonStyle.Background = new SolidBrush(Color.Black);
@@ -179,7 +176,7 @@ namespace Pandorai.UI
 
             continueButton.Click += (s, a) =>
             {
-                game.TogglePauseGame();
+                _game.TogglePauseGame();
             };
 
             var playButton = new TextButton
@@ -191,7 +188,7 @@ namespace Pandorai.UI
 
             playButton.Click += (s, a) =>
             {
-                Task.Run(() => game.StartGame());
+                Task.Run(() => _game.StartGame());
             };
 
             var optionsButton = new TextButton
@@ -205,7 +202,7 @@ namespace Pandorai.UI
             {
                 Dialog optionsWindow = OptionsWindow();
 
-                optionsWindow.ShowModal(desktop);
+                optionsWindow.ShowModal(_desktop);
             };
 
             var exitButton = new TextButton
@@ -217,7 +214,7 @@ namespace Pandorai.UI
 
             exitButton.Click += (s, a) =>
             {
-                game.Exit();
+                _game.Exit();
             };
 
             centerButtonsHolder.Widgets.Add(continueButton);
@@ -228,7 +225,7 @@ namespace Pandorai.UI
             return centerButtonsHolder;
         }
 
-        static Widget GameScreen()
+        private static Widget GameScreen()
 		{
             Panel gameScreen = new Panel
             {
@@ -275,7 +272,7 @@ namespace Pandorai.UI
             slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 1));
             slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 5));
 
-            inventorySlotsGrid = slotsGrid;
+            InventorySlotsGrid = slotsGrid;
 
             grid.Widgets.Add(slotsGrid);
 
@@ -284,7 +281,7 @@ namespace Pandorai.UI
             return gameScreen;
 		}
 
-        static Widget DialoguePanel()
+        private static Widget DialoguePanel()
 		{
             Panel mainPanel = new Panel
             {
@@ -313,7 +310,7 @@ namespace Pandorai.UI
                 Id = "DialogueOptionsStack",
                 VerticalAlignment = VerticalAlignment.Bottom,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Width = (int)(Options.oldResolution.X * 0.75f)
+                Width = (int)(Options.OldResolution.X * 0.75f)
             };
 
             ScrollViewer dialogueOptionsScrollViewer = new ScrollViewer
@@ -332,7 +329,7 @@ namespace Pandorai.UI
             return mainPanel;
 		}
 
-        static Widget DebugPanel()
+        private static Widget DebugPanel()
 		{
             Panel panel = new Panel
             {
@@ -355,7 +352,7 @@ namespace Pandorai.UI
             return panel;
 		}
 
-        static Dialog OptionsWindow()
+        private static Dialog OptionsWindow()
         {
             Dialog window = new Dialog
             {
@@ -373,11 +370,11 @@ namespace Pandorai.UI
             {
                 if(window.Result)
 				{
-                    game.Options.ApplyChanges();
+                    _game.Options.ApplyChanges();
 				}
                 else
 				{
-                    game.Options.RevertChanges();
+                    _game.Options.RevertChanges();
 				}
             };
 
@@ -410,7 +407,7 @@ namespace Pandorai.UI
 
 			foreach (var item in resolutionList.Items)
 			{
-                if((Point)item.Tag == Options.oldResolution)
+                if((Point)item.Tag == Options.OldResolution)
 				{
                     resolutionList.SelectedItem = item;
                     break;
@@ -424,19 +421,19 @@ namespace Pandorai.UI
 
             applyResolutionButton.Click += (s, e) =>
             {
-                game.Options.ChangeResolution((Point)resolutionList.SelectedItem.Tag, window);
+                _game.Options.ChangeResolution((Point)resolutionList.SelectedItem.Tag, window);
             };
 
             HorizontalSlider zoomSlider = new HorizontalSlider
             {
                 Minimum = 8,
                 Maximum = 128,
-                Value = game.Options.TileSize,
+                Value = _game.Options.TileSize,
             };
 
             zoomSlider.ValueChanged += (s, a) =>
             {
-                game.Options.TileSize = (int)a.NewValue;
+                _game.Options.TileSize = (int)a.NewValue;
             };
 
             VerticalStackPanel verticalStackPanel2 = new VerticalStackPanel
@@ -455,11 +452,11 @@ namespace Pandorai.UI
             {
             };
 
-            fullScreenCheckbox.IsPressed = game.Options.oldIsFullScreen;
+            fullScreenCheckbox.IsPressed = _game.Options.OldIsFullScreen;
 
             fullScreenCheckbox.Click += (s, e) =>
             {
-                game.Options.ToggleFullscreen();
+                _game.Options.ToggleFullscreen();
             };
 
             verticalStackPanel1.Widgets.Add(resolutionChoice);

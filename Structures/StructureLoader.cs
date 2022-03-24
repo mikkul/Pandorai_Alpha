@@ -2,7 +2,6 @@
 using Pandorai.Utility;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Xml;
 
 namespace Pandorai.Structures
@@ -17,7 +16,7 @@ namespace Pandorai.Structures
 			return clone;
 		}
 
-		public static void LoadStructures(string spreadsheetPath, Game1 game)
+		public static void LoadStructures(string spreadsheetPath, Main game)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.Load(spreadsheetPath);

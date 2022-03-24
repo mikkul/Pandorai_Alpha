@@ -34,7 +34,7 @@ namespace Pandorai.Structures.Behaviours
             }
 
             var adjacentTiles = GenHelper.Get8Neighbours(otherTeleporter.Tile.Index);
-            var freeTile = adjacentTiles.FirstOrDefault(x => !Game1.game.Map.GetTile(x).CollisionFlag);
+            var freeTile = adjacentTiles.FirstOrDefault(x => !Main.Game.Map.GetTile(x).CollisionFlag);
             if(freeTile == Point.Zero)
             {
                 MessageLog.DisplayMessage("The teleporter appears to be blocked");

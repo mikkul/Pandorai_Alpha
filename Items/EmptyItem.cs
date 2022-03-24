@@ -1,5 +1,4 @@
-﻿using Pandorai.Creatures;
-using System;
+﻿using System;
 
 namespace Pandorai.Items
 {

@@ -5,14 +5,13 @@ using Pandorai.ParticleSystems;
 using Pandorai.Sounds;
 using Pandorai.UI;
 using Pandorai.Utility;
-using System;
 using System.Timers;
 
 namespace Pandorai.Structures.Behaviours
 {
 	public class PandoraiPedestal : Behaviour
 	{
-		private bool activated = false;
+		private bool _activated = false;
 
 		public override void Bind()
 		{
@@ -41,7 +40,7 @@ namespace Pandorai.Structures.Behaviours
 
 		public override void Interact(Creature creature)
 		{
-			if(!activated)
+			if(!_activated)
 			{
 				return;
 			}
@@ -58,7 +57,7 @@ namespace Pandorai.Structures.Behaviours
 
 		public void ItemInteract(Item item)
         {
-            if (activated)
+            if (_activated)
             {
                 return;
             }
@@ -68,14 +67,14 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
-            Game1.game.Player.PossessedCreature.Stats.Experience += 1500;
+            Main.Game.Player.PossessedCreature.Stats.Experience += 1500;
 
-            Game1.game.Player.PossessedCreature.Inventory.RemoveElement(item);
+            Main.Game.Player.PossessedCreature.Inventory.RemoveElement(item);
             Structure.EnableBehaviour("LightEmitter");
 
             DoFancyEffectsAndJingle();
 
-            Game1.game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem("MassDestructionRune"));
+            Main.Game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem("MassDestructionRune"));
 
             MessageLog.DisplayMessage("You restored the altar of Pandorai!");
             MessageLog.DisplayMessage("You win!");
@@ -83,10 +82,10 @@ namespace Pandorai.Structures.Behaviours
 
         private void DoFancyEffectsAndJingle()
         {
-            Game1.game.Camera.CameraShake = new Rendering.Shake(5000, 60, 50, Game1.game.mainRng);
-            Game1.game.Camera.ShakeCamera();
+            Main.Game.Camera.CameraShake = new Rendering.Shake(5000, 60, 50, Main.Game.MainRng);
+            Main.Game.Camera.ShakeCamera();
 
-            var position = new Vector2(Structure.Tile.Index.X * Game1.game.Map.TileSize, Structure.Tile.Index.Y * Game1.game.Map.TileSize);
+            var position = new Vector2(Structure.Tile.Index.X * Main.Game.Map.TileSize, Structure.Tile.Index.Y * Main.Game.Map.TileSize);
             int rangeCovered = 0;
             int time = 5000;
             var range = 15;
@@ -96,11 +95,11 @@ namespace Pandorai.Structures.Behaviours
                 PSExplosion wavePS;
                 if (rangeCovered % 2 == 0)
                 {
-                    wavePS = new PSExplosion(position, 150, Game1.game.smokeParticleTexture, time * 1.4f, 64 * range, 100, Helper.GetColorFromHex("#3f6aeb"), true, Game1.game);
+                    wavePS = new PSExplosion(position, 150, Main.Game.smokeParticleTexture, time * 1.4f, 64 * range, 100, Helper.GetColorFromHex("#3f6aeb"), true, Main.Game);
                 }
                 else
                 {
-                    wavePS = new PSExplosion(position, 150, Game1.game.smokeParticleTexture, time * 1.4f, 64 * range, 85, Helper.GetColorFromHex("#819ae6"), true, Game1.game);
+                    wavePS = new PSExplosion(position, 150, Main.Game.smokeParticleTexture, time * 1.4f, 64 * range, 85, Helper.GetColorFromHex("#819ae6"), true, Main.Game);
                 }
 
                 ParticleSystemManager.AddSystem(wavePS, true);

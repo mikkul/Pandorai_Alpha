@@ -1,13 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Myra.Graphics2D.UI;
 using Pandorai.Rendering;
-using Pandorai.Sounds;
 using System;
 
 namespace Pandorai
 {
-	public class Camera
+    public class Camera
 	{
 		public Vector2 Position;
 
@@ -23,7 +20,7 @@ namespace Pandorai
 		public float PanningCurveSteepness = 5;
 		public float PanningCurveBias = 2.5f;
 
-		private float panLerpPercentage = 0;
+		private float _panLerpPercentage = 0;
 
 		public Shake CameraShake { 
 			set
@@ -57,8 +54,8 @@ namespace Pandorai
 
 		public void UpdateViewport(Options options)
 		{
-			Viewport.Width = (int)(Options.oldResolution.X * 0.75);
-			Viewport.Height = (int)(Options.oldResolution.Y * 0.75);
+			Viewport.Width = (int)(Options.OldResolution.X * 0.75);
+			Viewport.Height = (int)(Options.OldResolution.Y * 0.75);
 		}
 
 		public bool IsInViewport(Vector2 vector)
@@ -81,7 +78,7 @@ namespace Pandorai
 
 		public void StartPanning(Vector2 destination)
 		{
-			panLerpPercentage = 0;
+			_panLerpPercentage = 0;
 			PanDestination = destination;
 			IsPannning = true;
 			IsFollowing = false;
@@ -91,19 +88,17 @@ namespace Pandorai
 		{
 			if(IsFollowing)
 			{
-				//Position.X += (FollowedBody.X - Viewport.Width / 2 - Position.X) * FollowingSpeed * dt;
-				//Position.Y += (FollowedBody.Y - Viewport.Height / 2 - Position.Y) * FollowingSpeed * dt;
 				Position.X = FollowedBody.X - Viewport.Width / 2;
 				Position.Y = FollowedBody.Y - Viewport.Height / 2;
 			}
 
 			else if(IsPannning)
 			{
-				panLerpPercentage += PanningSpeed * dt;
+				_panLerpPercentage += PanningSpeed * dt;
 
-				double lerpValue = 1 / (1 + Math.Pow((PanningCurveBias * panLerpPercentage) / (1 - panLerpPercentage), -PanningCurveSteepness));
+				double lerpValue = 1 / (1 + Math.Pow((PanningCurveBias * _panLerpPercentage) / (1 - _panLerpPercentage), -PanningCurveSteepness));
 
-				if (panLerpPercentage >= 1)
+				if (_panLerpPercentage >= 1)
 				{
 					lerpValue = 1;
 					IsPannning = false;

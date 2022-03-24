@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.Xna.Framework;
-using System.Linq;
 using System.Diagnostics;
 
 namespace Pandorai.Utility

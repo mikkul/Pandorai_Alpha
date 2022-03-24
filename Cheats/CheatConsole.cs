@@ -1,5 +1,4 @@
-﻿using Myra;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
 using Myra.Graphics2D.UI;
@@ -15,21 +14,22 @@ namespace Pandorai.Cheats
 	{
 		public static Keys ActivationKey = Keys.OemTilde;
 
-		public static Game1 game;
+		public static Main Game;
 
 		public static List<string> CommandParameters;
 
 		public static Dictionary<string, Action> Commands = new Dictionary<string, Action>();
 
 		public static bool IsActive = false;
+		
         private static Vision _originalPlayerVision;
 
         public static void InitCommands()
 		{
 			Commands.Add("godmode", () =>
 			{
-				game.Player.PossessedCreature.Stats.MaxHealth = int.MaxValue;
-				game.Player.PossessedCreature.Stats.Health = int.MaxValue;
+				Game.Player.PossessedCreature.Stats.MaxHealth = int.MaxValue;
+				Game.Player.PossessedCreature.Stats.Health = int.MaxValue;
 			});
 
 			Commands.Add("activate", () =>
@@ -39,7 +39,7 @@ namespace Pandorai.Cheats
 
 			Commands.Add("allvision", () =>
 			{
-				var possesedCreature = Game1.game.Player.PossessedCreature;
+				var possesedCreature = Main.Game.Player.PossessedCreature;
 				if(_originalPlayerVision == null)
 				{
 					var allSeeingVision = new AllSeeingVision();
@@ -66,17 +66,17 @@ namespace Pandorai.Cheats
 			Commands.Add("giveitem", () =>
 			{
 				var itemName = CommandParameters[0];
-				game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem(itemName));
+				Game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem(itemName));
 			});			
 
 			Commands.Add("noclip", () =>
 			{
-				game.Player.PossessedCreature.NoClip ^= true;
+				Game.Player.PossessedCreature.NoClip ^= true;
 			});
 
 			Commands.Add("speed", () =>
 			{
-				game.TurnManager.heroTurnTime = int.Parse(CommandParameters[0]);
+				Game.TurnManager.heroTurnTime = int.Parse(CommandParameters[0]);
 			});
 
 			Commands.Add("teleport", () =>
@@ -85,9 +85,9 @@ namespace Pandorai.Cheats
 
 			Commands.Add("move", () =>
 			{
-				game.Player.PossessedCreature.Position.X += int.Parse(CommandParameters[0]) * game.Map.TileSize;
-				game.Player.PossessedCreature.Position.Y += int.Parse(CommandParameters[1]) * game.Map.TileSize;
-				game.Player.PossessedCreature.MapIndex = game.Map.GetTileIndexByPosition(game.Player.PossessedCreature.Position);
+				Game.Player.PossessedCreature.Position.X += int.Parse(CommandParameters[0]) * Game.Map.TileSize;
+				Game.Player.PossessedCreature.Position.Y += int.Parse(CommandParameters[1]) * Game.Map.TileSize;
+				Game.Player.PossessedCreature.MapIndex = Game.Map.GetTileIndexByPosition(Game.Player.PossessedCreature.Position);
 			});
 
 			Commands.Add("kill", () =>
@@ -113,7 +113,7 @@ namespace Pandorai.Cheats
 
 						if (x != 0 && y != 0)
 						{
-							game.CreatureManager.GetCreature(new Point(x, y))?.GetHit(9999, Game1.game.Player.PossessedCreature);
+							Game.CreatureManager.GetCreature(new Point(x, y))?.GetHit(9999, Main.Game.Player.PossessedCreature);
 						}
 					}
 				}
@@ -125,15 +125,15 @@ namespace Pandorai.Cheats
 				{
 					if (CommandParameters[0] == "monster")
 					{
-						game.Player.PossessedCreature.Class = CreatureClass.Monster;
+						Game.Player.PossessedCreature.Class = CreatureClass.Monster;
 					}
 					else if (CommandParameters[0] == "human")
 					{
-						game.Player.PossessedCreature.Class = CreatureClass.Human;
+						Game.Player.PossessedCreature.Class = CreatureClass.Human;
 					}
 					else if (CommandParameters[0] == "neutral")
 					{
-						game.Player.PossessedCreature.Class = CreatureClass.Neutral;
+						Game.Player.PossessedCreature.Class = CreatureClass.Neutral;
 					}
 					Console.WriteLine(CommandParameters[0]);
 				}
@@ -161,7 +161,7 @@ namespace Pandorai.Cheats
 			if(key.Equals(ActivationKey))
 			{
 				var console = GUI();
-				console.Show(game.desktop, Point.Zero);
+				console.Show(Game.desktop, Point.Zero);
 				console.FindWidgetById("CheatConsoleInput").SetKeyboardFocus();
 				IsActive = true;
 			}
@@ -173,7 +173,7 @@ namespace Pandorai.Cheats
 			{
 				Id = "CheatConsole",
 				AcceptsKeyboardFocus = true,
-				Width = (int)(Options.oldResolution.X * 0.75f),
+				Width = (int)(Options.OldResolution.X * 0.75f),
 				Opacity = 0.8f
 			};
 
@@ -194,7 +194,7 @@ namespace Pandorai.Cheats
 				}
 
 				IsActive = false;
-				game.desktop.FocusedKeyboardWidget = null;
+				Game.desktop.FocusedKeyboardWidget = null;
 			};
 
 			console.Content = commandPrompt;

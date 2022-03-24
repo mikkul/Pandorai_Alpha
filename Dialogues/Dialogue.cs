@@ -17,29 +17,29 @@ namespace Pandorai.Dialogues
 		public string NPCName;
 		public string PlayerName;
 
-		private List<DialogueNode> dialogueNodes = new List<DialogueNode>();
-		private List<DialogueOption> dialogueOptions = new List<DialogueOption>();
-		private List<CustomBool> customBools = new List<CustomBool>();
+		private List<DialogueNode> _dialogueNodes = new List<DialogueNode>();
+		private List<DialogueOption> _dialogueOptions = new List<DialogueOption>();
+		private List<CustomBool> _customBools = new List<CustomBool>();
 
-		private Game1 game;
-		private string name;
+		private Main _game;
+		private string _name;
 
-		public Dialogue(string dialogueName, Game1 _game)
+		public Dialogue(string dialogueName, Main game)
 		{
-			name = dialogueName;
+			_name = dialogueName;
 			string fullName = dialogueName + ".txt";
-			dialogueNodes = DialogueManager.ReadDialogueFile(fullName);
-			game = _game;
+			_dialogueNodes = DialogueManager.ReadDialogueFile(fullName);
+			_game = game;
 		}
 
 		public Dialogue Clone()
 		{
-			return new Dialogue(name, game);
+			return new Dialogue(_name, _game);
 		}
 
 		public DialogueNode GetNode(int index)
 		{
-			return dialogueNodes.Find(node => node.Index == index);
+			return _dialogueNodes.Find(node => node.Index == index);
 		}
 
 		public void ReadNode(int index)
@@ -63,7 +63,7 @@ namespace Pandorai.Dialogues
 
 				if (action.Type == "if")
 				{
-					CustomBool check = customBools.Find(cBool => cBool.Name == action.Value);
+					CustomBool check = _customBools.Find(cBool => cBool.Name == action.Value);
 
 					if (check != null && !check.Value)
 					{
@@ -133,7 +133,7 @@ namespace Pandorai.Dialogues
 						effectInstance.SetAttribute(attributeName, attributeValue);
 					}
 
-					effectInstance.Use(Game1.game.Player.PossessedCreature);
+					effectInstance.Use(Main.Game.Player.PossessedCreature);
 				}
 			}
 			// check for type and do something about it
@@ -147,7 +147,7 @@ namespace Pandorai.Dialogues
 			{
 				DialogueManager.SetNameLabel(NPCName);
 				DialogueManager.SetTextContent();
-				DialogueManager.ShowOptions(dialogueOptions, this);
+				DialogueManager.ShowOptions(_dialogueOptions, this);
 
 				ReadNode(ourNode.Lead);
 			}
@@ -188,11 +188,11 @@ namespace Pandorai.Dialogues
 				if (key == Keys.Space)
 				{
 					ContinueNode(index);
-					game.InputManager.SingleKeyPress -= handler;
+					_game.InputManager.SingleKeyPress -= handler;
 				}
 			};
 
-			game.InputManager.SingleKeyPress += handler;
+			_game.InputManager.SingleKeyPress += handler;
 		}
 
 		public void ContinueNode(int index)
@@ -205,7 +205,7 @@ namespace Pandorai.Dialogues
 				DialogueManager.HideOptions();
 				DialogueManager.SetNameLabel(NPCName);
 				DialogueManager.SetTextContent();
-				DialogueManager.ShowOptions(dialogueOptions, this);
+				DialogueManager.ShowOptions(_dialogueOptions, this);
 			}
 			else
 			{
@@ -215,7 +215,7 @@ namespace Pandorai.Dialogues
 
 			if(index == -2)
 			{
-				game.Player.IsInteractingWithSomeone = false;
+				_game.Player.IsInteractingWithSomeone = false;
 				MessageLog.Show();
 			}
 		}
@@ -235,13 +235,13 @@ namespace Pandorai.Dialogues
 		{
 			bool boolValue = value == "true";
 
-			if (customBools.Find(cBool => cBool.Name == name) == null)
+			if (_customBools.Find(cBool => cBool.Name == name) == null)
 			{
-				customBools.Add(new CustomBool(name, boolValue));
+				_customBools.Add(new CustomBool(name, boolValue));
 			}
 			else
 			{
-				customBools.Find(cBool => cBool.Name == name).Value = boolValue;
+				_customBools.Find(cBool => cBool.Name == name).Value = boolValue;
 			}
 		}
 
@@ -252,20 +252,20 @@ namespace Pandorai.Dialogues
 
 		public void GiveHeroItem(string itemName)
 		{
-			game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem(itemName));
+			_game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem(itemName));
 		}
 
 		public void AddOption(string index)
 		{
 			int intIndex = int.Parse(index);
 
-			if (dialogueOptions.Any(item => item.NodeIndex == intIndex))
+			if (_dialogueOptions.Any(item => item.NodeIndex == intIndex))
 			{
 				Console.WriteLine(string.Format("Option nr {0} already exists", intIndex));
 				return;
 			}
 
-			DialogueNode optionNode = dialogueNodes.Find(item => item.Index == intIndex);
+			DialogueNode optionNode = _dialogueNodes.Find(item => item.Index == intIndex);
 			bool isForever = optionNode.Type == "ForeverHeroOption";
 			string optContent = optionNode.Content;
 
@@ -294,13 +294,13 @@ namespace Pandorai.Dialogues
 				dialogueOption.Conditions.Add(conditionInstance);
 			}
 
-			dialogueOptions.Add(dialogueOption);
+			_dialogueOptions.Add(dialogueOption);
 		}
 
 		public void RemoveOption(string index)
 		{
 			int intIndex = int.Parse(index);
-			dialogueOptions.Remove(dialogueOptions.Find(item => item.NodeIndex == intIndex));
+			_dialogueOptions.Remove(_dialogueOptions.Find(item => item.NodeIndex == intIndex));
 		}
 	}
 }

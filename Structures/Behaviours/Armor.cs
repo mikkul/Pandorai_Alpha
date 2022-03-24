@@ -10,7 +10,7 @@ namespace Pandorai.Structures.Behaviours
 	{
 		public int Hits;
 
-		private List<Behaviour> holdedBehaviours = new List<Behaviour>();
+		private List<Behaviour> _behavioursHeld = new List<Behaviour>();
 
 		public override void Bind()
 		{
@@ -21,7 +21,7 @@ namespace Pandorai.Structures.Behaviours
 
 				if (behaviour.GetType() == this.GetType()) continue;
 
-				holdedBehaviours.Add(behaviour);
+				_behavioursHeld.Add(behaviour);
 				behaviour.Unbind();
 			}
 		}
@@ -35,7 +35,7 @@ namespace Pandorai.Structures.Behaviours
 
 				if (behaviour.GetType() == this.GetType()) continue;
 
-				holdedBehaviours.Add(behaviour);
+				_behavioursHeld.Add(behaviour);
 				behaviour.Bind();
 			}
 		}
@@ -74,20 +74,20 @@ namespace Pandorai.Structures.Behaviours
 				return;
 			}
 
-			ParticleSystemManager.AddSystem(new PSExplosion(Structure.Tile.Index.ToVector2() * Game1.game.Options.TileSize, 25, Game1.game.smokeParticleTexture, 350, 90, 30, Color.Gray, true, Game1.game), true);
+			ParticleSystemManager.AddSystem(new PSExplosion(Structure.Tile.Index.ToVector2() * Main.Game.Options.TileSize, 25, Main.Game.smokeParticleTexture, 350, 90, 30, Color.Gray, true, Main.Game), true);
 
 			Hits -= damage;
 			if (Hits <= 0)
 			{
 				SoundManager.PlaySound("impactwood22", 0.25f);
-				foreach (var behaviour in holdedBehaviours)
+				foreach (var behaviour in _behavioursHeld)
 				{
 					Structure.Interacted += behaviour.Interact;
 					Structure.UsedForce += behaviour.ForceHandler;
 
 					if(behaviour.GetType() == typeof(Container))
 					{
-						behaviour.Interact(new Creature(Game1.game));
+						behaviour.Interact(new Creature(Main.Game));
 					}
 				}
 

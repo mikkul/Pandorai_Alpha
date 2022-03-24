@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.Sounds;
-using System;
 
 namespace Pandorai.Mechanics
 {

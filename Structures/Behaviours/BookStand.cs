@@ -36,7 +36,7 @@ namespace Pandorai.Structures.Behaviours
 
         public override void Interact(Creature creature)
         {
-            if(creature != Game1.game.Player.PossessedCreature)
+            if(creature != Main.Game.Player.PossessedCreature)
             {
                 return;
             }

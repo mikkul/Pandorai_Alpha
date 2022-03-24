@@ -53,7 +53,7 @@ namespace Pandorai.Structures.Behaviours
 				if (creature.Inventory.ContainsItem(RequiredKey))
 				{
 					creature.Inventory.RemoveElement(RequiredKey);
-					Game1.game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, false);
+					Main.Game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, false);
 					Structure.ColorTint *= OpacityMultiplier;
 					IsOpened = true;
 				}
@@ -66,7 +66,7 @@ namespace Pandorai.Structures.Behaviours
 			{
 				IsOpened = false;
 				Structure.ColorTint *= 1 / OpacityMultiplier;
-				Game1.game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, true);
+				Main.Game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, true);
 			}
         }
 

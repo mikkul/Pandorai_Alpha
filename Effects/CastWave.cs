@@ -32,8 +32,8 @@ namespace Pandorai.Effects
 
 			float time = 1000;
 
-			Game1.game.Camera.CameraShake = new Rendering.Shake((int)time + 250, 60, 30, Game1.game.mainRng);
-			Game1.game.Camera.ShakeCamera();
+			Main.Game.Camera.CameraShake = new Rendering.Shake((int)time + 250, 60, 30, Main.Game.MainRng);
+			Main.Game.Camera.ShakeCamera();
 			SoundManager.PlaySound("explosion_low");
 
 			Timer effectTimer = new Timer(time);
@@ -77,9 +77,9 @@ namespace Pandorai.Effects
 				foreach (var tile in damagedTiles)
 				{
 					Creature tryCreature;
-					if((tryCreature = Game1.game.CreatureManager.GetCreature(tile)) != null)
+					if((tryCreature = Main.Game.CreatureManager.GetCreature(tile)) != null)
 					{
-						Game1.game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(Damage, user));
+						Main.Game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(Damage, user));
 					}
 				}
 			};

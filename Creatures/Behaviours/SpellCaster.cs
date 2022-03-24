@@ -3,7 +3,6 @@ using Pandorai.Tilemaps;
 using Pandorai.Utility;
 using System;
 using Microsoft.Xna.Framework;
-using System.Diagnostics;
 
 namespace Pandorai.Creatures.Behaviours
 {
@@ -51,11 +50,11 @@ namespace Pandorai.Creatures.Behaviours
 			Item spellToUse = null;
 			if (prioritySpells.Count > 0)
 			{
-				spellToUse = prioritySpells.GetRandomElement(Owner.game.mainRng).Item;
+				spellToUse = prioritySpells.GetRandomElement(Owner.game.MainRng).Item;
 			}
 			else
 			{
-				spellToUse = spells.GetRandomElement(Owner.game.mainRng).Item;
+				spellToUse = spells.GetRandomElement(Owner.game.MainRng).Item;
 			}
 
 			spellToUse.Use(Owner);

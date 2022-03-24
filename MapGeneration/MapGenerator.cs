@@ -14,48 +14,43 @@ using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Sounds;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
-using Pandorai.Effects;
 
 namespace Pandorai.MapGeneration
 {
 	public class MapGenerator
 	{
-		public Game1 _game;
-
-		Random rng = new Random();
-
-		Tile[,] map;
-
-		int[,] operatingArea;
-
-		Color _freeSpaceFloorColor = Helper.GetColorFromHex("#966c4b");
-
-		Dictionary<string, int> _maxAllowedItemCount;
-
-		Creature _trapCreature;
-
+		public Main Game;
 		public Regions Rooms = new Regions();
 
-		public Point StartingPoint;
+		private Random _rng = new Random();
+
+		private Tile[,] _map;
+
+		private int[,] _operatingArea;
+
+		private Color _freeSpaceFloorColor = Helper.GetColorFromHex("#966c4b");
+
+		private Dictionary<string, int> _maxAllowedItemCount;
+
+		private Creature _trapCreature;
 
 		public MapGenerator()
 		{
-			_trapCreature = new Creature(Game1.game);
+			_trapCreature = new Creature(Main.Game);
 			_trapCreature.Id = "Trap";
 			_trapCreature.Stats = new CreatureStats(_trapCreature);
 			_trapCreature.Stats.Strength = 45;
 		}
 
-		public async Task<Tile[,]> GenerateMapAsync(Game1 game, string regionSpreadsheet)
+		public async Task<Tile[,]> GenerateMapAsync(Main game, string regionSpreadsheet)
 		{
 			var map = await Task.FromResult(GenerateMap(game, regionSpreadsheet));
 			return map;
 		}
 
-		public Tile[,] GenerateMap(Game1 game, string regionSpreadsheet)
+		public Tile[,] GenerateMap(Main game, string regionSpreadsheet)
         {
-			_game = game;
+			Game = game;
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -63,8 +58,8 @@ namespace Pandorai.MapGeneration
 			_maxAllowedItemCount = new();
 			_maxAllowedItemCount["BlinkPotion"] = 2;
 
-            map = new Tile[WorldOptions.Width, WorldOptions.Height];
-            map.Populate(() => null);
+            _map = new Tile[WorldOptions.Width, WorldOptions.Height];
+            _map.Populate(() => null);
 
             CustomRegionLoader customRegLoader = new CustomRegionLoader(regionSpreadsheet);
 
@@ -96,7 +91,7 @@ namespace Pandorai.MapGeneration
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
-            return map;
+            return _map;
         }
 
         private void DoSomethingAboutUnreachableSpace()
@@ -105,15 +100,15 @@ namespace Pandorai.MapGeneration
 			while(isUncreachableSpace)
 			{
 				isUncreachableSpace = false;
-				var localOpArea = new int[map.GetLength(0), map.GetLength(1)];
+				var localOpArea = new int[_map.GetLength(0), _map.GetLength(1)];
 				FloodFill(localOpArea);
 
 				var uncreachablePoints = new List<Point>();
-				for (int x = 0; x < map.GetLength(0); x++)
+				for (int x = 0; x < _map.GetLength(0); x++)
 				{
-					for (int y = 0; y < map.GetLength(1); y++)
+					for (int y = 0; y < _map.GetLength(1); y++)
 					{
-						if(localOpArea[x, y] == 0 && map[x, y].BaseType == 0 && map[x, y].BaseColor == _freeSpaceFloorColor)
+						if(localOpArea[x, y] == 0 && _map[x, y].BaseType == 0 && _map[x, y].BaseColor == _freeSpaceFloorColor)
 						{
 							isUncreachableSpace = true;
 							uncreachablePoints.Add(new Point(x, y));
@@ -126,14 +121,14 @@ namespace Pandorai.MapGeneration
 					var neighbours = GenHelper.GetNeighbours(point);
 					foreach (var neighbour in neighbours)
 					{
-						if(!map.IsPointInBounds(neighbour))
+						if(!_map.IsPointInBounds(neighbour))
 						{
 							continue;
 						}
-						map[neighbour.X, neighbour.Y].CollisionFlag = false;
-						map[neighbour.X, neighbour.Y].BaseColor = _freeSpaceFloorColor;
-						map[neighbour.X, neighbour.Y].BaseType = 0;
-						map[neighbour.X, neighbour.Y].SetTexture(0);
+						_map[neighbour.X, neighbour.Y].CollisionFlag = false;
+						_map[neighbour.X, neighbour.Y].BaseColor = _freeSpaceFloorColor;
+						_map[neighbour.X, neighbour.Y].BaseType = 0;
+						_map[neighbour.X, neighbour.Y].SetTexture(0);
 					}
 				}
 			}
@@ -143,11 +138,11 @@ namespace Pandorai.MapGeneration
                 Stack<Point> openList = new Stack<Point>();
                 List<Point> closedList = new List<Point>();
 
-                for (int x = 0; x < map.GetLength(0); x++)
+                for (int x = 0; x < _map.GetLength(0); x++)
                 {
-                    for (int y = 0; y < map.GetLength(1); y++)
+                    for (int y = 0; y < _map.GetLength(1); y++)
                     {
-                        if (opArea[x, y] == 0 && map[x, y].BaseType == 0 && map[x, y].BaseColor == _freeSpaceFloorColor)
+                        if (opArea[x, y] == 0 && _map[x, y].BaseType == 0 && _map[x, y].BaseColor == _freeSpaceFloorColor)
                         {
                             openList.Push(new Point(x, y));
                             goto EndLoop;
@@ -165,11 +160,11 @@ namespace Pandorai.MapGeneration
 
                     foreach (var neighbour in neighbours)
                     {
-						if(!map.IsPointInBounds(neighbour))
+						if(!_map.IsPointInBounds(neighbour))
 						{
 							continue;
 						}
-                        if (map[neighbour.X, neighbour.Y].BaseType == 0 && opArea[neighbour.X, neighbour.Y] == 0)
+                        if (_map[neighbour.X, neighbour.Y].BaseType == 0 && opArea[neighbour.X, neighbour.Y] == 0)
                         {
                             openList.Push(neighbour);
                         }
@@ -185,11 +180,11 @@ namespace Pandorai.MapGeneration
         private void PlaceTeleporters()
 		{
 			var freeSpace = new List<Point>();
-			for (int x = 0; x < map.GetLength(0); x++)
+			for (int x = 0; x < _map.GetLength(0); x++)
 			{
-				for (int y = 0; y < map.GetLength(1); y++)
+				for (int y = 0; y < _map.GetLength(1); y++)
 				{
-					if(!map[x, y].CollisionFlag && map[x, y].BaseColor == _freeSpaceFloorColor)
+					if(!_map[x, y].CollisionFlag && _map[x, y].BaseColor == _freeSpaceFloorColor)
 					{
 						freeSpace.Add(new Point(x, y));
 					}
@@ -213,7 +208,7 @@ namespace Pandorai.MapGeneration
 				var color = brightColors[i];
 				for (int j = 0; j < 1; j++)
 				{
-					var randomPoint = freeSpace.GetRandomElement(Game1.game.mainRng);
+					var randomPoint = freeSpace.GetRandomElement(Main.Game.MainRng);
 					var teleporterInstance = PlaceStructure("Teleporter", randomPoint);
 					teleporterInstance.ColorTint = color;
 					var teleporterBehaviour = teleporterInstance.GetBehaviour<Teleporter>();
@@ -236,8 +231,8 @@ namespace Pandorai.MapGeneration
 
 		private void ProcessRooms()
 		{
-			operatingArea = new int[map.GetLength(0), map.GetLength(1)];
-			Rooms.OperatingArea = new int[map.GetLength(0), map.GetLength(1)];
+			_operatingArea = new int[_map.GetLength(0), _map.GetLength(1)];
+			Rooms.OperatingArea = new int[_map.GetLength(0), _map.GetLength(1)];
 
 			List<Point> newRoomArea;
 			while((newRoomArea = FloodFillRoom()).Count > 0)
@@ -245,12 +240,12 @@ namespace Pandorai.MapGeneration
 				Region newRoom = new Region { Id = Rooms.RegionIdCounter++ };
 				newRoom.Area = newRoomArea;
 				Rooms.UpdateOpArea(newRoom.Area, newRoom.Id);
-				newRoom.Color = new Color(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
+				newRoom.Color = new Color(_rng.Next(0, 255), _rng.Next(0, 255), _rng.Next(0, 255));
 				newRoom.Border = Rooms.CalculateRegionBorder(newRoom);
 
 				foreach (var point in newRoom.Area)
 				{
-					map[point.X, point.Y].BaseColor = newRoom.Color;
+					_map[point.X, point.Y].BaseColor = newRoom.Color;
 				}
 
 				Rooms.AddRegion(newRoom);	
@@ -270,7 +265,7 @@ namespace Pandorai.MapGeneration
 			}
 			foreach (var point in biggestRoom!.Area)
 			{
-				map[point.X, point.Y].BaseColor = _freeSpaceFloorColor;
+				_map[point.X, point.Y].BaseColor = _freeSpaceFloorColor;
 			}
 
 			// remove rooms that are too small to be considered rooms
@@ -287,7 +282,7 @@ namespace Pandorai.MapGeneration
 			{
 				foreach (var point in roomToBeRemoved.Area)
 				{
-					map[point.X, point.Y].BaseColor = _freeSpaceFloorColor;
+					_map[point.X, point.Y].BaseColor = _freeSpaceFloorColor;
 				}
 				Rooms.RegionList.Remove(roomToBeRemoved);
 			}
@@ -321,23 +316,23 @@ namespace Pandorai.MapGeneration
 
 					foreach (var point in addedArea)
 					{
-						map[point.X, point.Y].BaseType = 0;
-						map[point.X, point.Y].SetTexture(0);
-						map[point.X, point.Y].CollisionFlag = false;
-						map[point.X, point.Y].BaseColor = room.Color;
+						_map[point.X, point.Y].BaseType = 0;
+						_map[point.X, point.Y].SetTexture(0);
+						_map[point.X, point.Y].CollisionFlag = false;
+						_map[point.X, point.Y].BaseColor = room.Color;
 					}
 
 					room.Border = Rooms.CalculateRegionBorder(room);
 				}
 
-				room.ProcessInterior(map);
+				room.ProcessInterior(_map);
 
 				foreach (var point in room.Border)
 				{
-					map[point.X, point.Y].BaseType = 1;
-					map[point.X, point.Y].SetTexture(1);
-					map[point.X, point.Y].CollisionFlag = true;
-					map[point.X, point.Y].BaseColor = Color.White;
+					_map[point.X, point.Y].BaseType = 1;
+					_map[point.X, point.Y].SetTexture(1);
+					_map[point.X, point.Y].CollisionFlag = true;
+					_map[point.X, point.Y].BaseColor = Color.White;
 				}
 			}
 		
@@ -346,15 +341,15 @@ namespace Pandorai.MapGeneration
 			bool[] isRoomDooredWeights = new bool[] { false, true, true };
 			foreach (var room in Rooms.RegionList)
 			{
-				bool isDoor = isRoomDooredWeights.GetRandomElement(Game1.game.mainRng);
-				int entryCount = roomEntryCountWeights.GetRandomElement(Game1.game.mainRng);
+				bool isDoor = isRoomDooredWeights.GetRandomElement(Main.Game.MainRng);
+				int entryCount = roomEntryCountWeights.GetRandomElement(Main.Game.MainRng);
 				for (int i = 0; i < entryCount; i++)
 				{
 					int safetyCounter = 0;
 					Point randomBorderPoint;
 					do
 					{
-						randomBorderPoint = room.Border.GetRandomElement(_game.mainRng);
+						randomBorderPoint = room.Border.GetRandomElement(Game.MainRng);
 						safetyCounter++;
 					}
 					while(!isGoodEntrance(randomBorderPoint) && safetyCounter < 1000);
@@ -366,16 +361,16 @@ namespace Pandorai.MapGeneration
 						var neighbours = GenHelper.GetNeighbours(point);
 						foreach (var neighbour in neighbours)
 						{
-							if (!map.IsPointInBounds(neighbour))
+							if (!_map.IsPointInBounds(neighbour))
 							{
 								break;
 							}
 
-							if (map[neighbour.X, neighbour.Y].BaseType == 0 && map[neighbour.X, neighbour.Y].BaseColor == room.Color)
+							if (_map[neighbour.X, neighbour.Y].BaseType == 0 && _map[neighbour.X, neighbour.Y].BaseColor == room.Color)
 							{
 								floorCount++;
 							}
-							else if (map[neighbour.X, neighbour.Y].BaseType == 1)
+							else if (_map[neighbour.X, neighbour.Y].BaseType == 1)
 							{
 								wallCount++;
 							}
@@ -383,7 +378,7 @@ namespace Pandorai.MapGeneration
 						return floorCount == 1 && wallCount == 2;
 					}
 
-					var tile = map[randomBorderPoint.X, randomBorderPoint.Y];
+					var tile = _map[randomBorderPoint.X, randomBorderPoint.Y];
 					tile.BaseType = 0;
 					tile.SetTexture(0);
 					tile.CollisionFlag = false;
@@ -409,8 +404,8 @@ namespace Pandorai.MapGeneration
 
 		private void FillRoomWithContent(Region room)
 		{
-			Random rng = Game1.game.mainRng;
-			room.ProcessInterior(map);
+			Random rng = Main.Game.MainRng;
+			room.ProcessInterior(_map);
 
 			// place torches
 			for (int i = 0; i < 2; i++)
@@ -548,10 +543,10 @@ namespace Pandorai.MapGeneration
 				if(doPlace)
 				{
 					var position = GetRandomUntakenPosition(room.Area);
-					map[position.X, position.Y].Modifier |= TileModifier.Trap;
-					map[position.X, position.Y].BaseColor = map[position.X, position.Y].BaseColor.Brighten(-0.2f);
-					map[position.X, position.Y].AddTexture(8);
-					map[position.X, position.Y].CreatureCame += c =>
+					_map[position.X, position.Y].Modifier |= TileModifier.Trap;
+					_map[position.X, position.Y].BaseColor = _map[position.X, position.Y].BaseColor.Brighten(-0.2f);
+					_map[position.X, position.Y].AddTexture(8);
+					_map[position.X, position.Y].CreatureCame += c =>
 					{
 						c.OnGotHit(_trapCreature);
 					};
@@ -574,7 +569,7 @@ namespace Pandorai.MapGeneration
 			List<string> chosenItems = new();
 			for (int i = 0; i < numberOfItems; i++)
 			{
-				chosenItems.Add(weightedChoiceSet.GetRandomElement(Game1.game.mainRng));
+				chosenItems.Add(weightedChoiceSet.GetRandomElement(Main.Game.MainRng));
 			}
 
 			return chosenItems;
@@ -585,9 +580,9 @@ namespace Pandorai.MapGeneration
 			Point position;
 			do
 			{
-				position = possiblePoints.GetRandomElement(Game1.game.mainRng);
+				position = possiblePoints.GetRandomElement(Main.Game.MainRng);
 			}
-			while(map[position.X, position.Y].CollisionFlag);
+			while(_map[position.X, position.Y].CollisionFlag);
 
 			return position;
 		}
@@ -600,7 +595,7 @@ namespace Pandorai.MapGeneration
 			}
 
 			Item itemInstance = ItemLoader.GetItem(itemName);
-			var tile = map[point.X, point.Y];
+			var tile = _map[point.X, point.Y];
 			tile.MapObject = new MapObject(ObjectType.Collectible, 0)
 			{
 				Item = itemInstance,
@@ -613,16 +608,16 @@ namespace Pandorai.MapGeneration
 		{
 			Creature creatureInstance = CreatureLoader.GetCreature(creatureName);
 			creatureInstance.MapIndex = point;
-			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * _game.Options.TileSize;
-			var tile = map[point.X, point.Y];
+			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * Game.Options.TileSize;
+			var tile = _map[point.X, point.Y];
 			tile.CollisionFlag = true;
-			_game.CreatureManager.AddCreature(creatureInstance);
+			Game.CreatureManager.AddCreature(creatureInstance);
 			return creatureInstance;
 		}
 
 		private Structure PlaceStructure(string structureName, Point point)
 		{
-			var tile = map[point.X, point.Y];
+			var tile = _map[point.X, point.Y];
 			Structure structureInstance = StructureLoader.GetStructure(structureName);
 			structureInstance.Tile = new TileInfo(point, tile);
 			tile.MapObject = new MapObject(ObjectType.Interactive, 0)
@@ -640,11 +635,11 @@ namespace Pandorai.MapGeneration
 			Stack<Point> openList = new Stack<Point>();
 			List<Point> closedList = new List<Point>();
 
-			for (int X = 0; X < map.GetLength(0); X++)
+			for (int X = 0; X < _map.GetLength(0); X++)
 			{
-				for (int Y = 0; Y < map.GetLength(1); Y++)
+				for (int Y = 0; Y < _map.GetLength(1); Y++)
 				{
-					if (operatingArea[X, Y] == 0 && map[X, Y].BaseType == 0 && map[X, Y].BaseColor == Color.White)
+					if (_operatingArea[X, Y] == 0 && _map[X, Y].BaseType == 0 && _map[X, Y].BaseColor == Color.White)
 					{
 						openList.Push(new Point(X, Y));
 						goto EndLoop;
@@ -662,15 +657,15 @@ namespace Pandorai.MapGeneration
 
 				foreach (var neighbour in neighbours)
 				{
-					if (map[neighbour.X, neighbour.Y].BaseType == 0 && operatingArea[neighbour.X, neighbour.Y] == 0 && map[neighbour.X, neighbour.Y].BaseColor == Color.White)
+					if (_map[neighbour.X, neighbour.Y].BaseType == 0 && _operatingArea[neighbour.X, neighbour.Y] == 0 && _map[neighbour.X, neighbour.Y].BaseColor == Color.White)
 					{
 						openList.Push(neighbour);
 					}
-					operatingArea[neighbour.X, neighbour.Y] = 1;
+					_operatingArea[neighbour.X, neighbour.Y] = 1;
 				}
 
 				closedList.Add(currentTile);
-				operatingArea[currentTile.X, currentTile.Y] = 1;
+				_operatingArea[currentTile.X, currentTile.Y] = 1;
 			}
 
 			return closedList;
@@ -699,37 +694,37 @@ namespace Pandorai.MapGeneration
             {
                 for (int y = 0; y < WorldOptions.Height; y++)
                 {
-                    if (map[x, y] != null && map[x, y].BaseColor != Color.White) continue;
+                    if (_map[x, y] != null && _map[x, y].BaseColor != Color.White) continue;
 
                     var pixelColor = System.Drawing.Color.FromArgb(output[x, y]).ToXnaColor();
                     var tileType = sample.TileColorLegend[pixelColor];
 
                     if (tileType == TileType.Empty)
                     {
-                        map[x, y] = new Tile(0, 0, false);
+                        _map[x, y] = new Tile(0, 0, false);
                     }
                     else if (tileType == TileType.Wall)
                     {
-                        map[x, y] = new Tile(1, 9, true);
+                        _map[x, y] = new Tile(1, 9, true);
                     }
                     else if (tileType == TileType.Floor)
                     {
-                        map[x, y] = new Tile(0, 0, false);
+                        _map[x, y] = new Tile(0, 0, false);
                     }
                     else if (tileType == TileType.Path)
                     {
-                        map[x, y] = new Tile(0, 0, false);
+                        _map[x, y] = new Tile(0, 0, false);
                     }
                     else if (tileType == TileType.Mud)
                     {
-                        map[x, y] = new Tile(0, 0, false);
+                        _map[x, y] = new Tile(0, 0, false);
                     }
 
                     if (x == 0 || y == 0 || x == WorldOptions.Width - 1 || y == WorldOptions.Height - 1)
-                        map[x, y] = new Tile(1, 9, true);
+                        _map[x, y] = new Tile(1, 9, true);
 
 					// play main music theme
-					map[x, y].CreatureCame += incomingCreature =>
+					_map[x, y].CreatureCame += incomingCreature =>
 					{
 						if(!incomingCreature.IsPossessedCreature())
 						{
@@ -755,8 +750,8 @@ namespace Pandorai.MapGeneration
                 {
                     isGoodFit = true;
 
-                    randomLocationX = rng.Next(1, WorldOptions.Width - regInfo.TileInfo.GetLength(0) - 1);
-                    randomLocationY = rng.Next(1, WorldOptions.Height - regInfo.TileInfo.GetLength(1) - 1);
+                    randomLocationX = _rng.Next(1, WorldOptions.Width - regInfo.TileInfo.GetLength(0) - 1);
+                    randomLocationY = _rng.Next(1, WorldOptions.Height - regInfo.TileInfo.GetLength(1) - 1);
 
                     foreach (var rectangle in filledSpace)
                     {
@@ -769,12 +764,12 @@ namespace Pandorai.MapGeneration
                     if (safetyCounter++ > 1000)
                     {
                         Console.WriteLine("Safety counter reached 1000");
-                        _game.CreatureManager.Creatures.Clear(); // first clear everything
+                        Game.CreatureManager.Creatures.Clear(); // first clear everything
                         LightingManager.ClearLightSources();
                         ParticleSystemManager.Clear();
                         usedTiles.Clear();
                         filledSpace.Clear();
-                        map.Populate(() => null);
+                        _map.Populate(() => null);
                         PlaceRegions(filledSpace, usedTiles, createdRegions);
                         return;
                     }
@@ -802,11 +797,11 @@ namespace Pandorai.MapGeneration
                     var creatureClone = creature.Clone();
                     creatureClone.MapIndex = creature.MapIndex;
                     creatureClone.MapIndex += new Point(randomLocationX, randomLocationY);
-                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * _game.Options.TileSize;
-                    _game.CreatureManager.AddCreature(creatureClone);
+                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * Game.Options.TileSize;
+                    Game.CreatureManager.AddCreature(creatureClone);
                 }
 
-                regInfo.TileInfo.CopyTo(map, randomLocationX, randomLocationY);
+                regInfo.TileInfo.CopyTo(_map, randomLocationX, randomLocationY);
             }
         }
 
@@ -818,7 +813,7 @@ namespace Pandorai.MapGeneration
 
 			foreach (var dimension in region.DimensionSpecifiers)
 			{
-				var bounds = dimension.GetAreaData(rng);
+				var bounds = dimension.GetAreaData(_rng);
 				int width1 = bounds.GetLength(0);
 				int height1 = bounds.GetLength(1);
 
@@ -1046,10 +1041,10 @@ namespace Pandorai.MapGeneration
 			{
 				if (nextSpec.Spec.Parent != null)
 				{
-					var placement = nextSpec.Spec.PossiblePlacements.GetRandomElement(rng);
+					var placement = nextSpec.Spec.PossiblePlacements.GetRandomElement(_rng);
 					var parent = areas.Find(i => i.Spec == nextSpec.Spec.Parent);
-					var realOffsetX = nextSpec.Spec.OffsetX.GetRandom(rng);
-					var realOffsetY = nextSpec.Spec.OffsetY.GetRandom(rng);
+					var realOffsetX = nextSpec.Spec.OffsetX.GetRandom(_rng);
+					var realOffsetY = nextSpec.Spec.OffsetY.GetRandom(_rng);
 
 					switch (placement)
 					{
@@ -1100,7 +1095,7 @@ namespace Pandorai.MapGeneration
 
 			void recursiveSelectContent(ElementNode node, ContentEntry modifiedEntry = null)
 			{
-				float randomChance = (float)rng.NextDouble();
+				float randomChance = (float)_rng.NextDouble();
 				if (randomChance >= node.Chance)
 				{
 					return;
@@ -1108,7 +1103,7 @@ namespace Pandorai.MapGeneration
 
 				if (node.Type == NodeType.Choice)
 				{
-					int rand = rng.Next(node.ChildNodes.Sum(x => x.Weight));
+					int rand = _rng.Next(node.ChildNodes.Sum(x => x.Weight));
 					int sum = 0;
 					foreach (var option in node.ChildNodes)
 					{
@@ -1127,7 +1122,7 @@ namespace Pandorai.MapGeneration
 				else if (node.Type == NodeType.Creature || node.Type == NodeType.Item || node.Type == NodeType.Structure || node.Type == NodeType.Entrance || node.Type == NodeType.InventoryItem)
 				{
 					EntitySpecifier entitySpec = (EntitySpecifier)node.Object;
-					var number = entitySpec.Number.GetRandom(rng);
+					var number = entitySpec.Number.GetRandom(_rng);
 
 					for (int i = 0; i < number; i++)
 					{
@@ -1209,14 +1204,14 @@ namespace Pandorai.MapGeneration
 
 			void positionContent(ContentEntry entry)
 			{
-				Point finalPosition = availableTiles.GetRandomElement(rng);
+				Point finalPosition = availableTiles.GetRandomElement(_rng);
 				if (entry.Node.Type == NodeType.Entrance)
-					finalPosition = availableBorders.GetRandomElement(rng);
+					finalPosition = availableBorders.GetRandomElement(_rng);
 
 				var farParents = entry.Parents.Where(x => x.Value.Distance == DistanceDescription.Far || x.Value.Distance == DistanceDescription.VeryFar || x.Value.Distance == DistanceDescription.FarthestAway);
 				var closeParents = entry.Parents.Where(x => x.Value.Distance == DistanceDescription.Close || x.Value.Distance == DistanceDescription.VeryClose);
 
-				var closeParentsNoDuplicates = closeParents.GroupBy(x => x.Key.Spec.Name).Select(x => x.ToList().GetRandomElement(rng));
+				var closeParentsNoDuplicates = closeParents.GroupBy(x => x.Key.Spec.Name).Select(x => x.ToList().GetRandomElement(_rng));
 				var selectedParents = farParents.Concat(closeParentsNoDuplicates);
 
 				List<List<Point>> constraints = new List<List<Point>>();
@@ -1363,14 +1358,14 @@ namespace Pandorai.MapGeneration
 							lastIntersection = intersection;
 						}
 
-						var randomColor = new Color(rng.Next(256), rng.Next(256), rng.Next(256));
+						var randomColor = new Color(_rng.Next(256), _rng.Next(256), _rng.Next(256));
 						foreach (var point in lastIntersection)
 						{
 							//tileData[point.X, point.Y].BaseColor = i == bounds.Count - 1 ? Color.Yellow : randomColor;
 						}
 					}
 
-					finalPosition = lastIntersection.GetRandomElement(rng);
+					finalPosition = lastIntersection.GetRandomElement(_rng);
 				}
 
 				if (entry.Node.Type == NodeType.Trigger)
@@ -1423,7 +1418,7 @@ namespace Pandorai.MapGeneration
 				//
 				var node = entry.Node;
 				EntitySpecifier entitySpec = (EntitySpecifier)entry.Spec;
-				var number = entitySpec.Number.GetRandom(rng);
+				var number = entitySpec.Number.GetRandom(_rng);
 
 				var tile = tileData[finalPosition.X, finalPosition.Y];
 				var index = finalPosition;

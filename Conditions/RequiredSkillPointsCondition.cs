@@ -6,7 +6,7 @@ namespace Pandorai.Conditions
 
         public override bool Check()
         {
-            bool conditionMet = Game1.game.Player.PossessedCreature.Stats.SkillPoints >= Amount;
+            bool conditionMet = Main.Game.Player.PossessedCreature.Stats.SkillPoints >= Amount;
             return conditionMet;
         }
 

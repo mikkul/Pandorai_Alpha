@@ -9,7 +9,7 @@ namespace Pandorai.Mechanics
 
 	public class InputManager
 	{
-        Game1 game;
+        Main game;
 
         public event KeyPressedHandler SingleKeyPress;
         public event MouseHandler LMBClick;
@@ -26,7 +26,7 @@ namespace Pandorai.Mechanics
 
         public Vector2 MousePos;
 
-        public InputManager(Game1 _game)
+        public InputManager(Main _game)
 		{
             game = _game;
 		}

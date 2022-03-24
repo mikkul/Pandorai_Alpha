@@ -1,6 +1,4 @@
 ﻿using Pandorai.AStarSearchAlgorithm;
-using System.Diagnostics;
-using System;
 
 namespace Pandorai.Creatures.Behaviours
 {

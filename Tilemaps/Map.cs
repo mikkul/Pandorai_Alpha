@@ -48,40 +48,40 @@ namespace Pandorai.Tilemaps
 
 		public bool AreTilesInteractive = false;
 
-		RenderTarget2D renderTarget;
+		private RenderTarget2D _renderTarget;
 
-		int tilesRenderedHorizontally;
-		int tilesRenderedVertically;
+		private int _tilesRenderedHorizontally;
+		private int _tilesRenderedVertically;
 
-		SpriteBatch spriteBatch;
+		private SpriteBatch _spriteBatch;
 
-		Vector2 oldReferencePoint;
+		private Vector2 _oldReferencePoint;
 
-		Dictionary<Point, bool> tileCollisionFlagChangeQueue = new Dictionary<Point, bool>();
-		Dictionary<Point, bool> tileIgnoreFlagChangeQueue = new Dictionary<Point, bool>();
+		private Dictionary<Point, bool> _tileCollisionFlagChangeQueue = new Dictionary<Point, bool>();
+		private Dictionary<Point, bool> _tileIgnoreFlagChangeQueue = new Dictionary<Point, bool>();
 
-		List<Point> highlightedTiles = new List<Point>();
-		Point lastHoveredOverTile = Point.Zero;
+		private List<Point> _highlightedTiles = new List<Point>();
+		private Point _lastHoveredOverTile = Point.Zero;
 
-		Color mouseHighlightColor = Color.White * 0.1f;
-		Color mouseHiglightDecalColor = Color.Black * 0.1f;
-		Color mouseInteractDecalColor = Color.Red * 0.5f;
+		private Color _mouseHighlightColor = Color.White * 0.1f;
+		private Color _mouseHiglightDecalColor = Color.Black * 0.1f;
+		private Color _mouseInteractDecalColor = Color.Red * 0.5f;
 
-		Game1 game;
+		private Main _game;
 
-		public Map(SpriteBatch batch, Game1 _game)
+		public Map(SpriteBatch batch, Main _game)
 		{
-			spriteBatch = batch;
-			game = _game;
+			_spriteBatch = batch;
+			this._game = _game;
 			TileOffset = Vector2.Zero;
 			CenterTile = Point.Zero;
 			DefaultTileColor = Color.White;
-			renderTarget = new RenderTarget2D(game.GraphicsDevice, game.Camera.Viewport.Width, game.Camera.Viewport.Height);
+            _renderTarget = new RenderTarget2D(this._game.GraphicsDevice, this._game.Camera.Viewport.Width, this._game.Camera.Viewport.Height);
 		}
 
 		public void RefreshRenderTarget()
 		{
-			renderTarget = new RenderTarget2D(game.GraphicsDevice, game.Camera.Viewport.Width, game.Camera.Viewport.Height);
+			_renderTarget = new RenderTarget2D(_game.GraphicsDevice, _game.Camera.Viewport.Width, _game.Camera.Viewport.Height);
 		}
 
 		public void UpdateMapRenderingOptions(int oldSize, int newSize)
@@ -89,9 +89,9 @@ namespace Pandorai.Tilemaps
 			TileOffset = Vector2.Zero;
 			CenterTile = Point.Zero;
 			TileSize = newSize;
-			SetAmountTilesRendered(game.Camera.Viewport.Width / TileSize / 2 + 2, game.Camera.Viewport.Height / TileSize / 2 + 2);
-			OffsetToMiddle = new Vector2(game.Camera.Viewport.X + game.Camera.Viewport.Width / 2 - TileSize / 2, game.Camera.Viewport.Y + game.Camera.Viewport.Height / 2 - TileSize / 2);
-			oldReferencePoint = Vector2.Zero;
+			SetAmountTilesRendered(_game.Camera.Viewport.Width / TileSize / 2 + 2, _game.Camera.Viewport.Height / TileSize / 2 + 2);
+			OffsetToMiddle = new Vector2(_game.Camera.Viewport.X + _game.Camera.Viewport.Width / 2 - TileSize / 2, _game.Camera.Viewport.Y + _game.Camera.Viewport.Height / 2 - TileSize / 2);
+			_oldReferencePoint = Vector2.Zero;
 			//game.Options.ApplyChanges();
 		}
 
@@ -126,14 +126,14 @@ namespace Pandorai.Tilemaps
 
 		public void InteractWithMapObjects(TileInfo info)
 		{
-			if (!game.Player.HoldingShift) return;
+			if (!_game.Player.HoldingShift) return;
 
-			float distToClickedTile = (game.Player.PossessedCreature.MapIndex - info.Index).ToVector2().LengthSquared();
+			float distToClickedTile = (_game.Player.PossessedCreature.MapIndex - info.Index).ToVector2().LengthSquared();
 			if (distToClickedTile <= 2)
 			{
-				info.Tile.MapObject?.Structure?.Interact(game.Player.PossessedCreature);
-				game.CreatureManager.GetCreature(info.Index)?.Interact(game.Player.PossessedCreature);
-				game.TurnManager.SkipHeroTurn();
+				info.Tile.MapObject?.Structure?.Interact(_game.Player.PossessedCreature);
+				_game.CreatureManager.GetCreature(info.Index)?.Interact(_game.Player.PossessedCreature);
+				_game.TurnManager.SkipHeroTurn();
 			}
 		}
 
@@ -146,32 +146,32 @@ namespace Pandorai.Tilemaps
 		{
 			if(!AreTilesInteractive)
 			{
-				Tiles[lastHoveredOverTile.X, lastHoveredOverTile.Y].IsHighlighted = false;
-				Tiles[lastHoveredOverTile.X, lastHoveredOverTile.Y].IsDecal = false;
+				Tiles[_lastHoveredOverTile.X, _lastHoveredOverTile.Y].IsHighlighted = false;
+				Tiles[_lastHoveredOverTile.X, _lastHoveredOverTile.Y].IsDecal = false;
 				info.Tile.IsHighlighted = true;
 				info.Tile.IsDecal = true;
-				info.Tile.HighlightColor = mouseHighlightColor;
+				info.Tile.HighlightColor = _mouseHighlightColor;
 
-				if (game.Player.HoldingShift && !game.Player.HoldingControl)
+				if (_game.Player.HoldingShift && !_game.Player.HoldingControl)
 				{
-					info.Tile.DecalColor = mouseInteractDecalColor;
+					info.Tile.DecalColor = _mouseInteractDecalColor;
 				}
 				else
 				{
-					info.Tile.DecalColor = mouseHiglightDecalColor;
+					info.Tile.DecalColor = _mouseHiglightDecalColor;
 				}
 			}
 			else
 			{
-				Tiles[lastHoveredOverTile.X, lastHoveredOverTile.Y].DecalColor = Color.Gray * 0.5f;
+				Tiles[_lastHoveredOverTile.X, _lastHoveredOverTile.Y].DecalColor = Color.Gray * 0.5f;
 
-				if (highlightedTiles.Contains(info.Index))
+				if (_highlightedTiles.Contains(info.Index))
 				{
 					info.Tile.DecalColor = Color.Yellow * 0.5f;
 				}
 			}
 
-			lastHoveredOverTile = info.Index;
+			_lastHoveredOverTile = info.Index;
 		}
 
 		public void GenerateTilesFromTilemap()
@@ -348,20 +348,20 @@ namespace Pandorai.Tilemaps
 
 		public void SetAmountTilesRendered(int horizontal, int vertical)
 		{
-			tilesRenderedHorizontally = horizontal;
-			tilesRenderedVertically = vertical;
+			_tilesRenderedHorizontally = horizontal;
+			_tilesRenderedVertically = vertical;
 		}
 
 		public void InitScrollPosition(Camera camera)
 		{
-			oldReferencePoint = camera.Position;
+			_oldReferencePoint = camera.Position;
 			CenterTile = new Point((int)(((camera.Position.X + camera.Viewport.Width) / 2) / TileSize), (int)(((camera.Position.Y + camera.Viewport.Height) / 2) / TileSize));
 		}
 
 		public void ClearTileChanges()
 		{
-			tileCollisionFlagChangeQueue.Clear();
-			tileIgnoreFlagChangeQueue.Clear();
+			_tileCollisionFlagChangeQueue.Clear();
+			_tileIgnoreFlagChangeQueue.Clear();
 		}
 
 		public void HighlightTiles(Rectangle area)
@@ -380,7 +380,7 @@ namespace Pandorai.Tilemaps
 					Point pos = new Point(area.Left + x, area.Top + y);
 					Tiles[pos.X, pos.Y].IsDecal = true;
 					Tiles[pos.X, pos.Y].DecalColor = Color.Gray * 0.5f;
-					highlightedTiles.Add(pos);
+					_highlightedTiles.Add(pos);
 				}
 			}
 		}
@@ -394,18 +394,18 @@ namespace Pandorai.Tilemaps
 
 				Tiles[point.X, point.Y].IsDecal = true;
 				Tiles[point.X, point.Y].DecalColor = Color.Gray * 0.5f;
-				highlightedTiles.Add(point);
+				_highlightedTiles.Add(point);
 			}
 		}
 
 		public void UnHighlightTiles()
 		{
-			for (int i = 0; i < highlightedTiles.Count; i++)
+			for (int i = 0; i < _highlightedTiles.Count; i++)
 			{
-				Tiles[highlightedTiles[i].X, highlightedTiles[i].Y].IsDecal = false;
+				Tiles[_highlightedTiles[i].X, _highlightedTiles[i].Y].IsDecal = false;
 			}
 
-			highlightedTiles.Clear();
+			_highlightedTiles.Clear();
 		}
 
 		public void EnableTileInteraction()
@@ -468,7 +468,7 @@ namespace Pandorai.Tilemaps
 
 		public void UpdateScroll(Vector2 referencePoint)
 		{
-			TileOffset += oldReferencePoint - referencePoint;
+			TileOffset += _oldReferencePoint - referencePoint;
 
 			//Console.WriteLine((oldReferencePoint).ToString());
 
@@ -493,7 +493,7 @@ namespace Pandorai.Tilemaps
 				CenterTile.Y--;
 			}
 
-			oldReferencePoint = referencePoint;
+			_oldReferencePoint = referencePoint;
 		}
 
 		public void ClearAllTiles()
@@ -511,13 +511,13 @@ namespace Pandorai.Tilemaps
 			int currentTileY;
 			Vector2 tilePosition;
 
-			game.GraphicsDevice.SetRenderTarget(renderTarget);
+			_game.GraphicsDevice.SetRenderTarget(_renderTarget);
 
-			spriteBatch.Begin(blendState: BlendState.AlphaBlend);
+			_spriteBatch.Begin(blendState: BlendState.AlphaBlend);
 
-			for (int y = -tilesRenderedVertically; y < tilesRenderedVertically; y++)
+			for (int y = -_tilesRenderedVertically; y < _tilesRenderedVertically; y++)
 			{
-				if(y == -tilesRenderedVertically)
+				if(y == -_tilesRenderedVertically)
 				{
 					//Console.WriteLine(CenterTile.ToString());
 				}
@@ -527,7 +527,7 @@ namespace Pandorai.Tilemaps
 					continue;
 				}
 
-				for (int x = -tilesRenderedHorizontally; x < tilesRenderedHorizontally; x++)
+				for (int x = -_tilesRenderedHorizontally; x < _tilesRenderedHorizontally; x++)
 				{
 					currentTileX = CenterTile.X + x;
 					if (currentTileX < 0 || currentTileX >= Tiles.GetLength(0))
@@ -539,7 +539,7 @@ namespace Pandorai.Tilemaps
 					Tile tile = GetTile(tileIndex);
 
 					bool isVisible = false;
-					if (game.Player.TilesInFOV.Contains(tileIndex))
+					if (_game.Player.TilesInFOV.Contains(tileIndex))
 					{
 						isVisible = true;
 					}
@@ -556,34 +556,34 @@ namespace Pandorai.Tilemaps
 						for (int i = 0; i < tile.TextureIndices.Count; i++)
 						{
 							Color tileColor = i == 0 ? tile.BaseColor : Color.White;
-							spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.TextureIndices[i]].Rect, tileColor);
+							_spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.TextureIndices[i]].Rect, tileColor);
 						}
 
 						if (tile.MapObject != null)
 						{
 							if (tile.MapObject.Item != null)
 							{
-								spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.MapObject.Item.Texture].Rect, tile.MapObject.Item.ColorTint);
+								_spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.MapObject.Item.Texture].Rect, tile.MapObject.Item.ColorTint);
 							}
 							else if (tile.MapObject.Structure != null)
 							{
-								spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.MapObject.Structure.Texture].Rect, tile.MapObject.Structure.ColorTint);
+								_spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[tile.MapObject.Structure.Texture].Rect, tile.MapObject.Structure.ColorTint);
 							}
 						}
 
 						if(!isVisible)
 						{
-							spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize)), Color.Black * game.Options.TilesOutsideFOVDarkening);
+							_spriteBatch.Draw(_game.squareTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize)), Color.Black * _game.Options.TilesOutsideFOVDarkening);
 						}						
 					}
 
 					if(tile.IsDecal)
 					{
-						spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[8].Rect, tile.DecalColor);
+						_spriteBatch.Draw(TilesheetManager.MapSpritesheetTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize, TileSize)), TilesheetManager.MapObjectSpritesheet[8].Rect, tile.DecalColor);
 					}
 					if(tile.IsHighlighted)
 					{
-						spriteBatch.Draw(game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), tile.HighlightColor);
+						_spriteBatch.Draw(_game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), tile.HighlightColor);
 					}
 					// used to debug stuff
 					// if(tile.HasStructure() && tile.MapObject.Structure.Id == "Teleporter")
@@ -593,11 +593,11 @@ namespace Pandorai.Tilemaps
 				}
 			}
 
-			spriteBatch.End();
+			_spriteBatch.End();
 
-			game.GraphicsDevice.SetRenderTarget(null);
+			_game.GraphicsDevice.SetRenderTarget(null);
 
-			return renderTarget;
+			return _renderTarget;
 		}
 	}
 }

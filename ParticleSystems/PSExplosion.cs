@@ -7,25 +7,26 @@ namespace Pandorai.ParticleSystems
 {
 	public class PSExplosion : ParticleSystem
 	{
-		private float particleSpeed;
-		private Random rng = new Random();
-		private const float frictionValue = 1f;
+		private const float FrictionValue = 1f;
 
-		public PSExplosion(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, Color color, bool isWorldCoords, Game1 _game)
+		private float _particleSpeed;
+		private Random _rng = new Random();
+
+		public PSExplosion(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, Color color, bool isWorldCoords, Main game)
 		{
-			centralPosition = position;
-			numberOfParticles = noOfParticles;
-			baseTexture = particleTexture;
-			maxParticleLife = particleLifeMs;
-			particleSpeed = particleSpd;
-			particleSize = partSize;
-			baseColor = color;
-			isWorldCoordinates = isWorldCoords;
-			game = _game;
+			_centralPosition = position;
+			_numberOfParticles = noOfParticles;
+			_baseTexture = particleTexture;
+			_maxParticleLife = particleLifeMs;
+			_particleSpeed = particleSpd;
+			_particleSize = partSize;
+			_baseColor = color;
+			_isWorldCoordinates = isWorldCoords;
+			_game = game;
 
-			for (int i = 0; i < numberOfParticles; i++)
+			for (int i = 0; i < _numberOfParticles; i++)
 			{
-				particles.Add(GenerateParticle());
+				_particles.Add(GenerateParticle());
 			}
 		}
 
@@ -33,19 +34,19 @@ namespace Pandorai.ParticleSystems
 		{
 			Particle part;
 
-			for (int i = particles.Count - 1; i >= 0; i--)
+			for (int i = _particles.Count - 1; i >= 0; i--)
 			{
-				part = particles[i];
+				part = _particles[i];
 
-				Vector2 friction = -part.Velocity * frictionValue;
-				part.Update(dt, friction, game.Options.UnitMultiplier);
-				if (part.LifeTime >= maxParticleLife)
+				Vector2 friction = -part.Velocity * FrictionValue;
+				part.Update(dt, friction, _game.Options.UnitMultiplier);
+				if (part.LifeTime >= _maxParticleLife)
 				{
-					particles.RemoveAt(i);
+					_particles.RemoveAt(i);
 				}
 			}
 
-			if (particles.Count <= 0)
+			if (_particles.Count <= 0)
 				return false;
 			else
 				return true;
@@ -53,13 +54,13 @@ namespace Pandorai.ParticleSystems
 
 		protected override Particle GenerateParticle()
 		{
-			float randomnessRange = particleSpeed * 0.2f;
-			double randAngle = rng.NextDouble(0, 2 * Math.PI);
-			float velX = (float)Math.Cos(randAngle) * particleSpeed + rng.NextFloat(0, randomnessRange);
-			float velY = (float)Math.Sin(randAngle) * particleSpeed + rng.NextFloat(0, randomnessRange);
+			float randomnessRange = _particleSpeed * 0.2f;
+			double randAngle = _rng.NextDouble(0, 2 * Math.PI);
+			float velX = (float)Math.Cos(randAngle) * _particleSpeed + _rng.NextFloat(0, randomnessRange);
+			float velY = (float)Math.Sin(randAngle) * _particleSpeed + _rng.NextFloat(0, randomnessRange);
 			Vector2 velocity = new Vector2(velX, velY);
-			float randomLife = rng.Next(0, 50);
-			return new Particle(centralPosition, velocity, randomLife);
+			float randomLife = _rng.Next(0, 50);
+			return new Particle(_centralPosition, velocity, randomLife);
 		}
 	}
 }

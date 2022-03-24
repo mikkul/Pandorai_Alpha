@@ -63,7 +63,7 @@ namespace Pandorai.MapGeneration
 			}
 		}
 
-		public void PrintConnectionGraph(Game1 game)
+		public void PrintConnectionGraph(Main game)
 		{
 			System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(WorldOptions.Width * game.Map.TileSize, WorldOptions.Height * game.Map.TileSize);
 

@@ -13,7 +13,7 @@ namespace Pandorai.Effects
 
         public override void Use(Creature user)
         {
-			if (user.IsPossessedCreature() && Game1.game.Player.IsInteractingWithSomeone)
+			if (user.IsPossessedCreature() && Main.Game.Player.IsInteractingWithSomeone)
             {
                 return;
             }
@@ -25,8 +25,8 @@ namespace Pandorai.Effects
             }
 
             Rectangle effectRange = new Rectangle(user.MapIndex - new Point(Range), new Point(Range * 2 + 1));
-			Game1.game.Map.HighlightTiles(effectRange);
-			Game1.game.Map.EnableTileInteraction();
+			Main.Game.Map.HighlightTiles(effectRange);
+			Main.Game.Map.EnableTileInteraction();
 
             TileInteractionManager.TileClick += useHandler;
 

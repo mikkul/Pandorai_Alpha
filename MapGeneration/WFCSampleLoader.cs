@@ -10,11 +10,11 @@ namespace Pandorai.MapGeneration
 {
 	public static class WFCSampleLoader
 	{
-		private static Dictionary<string, WFCSample> samples = new Dictionary<string, WFCSample>();
+		private static Dictionary<string, WFCSample> _samples = new Dictionary<string, WFCSample>();
 
-		public static Dictionary<string, WFCSample> Samples { get => samples; }
+		public static Dictionary<string, WFCSample> Samples { get => _samples; }
 
-		public static void InitSamples(string folderLocation, string sampleSpreadsheetPath, Game1 game)
+		public static void InitSamples(string folderLocation, string sampleSpreadsheetPath, Main game)
 		{
 			XmlDocument spreadsheet = new XmlDocument();
 			spreadsheet.Load(sampleSpreadsheetPath);
@@ -28,11 +28,11 @@ namespace Pandorai.MapGeneration
 				WFCSample sample = LoadSample(file, tileLegend, game);
 				sample.IsPeriodic = bool.Parse(element.GetAttribute("isPeriodic"));
 
-				samples.Add(sampleName, sample);
+				_samples.Add(sampleName, sample);
 			}
 		}
 
-		private static WFCSample LoadSample(string pathToSample, XmlNode tileLegend, Game1 game)
+		private static WFCSample LoadSample(string pathToSample, XmlNode tileLegend, Main game)
 		{
 			WFCSample sample = new WFCSample();
 

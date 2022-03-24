@@ -56,7 +56,7 @@ namespace Pandorai.Creatures.Behaviours
                 possibleMovementPoints.AddRange(GenHelper.GetNeighbours(Owner.MapIndex).ToList());
             }
 
-            var chosenPoint = possibleMovementPoints.GetRandomElement(Game1.game.mainRng);
+            var chosenPoint = possibleMovementPoints.GetRandomElement(Main.Game.MainRng);
             var targetDistanceToHome = Vector2.Distance(chosenPoint.ToVector2(), _homePosition.ToVector2());
             var currentDistanceToHome = Vector2.Distance(Owner.MapIndex.ToVector2(), _homePosition.ToVector2());
 

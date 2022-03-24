@@ -8,24 +8,24 @@ namespace Pandorai.Dialogues
 {
 	public class Trivia
 	{
-		private List<string> lines = new List<string>();
+		private List<string> _lines = new List<string>();
 
-		private string fileName;
+		private string _fileName;
 
-		private Random rng = new Random();
+		private Random _rng = new Random();
 
-		private List<int> lastTrivias = new List<int>();
+		private List<int> _lastTrivias = new List<int>();
 
 		private static string _sidekickThought = @"\c[#c6bdc9]...";
 
-		public Trivia(string _fileName)
+		public Trivia(string fileName)
 		{
-			fileName = _fileName;
+			_fileName = fileName;
 		}
 		
-		public void Load(Game1 game)
+		public void Load(Main game)
 		{
-			var path = Path.Combine(game.Content.RootDirectory, fileName);
+			var path = Path.Combine(game.Content.RootDirectory, _fileName);
 			using (var stream = TitleContainer.OpenStream(path))
 			{
 				using (var reader = new StreamReader(stream))
@@ -35,7 +35,7 @@ namespace Pandorai.Dialogues
 					{
 						line = line.Insert(0, $"{_sidekickThought} ");
 						line = line.Insert(line.Length, $" {_sidekickThought}");
-						lines.Add(line);
+						_lines.Add(line);
 					}
 				}
 			}
@@ -43,22 +43,22 @@ namespace Pandorai.Dialogues
 
 		public string GetRandomTrivia()
 		{
-			int index = rng.Next(0, lines.Count);
-			while (lastTrivias.Contains(index))
+			int index = _rng.Next(0, _lines.Count);
+			while (_lastTrivias.Contains(index))
 			{
-				index = rng.Next(0, lines.Count);
+				index = _rng.Next(0, _lines.Count);
 			}
 
-			lastTrivias.Add(index);
-			if(lastTrivias.Count > lines.Count / 2) // lines.Count / 2 is an arbitrary choice, can set it to anything else lower than lines.Count
+			_lastTrivias.Add(index);
+			if(_lastTrivias.Count > _lines.Count / 2) // lines.Count / 2 is an arbitrary choice, can set it to anything else lower than lines.Count
 			{
-				lastTrivias.RemoveAt(0);
+				_lastTrivias.RemoveAt(0);
 			}
 
-			return lines[index];
+			return _lines[index];
 		}
 
-		public void DisplayRandomTrivia(Game1 game)
+		public void DisplayRandomTrivia(Main game)
 		{
 			if (game.TurnManager.TurnCount % 100 == 0)
 			{

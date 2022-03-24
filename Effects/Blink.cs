@@ -8,16 +8,16 @@ namespace Pandorai.Effects
     {
         public override void Use(Creature usingCreature)
         {
-            var maxX = Game1.game.Map.Tiles.GetLength(0);
-            var maxY = Game1.game.Map.Tiles.GetLength(1);
+            var maxX = Main.Game.Map.Tiles.GetLength(0);
+            var maxY = Main.Game.Map.Tiles.GetLength(1);
 
             int randomX, randomY;
             do
             {
-                randomX = Game1.game.mainRng.Next(0, maxX);
-                randomY = Game1.game.mainRng.Next(0, maxY);
+                randomX = Main.Game.MainRng.Next(0, maxX);
+                randomY = Main.Game.MainRng.Next(0, maxY);
             }
-            while(Game1.game.Map.GetTile(randomX, randomY).CollisionFlag);
+            while(Main.Game.Map.GetTile(randomX, randomY).CollisionFlag);
 
             usingCreature.RequestMovement(new Point(randomX, randomY));
             SoundManager.PlaySound("teleport");

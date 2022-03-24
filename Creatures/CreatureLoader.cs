@@ -16,7 +16,7 @@ namespace Pandorai.Creatures
 			return newCreature;
 		}
 
-		public static void LoadCreatures(string spreadsheetPath, Game1 game)
+		public static void LoadCreatures(string spreadsheetPath, Main game)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.Load(spreadsheetPath);

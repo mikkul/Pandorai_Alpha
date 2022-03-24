@@ -1,13 +1,8 @@
 ﻿using DeBroglie;
 using DeBroglie.Models;
 using DeBroglie.Topo;
-using DeBroglie.Constraints;
-using Microsoft.Xna.Framework;
 using Pandorai.MapGeneration.CustomRegions;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using Pandorai.Utility;
 
 namespace Pandorai.MapGeneration
 {

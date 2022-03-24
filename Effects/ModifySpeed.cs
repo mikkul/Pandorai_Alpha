@@ -1,4 +1,3 @@
-using System;
 using Pandorai.Creatures;
 using Pandorai.UI;
 
@@ -7,8 +6,9 @@ namespace Pandorai.Effects
     public class ModifySpeed : Effect
     {
         public int Amount;
-        private string _modifier;
         public int Duration;
+
+        private string _modifier;
 
         public override void SetAttribute(string name, string value)
         {

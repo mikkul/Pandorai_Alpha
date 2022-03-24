@@ -1,5 +1,4 @@
 using Pandorai.Creatures;
-using Pandorai.Effects;
 using Pandorai.Tilemaps;
 
 namespace Pandorai.Effects
@@ -10,7 +9,7 @@ namespace Pandorai.Effects
 
         public int Amount;
 
-        private bool equiped = false;
+        private bool _equipped = false;
 
         public override void SetAttribute(string name, string value)
         {
@@ -22,10 +21,10 @@ namespace Pandorai.Effects
 
         public override void Use(Creature user)
         {
-            equiped ^= true;
-			user.Stats.Stealth += equiped ? Amount : -Amount;
+            _equipped ^= true;
+			user.Stats.Stealth += _equipped ? Amount : -Amount;
 
-			if (equiped)
+			if (_equipped)
             {
                 user.Color *= Opacity;
             }
@@ -37,7 +36,7 @@ namespace Pandorai.Effects
 			CreatureIncomingHandler revertUse = null;
 			revertUse = creature =>
 			{
-				equiped = false;
+				_equipped = false;
 				user.Stats.Stealth -= Amount;
 				user.Color *= 1 / Opacity;
 				user.GotHit -= revertUse;
@@ -50,7 +49,7 @@ namespace Pandorai.Effects
 
 		protected override string GetMessage()
         {
-            if(equiped)
+            if(_equipped)
             {
                 return "You equip the stealth item";
             }

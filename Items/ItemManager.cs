@@ -7,7 +7,7 @@ namespace Pandorai.Items
 {
 	public static class ItemManager
 	{
-		private static List<CreatureClass> itemCollectingClasses = new List<CreatureClass>
+		private static List<CreatureClass> _itemCollectingClasses = new List<CreatureClass>
 		{
 			CreatureClass.Human,
 		};
@@ -26,7 +26,7 @@ namespace Pandorai.Items
 
 		public static void CheckItemInteraction(Creature incomingCreature, TileInfo info)
 		{
-			if (!itemCollectingClasses.Contains(incomingCreature.Class)) return;
+			if (!_itemCollectingClasses.Contains(incomingCreature.Class)) return;
 
 			if(info.Tile.MapObject != null && info.Tile.MapObject.Item != null)
 			{

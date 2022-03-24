@@ -13,7 +13,7 @@ namespace Pandorai.Tilemaps
 			Tile = tile;
 		}
 
-		public static TileInfo GetInfo(Point index, Game1 game)
+		public static TileInfo GetInfo(Point index, Main game)
 		{
 			return new TileInfo(index, game.Map.GetTile(index));
 		}

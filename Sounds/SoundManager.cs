@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Timers;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Media;
 
 namespace Pandorai.Sounds
 {
@@ -19,30 +18,30 @@ namespace Pandorai.Sounds
 
         public static void LoadSounds(string musicFolderPath, string soundEffectsFolderPath)
         {
-            var musicFiles = Directory.EnumerateFiles(Path.Combine(Game1.game.Content.RootDirectory, musicFolderPath));
-            var soundFiles = Directory.EnumerateFiles(Path.Combine(Game1.game.Content.RootDirectory, soundEffectsFolderPath), "*.*", SearchOption.AllDirectories);
+            var musicFiles = Directory.EnumerateFiles(Path.Combine(Main.Game.Content.RootDirectory, musicFolderPath));
+            var soundFiles = Directory.EnumerateFiles(Path.Combine(Main.Game.Content.RootDirectory, soundEffectsFolderPath), "*.*", SearchOption.AllDirectories);
 
             foreach (var fullFilePath in musicFiles)
             {
                 var filePath = Path.ChangeExtension(fullFilePath, null);
-                filePath = filePath.Replace(Game1.game.Content.RootDirectory, null);
+                filePath = filePath.Replace(Main.Game.Content.RootDirectory, null);
                 if (filePath.StartsWith("/") || filePath.StartsWith(@"\"))
                 {
                     filePath = filePath.Remove(0, 1);
                 }
-                var song = Game1.game.Content.Load<SoundEffect>(filePath);
+                var song = Main.Game.Content.Load<SoundEffect>(filePath);
                 _music.Add(Path.GetFileName(filePath), song);
             }
 
             foreach (var fullFilePath in soundFiles)
             {
                 var filePath = Path.ChangeExtension(fullFilePath, null);
-                filePath = filePath.Replace(Game1.game.Content.RootDirectory, null);
+                filePath = filePath.Replace(Main.Game.Content.RootDirectory, null);
                 if (filePath.StartsWith("/") || filePath.StartsWith(@"\"))
                 {
                     filePath = filePath.Remove(0, 1);
                 }
-                var soundEffect = Game1.game.Content.Load<SoundEffect>(filePath);
+                var soundEffect = Main.Game.Content.Load<SoundEffect>(filePath);
                 _sounds.Add(Path.GetFileName(filePath), soundEffect);
             }    
         }

@@ -40,15 +40,15 @@ namespace Pandorai.Items
 
         public string Id = "inventory";
 
-        Panel currentTooltip = null;
-        bool isTooltipVisible = false;
+        private Panel _currentTooltip = null;
+        private bool _isTooltipVisible = false;
 
-        Game1 game;
+        private Main game;
 
-        Proportion columnProp;
-        Proportion rowProp;
-        ItemClickHandler clickHandler;
-        ItemClickHandler releaseHandler;
+        private Proportion _columnProp;
+        private Proportion _rowProp;
+        private ItemClickHandler _clickHandler;
+        private ItemClickHandler _releaseHandler;
 
         public Inventory(Creature owner, int maxElements = 80)
 		{
@@ -81,7 +81,7 @@ namespace Pandorai.Items
             Proportion rowProp = new Proportion
             {
                 Type = ProportionType.Pixels,
-                Value = Options.oldResolution.X / 16,
+                Value = Options.OldResolution.X / 16,
             };
 			GUI.DisplayInventory(ConstructGUI(columnProp, rowProp, (i, c, b) =>
             {
@@ -95,22 +95,22 @@ namespace Pandorai.Items
 
         public Panel RefreshGUI()
 		{
-            var gui = ConstructGUI(columnProp, rowProp, clickHandler, releaseHandler);
+            var gui = ConstructGUI(_columnProp, _rowProp, _clickHandler, _releaseHandler);
             Grid invGrid = (Grid)gui.FindWidgetById(Id);
             foreach (ImageTextButton item in invGrid.Widgets)
             {
-                item.Width = (int)columnProp.Value;
-                item.Height = (int)rowProp.Value;
+                item.Width = (int)_columnProp.Value;
+                item.Height = (int)_rowProp.Value;
             }
             return gui;
         }
 
         public Panel ConstructGUI(Proportion columnProportion, Proportion rowProportion, ItemClickHandler itemClickHandler, ItemClickHandler itemReleaseHandler)
 		{
-            columnProp = columnProportion;
-            rowProp = rowProportion;
-            clickHandler = itemClickHandler;
-            releaseHandler = itemReleaseHandler;
+            _columnProp = columnProportion;
+            _rowProp = rowProportion;
+            _clickHandler = itemClickHandler;
+            _releaseHandler = itemReleaseHandler;
 
             Panel panel = new Panel
             {
@@ -192,16 +192,16 @@ namespace Pandorai.Items
 				{
                     MouseHandler moveTooltip = pos =>
                     {
-                        if (!isTooltipVisible) return;
+                        if (!_isTooltipVisible) return;
 
-                        currentTooltip.Left = (int)pos.X - (int)currentTooltip.Width;
-                        currentTooltip.Top = (int)pos.Y;
+                        _currentTooltip.Left = (int)pos.X - (int)_currentTooltip.Width;
+                        _currentTooltip.Top = (int)pos.Y;
                     };
 
                     void removeTooltip(Panel tooltip)
                     {
                         if (tooltip == null) return;
-                        isTooltipVisible = false;
+                        _isTooltipVisible = false;
                         tooltip.Visible = false;
                         if(tooltip.Desktop != null)
                             tooltip.RemoveFromDesktop();
@@ -211,11 +211,11 @@ namespace Pandorai.Items
 
                     element.MouseEntered += (s, a) =>
                     {
-                        if (isTooltipVisible) return;
+                        if (_isTooltipVisible) return;
 
-                        isTooltipVisible = true;
+                        _isTooltipVisible = true;
 
-                        currentTooltip = new Panel
+                        _currentTooltip = new Panel
                         {
                             Left = (int)game.InputManager.MousePos.X,
                             Top = (int)game.InputManager.MousePos.Y,
@@ -252,13 +252,13 @@ namespace Pandorai.Items
                             }); 
                         }
                    
-                        currentTooltip.Widgets.Add(stackPanel);
+                        _currentTooltip.Widgets.Add(stackPanel);
 
-                        game.desktop.Widgets.Add(currentTooltip);
+                        game.desktop.Widgets.Add(_currentTooltip);
 
                         game.InputManager.MouseMove += moveTooltip;
 
-                        var lastTooltip = currentTooltip;
+                        var lastTooltip = _currentTooltip;
                         // safety measure
                         // if the tooltip didnt disappear for some reason, automatically remove it after 5 seconds
                         // to prevent tooltips that are stuck
@@ -277,12 +277,12 @@ namespace Pandorai.Items
 
                     element.MouseLeft += (s, a) =>
                     {
-                        removeTooltip(currentTooltip);
+                        removeTooltip(_currentTooltip);
                     };
 
                     element.Click += (s, a) =>
                     {
-                        removeTooltip(currentTooltip);
+                        removeTooltip(_currentTooltip);
                     };
                 }
 

@@ -6,7 +6,6 @@ using Pandorai.Structures.Behaviours;
 using Pandorai.Tilemaps;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Pandorai.Structures
 {
@@ -29,16 +28,16 @@ namespace Pandorai.Structures
 
 		public ForceResult UsedForceResult = ForceResult.None;
 
-		private Game1 game;
+		private Main _game;
 
-		public Structure(Game1 _game)
+		public Structure(Main game)
 		{
-			game = _game;
+			_game = game;
 		}
 
 		public Structure Clone()
 		{
-			var clone = new Structure(game)
+			var clone = new Structure(_game)
 			{
 				Id = Id,
 				Texture = Texture,
@@ -97,7 +96,7 @@ namespace Pandorai.Structures
 		{
 			Tile.Tile.MapObject = null;
 			Tile.Tile.CollisionFlag = false;
-			ParticleSystemManager.AddSystem(new PSExplosion(Tile.Index.ToVector2() * game.Options.TileSize, 25, game.smokeParticleTexture, 1000, 90, 30, Color.Gray, true, game), true);
+			ParticleSystemManager.AddSystem(new PSExplosion(Tile.Index.ToVector2() * _game.Options.TileSize, 25, _game.smokeParticleTexture, 1000, 90, 30, Color.Gray, true, _game), true);
 			SoundManager.PlaySound("impactwood11");
 		}
 	}

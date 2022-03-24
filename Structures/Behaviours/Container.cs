@@ -8,7 +8,7 @@ namespace Pandorai.Structures.Behaviours
 	{
 		public int ClosedTexture;
 		public int OpenTexture;
-		public Inventory Inventory = new Inventory(new Creature(Game1.game));
+		public Inventory Inventory = new Inventory(new Creature(Main.Game));
 		public bool IsOpened = false;
 
 		public override void SetAttribute(string name, string value)
@@ -29,7 +29,7 @@ namespace Pandorai.Structures.Behaviours
 			{
 				ClosedTexture = ClosedTexture,
 				OpenTexture = OpenTexture,
-				Inventory = new Inventory(new Creature(Game1.game)),
+				Inventory = new Inventory(new Creature(Main.Game)),
 			};
 			return clone;
 		}
@@ -54,7 +54,7 @@ namespace Pandorai.Structures.Behaviours
 
 			if (!creature.IsPossessedCreature()) return;
 
-			var game = Game1.game;
+			var game = Main.Game;
 
 			game.Player.IsInteractingWithSomeone = true;
 
@@ -79,7 +79,7 @@ namespace Pandorai.Structures.Behaviours
 				}
 			}
 
-			Game1.game.InputManager.SingleKeyPress += closeWindowOnSpace;
+			Main.Game.InputManager.SingleKeyPress += closeWindowOnSpace;
 
 			popupWindow.Closed += (s, a) =>
 			{
@@ -88,7 +88,7 @@ namespace Pandorai.Structures.Behaviours
 					game.Player.IsInteractingWithSomeone = false;
 				}
 
-				Game1.game.InputManager.SingleKeyPress -= closeWindowOnSpace;
+				Main.Game.InputManager.SingleKeyPress -= closeWindowOnSpace;
 			};
 
 			int cellSize = 50;

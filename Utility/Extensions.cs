@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using Myra.Graphics2D.UI;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
-using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
-using Pandorai.Mechanics;
 
 namespace Pandorai.Utility
 {

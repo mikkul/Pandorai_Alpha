@@ -21,7 +21,7 @@ namespace Pandorai.Effects
 
         public override void Use(Creature user)
         {
-            if (user.IsPossessedCreature() && Game1.game.Player.IsInteractingWithSomeone)
+            if (user.IsPossessedCreature() && Main.Game.Player.IsInteractingWithSomeone)
             {
                 return;
             }
@@ -31,14 +31,14 @@ namespace Pandorai.Effects
 
 			foreach (var tile in attackedTiles)
 			{
-                Game1.game.GameStateManager.AddSynchronizedAction(() => Game1.game.CreatureManager.GetCreature(tile)?.GetHit(Damage, user));
-				var system = new PSExplosion(tile.ToVector2() * Game1.game.Map.TileSize, 50, Game1.game.squareTexture, 500, 25, 5, Color.SlateGray, true, Game1.game);
+                Main.Game.GameStateManager.AddSynchronizedAction(() => Main.Game.CreatureManager.GetCreature(tile)?.GetHit(Damage, user));
+				var system = new PSExplosion(tile.ToVector2() * Main.Game.Map.TileSize, 50, Main.Game.squareTexture, 500, 25, 5, Color.SlateGray, true, Main.Game);
 				ParticleSystemManager.AddSystem(system, true);
 			}
 
             if (user.IsPossessedCreature())
             {
-                Game1.game.TurnManager.PlayerIsReady();
+                Main.Game.TurnManager.PlayerIsReady();
             }
 
             if(user.MapIndex.IsInRangeOfPlayer())

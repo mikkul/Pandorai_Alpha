@@ -12,35 +12,35 @@ namespace Pandorai.Mechanics
 		public event MouseHandler LMBClickInViewport;
 		public event MouseHandler RMBClickInViewport;
 
-		private Queue<Action> synchronizedActionsQueue = new Queue<Action>();
+		private Queue<Action> _synchronizedActionsQueue = new Queue<Action>();
 
-		Game1 game;
+		private Main _game;
 
-		public GameStateManager(Game1 _game)
+		public GameStateManager(Main game)
 		{
-			game = _game;
+			_game = game;
 		}
 
 		public void AddSynchronizedAction(Action action)
 		{
-			lock(synchronizedActionsQueue)
-				synchronizedActionsQueue.Enqueue(action);
+			lock(_synchronizedActionsQueue)
+				_synchronizedActionsQueue.Enqueue(action);
 		}
 
 		public void ExecuteSynchronizedActions()
 		{
-			lock (synchronizedActionsQueue)
+			lock (_synchronizedActionsQueue)
 			{
-				while (synchronizedActionsQueue.Count > 0)
+				while (_synchronizedActionsQueue.Count > 0)
 				{
-					synchronizedActionsQueue.Dequeue()?.Invoke();
+					_synchronizedActionsQueue.Dequeue()?.Invoke();
 				}
 			};
 		}
 
 		public void CheckIfMouseOverViewport(Vector2 pos)
 		{
-			if(game.Camera.IsInViewport(pos))
+			if(_game.Camera.IsInViewport(pos))
 			{
 				MouseOverViewport?.Invoke(pos);
 			}
@@ -48,7 +48,7 @@ namespace Pandorai.Mechanics
 
 		public void CheckIfLMBClickInViewport(Vector2 pos)
 		{
-			if (game.Camera.IsInViewport(pos))
+			if (_game.Camera.IsInViewport(pos))
 			{
 				LMBClickInViewport?.Invoke(pos);
 			}
@@ -56,7 +56,7 @@ namespace Pandorai.Mechanics
 
 		public void CheckIfRMBClickInViewport(Vector2 pos)
 		{
-			if (game.Camera.IsInViewport(pos))
+			if (_game.Camera.IsInViewport(pos))
 			{
 				RMBClickInViewport?.Invoke(pos);
 			}
@@ -78,32 +78,32 @@ namespace Pandorai.Mechanics
 
 		public void PausePlayerMovementHandler()
 		{
-			if (!CheatConsole.IsActive && !game.Player.IsInteractingWithSomeone)
+			if (!CheatConsole.IsActive && !_game.Player.IsInteractingWithSomeone)
 			{
-				if (game.Player.isMovingByMouse)
+				if (_game.Player._isMovingByMouse)
 				{
-					game.Player.isMovingByMouse = false;
+					_game.Player._isMovingByMouse = false;
 				}
-				else if(game.TurnManager.PercentageCompleted <= 0 || game.TurnManager.PercentageCompleted >= 1)
+				else if(_game.TurnManager.PercentageCompleted <= 0 || _game.TurnManager.PercentageCompleted >= 1)
 				{
-					game.TurnManager.SkipHeroTurn();
+					_game.TurnManager.SkipHeroTurn();
 				}
 			}
 		}
 
 		public void DisableMapInteractionHandler()
 		{
-			if(game.Map.AreTilesInteractive)
+			if(_game.Map.AreTilesInteractive)
 			{
-				game.Map.DisableTileInteraction();
+				_game.Map.DisableTileInteraction();
 			}
 		}
 
 		public void PauseHandler()
 		{
-			if(!game.Map.AreTilesInteractive && !CheatConsole.IsActive && !game.Player.IsInteractingWithSomeone && game.IsGameStarted)
+			if(!_game.Map.AreTilesInteractive && !CheatConsole.IsActive && !_game.Player.IsInteractingWithSomeone && _game.IsGameStarted)
 			{
-				game.TogglePauseGame();
+				_game.TogglePauseGame();
 			}
 		}
 	}

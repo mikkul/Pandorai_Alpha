@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.Creatures.Behaviours;
-using Pandorai.Rendering;
 
 namespace Pandorai.Triggers
 {
@@ -14,7 +13,7 @@ namespace Pandorai.Triggers
 		{
 			if(_dummyStoneGuardian == null)
 			{
-				_dummyStoneGuardian = Game1.game.CreatureManager.Creatures.FirstOrDefault(x => x.Id == "StoneGuardian");
+				_dummyStoneGuardian = Main.Game.CreatureManager.Creatures.FirstOrDefault(x => x.Id == "StoneGuardian");
 			}
 
 			if (_dummyStoneGuardian == null || !_dummyStoneGuardian.EnemyClasses.Contains(incomingCreature.Class)) return;

@@ -22,7 +22,7 @@ namespace Pandorai.Mechanics
         
         public void Update()
         {
-            _creature = Game1.game.Player.PossessedCreature;
+            _creature = Main.Game.Player.PossessedCreature;
             _turnCounter++;
             SearchArea();
             if(_turnCounter >= _messageFrequency)
@@ -45,13 +45,13 @@ namespace Pandorai.Mechanics
         {
             foreach (var point in area)
             {
-                var tile = Game1.game.Map.GetTile(point);
+                var tile = Main.Game.Map.GetTile(point);
                 if(tile.Modifier.HasFlag(TileModifier.Trap))
                 {
                     var dist = Vector2.Distance(point.ToVector2(), _creature.MapIndex.ToVector2());
                     var chance = 1 - dist / (SearchRange + 1);
                     chance = MathHelper.Clamp(chance, 0.15f, 0.75f);
-                    if(Game1.game.mainRng.NextFloat() < chance)
+                    if(Main.Game.MainRng.NextFloat() < chance)
                     {
                         DisplayMessage(@"\c[#9160bf]I sense a trap somewhere", point);
                     }
@@ -64,7 +64,7 @@ namespace Pandorai.Mechanics
             var dangerLevelDifference = 2;
             foreach (var point in area)
             {
-                var creature = Game1.game.CreatureManager.GetCreature(point);
+                var creature = Main.Game.CreatureManager.GetCreature(point);
                 if(creature == null)
                 {
                     continue;
@@ -75,7 +75,7 @@ namespace Pandorai.Mechanics
                     var dist = Vector2.Distance(point.ToVector2(), _creature.MapIndex.ToVector2());
                     var chance = 1 - dist / (SearchRange + 1);
                     chance = MathHelper.Clamp(chance, 0.15f, 0.75f);
-                    if(Game1.game.mainRng.NextFloat() < chance)
+                    if(Main.Game.MainRng.NextFloat() < chance)
                     {
                         DisplayMessage(@"\c[#9160bf]There's something dangerous", point);
                     }
@@ -88,7 +88,7 @@ namespace Pandorai.Mechanics
             var valuableItemTypes = new[] { ItemType.Spell, ItemType.Food };
             foreach (var point in area)
             {
-                var tile = Game1.game.Map.GetTile(point);
+                var tile = Main.Game.Map.GetTile(point);
 
                 Item itemFound = null;
 
@@ -113,7 +113,7 @@ namespace Pandorai.Mechanics
                         var dist = Vector2.Distance(point.ToVector2(), _creature.MapIndex.ToVector2());
                         var chance = 1 - dist / (SearchRange + 1);
                         chance = MathHelper.Clamp(chance, 0.15f, 0.75f);
-                        if(Game1.game.mainRng.NextFloat() < chance)
+                        if(Main.Game.MainRng.NextFloat() < chance)
                         {
                             DisplayMessage(@"\c[#9160bf]There's a valuable object somwhere", point);
                             break;
@@ -127,7 +127,7 @@ namespace Pandorai.Mechanics
         {
             // add direction to the message
             message += " at ";
-            int threshold = 3;
+            //int threshold = 3;
             var horizontalDist = point.X - _creature.MapIndex.X;
             var verticalDist = point.Y - _creature.MapIndex.Y;
             if(verticalDist < 0)
@@ -198,12 +198,12 @@ namespace Pandorai.Mechanics
         {
             foreach (var point in _lastSearchArea)
             {
-                var tile = Game1.game.Map.GetTile(point);
+                var tile = Main.Game.Map.GetTile(point);
                 tile.IsHighlighted = false;
             }
             foreach (var point in area)
             {
-                var tile = Game1.game.Map.GetTile(point);
+                var tile = Main.Game.Map.GetTile(point);
                 tile.IsHighlighted = true;
                 tile.HighlightColor = Helper.GetColorFromHex("#deb1f2") * 0.125f;
             }
@@ -218,7 +218,7 @@ namespace Pandorai.Mechanics
                 for (int y = -SearchRange; y <= SearchRange; y++)
                 {
                     var point = new Point(_creature.MapIndex.X + x, _creature.MapIndex.Y + y);
-                    if(Game1.game.Map.Tiles.IsPointInBounds(point))
+                    if(Main.Game.Map.Tiles.IsPointInBounds(point))
                     {
                         area.Add(point);
                     }

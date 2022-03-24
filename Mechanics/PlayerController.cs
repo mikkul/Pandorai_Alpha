@@ -2,14 +2,10 @@
 using Microsoft.Xna.Framework.Input;
 using Pandorai.Creatures;
 using Pandorai.Creatures.Behaviours;
-using System;
 using Pandorai.Cheats;
 using Pandorai.Tilemaps;
 using Pandorai.AStarSearchAlgorithm;
-using System.Diagnostics;
 using System.Collections.Generic;
-using Pandorai.Utility;
-using Pandorai.UI;
 using System.Linq;
 
 namespace Pandorai.Mechanics
@@ -48,19 +44,19 @@ namespace Pandorai.Mechanics
 
 		public List<Point> TilesInFOV = new List<Point>();
 
-		public bool isMovingByMouse = false;
-		private List<Point> mousePath = new List<Point>();
+		public bool _isMovingByMouse = false;
+		private List<Point> _mousePath = new List<Point>();
 
-		Game1 game;
+		private Main _game;
 
-		public PlayerController(Game1 _game)
+		public PlayerController(Main game)
 		{
-			game = _game;
+			_game = game;
 		}
 
 		public void Update()
 		{
-			if(game.InputManager.IsHoldingKey(Keys.LeftShift))
+			if(_game.InputManager.IsHoldingKey(Keys.LeftShift))
 			{
 				HoldingShift = true;
 			}
@@ -69,7 +65,7 @@ namespace Pandorai.Mechanics
 				HoldingShift = false;
 			}
 
-			if (game.InputManager.IsHoldingKey(Keys.LeftControl))
+			if (_game.InputManager.IsHoldingKey(Keys.LeftControl))
 			{
 				HoldingControl = true;
 			}
@@ -78,11 +74,11 @@ namespace Pandorai.Mechanics
 				HoldingControl = false;
 			}
 
-			if(isMovingByMouse && !CheatConsole.IsActive && !IsInteractingWithSomeone && !HoldingControl)
+			if(_isMovingByMouse && !CheatConsole.IsActive && !IsInteractingWithSomeone && !HoldingControl)
 			{
-				if(mousePath.Count > 0)
+				if(_mousePath.Count > 0)
 				{
-					movementInput = (mousePath[0] - PossessedCreature.MapIndex).ToVector2();
+					movementInput = (_mousePath[0] - PossessedCreature.MapIndex).ToVector2();
 
 					//game.TurnManager.PlayerIsReady();
 					StartTurn();
@@ -90,7 +86,7 @@ namespace Pandorai.Mechanics
 			}
 			else
 			{
-				var input = game.InputManager.GetPlayerInput();
+				var input = _game.InputManager.GetPlayerInput();
 
 				if ((input.Movement != Vector2.Zero || input.Action != InputAction.None) && !CheatConsole.IsActive && !IsInteractingWithSomeone && !PossessedCreature.IsMoving)
 				{
@@ -105,21 +101,21 @@ namespace Pandorai.Mechanics
         {
             if(key == Keys.R) // use ranged weapon
 			{
-				var rangedWeapon = game.Player.PossessedCreature.Inventory.Items.FirstOrDefault(x => x.Item.Type.HasFlag(Items.ItemType.Ranged));
+				var rangedWeapon = _game.Player.PossessedCreature.Inventory.Items.FirstOrDefault(x => x.Item.Type.HasFlag(Items.ItemType.Ranged));
 				if(rangedWeapon != null)
 				{
-					rangedWeapon.Item.Use(game.Player.PossessedCreature);
+					rangedWeapon.Item.Use(_game.Player.PossessedCreature);
 				}
 			}
         }		
 
 		public void MoveByMouse(TileInfo tileInfo)
 		{
-			if (CheatConsole.IsActive || game.Player.IsInteractingWithSomeone || game.Map.AreTilesInteractive || HoldingControl || HoldingShift || PossessedCreature.IsMoving) return;
+			if (CheatConsole.IsActive || _game.Player.IsInteractingWithSomeone || _game.Map.AreTilesInteractive || HoldingControl || HoldingShift || PossessedCreature.IsMoving) return;
 
-			mousePath = AStarCreatures.GetShortestPath(game.Map.Tiles, PossessedCreature.MapIndex, tileInfo.Index, false, true, true);
+			_mousePath = AStarCreatures.GetShortestPath(_game.Map.Tiles, PossessedCreature.MapIndex, tileInfo.Index, false, true, true);
 
-			if(mousePath.Count > 0)
+			if(_mousePath.Count > 0)
 			{
 				/*var lastPointInPath = mousePath[mousePath.Count - 1];
 				if(game.Map.Tiles[lastPointInPath.X, lastPointInPath.Y].CollisionFlag)
@@ -127,9 +123,9 @@ namespace Pandorai.Mechanics
 					mousePath.Remove(lastPointInPath);
 				}*/
 
-				if(mousePath.Count > 0)
+				if(_mousePath.Count > 0)
 				{
-					isMovingByMouse = true;
+					_isMovingByMouse = true;
 				}
 			}
 		}
@@ -138,34 +134,25 @@ namespace Pandorai.Mechanics
 		{
 			if(creature == PossessedCreature)
 			{
-				if (mousePath.Count > 0)
+				if (_mousePath.Count > 0)
 				{
-					mousePath.RemoveAt(0);
-					if (mousePath.Count == 0)
+					_mousePath.RemoveAt(0);
+					if (_mousePath.Count == 0)
 					{
-						isMovingByMouse = false;
+						_isMovingByMouse = false;
 					}
 				}
 			}
 		}
 
-		private void SpawnGhost()
-		{
-			Creature spirit = CreatureLoader.GetCreature("Spirit");
-			spirit.Position = PossessedCreature.Position;
-			game.CreatureManager.AddCreature(spirit);
-			PossessedCreature = spirit;
-			IsDead = true;
-		}
-
 		public void StartTurn()
 		{
-			if(!game.TurnManager.PlayerCanMove)
+			if(!_game.TurnManager.PlayerCanMove)
 			{
 				return;
 			}
 
-			game.Map.DisableTileInteraction();
+			_game.Map.DisableTileInteraction();
 
 			if(!PossessedCreature.IsAlive)
 			{
@@ -179,12 +166,12 @@ namespace Pandorai.Mechanics
 		{
 			PossessedCreature.EndTurn();
 
-			if (mousePath.Count > 0)
+			if (_mousePath.Count > 0)
 			{
-				mousePath.RemoveAt(0);
-				if (mousePath.Count == 0)
+				_mousePath.RemoveAt(0);
+				if (_mousePath.Count == 0)
 				{
-					isMovingByMouse = false;
+					_isMovingByMouse = false;
 				}
 			}
 
@@ -195,12 +182,21 @@ namespace Pandorai.Mechanics
 
 				foreach (var tile in TilesInFOV)
 				{
-					if (game.Map.GetTile(tile) != null)
+					if (_game.Map.GetTile(tile) != null)
                     {
-						game.Map.GetTile(tile).Visited = true;
+						_game.Map.GetTile(tile).Visited = true;
 					}
 				}
 			}
+		}
+
+		private void SpawnGhost()
+		{
+			Creature spirit = CreatureLoader.GetCreature("Spirit");
+			spirit.Position = PossessedCreature.Position;
+			_game.CreatureManager.AddCreature(spirit);
+			PossessedCreature = spirit;
+			IsDead = true;
 		}
     }
 }

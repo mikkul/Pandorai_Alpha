@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -10,7 +9,7 @@ namespace Pandorai.Dialogues
 {
 	public class DialogueManager
 	{
-		public static Game1 game;
+		public static Main game;
 
 		public static Label NameLabel;
 		public static Label TextLabel;
@@ -121,7 +120,7 @@ namespace Pandorai.Dialogues
 			TextButton button = new TextButton
 			{
 				Text = option.Content,
-				Width = (int)(Options.oldResolution.X * 0.75f),
+				Width = (int)(Options.OldResolution.X * 0.75f),
 				Padding = new Thickness(3),
 			};
 

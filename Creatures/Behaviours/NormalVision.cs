@@ -1,25 +1,24 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 using Pandorai.Visibility;
 
 namespace Pandorai.Creatures.Behaviours
 {
 	public class NormalVision : Vision
 	{
-		private FieldOfView FOV;
-
 		public int RangeLimit;
+
+		private FieldOfView _fov;
 
 		public NormalVision()
 		{
-			FOV = new FieldOfView(BlocksLight, SetVisibility, GetDistance);
+			_fov = new FieldOfView(BlocksLight, SetVisibility, GetDistance);
 		}
 
 		protected override void CalculateFOV()
 		{
 			VisibleTiles.Clear();
-			FOV.Compute(Owner.MapIndex, RangeLimit);
+			_fov.Compute(Owner.MapIndex, RangeLimit);
 		}
 
 		bool BlocksLight(int x, int y)

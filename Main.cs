@@ -4,7 +4,6 @@ using Myra;
 using Myra.Graphics2D.UI;
 using Pandorai.Tilemaps;
 using System;
-using System.Diagnostics;
 using Pandorai.MapGeneration;
 using Pandorai.Creatures;
 using Pandorai.Mechanics;
@@ -25,7 +24,6 @@ using Pandorai.UI;
 using Pandorai.MapGeneration.CustomRegions;
 using Pandorai.Sounds;
 using Microsoft.Xna.Framework.Media;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Linq;
 
@@ -33,15 +31,12 @@ namespace Pandorai
 {
     public delegate void EmptyEventHandler();
     public delegate void InputEventHandler(CustomInput input);
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
-    public class Game1 : Game
-    {
-        public static Game1 game;
 
-        public GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+    public class Main : Game
+    {
+        public static Main Game;
+
+        public GraphicsDeviceManager Graphics;
 
         public Desktop desktop;
 
@@ -51,52 +46,49 @@ namespace Pandorai
 
         public Texture2D squareTexture;
         public Texture2D smokeParticleTexture;
-        Texture2D fogTexture;
-
-        SpriteFont defaultFont;
-
-        Timer _loadingAnimationTimer;
-
-        public Map Map;
 
         public bool IsGameStarted = false;
         public bool IsGamePaused = true;
 
+        public Map Map;
         public PlayerController Player;
-
         public CreatureManager CreatureManager;
-
         public InputManager InputManager;
-
         public TurnManager TurnManager;
-
         public GameStateManager GameStateManager;
-
         public Trivia BasicTrivia;
 
         public RenderTarget2D ViewportTarget;
 
         public Texture2D fireParticleTexture;
 
-        SmartFramerate fpsCounter;
+        public Random MainRng = new Random();
 
         public Effect spiritWorldEffectBackground;
         public Effect spiritWorldEffectForeground;
         public Effect distortionEffect;
 
-        PSSparkles mouseSparkle;
-
         public event EmptyEventHandler GameStarted;
-
-        public Random mainRng = new Random();
-
-        RenderHelper viewportRenderer;
         
-        public Game1()
-        {
-            graphics = new GraphicsDeviceManager(this);
+        private SmartFramerate _fpsCounter;
 
-            graphics.SynchronizeWithVerticalRetrace = false;
+        private PSSparkles _mouseSparkle;
+
+        private SpriteBatch _spriteBatch;
+
+        private Texture2D _fogTexture;
+
+        private SpriteFont _defaultFont;
+
+        private Timer _loadingAnimationTimer;
+
+        private RenderHelper _viewportRenderer;
+        
+        public Main()
+        {
+            Graphics = new GraphicsDeviceManager(this);
+
+            Graphics.SynchronizeWithVerticalRetrace = false;
             IsFixedTimeStep = true;
             IsMouseVisible = true;
             Window.AllowUserResizing = false;
@@ -104,24 +96,18 @@ namespace Pandorai
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            game = this;
+            Game = this;
 
-            CheatConsole.game = this;
+            CheatConsole.Game = this;
             CheatConsole.InitCommands();
 
             DialogueManager.game = this;
 
-            CheatShortcuts.game = this;
+            CheatShortcuts.Game = this;
 
-            TileInteractionManager.game = this;
+            TileInteractionManager.Game = this;
 
             ParticleSystemManager.game = this;
 
@@ -140,7 +126,6 @@ namespace Pandorai
 
             Camera.UpdateViewport(Options);
             ViewportTarget = new RenderTarget2D(GraphicsDevice, Camera.Viewport.Width, Camera.Viewport.Height);
-            //Console.WriteLine(Camera.Viewport);
 
             InputManager = new InputManager(this);
 
@@ -152,9 +137,8 @@ namespace Pandorai
 
             BasicTrivia = new Trivia("defaultTrivia.txt");
 
-            viewportRenderer = new RenderHelper(this, () => ViewportTarget.Width, () => ViewportTarget.Height);
+            _viewportRenderer = new RenderHelper(this, () => ViewportTarget.Width, () => ViewportTarget.Height);
 
-            //TurnManager.PlayerActionStarted += Player.StartTurn;
             TurnManager.PlayerTurnEnded += Player.FinishTurn;
             TurnManager.PlayerTurnEnded += Sidekick.ConsiderTips;
 
@@ -210,29 +194,16 @@ namespace Pandorai
             Options.TileSizeChanged += Sidekick.AdjustToTileSize;
 
             Options.SettingsApplied += CreatureManager.RefreshRenderTarget;
-            Options.SettingsApplied += viewportRenderer.RefreshRenderTargets;
+            Options.SettingsApplied += _viewportRenderer.RefreshRenderTargets;
 
-            fpsCounter = new SmartFramerate(20);
-
-            /*InputManager.SingleKeyPress += k =>
-            {
-                if (k == Keys.Add)
-                    Options.TileSize += 4;
-                else if (k == Keys.Subtract)
-                    Options.TileSize -= 4;
-            };*/
+            _fpsCounter = new SmartFramerate(20);
 
             base.Initialize();
         }
 
-		/// <summary>
-		/// LoadContent will be called once per game and is the place to load
-		/// all of your content.
-		/// </summary>
 		protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //
 
@@ -254,7 +225,7 @@ namespace Pandorai
 
             //
             squareTexture = Content.Load<Texture2D>("fullSquareTexture");
-            fogTexture = Content.Load<Texture2D>("fog");
+            _fogTexture = Content.Load<Texture2D>("fog");
             LightingManager.LightSourceMask = Content.Load<Texture2D>("lightSource");
             LightingManager.LightingMaskEffect = Content.Load<Effect>("Shaders/lightingMask");
 
@@ -263,14 +234,14 @@ namespace Pandorai
             fireParticleTexture = Content.Load<Texture2D>("fireParticleTexture");
             smokeParticleTexture = Content.Load<Texture2D>("smokeParticle");
 
-            defaultFont = Content.Load<SpriteFont>("defaultFont");
+            _defaultFont = Content.Load<SpriteFont>("defaultFont");
 
             BasicTrivia.Load(this);
 
             TilesheetManager.MapSpritesheetTexture = Content.Load<Texture2D>("tilesheet2");
             TilesheetManager.CreatureSpritesheetTexture = Content.Load<Texture2D>("creatureTilesheet");
 
-            Map = new Map(spriteBatch, this);
+            Map = new Map(_spriteBatch, this);
 
             Map.ActiveMapSwitched += LightingManager.MapSwitchHandler;
             Map.ActiveMapSwitched += ParticleSystemManager.MapSwitchHandler;
@@ -279,8 +250,6 @@ namespace Pandorai
             Options.SettingsApplied += Map.RefreshRenderTarget;
 
             Options.TileSizeChanged += Map.UpdateMapRenderingOptions;
-
-            //TileInteractionManager.TileHover += MapTooltip.DisplayMapTooltip;
 
             Map.TileSize = Options.TileSize;
             Map.SetAmountTilesRendered(Camera.Viewport.Width / Map.TileSize / 2 + 2, Camera.Viewport.Height / Map.TileSize / 2 + 2);
@@ -308,7 +277,7 @@ namespace Pandorai
             Options.ChangeResolution(Options.ResolutionList[0], null);
             Options.ApplyChanges();
 
-            mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false, this);
+            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false, this);
 
             CustomRegionLoader.LoadRegionTemplates(Path.Combine(Content.RootDirectory, "CustomRegions"));
             WFCSampleLoader.InitSamples(Path.Combine(Content.RootDirectory, "WFCSamples"), Path.Combine(Content.RootDirectory, "wfcSamplesSpreadsheet.xml"), this);
@@ -333,25 +302,15 @@ namespace Pandorai
             };
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
         protected override void UnloadContent()
         {
-            
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            fpsCounter.Update(gameTime.ElapsedGameTime.TotalSeconds);
+            _fpsCounter.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             GameStateManager.ExecuteSynchronizedActions();
 
@@ -388,8 +347,8 @@ namespace Pandorai
 
                 Sidekick.Update(gameTime);
 
-                mouseSparkle.CentralPosition = InputManager.MousePos;
-                mouseSparkle.Update(gameTime);
+                _mouseSparkle.CentralPosition = InputManager.MousePos;
+                _mouseSparkle.Update(gameTime);
 
                 ParticleSystemManager.Update(gameTime);
             }
@@ -397,10 +356,6 @@ namespace Pandorai
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Options.ClearColor);
@@ -412,57 +367,57 @@ namespace Pandorai
 
                 var backgroundRender = Map.Render();
 
-                var foregroundRender = CreatureManager.DrawCreatures(spriteBatch);
+                var foregroundRender = CreatureManager.DrawCreatures(_spriteBatch);
 
                 GraphicsDevice.SetRenderTarget(ViewportTarget);
 
                 if (Player.IsDead)
-                    spriteBatch.Begin(effect: spiritWorldEffectBackground);
+                    _spriteBatch.Begin(effect: spiritWorldEffectBackground);
                 else
-                    spriteBatch.Begin();
-                spriteBatch.Draw(backgroundRender, ViewportTarget.Bounds, Color.White);
-                spriteBatch.End();
+                    _spriteBatch.Begin();
+                _spriteBatch.Draw(backgroundRender, ViewportTarget.Bounds, Color.White);
+                _spriteBatch.End();
 
                 if (Player.IsDead)
-                    spriteBatch.Begin(effect: spiritWorldEffectForeground);
+                    _spriteBatch.Begin(effect: spiritWorldEffectForeground);
                 else
-                    spriteBatch.Begin();
-                spriteBatch.Draw(foregroundRender, ViewportTarget.Bounds, Color.White);
-                Sidekick.Draw(spriteBatch);
-                spriteBatch.End();
+                    _spriteBatch.Begin();
+                _spriteBatch.Draw(foregroundRender, ViewportTarget.Bounds, Color.White);
+                Sidekick.Draw(_spriteBatch);
+                _spriteBatch.End();
 
-                ParticleSystemManager.Render(spriteBatch);
+                ParticleSystemManager.Render(_spriteBatch);
 
                 GraphicsDevice.SetRenderTarget(null);
 
                 GraphicsDevice.Clear(Options.ClearColor);
 
-                var lightingMask = LightingManager.CreateLightingMask(GraphicsDevice, spriteBatch, Camera);
+                var lightingMask = LightingManager.CreateLightingMask(GraphicsDevice, _spriteBatch, Camera);
                 LightingManager.LightingMaskEffect.Parameters["intensityMask"].SetValue(lightingMask.IntensityMask);
                 LightingManager.LightingMaskEffect.Parameters["colorMask"].SetValue(lightingMask.ColorMask);
                 LightingManager.LightingMaskEffect.Parameters["ambientLight"].SetValue(LightingManager.AmbientLight);
                 distortionEffect.Parameters["distortionScale"].SetValue(0.1f);
                 distortionEffect.Parameters["animationOffset"].SetValue((float)gameTime.TotalGameTime.TotalSeconds);
 
-                viewportRenderer.ApplyEffect(LightingManager.LightingMaskEffect);
+                _viewportRenderer.ApplyEffect(LightingManager.LightingMaskEffect);
                 if (Player.IsDead)
-                    viewportRenderer.ApplyEffect(distortionEffect);
-                var postProcessTexture = viewportRenderer.RenderTexture(spriteBatch, ViewportTarget);
+                    _viewportRenderer.ApplyEffect(distortionEffect);
+                var postProcessTexture = _viewportRenderer.RenderTexture(_spriteBatch, ViewportTarget);
 
-                spriteBatch.Begin();
-                spriteBatch.Draw(postProcessTexture, ViewportTarget.Bounds.Displace(Camera.ShakeX.Value, Camera.ShakeY.Value), Color.White);
-                spriteBatch.End();
+                _spriteBatch.Begin();
+                _spriteBatch.Draw(postProcessTexture, ViewportTarget.Bounds.Displace(Camera.ShakeX.Value, Camera.ShakeY.Value), Color.White);
+                _spriteBatch.End();
 
-                spriteBatch.Begin();
-                spriteBatch.DrawString(defaultFont, TurnManager.TurnCount.ToString(), new Vector2(0, Camera.Viewport.Bottom - 20), Color.White);
-                spriteBatch.End();
+                _spriteBatch.Begin();
+                _spriteBatch.DrawString(_defaultFont, TurnManager.TurnCount.ToString(), new Vector2(0, Camera.Viewport.Bottom - 20), Color.White);
+                _spriteBatch.End();
             }
             else if(IsGameStarted)
 			{
-                spriteBatch.Begin();
-                spriteBatch.Draw(ViewportTarget, ViewportTarget.Bounds, Color.White);
-                spriteBatch.Draw(squareTexture, new Rectangle(Point.Zero, Options.oldResolution), new Color(0, 0, 0, 0.75f));
-                spriteBatch.End();
+                _spriteBatch.Begin();
+                _spriteBatch.Draw(ViewportTarget, ViewportTarget.Bounds, Color.White);
+                _spriteBatch.Draw(squareTexture, new Rectangle(Point.Zero, Options.OldResolution), new Color(0, 0, 0, 0.75f));
+                _spriteBatch.End();
             }
 
 			try // some weird error popped up once so i put it in try catch block
@@ -471,13 +426,13 @@ namespace Pandorai
 			}
 			catch (Exception) { }
 
-			mouseSparkle.Draw(spriteBatch);
+			_mouseSparkle.Draw(_spriteBatch);
 
-            if (Options.enableFPSCounter)
+            if (Options.EnableFPSCounter)
 			{
-                spriteBatch.Begin();
-                spriteBatch.DrawString(defaultFont, Math.Round(fpsCounter.framerate).ToString(), Vector2.Zero, Color.White);
-                spriteBatch.End();
+                _spriteBatch.Begin();
+                _spriteBatch.DrawString(_defaultFont, Math.Round(_fpsCounter.Framerate).ToString(), Vector2.Zero, Color.White);
+                _spriteBatch.End();
 			}
 
             base.Draw(gameTime);
@@ -546,7 +501,7 @@ namespace Pandorai
             IsGamePaused ^= true;
 		}
 
-        void ToggleMainMenu()
+        private void ToggleMainMenu()
 		{
             desktop.Root.FindWidgetById("mainMenu").Visible ^= true;
             desktop.Root.FindWidgetById("gameScreen").Visible ^= true;

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 
 namespace Pandorai.Mechanics
@@ -33,35 +32,35 @@ namespace Pandorai.Mechanics
 
 		public int EnergyThreshold = 100;
 
-		float timeSinceTurnStart;
+		private float _timeSinceTurnStart;
 
-		Game1 game;
+		private Main _game;
 
-		TurnState previousState = TurnState.OnHold;
-        private TurnState turnState = TurnState.WaitingForPlayer;
+		private TurnState _previousState = TurnState.OnHold;
+        private TurnState _turnState = TurnState.WaitingForPlayer;
+
+        public TurnManager(Main game)
+		{
+			_game = game;
+		}
 
         public TurnState TurnState 
 		{ 
-			get => turnState; 
+			get => _turnState; 
 			set 
 			{
 				//Console.WriteLine($"{turnState} -> {value}");
-				turnState = value;
+				_turnState = value;
 		 	} 
-		}
-
-        public TurnManager(Game1 _game)
-		{
-			game = _game;
 		}
 
 		public void Update(float dt)
 		{
 			if(TurnState == TurnState.WaitingForPlayer)
 			{
-				if(TurnState != previousState)
+				if(TurnState != _previousState)
 				{
-					previousState = TurnState;
+					_previousState = TurnState;
 					PlayerTurnCame?.Invoke();
 					CheckPlayerEnergy();
 				}
@@ -69,16 +68,16 @@ namespace Pandorai.Mechanics
 			
 			if(TurnState == TurnState.PlayerTurn)
 			{
-				if(TurnState != previousState)
+				if(TurnState != _previousState)
 				{
-					previousState = TurnState;
+					_previousState = TurnState;
 					PercentageCompleted = 0;
-					timeSinceTurnStart = 0;
+					_timeSinceTurnStart = 0;
 					PlayerActionStarted?.Invoke();
 				}
 
-				timeSinceTurnStart += dt * 1000;
-				PercentageCompleted = timeSinceTurnStart / heroTurnTime;
+				_timeSinceTurnStart += dt * 1000;
+				PercentageCompleted = _timeSinceTurnStart / heroTurnTime;
 
 				if (PercentageCompleted >= 1.0f)
 				{
@@ -87,7 +86,7 @@ namespace Pandorai.Mechanics
 					PlayerTurnEnded?.Invoke();
 				}
 
-				if((timeSinceTurnStart + dt * 1000) / heroTurnTime >= 1.0f)
+				if((_timeSinceTurnStart + dt * 1000) / heroTurnTime >= 1.0f)
 				{
 					PercentageCompleted = 1.0f;
 				}
@@ -95,33 +94,33 @@ namespace Pandorai.Mechanics
 
 			if(TurnState == TurnState.WaitingForEnemy)
 			{
-				if(TurnState != previousState)
+				if(TurnState != _previousState)
 				{
-					previousState = TurnState;
+					_previousState = TurnState;
 					EnemyTurnCame?.Invoke();
-					timeSinceTurnStart = 0;
+					_timeSinceTurnStart = 0;
 					PercentageCompleted = 0;
 				}
 			}
 
 			if(TurnState == TurnState.EnemyTurn)
 			{
-				timeSinceTurnStart += dt * 1000;
-				PercentageCompleted = timeSinceTurnStart / enemyTurnTime;
+				_timeSinceTurnStart += dt * 1000;
+				PercentageCompleted = _timeSinceTurnStart / enemyTurnTime;
 
 				if (PercentageCompleted >= 1.0f)
 				{
 					TurnState = TurnState.WaitingForPlayer;
 					EnemyTurnEnded?.Invoke();
 					TurnCount++;
-					game.BasicTrivia.DisplayRandomTrivia(game);
+					_game.BasicTrivia.DisplayRandomTrivia(_game);
 				}
 			}
 		}
 
         private void CheckPlayerEnergy()
         {
-			var possessedCreature = Game1.game.Player.PossessedCreature;
+			var possessedCreature = Main.Game.Player.PossessedCreature;
 			if(possessedCreature == null)
 			{
 				return;
@@ -141,7 +140,7 @@ namespace Pandorai.Mechanics
 
         public void HandleCreatureMovementRequest(Creature creature, Point desiredPoint)
 		{
-			if(creature == game.Player.PossessedCreature)
+			if(creature == _game.Player.PossessedCreature)
 			{
 				if(TurnState == TurnState.WaitingForPlayer)
 				{
@@ -178,9 +177,9 @@ namespace Pandorai.Mechanics
 		public void SkipEnemyTurn()
 		{
 			TurnState = TurnState.WaitingForPlayer;
-			previousState = TurnState.EnemyTurn;
+			_previousState = TurnState.EnemyTurn;
 			TurnCount++;
-			game.BasicTrivia.DisplayRandomTrivia(game);
+			_game.BasicTrivia.DisplayRandomTrivia(_game);
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Pandorai.Triggers
 
 		public static void LeaveLibraryTrigger(Creature incomingCreature)
 		{
-			incomingCreature.game.Camera.CameraShake = new Shake(1000, 120, 25, incomingCreature.game.mainRng);
+			incomingCreature.game.Camera.CameraShake = new Shake(1000, 120, 25, incomingCreature.game.MainRng);
 			incomingCreature.game.Camera.ShakeCamera();
 			Console.WriteLine("leave");
 			CreatureLeftLibrary?.Invoke(incomingCreature);

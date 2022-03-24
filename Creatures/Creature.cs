@@ -3,21 +3,17 @@ using Microsoft.Xna.Framework.Graphics;
 using Pandorai.Sprites;
 using Pandorai.Tilemaps;
 using Pandorai.Items;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Timers;
 using Pandorai.Structures;
 using Pandorai.Creatures.Behaviours;
-using System.Linq;
 using Pandorai.Sounds;
 using Pandorai.UI;
 using Pandorai.ParticleSystems;
-using Pandorai.Utility;
 
 namespace Pandorai.Creatures
 {
-	public enum CreatureClass
+    public enum CreatureClass
 	{
 		Human,
 		Monster,
@@ -68,7 +64,7 @@ namespace Pandorai.Creatures
 
 		public bool IsMoving = false;
 
-		public Game1 game;
+		public Main game;
 
 		public Point Target;
 
@@ -80,18 +76,18 @@ namespace Pandorai.Creatures
 		public Vector2 StartPosition;
 		public Vector2 TargetPosition;
 
-		private byte damageFlashSpeed = 15;
-		private Timer damageFlashTimer1;
-		private Timer damageFlashTimer2;
+		private byte _damageFlashSpeed = 15;
+		private Timer _damageFlashTimer1;
+		private Timer _damageFlashTimer2;
 
 		private bool _savedByGod = false;
 
-		public Creature(Game1 _game)
+		public Creature(Main _game)
 		{
 			game = _game;
 			Inventory = new Inventory(this);
 
-			var stonesCount = Game1.game.mainRng.Next(0, 3);
+			var stonesCount = Main.Game.MainRng.Next(0, 3);
 			Inventory.RemoveElement("Stone", 9999);
 			Inventory.AddElement(ItemLoader.GetItem("Stone"), stonesCount);
 
@@ -327,13 +323,13 @@ namespace Pandorai.Creatures
 				if(this.IsPossessedCreature() && !_savedByGod)
 				{
 					_savedByGod = true;
-					var chance = Game1.game.mainRng.NextDouble();
+					var chance = Main.Game.MainRng.NextDouble();
 					if(chance < 0.5)
 					{
 						Stats.Health = 1;
 						MessageLog.DisplayMessage("You have miraculously avoided death", Color.Pink);
 						SoundManager.PlaySound("FX148");
-						var particleSystemEffect = new PSImplosion(this.Position, 100, Game1.game.fireParticleTexture, 2000, Game1.game.Map.TileSize, 40, Color.Green, true, Game1.game);
+						var particleSystemEffect = new PSImplosion(this.Position, 100, Main.Game.fireParticleTexture, 2000, Main.Game.Map.TileSize, 40, Color.Green, true, Main.Game);
 						ParticleSystemManager.AddSystem(particleSystemEffect, true);
 					}
 					else
@@ -372,36 +368,36 @@ namespace Pandorai.Creatures
 
 		public void DamageFlash()
 		{
-			if ((damageFlashTimer1 != null && damageFlashTimer1.Enabled) || (damageFlashTimer2 != null && damageFlashTimer2.Enabled)) return;
+			if ((_damageFlashTimer1 != null && _damageFlashTimer1.Enabled) || (_damageFlashTimer2 != null && _damageFlashTimer2.Enabled)) return;
 			bool wasHPBarVisible = ShowHPBar;
 			ShowHPBar = true;
-			damageFlashTimer1 = new Timer(10);
-			damageFlashTimer1.Elapsed += (o, e) =>
+			_damageFlashTimer1 = new Timer(10);
+			_damageFlashTimer1.Elapsed += (o, e) =>
 			{
-				Color.G -= damageFlashSpeed;
-				Color.B -= damageFlashSpeed;
-				if(Color.G <= 128 + damageFlashSpeed)
+				Color.G -= _damageFlashSpeed;
+				Color.B -= _damageFlashSpeed;
+				if(Color.G <= 128 + _damageFlashSpeed)
 				{
-					damageFlashTimer1.Stop();
-					damageFlashTimer1.Dispose();
-					damageFlashTimer2 = new Timer(10);
-					damageFlashTimer2.Elapsed += (o2, e2) =>
+					_damageFlashTimer1.Stop();
+					_damageFlashTimer1.Dispose();
+					_damageFlashTimer2 = new Timer(10);
+					_damageFlashTimer2.Elapsed += (o2, e2) =>
 					{
-						Color.G += damageFlashSpeed;
-						Color.B += damageFlashSpeed;
-						if(Color.G >= 255 - damageFlashSpeed)
+						Color.G += _damageFlashSpeed;
+						Color.B += _damageFlashSpeed;
+						if(Color.G >= 255 - _damageFlashSpeed)
 						{
 							Color.G = 255;
 							Color.B = 255;
 							ShowHPBar = wasHPBarVisible;
-							damageFlashTimer2.Stop();
-							damageFlashTimer2.Dispose();
+							_damageFlashTimer2.Stop();
+							_damageFlashTimer2.Dispose();
 						}
 					};
-					damageFlashTimer2.Enabled = true;
+					_damageFlashTimer2.Enabled = true;
 				}
 			};
-			damageFlashTimer1.Enabled = true;
+			_damageFlashTimer1.Enabled = true;
 		}
 
 		public void Draw(SpriteBatch spriteBatch)

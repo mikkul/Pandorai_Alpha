@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Pandorai.Dialogues
+﻿namespace Pandorai.Dialogues
 {
 	public class DialogueAction
 	{

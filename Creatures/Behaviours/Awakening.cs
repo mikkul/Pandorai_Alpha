@@ -15,8 +15,8 @@ namespace Pandorai.Creatures.Behaviours
             }
 
             IsAwake = true;
-            Game1.game.Camera.CameraShake = new Shake(1000, 120, 25, Game1.game.mainRng);
-			Game1.game.Camera.ShakeCamera();
+            Main.Game.Camera.CameraShake = new Shake(1000, 120, 25, Main.Game.MainRng);
+			Main.Game.Camera.ShakeCamera();
             SoundManager.PlaySound("explosion_low");
             EnableVision();
 
