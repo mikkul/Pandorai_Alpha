@@ -33,19 +33,9 @@ namespace Pandorai.MapGeneration
 
 		Dictionary<string, int> _maxAllowedItemCount;
 
-		Creature _trapCreature;
-
 		public Regions Rooms = new Regions();
 
 		public Point StartingPoint;
-
-		public MapGenerator()
-		{
-			_trapCreature = new Creature(Game1.game);
-			_trapCreature.Id = "Trap";
-			_trapCreature.Stats = new CreatureStats(_trapCreature);
-			_trapCreature.Stats.Strength = 45;
-		}
 
 		public async Task<Tile[,]> GenerateMapAsync(Game1 game, string regionSpreadsheet)
 		{
@@ -550,10 +540,15 @@ namespace Pandorai.MapGeneration
 					var position = GetRandomUntakenPosition(room.Area);
 					map[position.X, position.Y].Modifier |= TileModifier.Trap;
 					map[position.X, position.Y].BaseColor = map[position.X, position.Y].BaseColor.Brighten(-0.2f);
-					map[position.X, position.Y].AddTexture(8);
 					map[position.X, position.Y].CreatureCame += c =>
 					{
-						c.OnGotHit(_trapCreature);
+						var spawnSpikesEffect = new SpawnSpikes
+						{
+							Damage = 0,
+						};
+						spawnSpikesEffect.Use(c);
+						c.GetHit(45f, c);
+						c.OnGotHit(c);
 					};
 				}
 			}				

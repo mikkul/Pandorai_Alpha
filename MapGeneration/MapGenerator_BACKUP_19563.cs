@@ -553,7 +553,17 @@ namespace Pandorai.MapGeneration
 					map[position.X, position.Y].AddTexture(8);
 					map[position.X, position.Y].CreatureCame += c =>
 					{
+<<<<<<< HEAD
+						var spawnSpikesEffect = new SpawnSpikes
+						{
+							Damage = 0,
+						};
+						spawnSpikesEffect.Use(c);
+						c.GetHit(45f, c);
+						c.OnGotHit(c);
+=======
 						c.OnGotHit(_trapCreature);
+>>>>>>> v.0.2.4
 					};
 				}
 			}				
