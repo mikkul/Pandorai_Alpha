@@ -269,7 +269,7 @@ namespace Pandorai.UI
                 GridRow = 0,
             };
 
-            slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 1));
+            slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 0));
             slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 5));
 
             InventorySlotsGrid = slotsGrid;
