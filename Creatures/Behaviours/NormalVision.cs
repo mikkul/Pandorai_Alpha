@@ -23,14 +23,14 @@ namespace Pandorai.Creatures.Behaviours
 
 		bool BlocksLight(int x, int y)
 		{
-			if (Owner.game.Map.GetTile(x, y) != null)
-				return Owner.game.Map.GetTile(x, y).CollisionFlag;
+			if (Owner.Game.Map.GetTile(x, y) != null)
+				return Owner.Game.Map.GetTile(x, y).CollisionFlag;
 			else return false;
 		}
 
 		void SetVisibility(int x, int y)
 		{
-			if (Owner.game.Map.GetTile(x, y) != null)
+			if (Owner.Game.Map.GetTile(x, y) != null)
 				VisibleTiles.Add(new Point(x, y));
 		}
 

@@ -39,13 +39,13 @@ namespace Pandorai.Creatures.Behaviours
 
 			Creature targetCreature = null;
 
-			foreach (var creature in Owner.game.CreatureManager.Creatures)
+			foreach (var creature in Owner.Game.CreatureManager.Creatures)
 			{
 				if (Owner.EnemyClasses.Contains(creature.Class))
 				{
 					float dist = Vector2.DistanceSquared(creature.Position, Owner.Position);
 					int realAggroRange = Range - creature.Stats.Stealth;
-					if (dist > (realAggroRange * Owner.game.Map.TileSize) * (realAggroRange * Owner.game.Map.TileSize))
+					if (dist > (realAggroRange * Owner.Game.Map.TileSize) * (realAggroRange * Owner.Game.Map.TileSize))
 					{
 						continue;
 					}

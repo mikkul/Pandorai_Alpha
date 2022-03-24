@@ -24,7 +24,7 @@ namespace Pandorai.Creatures.Behaviours
 
 			foreach (var tile in vision.VisibleTiles)
 			{
-				var tryCreature = Owner.game.CreatureManager.GetCreature(tile);
+				var tryCreature = Owner.Game.CreatureManager.GetCreature(tile);
 				if (tryCreature == null) continue;
 
 				float dist = Vector2.DistanceSquared(tryCreature.Position, Owner.Position);
@@ -32,7 +32,7 @@ namespace Pandorai.Creatures.Behaviours
 				if(normalVision != null)
 				{
 					int realAggroRange = normalVision.RangeLimit - tryCreature.Stats.Stealth;
-					if (dist > (realAggroRange * Owner.game.Map.TileSize) * (realAggroRange * Owner.game.Map.TileSize))
+					if (dist > (realAggroRange * Owner.Game.Map.TileSize) * (realAggroRange * Owner.Game.Map.TileSize))
 					{
 						continue;
 					}

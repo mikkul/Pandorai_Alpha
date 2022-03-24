@@ -17,9 +17,9 @@ namespace Pandorai.Creatures.Behaviours
         protected override void CalculateFOV()
         {
             VisibleTiles.Clear();
-            for (int x = 0; x < Owner.game.Map.Tiles.GetLength(0); x++)
+            for (int x = 0; x < Owner.Game.Map.Tiles.GetLength(0); x++)
             {
-                for (int y = 0; y < Owner.game.Map.Tiles.GetLength(1); y++)
+                for (int y = 0; y < Owner.Game.Map.Tiles.GetLength(1); y++)
                 {
                     VisibleTiles.Add(new Point(x, y));
                 }

@@ -53,7 +53,7 @@ namespace Pandorai.Items
         public Inventory(Creature owner, int maxElements = 80)
 		{
             Owner = owner;
-            game = Owner.game;
+            game = Owner.Game;
             MaxElements = maxElements;
 
             for (int i = 0; i < MaxElements; i++)
@@ -320,7 +320,7 @@ namespace Pandorai.Items
 
             if (!game.IsGameStarted) return;
 
-            if(Owner == Owner.game.Player.PossessedCreature)
+            if(Owner == Owner.Game.Player.PossessedCreature)
 			{
                 DisplayAsMainInventory();
 			}
@@ -342,7 +342,7 @@ namespace Pandorai.Items
 
             if (!game.IsGameStarted) return;
 
-            if (Owner == Owner.game.Player.PossessedCreature)
+            if (Owner == Owner.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }
@@ -380,7 +380,7 @@ namespace Pandorai.Items
                 ReplaceSlot(new EmptyItem(), 1, index);
 			}
 
-            if (Owner == Owner.game.Player.PossessedCreature)
+            if (Owner == Owner.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }
@@ -402,7 +402,7 @@ namespace Pandorai.Items
                 ReplaceSlot(new EmptyItem(), 1, index);
 			}
 
-            if (Owner == Owner.game.Player.PossessedCreature)
+            if (Owner == Owner.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }
@@ -417,7 +417,7 @@ namespace Pandorai.Items
 
             if (!game.IsGameStarted) return;
 
-            if (Owner == Owner.game.Player.PossessedCreature)
+            if (Owner == Owner.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }

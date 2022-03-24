@@ -11,18 +11,18 @@ namespace Pandorai.Mechanics
 			if (!creature.IsAlive) return;
 
 			creature.StartPosition = creature.Position;
-			creature.TargetPosition = desiredPoint.ToVector2() * creature.game.Map.TileSize;
+			creature.TargetPosition = desiredPoint.ToVector2() * creature.Game.Map.TileSize;
 
 			creature.IsMoving = true;
 			creature.SetMovementTexture(desiredPoint);
 			SoundManager.PlaySound(creature.Sounds.Footstep, 0.35f);
 
-			creature.game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
-			creature.game.Map.RequestTileCollisionFlagChange(desiredPoint, true);
+			creature.Game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
+			creature.Game.Map.RequestTileCollisionFlagChange(desiredPoint, true);
 
-			if(creature == creature.game.Player.PossessedCreature)
+			if(creature == creature.Game.Player.PossessedCreature)
 			{
-				creature.game.TurnManager.PlayerIsReady();
+				creature.Game.TurnManager.PlayerIsReady();
 			}
 			/*else
 			{

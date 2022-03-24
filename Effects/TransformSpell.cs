@@ -21,15 +21,15 @@ namespace Pandorai.Effects
 
         public override void Use(Creature user)
         {
-			if (user == user.game.Player.PossessedCreature && user.game.Player.IsInteractingWithSomeone)
+			if (user == user.Game.Player.PossessedCreature && user.Game.Player.IsInteractingWithSomeone)
             {
                 return;
             }
 
 			Rectangle effectRange = new Rectangle(user.MapIndex - new Point(Range), new Point(Range * 2 + 1));
-			user.game.Map.HighlightTiles(effectRange);
+			user.Game.Map.HighlightTiles(effectRange);
 
-			user.game.Map.EnableTileInteraction();
+			user.Game.Map.EnableTileInteraction();
 
 			TileInteractionManager.TileClick += useHandler;
 
@@ -37,31 +37,31 @@ namespace Pandorai.Effects
             {
                 if(!effectRange.Contains(tile.Index))
                 {
-                    user.game.Map.DisableTileInteraction();
+                    user.Game.Map.DisableTileInteraction();
                     TileInteractionManager.TileClick -= useHandler;
                 }
 
-                if(user.game.CreatureManager.GetCreature(tile.Index) != null)
+                if(user.Game.CreatureManager.GetCreature(tile.Index) != null)
                 {
-                    user.game.Player.IsInteractingWithSomeone = true;
-                    user.game.Map.DisableTileInteraction();
+                    user.Game.Player.IsInteractingWithSomeone = true;
+                    user.Game.Map.DisableTileInteraction();
                     TileInteractionManager.TileClick -= useHandler;
 
-                    ParticleSystemManager.AddSystem(new PSExplosion(user.Position, 30, user.game.smokeParticleTexture, 1500, 150, 35, Color.Purple, true, user.game), true);
+                    ParticleSystemManager.AddSystem(new PSExplosion(user.Position, 30, user.Game.smokeParticleTexture, 1500, 150, 35, Color.Purple, true, user.Game), true);
 
                     var effectTimer = new Timer(1000);
                     effectTimer.Elapsed += (s, a) =>
                     {
-                        user.game.Player.PossessedCreature = user.game.CreatureManager.GetCreature(tile.Index);
+                        user.Game.Player.PossessedCreature = user.Game.CreatureManager.GetCreature(tile.Index);
 
-                        if (user == user.game.Player.PossessedCreature)
+                        if (user == user.Game.Player.PossessedCreature)
                         {
-                            user.game.TurnManager.PlayerIsReady();
+                            user.Game.TurnManager.PlayerIsReady();
                         }
 
-                        ParticleSystemManager.AddSystem(new PSImplosion(tile.Index.ToVector2() * user.game.Options.TileSize, 50, user.game.smokeParticleTexture, 800, 200, 25, Color.Purple, true, user.game), true);
+                        ParticleSystemManager.AddSystem(new PSImplosion(tile.Index.ToVector2() * user.Game.Options.TileSize, 50, user.Game.smokeParticleTexture, 800, 200, 25, Color.Purple, true, user.Game), true);
 
-                        user.game.Player.IsInteractingWithSomeone = false;
+                        user.Game.Player.IsInteractingWithSomeone = false;
 
                         effectTimer.Stop();
                         effectTimer.Dispose();

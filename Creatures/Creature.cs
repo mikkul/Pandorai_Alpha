@@ -64,7 +64,7 @@ namespace Pandorai.Creatures
 
 		public bool IsMoving = false;
 
-		public Main game;
+		public Main Game;
 
 		public Point Target;
 
@@ -82,9 +82,9 @@ namespace Pandorai.Creatures
 
 		private bool _savedByGod = false;
 
-		public Creature(Main _game)
+		public Creature(Main game)
 		{
-			game = _game;
+			Game = game;
 			Inventory = new Inventory(this);
 
 			var stonesCount = Main.Game.MainRng.Next(0, 3);
@@ -98,10 +98,10 @@ namespace Pandorai.Creatures
 					SoundManager.PlaySound(Sounds.Death);
 				}
 				var corpse = StructureLoader.GetStructure("Corpse");
-				corpse.Tile = TileInfo.GetInfo(MapIndex, game);
+				corpse.Tile = TileInfo.GetInfo(MapIndex, Game);
 				var container = corpse.GetBehaviour<Pandorai.Structures.Behaviours.Container>();
 				container.Inventory.AddElements(Inventory.Items);
-				game.Map.GetTile(MapIndex).MapObject = new MapObject(ObjectType.Interactive, CorpseTextureIndex)
+				Game.Map.GetTile(MapIndex).MapObject = new MapObject(ObjectType.Interactive, CorpseTextureIndex)
 				{
 					Structure = corpse,
 				};
@@ -111,7 +111,7 @@ namespace Pandorai.Creatures
 
 		public Creature Clone()
 		{
-			var clone = new Creature(game)
+			var clone = new Creature(Game)
 			{
 				Id = Id,
 				TextureIndex = TextureIndex,
@@ -130,6 +130,7 @@ namespace Pandorai.Creatures
 				clone.Behaviours[i] = clone.Behaviours[i].Clone();
 				clone.Behaviours[i].Owner = clone;
 			}
+			clone.Inventory.RemoveElement("Stone", 9999);
 			clone.Inventory.AddElements(Inventory.Items);
 			return clone;
 		}
@@ -150,7 +151,7 @@ namespace Pandorai.Creatures
 			{
 				SetIdleTexture(desiredPosition);
 			}
-			game.CreatureManager.RequestCreatureMovement(this, desiredPosition);
+			Game.CreatureManager.RequestCreatureMovement(this, desiredPosition);
 		}
 
 		public virtual bool ReadyForTurn()
@@ -164,18 +165,18 @@ namespace Pandorai.Creatures
 
 		public virtual void ReadyForTurn(Vector2 input)
 		{
-			var desiredPosition = Position + (input * game.Map.TileSize);
+			var desiredPosition = Position + (input * Game.Map.TileSize);
 
-			Point targetTile = game.Map.GetTileIndexByPosition(desiredPosition);
+			Point targetTile = Game.Map.GetTileIndexByPosition(desiredPosition);
 
 			RequestMovement(targetTile);
 		}
 
 		public virtual void EndTurn()
 		{
-			Position = game.Map.SnapToGrid(Position);
+			Position = Game.Map.SnapToGrid(Position);
 
-			var newIndex = game.Map.GetTileIndexByPosition(Position);
+			var newIndex = Game.Map.GetTileIndexByPosition(Position);
 
 			if(newIndex == MapIndex)
 			{
@@ -190,7 +191,7 @@ namespace Pandorai.Creatures
 
 			TurnEnded?.Invoke();
 
-			game.CreatureManager.FinishCreatureMovement(this);
+			Game.CreatureManager.FinishCreatureMovement(this);
 		}
 
 		public void OnDeath()
@@ -216,25 +217,25 @@ namespace Pandorai.Creatures
 
 		public void Update()
 		{
-			if (game.TurnManager.TurnState == Mechanics.TurnState.EnemyTurn)
+			if (Game.TurnManager.TurnState == Mechanics.TurnState.EnemyTurn)
 			{
-				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, game.TurnManager.PercentageCompleted);
+				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, Game.TurnManager.PercentageCompleted);
 				Position = new Vector2(lerpVector2.X, lerpVector2.Y);
 			}
 		}
 
 		public void UpdatePossessed()
 		{
-			if (game.TurnManager.TurnState == Mechanics.TurnState.PlayerTurn)
+			if (Game.TurnManager.TurnState == Mechanics.TurnState.PlayerTurn)
 			{
-				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, game.TurnManager.PercentageCompleted);
+				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, Game.TurnManager.PercentageCompleted);
 				Position = new Vector2(lerpVector2.X, lerpVector2.Y);
 			}
 		}
 
 		public bool IsPossessedCreature()
 		{
-			return this == game.Player.PossessedCreature;
+			return this == Game.Player.PossessedCreature;
 		}
 
 		public void SetMovementTexture(Point targetPos)
@@ -363,7 +364,7 @@ namespace Pandorai.Creatures
 		public void Move(Point index)
 		{
 			MapIndex = index;
-			Position = MapIndex.ToVector2() * game.Map.TileSize;
+			Position = MapIndex.ToVector2() * Game.Map.TileSize;
 		}
 
 		public void DamageFlash()
@@ -402,11 +403,11 @@ namespace Pandorai.Creatures
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			var hpBarRect = new Rectangle(game.Camera.GetViewportPosition(Position - new Vector2(game.Map.TileSize * 0.375f, game.Map.TileSize * 0.5f)).ToPoint(), new Point((int)((float)Stats.Health / (float)Stats.MaxHealth * game.Map.TileSize * 0.75f), game.Map.TileSize / 10));
-			var destRect = new Rectangle(game.Camera.GetViewportPosition(Position - new Vector2(game.Map.TileSize / 2, game.Map.TileSize / 2)).ToPoint(), new Point(game.Map.TileSize));
+			var hpBarRect = new Rectangle(Game.Camera.GetViewportPosition(Position - new Vector2(Game.Map.TileSize * 0.375f, Game.Map.TileSize * 0.5f)).ToPoint(), new Point((int)((float)Stats.Health / (float)Stats.MaxHealth * Game.Map.TileSize * 0.75f), Game.Map.TileSize / 10));
+			var destRect = new Rectangle(Game.Camera.GetViewportPosition(Position - new Vector2(Game.Map.TileSize / 2, Game.Map.TileSize / 2)).ToPoint(), new Point(Game.Map.TileSize));
 			if(ShowHPBar)
 			{
-				spriteBatch.Draw(game.squareTexture, hpBarRect, Color.Red);
+				spriteBatch.Draw(Game.squareTexture, hpBarRect, Color.Red);
 			}
 			spriteBatch.Draw(TilesheetManager.CreatureSpritesheetTexture, destRect, TilesheetManager.CreatureSpritesheet[TextureIndex].Rect, this.Color);
 			// if(Id == "Spider")

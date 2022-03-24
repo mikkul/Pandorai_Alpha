@@ -50,11 +50,11 @@ namespace Pandorai.Creatures.Behaviours
 			Item spellToUse = null;
 			if (prioritySpells.Count > 0)
 			{
-				spellToUse = prioritySpells.GetRandomElement(Owner.game.MainRng).Item;
+				spellToUse = prioritySpells.GetRandomElement(Owner.Game.MainRng).Item;
 			}
 			else
 			{
-				spellToUse = spells.GetRandomElement(Owner.game.MainRng).Item;
+				spellToUse = spells.GetRandomElement(Owner.Game.MainRng).Item;
 			}
 
 			spellToUse.Use(Owner);

@@ -34,15 +34,15 @@ namespace Pandorai.Effects
             {
                 if(!effectRange.Contains(tile.Index))
                 {
-                    user.game.Map.DisableTileInteraction();
+                    user.Game.Map.DisableTileInteraction();
                     TileInteractionManager.TileClick -= useHandler;
                 }
 
-                var tryCreature = user.game.CreatureManager.GetCreature(tile.Index);
+                var tryCreature = user.Game.CreatureManager.GetCreature(tile.Index);
 
                 if(tryCreature != null)
                 {
-                    user.game.Map.DisableTileInteraction();
+                    user.Game.Map.DisableTileInteraction();
                     TileInteractionManager.TileClick -= useHandler;
 
                     user.Inventory.RemoveElement("Stone", 1);
@@ -52,9 +52,9 @@ namespace Pandorai.Effects
 
                     tryCreature.GetHit(Damage, user);
 
-                    if (user == user.game.Player.PossessedCreature)
+                    if (user == user.Game.Player.PossessedCreature)
                     {
-                        user.game.TurnManager.PlayerIsReady();
+                        user.Game.TurnManager.PlayerIsReady();
                     }
                 }
             }

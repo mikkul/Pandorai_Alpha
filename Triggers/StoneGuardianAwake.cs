@@ -20,12 +20,12 @@ namespace Pandorai.Triggers
 
 			float range = 15f;
 
-			foreach (var creature in incomingCreature.game.CreatureManager.Creatures)
+			foreach (var creature in incomingCreature.Game.CreatureManager.Creatures)
 			{
 				if (creature.Id != "StoneGuardian") continue;
 
 				float dist = Vector2.DistanceSquared(creature.Position, incomingCreature.Position);
-				if (dist < (range * incomingCreature.game.Map.TileSize) * (range * incomingCreature.game.Map.TileSize))
+				if (dist < (range * incomingCreature.Game.Map.TileSize) * (range * incomingCreature.Game.Map.TileSize))
 				{
 					var awakeningBehaviour = creature.GetBehaviour<Awakening>() as Awakening;
 					if(awakeningBehaviour != null)
