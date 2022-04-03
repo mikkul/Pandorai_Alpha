@@ -157,16 +157,20 @@ namespace Pandorai.UI
             Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(Color.Black);
 
             Grid mainGrid = new Grid();
-            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 1));
-            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 3));
+            mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 1));
             mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 3));
-            mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 5));
+            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 3));
+            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 4));
 
             Image logo = new Image
             {
                 Background = new TextureRegion(_game.LogoTexture),
                 GridRow = 0,
                 GridColumnSpan = 2,
+                Width = 800,
+                Height = 300,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
 
             Image sampleImage = new Image
@@ -174,6 +178,10 @@ namespace Pandorai.UI
                 Background = new TextureRegion(_game.MainMenuImage),
                 GridRow = 1,
                 GridColumn = 1,
+                Width = 1325,
+                Height = 820,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
 
             VerticalStackPanel buttonsStackPanel = new VerticalStackPanel
@@ -182,10 +190,12 @@ namespace Pandorai.UI
                 Spacing = 5,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Padding = new Thickness(15, 25),
-                Width = 100,
+                Padding = new Thickness(25, 50),
+                Width = 300,
                 GridRow = 1,
                 GridColumn = 0,
+                Border = new SolidBrush(Color.White),
+                BorderThickness = new Thickness(1),
             };
 
             var continueButton = new TextButton
@@ -214,6 +224,17 @@ namespace Pandorai.UI
                 Task.Run(() => _game.StartGame());
             };
 
+            var tutorialButton = new TextButton
+            {
+                Text = "Tutorial",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+
+            tutorialButton.Click += (s, a) =>
+            {
+            };
+
             var optionsButton = new TextButton
             {
                 Text = "Options",
@@ -228,9 +249,20 @@ namespace Pandorai.UI
                 optionsWindow.ShowModal(_desktop);
             };
 
+            var creditsButton = new TextButton
+            {
+                Text = "Credits",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+
+            creditsButton.Click += (s, a) =>
+            {
+            };
+
             var exitButton = new TextButton
             {
-                Text = "Exit",
+                Text = "Quit",
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
             };
@@ -240,9 +272,13 @@ namespace Pandorai.UI
                 _game.Exit();
             };
 
-            buttonsStackPanel.Widgets.Add(continueButton);
             buttonsStackPanel.Widgets.Add(playButton);
+            buttonsStackPanel.Widgets.Add(continueButton);
+            buttonsStackPanel.Widgets.Add(new HorizontalSeparator());
+            buttonsStackPanel.Widgets.Add(tutorialButton);
             buttonsStackPanel.Widgets.Add(optionsButton);
+            buttonsStackPanel.Widgets.Add(creditsButton);
+            buttonsStackPanel.Widgets.Add(new HorizontalSeparator());
             buttonsStackPanel.Widgets.Add(exitButton);
 
             mainGrid.Widgets.Add(logo);

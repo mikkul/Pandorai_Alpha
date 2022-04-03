@@ -214,6 +214,9 @@ namespace Pandorai
 
             desktop = new Desktop();
 
+            LogoTexture = Content.Load<Texture2D>("logo");
+            MainMenuImage = Content.Load<Texture2D>("mainMenuImage");
+
             var rootPanel = GUI.LoadGUI(this, desktop);
 
             desktop.Root = rootPanel;
@@ -236,9 +239,6 @@ namespace Pandorai
 
             fireParticleTexture = Content.Load<Texture2D>("fireParticleTexture");
             smokeParticleTexture = Content.Load<Texture2D>("smokeParticle");
-
-            LogoTexture = Content.Load<Texture2D>("logo");
-            MainMenuImage = Content.Load<Texture2D>("mainMenuImage");
 
             _defaultFont = Content.Load<SpriteFont>("defaultFont");
 
