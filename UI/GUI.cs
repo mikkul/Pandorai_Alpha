@@ -7,6 +7,7 @@ using Pandorai.Dialogues;
 using Myra.Graphics2D.UI.Properties;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Myra.Graphics2D.TextureAtlases;
 
 namespace Pandorai.UI
 {
@@ -33,7 +34,7 @@ namespace Pandorai.UI
 
             Panel rootPanel = new Panel();
 
-            var centerButtons = MainMenu();
+            var mainMenu = MainMenu();
 
             var loadingScreen = LoadingScreen();
             loadingScreen.Visible = false;
@@ -41,7 +42,7 @@ namespace Pandorai.UI
             var gameScreen = GameScreen();
             gameScreen.Visible = false;
 
-            rootPanel.Widgets.Add(centerButtons);
+            rootPanel.Widgets.Add(mainMenu);
             rootPanel.Widgets.Add(gameScreen);
             rootPanel.Widgets.Add(loadingScreen);
 
@@ -155,7 +156,27 @@ namespace Pandorai.UI
             Stylesheet.Current.ButtonStyle.Background = new SolidBrush(Color.Black);
             Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(Color.Black);
 
-            VerticalStackPanel centerButtonsHolder = new VerticalStackPanel
+            Grid mainGrid = new Grid();
+            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 1));
+            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 3));
+            mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 3));
+            mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 5));
+
+            Image logo = new Image
+            {
+                Background = new TextureRegion(_game.LogoTexture),
+                GridRow = 0,
+                GridColumnSpan = 2,
+            };
+
+            Image sampleImage = new Image
+            {
+                Background = new TextureRegion(_game.MainMenuImage),
+                GridRow = 1,
+                GridColumn = 1,
+            };
+
+            VerticalStackPanel buttonsStackPanel = new VerticalStackPanel
             {
                 Id = "mainMenu",
                 Spacing = 5,
@@ -163,6 +184,8 @@ namespace Pandorai.UI
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Padding = new Thickness(15, 25),
                 Width = 100,
+                GridRow = 1,
+                GridColumn = 0,
             };
 
             var continueButton = new TextButton
@@ -217,12 +240,16 @@ namespace Pandorai.UI
                 _game.Exit();
             };
 
-            centerButtonsHolder.Widgets.Add(continueButton);
-            centerButtonsHolder.Widgets.Add(playButton);
-            centerButtonsHolder.Widgets.Add(optionsButton);
-            centerButtonsHolder.Widgets.Add(exitButton);
+            buttonsStackPanel.Widgets.Add(continueButton);
+            buttonsStackPanel.Widgets.Add(playButton);
+            buttonsStackPanel.Widgets.Add(optionsButton);
+            buttonsStackPanel.Widgets.Add(exitButton);
 
-            return centerButtonsHolder;
+            mainGrid.Widgets.Add(logo);
+            mainGrid.Widgets.Add(sampleImage);
+            mainGrid.Widgets.Add(buttonsStackPanel);
+
+            return mainGrid;
         }
 
         private static Widget GameScreen()

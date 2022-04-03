@@ -61,6 +61,9 @@ namespace Pandorai
         public RenderTarget2D ViewportTarget;
 
         public Texture2D fireParticleTexture;
+        
+        public Texture2D LogoTexture;
+        public Texture2D MainMenuImage;
 
         public Random MainRng = new Random();
 
@@ -233,6 +236,9 @@ namespace Pandorai
 
             fireParticleTexture = Content.Load<Texture2D>("fireParticleTexture");
             smokeParticleTexture = Content.Load<Texture2D>("smokeParticle");
+
+            LogoTexture = Content.Load<Texture2D>("logo");
+            MainMenuImage = Content.Load<Texture2D>("mainMenuImage");
 
             _defaultFont = Content.Load<SpriteFont>("defaultFont");
 
