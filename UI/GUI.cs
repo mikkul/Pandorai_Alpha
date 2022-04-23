@@ -8,6 +8,7 @@ using Myra.Graphics2D.UI.Properties;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Myra.Graphics2D.TextureAtlases;
+using System.Linq;
 
 namespace Pandorai.UI
 {
@@ -268,6 +269,9 @@ namespace Pandorai.UI
 
             creditsButton.Click += (s, a) =>
             {
+                Window creditsWindow = CreditsWindow();
+
+                creditsWindow.ShowModal(_desktop);
             };
 
             var exitButton = new TextButton
@@ -424,6 +428,71 @@ namespace Pandorai.UI
 
             return panel;
 		}
+
+        private static Window CreditsWindow()
+        {
+            Window window = new Window
+            {
+                Id = "creditsWindow",
+                Title = "Credits",
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Width = 900,
+                Height = 600,
+                Opacity = 1f,
+            };
+
+            VerticalStackPanel stackPanel = new VerticalStackPanel
+            {
+                Spacing = 5,
+                Margin = new Thickness(5),
+                GridColumn = 0,
+            };
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Game made by Nikolaj Kuleszow (https://github.com/mikkul)",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 20),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Music used:",
+                Margin = new Thickness(0, 0, 0, 5),
+            });
+
+            stackPanel.Widgets.Add(creditLabel("Jordan Hake (https://opengameart.org/users/vwolfdog)", "https://opengameart.org/content/soft-mysterious-harp-loop"));
+            stackPanel.Widgets.Add(creditLabel("Irrational Machines", "https://opengameart.org/content/rpg-title-screen-music-pack"));
+            stackPanel.Widgets.Add(creditLabel("Alexandr Zhelanov (https://soundcloud.com/alexandr-zhelanov)", "hhttps://opengameart.org/content/ancient-temple", "https://opengameart.org/content/mystery-forest"));
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Sounds used:",
+                Margin = new Thickness(0, 10, 0, 5),
+            });
+
+            stackPanel.Widgets.Add(creditLabel("Jute", "https://opengameart.org/content/foot-walking-step-sounds-on-stone-water-snow-wood-and-dirt"));
+            stackPanel.Widgets.Add(creditLabel("https://opengameart.org/users/arcadeparty", "https://opengameart.org/content/zombie-skeleton-monster-voice-effects"));
+            stackPanel.Widgets.Add(creditLabel("jukeri (https://opengameart.org/users/jukeri12)", "https://opengameart.org/content/dog-sounds-0"));
+            stackPanel.Widgets.Add(creditLabel("Little Robot Sound Factory (www.littlerobotsoundfactory.com)", "https://opengameart.org/content/fantasy-sound-effects-library"));
+            stackPanel.Widgets.Add(creditLabel("Jesús Lastra (https://opengameart.org/users/jalastram)", "https://opengameart.org/content/sound-effects-sfx015"));
+            stackPanel.Widgets.Add(creditLabel("https://opengameart.org/users/ogrebane", "https://opengameart.org/content/monster-sound-pack-volume-1"));
+
+            window.Content = stackPanel;
+
+            return window;
+
+            Widget creditLabel(string author, params string[] assetLinks)
+            {
+                Label label = new Label
+                {
+                    Text = $"{author} : {string.Join(", ", assetLinks)}",
+                    Wrap = true,
+                };
+                return label;
+            }
+        }
 
         private static Dialog OptionsWindow()
         {
