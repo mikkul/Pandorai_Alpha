@@ -245,6 +245,9 @@ namespace Pandorai.UI
 
             tutorialButton.Click += (s, a) =>
             {
+                Window tutorialWindow = TutorialWindow();
+
+                tutorialWindow.ShowModal(_desktop);
             };
 
             var optionsButton = new TextButton
@@ -429,6 +432,59 @@ namespace Pandorai.UI
 
             return panel;
 		}
+
+        private static Window TutorialWindow()
+        {
+            Window window = new Window
+            {
+                Id = "tutorialWindow",
+                Title = "Tutorial",
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Width = 900,
+                Height = 600,
+                Opacity = 1f,
+            };
+
+            VerticalStackPanel stackPanel = new VerticalStackPanel
+            {
+                Spacing = 5,
+                Margin = new Thickness(5),
+                GridColumn = 0,
+            };
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "[Insert some corny story about the hero and his goal]",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 20),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "8-way movement with WASD, Arrow keys or Numpad. You can also move clicking on the target tile with your mouse.",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Rest of the stuff is pretty self-explanatory. If you move onto a tile with an item, you collect it. If you bump into a structure or a creature, you interact with it. In case of monsters the default action is attack.",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Have fun!",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 0),
+            });
+
+            window.Content = stackPanel;
+
+            return window;
+        }
 
         private static Window CreditsWindow()
         {
