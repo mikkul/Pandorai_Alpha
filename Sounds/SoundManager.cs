@@ -8,13 +8,33 @@ namespace Pandorai.Sounds
 {
     public static class SoundManager
     {
-        public static int SongTransitionMs = 1000;
-        public static string CurrentSong { get; private set; }
-
         private static Dictionary<string, SoundEffect> _music = new();
         private static Dictionary<string, SoundEffect> _sounds = new();
 
         private static SoundEffectInstance _currentSongInstance;
+
+        private static int SongTransitionMs = 1000;
+        private static int musicVolume = 100;
+        private static int soundsVolume = 100;
+
+        public static string CurrentSong { get; private set; }
+        public static int MusicVolume 
+        { 
+            get => musicVolume; 
+            set
+            {
+                musicVolume = value;
+                if(_currentSongInstance != null)
+                {
+                    _currentSongInstance.Volume = musicVolume / 100f;
+                }
+            }
+        }
+        public static int SoundsVolume 
+        { 
+            get => soundsVolume; 
+            set => soundsVolume = value; 
+        }
 
         public static void LoadSounds(string musicFolderPath, string soundEffectsFolderPath)
         {
@@ -43,27 +63,27 @@ namespace Pandorai.Sounds
                 }
                 var soundEffect = Main.Game.Content.Load<SoundEffect>(filePath);
                 _sounds.Add(Path.GetFileName(filePath), soundEffect);
-            }    
+            }
         }
-        
+
         public static void PlaySound(string name, float volume = 1f)
         {
-            if(_sounds.ContainsKey(name))
+            if (_sounds.ContainsKey(name))
             {
                 var soundInstance = _sounds[name].CreateInstance();
-                soundInstance.Volume = volume;
+                soundInstance.Volume = volume * (SoundsVolume / 100f);
                 soundInstance.Play();
             }
         }
 
         public static void PlayMusic(string name)
         {
-            if(CurrentSong == name)
+            if (CurrentSong == name)
             {
                 return;
             }
 
-            if(_music.ContainsKey(name))
+            if (_music.ContainsKey(name))
             {
                 TransitionToSong(name);
                 CurrentSong = name;
@@ -82,7 +102,7 @@ namespace Pandorai.Sounds
             songInstance.Volume = 0;
 
             int timerIncrementStep = 10;
-            float volumeStep = (float)timerIncrementStep / (float)SongTransitionMs;
+            float volumeStep = (float)timerIncrementStep / (float)SongTransitionMs * (MusicVolume / 100f);
 
             var fadeInTimer = new Timer(timerIncrementStep);
             double fadeInElapsedTime = 0;
@@ -92,9 +112,9 @@ namespace Pandorai.Sounds
                 {
                     songInstance.Volume += volumeStep;
                 }
-                catch(Exception){}
+                catch (Exception) { }
                 fadeInElapsedTime += fadeInTimer.Interval;
-                if(fadeInElapsedTime > SongTransitionMs)
+                if (fadeInElapsedTime > SongTransitionMs)
                 {
                     fadeInTimer.Stop();
                     fadeInTimer.Dispose();
@@ -105,21 +125,21 @@ namespace Pandorai.Sounds
             double fadeOutElapsedTime = 0;
             fadeOutTimer.Elapsed += (s, a) =>
             {
-                if(_currentSongInstance != null)
+                if (_currentSongInstance != null)
                 {
                     try
                     {
                         _currentSongInstance.Volume -= volumeStep;
                     }
-                    catch(Exception){}
+                    catch (Exception) { }
                 }
                 fadeOutElapsedTime += fadeOutTimer.Interval;
-                if(fadeOutElapsedTime > SongTransitionMs)
+                if (fadeOutElapsedTime > SongTransitionMs)
                 {
                     _currentSongInstance?.Stop();
                     songInstance.Play();
                     _currentSongInstance = songInstance;
-                    
+
                     fadeInTimer.Start();
                     fadeOutTimer.Stop();
                     fadeOutTimer.Dispose();

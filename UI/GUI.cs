@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Myra.Graphics2D.TextureAtlases;
 using System.Linq;
+using Pandorai.Sounds;
 
 namespace Pandorai.UI
 {
@@ -566,16 +567,38 @@ namespace Pandorai.UI
                 _game.Options.ChangeResolution((Point)resolutionList.SelectedItem.Tag, window);
             };
 
-            HorizontalSlider zoomSlider = new HorizontalSlider
+            Label musicVolumeLabel = new Label
             {
-                Minimum = 8,
-                Maximum = 128,
-                Value = _game.Options.TileSize,
+                Text = "Music volume:",
             };
 
-            zoomSlider.ValueChanged += (s, a) =>
+            HorizontalSlider musicVolumeSlider = new HorizontalSlider
             {
-                _game.Options.TileSize = (int)a.NewValue;
+                Minimum = 0,
+                Maximum = 100,
+                Value = SoundManager.MusicVolume,
+            };
+
+            musicVolumeSlider.ValueChanged += (s, a) =>
+            {
+                SoundManager.MusicVolume = (int)a.NewValue;
+            };
+        
+            Label soundsVolumeLabel = new Label
+            {
+                Text = "Sounds volume:",
+            };
+
+            HorizontalSlider soundsVolumeSlider = new HorizontalSlider
+            {
+                Minimum = 0,
+                Maximum = 100,
+                Value = SoundManager.SoundsVolume,
+            };
+
+            soundsVolumeSlider.ValueChanged += (s, a) =>
+            {
+                SoundManager.SoundsVolume = (int)a.NewValue;
             };
 
             VerticalStackPanel verticalStackPanel2 = new VerticalStackPanel
@@ -604,7 +627,10 @@ namespace Pandorai.UI
             verticalStackPanel1.Widgets.Add(resolutionChoice);
             verticalStackPanel1.Widgets.Add(resolutionList);
             verticalStackPanel1.Widgets.Add(applyResolutionButton);
-            verticalStackPanel1.Widgets.Add(zoomSlider);
+            verticalStackPanel1.Widgets.Add(musicVolumeLabel);
+            verticalStackPanel1.Widgets.Add(musicVolumeSlider);
+            verticalStackPanel1.Widgets.Add(soundsVolumeLabel);
+            verticalStackPanel1.Widgets.Add(soundsVolumeSlider);
 
             verticalStackPanel2.Widgets.Add(fullScreenLabel);
             verticalStackPanel2.Widgets.Add(fullScreenCheckbox);
