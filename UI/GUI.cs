@@ -598,29 +598,43 @@ namespace Pandorai.UI
                 Text = "Resolution:"
             };
 
-            ComboBox resolutionList = new ComboBox
+            HorizontalStackPanel resolutionInputPanel = new HorizontalStackPanel
             {
+                Spacing = 5,
             };
-            resolutionList.Items.Add(new ListItem("1440x900", null, new Point(1440, 900)));
-            resolutionList.Items.Add(new ListItem("800x600", null, new Point(800, 600)));
 
-			foreach (var item in resolutionList.Items)
-			{
-                if((Point)item.Tag == Options.OldResolution)
-				{
-                    resolutionList.SelectedItem = item;
-                    break;
-				}
-			}
+            TextBox resolutionWidthTextBox = new TextBox
+            {
+                Text = "800",
+                Width = 50,
+            };
+
+            Label resolutionDividerLabel = new Label
+            {
+                Text = "x",
+            };
+
+            TextBox resolutionHeightTextBox = new TextBox
+            {
+                Text = "600",
+                Width = 50,
+            };
 
             TextButton applyResolutionButton = new TextButton
             {
                 Text = "Apply"
             };
+            
+            resolutionInputPanel.Widgets.Add(resolutionWidthTextBox);
+            resolutionInputPanel.Widgets.Add(resolutionDividerLabel);
+            resolutionInputPanel.Widgets.Add(resolutionHeightTextBox);
+            resolutionInputPanel.Widgets.Add(applyResolutionButton);
 
             applyResolutionButton.Click += (s, e) =>
             {
-                _game.Options.ChangeResolution((Point)resolutionList.SelectedItem.Tag, window);
+                int resolutionWidth = int.Parse(resolutionWidthTextBox.Text);
+                int resolutionHeight = int.Parse(resolutionHeightTextBox.Text);
+                _game.Options.ChangeResolution(new Point(resolutionWidth, resolutionHeight), window);
             };
 
             Label musicVolumeLabel = new Label
@@ -681,8 +695,7 @@ namespace Pandorai.UI
             };
 
             verticalStackPanel1.Widgets.Add(resolutionChoice);
-            verticalStackPanel1.Widgets.Add(resolutionList);
-            verticalStackPanel1.Widgets.Add(applyResolutionButton);
+            verticalStackPanel1.Widgets.Add(resolutionInputPanel);
             verticalStackPanel1.Widgets.Add(musicVolumeLabel);
             verticalStackPanel1.Widgets.Add(musicVolumeSlider);
             verticalStackPanel1.Widgets.Add(soundsVolumeLabel);
