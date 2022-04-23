@@ -210,6 +210,8 @@ namespace Pandorai
 
             //
 
+            squareTexture = Content.Load<Texture2D>("fullSquareTexture");
+
             MyraEnvironment.Game = this;
 
             desktop = new Desktop();
@@ -230,7 +232,6 @@ namespace Pandorai
             StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"), this);
 
             //
-            squareTexture = Content.Load<Texture2D>("fullSquareTexture");
             _fogTexture = Content.Load<Texture2D>("fog");
             LightingManager.LightSourceMask = Content.Load<Texture2D>("lightSource");
             LightingManager.LightingMaskEffect = Content.Load<Effect>("Shaders/lightingMask");
@@ -440,8 +441,6 @@ namespace Pandorai
                 _spriteBatch.DrawString(_defaultFont, Math.Round(_fpsCounter.Framerate).ToString(), Vector2.Zero, Color.White);
                 _spriteBatch.End();
 			}
-
-            base.Draw(gameTime);
         }
 
         public void StartGame()

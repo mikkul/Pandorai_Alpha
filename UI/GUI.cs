@@ -26,6 +26,15 @@ namespace Pandorai.UI
         public static Widget LoadGUI(Main thisGame, Desktop thisDesktop)
 		{
             Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(new Color(0.6f, 0.6f, 0.6f, 1f));
+            Stylesheet.Current.ButtonStyle.Height = 25;
+            Stylesheet.Current.ButtonStyle.Background = new SolidBrush(Color.Black);
+            Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(Color.Black);
+            Stylesheet.Current.WindowStyle.Background = new SolidBrush(Color.Black);
+            Stylesheet.Current.WindowStyle.Border = new SolidBrush(Color.White);
+            Stylesheet.Current.WindowStyle.BorderThickness = new Thickness(1);
+            Stylesheet.Current.HorizontalSeparatorStyle.Thickness = 1;
+            Stylesheet.Current.HorizontalSeparatorStyle.Image = new TextureRegion(Main.Game.squareTexture);
+            Stylesheet.Current.HorizontalSeparatorStyle.Margin = new Thickness(0, 5);
 
             _game = thisGame;
             _desktop = thisDesktop;
@@ -152,11 +161,10 @@ namespace Pandorai.UI
 
         private static Widget MainMenu()
 		{
-            Stylesheet.Current.ButtonStyle.Height = 25;
-            Stylesheet.Current.ButtonStyle.Background = new SolidBrush(Color.Black);
-            Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(Color.Black);
-
-            Grid mainGrid = new Grid();
+            Grid mainGrid = new Grid()
+            {
+                Id = "mainMenu",
+            };
             mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 1));
             mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 3));
             mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 3));
@@ -186,7 +194,7 @@ namespace Pandorai.UI
 
             VerticalStackPanel buttonsStackPanel = new VerticalStackPanel
             {
-                Id = "mainMenu",
+                Id = "mainMenuButtons",
                 Spacing = 5,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -196,6 +204,8 @@ namespace Pandorai.UI
                 GridColumn = 0,
                 Border = new SolidBrush(Color.White),
                 BorderThickness = new Thickness(1),
+                Background = new SolidBrush(Color.Black),
+                Top = -75,
             };
 
             var continueButton = new TextButton
@@ -272,8 +282,8 @@ namespace Pandorai.UI
                 _game.Exit();
             };
 
-            buttonsStackPanel.Widgets.Add(playButton);
             buttonsStackPanel.Widgets.Add(continueButton);
+            buttonsStackPanel.Widgets.Add(playButton);
             buttonsStackPanel.Widgets.Add(new HorizontalSeparator());
             buttonsStackPanel.Widgets.Add(tutorialButton);
             buttonsStackPanel.Widgets.Add(optionsButton);
@@ -348,7 +358,7 @@ namespace Pandorai.UI
 		{
             Panel mainPanel = new Panel
             {
-                Id = "DialoguePanel"
+                Id = "DialoguePanel",
             };
 
             Label nameLabel = new Label
@@ -426,7 +436,7 @@ namespace Pandorai.UI
                 //IsDraggable = true,
                 Width = 500,
                 Height = 300,
-                Opacity = 1f
+                Opacity = 1f,
             };
 
             window.Closed += (s, e) =>
@@ -443,7 +453,7 @@ namespace Pandorai.UI
 
             Grid windowPanel = new Grid
             {
-                Background = new SolidBrush(Color.Gray)
+                Background = new SolidBrush(Color.Black),
             };
 
             windowPanel.ColumnsProportions.Add(new Proportion());

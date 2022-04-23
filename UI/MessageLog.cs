@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Myra.Graphics2D;
 using Myra.Graphics2D.UI;
 using System.Collections.Generic;
 
@@ -48,6 +49,7 @@ namespace Pandorai.UI
 			_panel = new VerticalStackPanel
 			{
 				Id = "MessageLog",
+				Padding = new Thickness(5),
 			};
 
 			return _panel;
