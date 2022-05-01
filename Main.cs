@@ -76,13 +76,13 @@ namespace Pandorai
 
         private SpriteBatch _spriteBatch;
 
-        private Texture2D _fogTexture;
-
         private SpriteFont _defaultFont;
 
         private Timer _loadingAnimationTimer;
 
         private RenderHelper _viewportRenderer;
+
+        private bool _firstGameLoad = true;
         
         public Main()
         {
@@ -205,41 +205,10 @@ namespace Pandorai
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //
-
             MyraEnvironment.Game = this;
-
             desktop = new Desktop();
-
             var rootPanel = GUI.LoadGUI(this, desktop);
-
             desktop.Root = rootPanel;
-
-            //
-
-            ItemLoader.LoadItems(Path.Combine(Content.RootDirectory, "Items/item_spreadsheet.xml"));
-
-            CreatureLoader.LoadCreatures(Path.Combine(Content.RootDirectory, "Creatures/creatures_spreadsheet.xml"), this);
-
-            StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"), this);
-
-            //
-            squareTexture = Content.Load<Texture2D>("fullSquareTexture");
-            _fogTexture = Content.Load<Texture2D>("fog");
-            LightingManager.LightSourceMask = Content.Load<Texture2D>("lightSource");
-            LightingManager.LightingMaskEffect = Content.Load<Effect>("Shaders/lightingMask");
-
-            Sidekick.Sprite = Content.Load<Texture2D>("sidekick");
-
-            fireParticleTexture = Content.Load<Texture2D>("fireParticleTexture");
-            smokeParticleTexture = Content.Load<Texture2D>("smokeParticle");
-
-            _defaultFont = Content.Load<SpriteFont>("defaultFont");
-
-            BasicTrivia.Load(this);
-
-            TilesheetManager.MapSpritesheetTexture = Content.Load<Texture2D>("tilesheet2");
-            TilesheetManager.CreatureSpritesheetTexture = Content.Load<Texture2D>("creatureTilesheet");
 
             Map = new Map(_spriteBatch, this);
 
@@ -266,21 +235,8 @@ namespace Pandorai
             Options.TilePropGrid = (PropertyGrid)desktop.Root.FindWidgetById("TilePropertyGrid");
             Options.TilePropGridScroll = (ScrollViewer)desktop.Root.FindWidgetById("TilePropertGridScroll");
 
-            spiritWorldEffectBackground = Content.Load<Effect>("Shaders/spiritEffectBackground");
-            spiritWorldEffectForeground = Content.Load<Effect>("Shaders/spiritEffectForeground");
-            distortionEffect = Content.Load<Effect>("Shaders/distortionEffect");
-
-            LightingManager.RefreshRenderTarget(GraphicsDevice, Camera);
-
-            Sidekick.Init();
-
             Options.ChangeResolution(Options.ResolutionList[0], null);
             Options.ApplyChanges();
-
-            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false, this);
-
-            CustomRegionLoader.LoadRegionTemplates(Path.Combine(Content.RootDirectory, "CustomRegions"));
-            WFCSampleLoader.InitSamples(Path.Combine(Content.RootDirectory, "WFCSamples"), Path.Combine(Content.RootDirectory, "wfcSamplesSpreadsheet.xml"), this);
 
             SoundManager.LoadSounds("Music", "Sounds");
             MediaPlayer.IsRepeating = true;
@@ -300,6 +256,43 @@ namespace Pandorai
                     loadingTextLabel.Text += ".";
                 }
             };
+
+            squareTexture = Content.Load<Texture2D>("fullSquareTexture");
+
+            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false, this);
+
+            Sidekick.Init();
+        }
+
+        private void LoadGameContent()
+        {
+            ItemLoader.LoadItems(Path.Combine(Content.RootDirectory, "Items/item_spreadsheet.xml"));
+            CreatureLoader.LoadCreatures(Path.Combine(Content.RootDirectory, "Creatures/creatures_spreadsheet.xml"), this);
+            StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"), this);
+
+            LightingManager.LightSourceMask = Content.Load<Texture2D>("lightSource");
+            LightingManager.LightingMaskEffect = Content.Load<Effect>("Shaders/lightingMask");
+
+            Sidekick.Sprite = Content.Load<Texture2D>("sidekick");
+
+            fireParticleTexture = Content.Load<Texture2D>("fireParticleTexture");
+            smokeParticleTexture = Content.Load<Texture2D>("smokeParticle");
+
+            _defaultFont = Content.Load<SpriteFont>("defaultFont");
+
+            BasicTrivia.Load(this);
+
+            TilesheetManager.MapSpritesheetTexture = Content.Load<Texture2D>("tilesheet2");
+            TilesheetManager.CreatureSpritesheetTexture = Content.Load<Texture2D>("creatureTilesheet");
+
+            spiritWorldEffectBackground = Content.Load<Effect>("Shaders/spiritEffectBackground");
+            spiritWorldEffectForeground = Content.Load<Effect>("Shaders/spiritEffectForeground");
+            distortionEffect = Content.Load<Effect>("Shaders/distortionEffect");
+
+            LightingManager.RefreshRenderTarget(GraphicsDevice, Camera);
+
+            CustomRegionLoader.LoadRegionTemplates(Path.Combine(Content.RootDirectory, "CustomRegions"));
+            WFCSampleLoader.InitSamples(Path.Combine(Content.RootDirectory, "WFCSamples"), Path.Combine(Content.RootDirectory, "wfcSamplesSpreadsheet.xml"), this);
         }
 
         protected override void UnloadContent()
@@ -445,6 +438,18 @@ namespace Pandorai
             desktop.Root.FindWidgetById("continueButton").Enabled = true;
             Player.IsDead = false;
 
+            // display loading sreeen and music
+            SoundManager.PlayMusic("Loading");
+            desktop.Root.FindWidgetById("mainMenu").Visible = false;
+            desktop.Root.FindWidgetById("loadingScreen").Visible = true;
+            _loadingAnimationTimer.Start();
+
+            //
+            if(_firstGameLoad)
+            {
+                LoadGameContent();
+            }
+
             //
             LightingManager.RefreshRenderTarget(GraphicsDevice, Camera);
 
@@ -458,12 +463,6 @@ namespace Pandorai
             LightingManager.ClearLightSources();
             ParticleSystemManager.Clear();
             MessageLog.Clear();
-
-            // display loading sreeen and music
-            SoundManager.PlayMusic("Loading");
-            desktop.Root.FindWidgetById("mainMenu").Visible = false;
-            desktop.Root.FindWidgetById("loadingScreen").Visible = true;
-            _loadingAnimationTimer.Start();
 
             //
             var mapGenerator = new MapGenerator();
