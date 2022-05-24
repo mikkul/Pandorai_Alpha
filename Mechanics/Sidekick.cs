@@ -4,7 +4,6 @@ using Pandorai.Creatures;
 using Pandorai.Items;
 using Microsoft.Xna.Framework;
 using System;
-using System.Diagnostics;
 using Pandorai.ParticleSystems;
 using Pandorai.Utility;
 using Pandorai.UI;
@@ -22,7 +21,7 @@ namespace Pandorai.Mechanics
 
 		public static bool WasItemDragged = false;
 
-		public static Vector2 position;
+		public static Vector2 Position;
 
 		private static Main _game;
 
@@ -73,7 +72,7 @@ namespace Pandorai.Mechanics
 
 		public static void InitLate()
 		{
-			position = _game.Player.PossessedCreature.Position - new Vector2(100, 100);
+			Position = _game.Player.PossessedCreature.Position - new Vector2(100, 100);
 			ParticleSystemManager.AddSystem(_sparkles, false);
 			_thinkingTimer = 0;
 			_newMovementChangeTime = 2500;
@@ -86,7 +85,7 @@ namespace Pandorai.Mechanics
 
 		public static void AdjustToTileSize(int oldSize, int newSize)
 		{
-			position *= (float)newSize / (float)oldSize;
+			Position *= (float)newSize / (float)oldSize;
 		}
 
 		public static void DeselectItem(Vector2 pos)
@@ -175,6 +174,11 @@ namespace Pandorai.Mechanics
 
 		public static void DisplaySlots()
 		{
+			bool showSlots = false;
+			if(showSlots)
+			{
+				return;
+			}
 			Proportion columnProp = new Proportion
 			{
 				Type = ProportionType.Part,
@@ -209,12 +213,12 @@ namespace Pandorai.Mechanics
 
 			Move(dt);
 
-			_sparkles.CentralPosition = position;
+			_sparkles.CentralPosition = Position;
 		}
 
 		public static void Draw(SpriteBatch batch)
 		{
-			var destRect = new Rectangle(_game.Camera.GetViewportPosition(position - new Vector2(_game.Map.TileSize / 2, _game.Map.TileSize / 2)).ToPoint(), new Point(_game.Map.TileSize));
+			var destRect = new Rectangle(_game.Camera.GetViewportPosition(Position - new Vector2(_game.Map.TileSize / 2, _game.Map.TileSize / 2)).ToPoint(), new Point(_game.Map.TileSize));
 			batch.Draw(Sprite, destRect, Color.White);
 		}
 
@@ -232,24 +236,24 @@ namespace Pandorai.Mechanics
 				_choiceOffset += 1;
 				var choiceNum = _noise.Evaluate(_choiceOffset, 0);
 				//var choiceNum = rng.NextDouble();
-				if(choiceNum < 0.25 || Vector2.Distance(playerPos, position) > _maxDistance * _game.Map.TileSize)
+				if(choiceNum < 0.25 || Vector2.Distance(playerPos, Position) > _maxDistance * _game.Map.TileSize)
 				{
 					_currentAction = Action.Following;
-					_desiredPos = playerPos + Vector2.Normalize(position - playerPos) * _safeDistance * _game.Map.TileSize;
+					_desiredPos = playerPos + Vector2.Normalize(Position - playerPos) * _safeDistance * _game.Map.TileSize;
 				}
 				else if(choiceNum < 0.50)
 				{
 					_currentAction = Action.SwitchingSide;
-					_desiredPos = playerPos - Vector2.Normalize(position - playerPos) * _safeDistance * _game.Map.TileSize;
+					_desiredPos = playerPos - Vector2.Normalize(Position - playerPos) * _safeDistance * _game.Map.TileSize;
 				}
 				else if(choiceNum < 0.80)
 				{
 					_currentAction = Action.Strafing;
 
-					float randomX = (float)_noise.Evaluate(position.X, position.Y);
-					float randomY = (float)_noise.Evaluate(position.Y, position.X);
+					float randomX = (float)_noise.Evaluate(Position.X, Position.Y);
+					float randomY = (float)_noise.Evaluate(Position.Y, Position.X);
 
-					_desiredPos = position + Vector2.Normalize(new Vector2(randomX, randomY)) * _strafeDistance * _game.Map.TileSize;
+					_desiredPos = Position + Vector2.Normalize(new Vector2(randomX, randomY)) * _strafeDistance * _game.Map.TileSize;
 				}
 				else
 				{
@@ -262,18 +266,18 @@ namespace Pandorai.Mechanics
 			if(_currentAction == Action.Following)
 			{
 				_lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / _movementChangeTime;
-				_desiredPos = playerPos + Vector2.Normalize(position - playerPos) * _safeDistance * _game.Map.TileSize;
-				position = Vector2.Lerp(position, _desiredPos, _lerpValue);
+				_desiredPos = playerPos + Vector2.Normalize(Position - playerPos) * _safeDistance * _game.Map.TileSize;
+				Position = Vector2.Lerp(Position, _desiredPos, _lerpValue);
 			}
 			else if(_currentAction == Action.SwitchingSide)
 			{
 				_lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / _movementChangeTime;
-				position = Vector2.Lerp(position, _desiredPos, _lerpValue);
+				Position = Vector2.Lerp(Position, _desiredPos, _lerpValue);
 			}
 			else if (_currentAction == Action.Strafing)
 			{
 				_lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / _movementChangeTime;
-				position = Vector2.Lerp(position, _desiredPos, _lerpValue);
+				Position = Vector2.Lerp(Position, _desiredPos, _lerpValue);
 			}
 		}
 

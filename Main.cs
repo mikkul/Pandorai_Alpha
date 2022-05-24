@@ -61,6 +61,9 @@ namespace Pandorai
         public RenderTarget2D ViewportTarget;
 
         public Texture2D fireParticleTexture;
+        
+        public Texture2D LogoTexture;
+        public Texture2D MainMenuImage;
 
         public Random MainRng = new Random();
 
@@ -427,8 +430,6 @@ namespace Pandorai
                 _spriteBatch.DrawString(_defaultFont, Math.Round(_fpsCounter.Framerate).ToString(), Vector2.Zero, Color.White);
                 _spriteBatch.End();
 			}
-
-            base.Draw(gameTime);
         }
 
         public void StartGame()

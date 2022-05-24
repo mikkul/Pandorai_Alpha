@@ -7,6 +7,9 @@ using Pandorai.Dialogues;
 using Myra.Graphics2D.UI.Properties;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using Myra.Graphics2D.TextureAtlases;
+using System.Linq;
+using Pandorai.Sounds;
 
 namespace Pandorai.UI
 {
@@ -25,6 +28,15 @@ namespace Pandorai.UI
         public static Widget LoadGUI(Main thisGame, Desktop thisDesktop)
 		{
             Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(new Color(0.6f, 0.6f, 0.6f, 1f));
+            Stylesheet.Current.ButtonStyle.Height = 25;
+            Stylesheet.Current.ButtonStyle.Background = new SolidBrush(Color.Black);
+            Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(Color.Black);
+            Stylesheet.Current.WindowStyle.Background = new SolidBrush(Color.Black);
+            Stylesheet.Current.WindowStyle.Border = new SolidBrush(Color.White);
+            Stylesheet.Current.WindowStyle.BorderThickness = new Thickness(1);
+            Stylesheet.Current.HorizontalSeparatorStyle.Thickness = 1;
+            Stylesheet.Current.HorizontalSeparatorStyle.Image = new TextureRegion(Main.Game.squareTexture);
+            Stylesheet.Current.HorizontalSeparatorStyle.Margin = new Thickness(0, 5);
 
             _game = thisGame;
             _desktop = thisDesktop;
@@ -33,7 +45,7 @@ namespace Pandorai.UI
 
             Panel rootPanel = new Panel();
 
-            var centerButtons = MainMenu();
+            var mainMenu = MainMenu();
 
             var loadingScreen = LoadingScreen();
             loadingScreen.Visible = false;
@@ -41,7 +53,7 @@ namespace Pandorai.UI
             var gameScreen = GameScreen();
             gameScreen.Visible = false;
 
-            rootPanel.Widgets.Add(centerButtons);
+            rootPanel.Widgets.Add(mainMenu);
             rootPanel.Widgets.Add(gameScreen);
             rootPanel.Widgets.Add(loadingScreen);
 
@@ -151,18 +163,51 @@ namespace Pandorai.UI
 
         private static Widget MainMenu()
 		{
-            Stylesheet.Current.ButtonStyle.Height = 25;
-            Stylesheet.Current.ButtonStyle.Background = new SolidBrush(Color.Black);
-            Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(Color.Black);
-
-            VerticalStackPanel centerButtonsHolder = new VerticalStackPanel
+            Grid mainGrid = new Grid()
             {
                 Id = "mainMenu",
+            };
+            mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 1));
+            mainGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 3));
+            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 3));
+            mainGrid.ColumnsProportions.Add(new Proportion(ProportionType.Part, 4));
+
+            Image logo = new Image
+            {
+                Background = new TextureRegion(_game.LogoTexture),
+                GridRow = 0,
+                GridColumnSpan = 2,
+                Width = 800,
+                Height = 300,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            Image sampleImage = new Image
+            {
+                Background = new TextureRegion(_game.MainMenuImage),
+                GridRow = 1,
+                GridColumn = 1,
+                Width = 1325,
+                Height = 820,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            VerticalStackPanel buttonsStackPanel = new VerticalStackPanel
+            {
+                Id = "mainMenuButtons",
                 Spacing = 5,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Padding = new Thickness(15, 25),
-                Width = 100,
+                Padding = new Thickness(25, 50),
+                Width = 300,
+                GridRow = 1,
+                GridColumn = 0,
+                Border = new SolidBrush(Color.White),
+                BorderThickness = new Thickness(1),
+                Background = new SolidBrush(Color.Black),
+                Top = -75,
             };
 
             var continueButton = new TextButton
@@ -191,6 +236,20 @@ namespace Pandorai.UI
                 Task.Run(() => _game.StartGame());
             };
 
+            var tutorialButton = new TextButton
+            {
+                Text = "Tutorial",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+
+            tutorialButton.Click += (s, a) =>
+            {
+                Window tutorialWindow = TutorialWindow();
+
+                tutorialWindow.ShowModal(_desktop);
+            };
+
             var optionsButton = new TextButton
             {
                 Text = "Options",
@@ -205,9 +264,23 @@ namespace Pandorai.UI
                 optionsWindow.ShowModal(_desktop);
             };
 
+            var creditsButton = new TextButton
+            {
+                Text = "Credits",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+
+            creditsButton.Click += (s, a) =>
+            {
+                Window creditsWindow = CreditsWindow();
+
+                creditsWindow.ShowModal(_desktop);
+            };
+
             var exitButton = new TextButton
             {
-                Text = "Exit",
+                Text = "Quit",
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
             };
@@ -217,12 +290,20 @@ namespace Pandorai.UI
                 _game.Exit();
             };
 
-            centerButtonsHolder.Widgets.Add(continueButton);
-            centerButtonsHolder.Widgets.Add(playButton);
-            centerButtonsHolder.Widgets.Add(optionsButton);
-            centerButtonsHolder.Widgets.Add(exitButton);
+            buttonsStackPanel.Widgets.Add(continueButton);
+            buttonsStackPanel.Widgets.Add(playButton);
+            buttonsStackPanel.Widgets.Add(new HorizontalSeparator());
+            buttonsStackPanel.Widgets.Add(tutorialButton);
+            buttonsStackPanel.Widgets.Add(optionsButton);
+            buttonsStackPanel.Widgets.Add(creditsButton);
+            buttonsStackPanel.Widgets.Add(new HorizontalSeparator());
+            buttonsStackPanel.Widgets.Add(exitButton);
 
-            return centerButtonsHolder;
+            mainGrid.Widgets.Add(logo);
+            mainGrid.Widgets.Add(sampleImage);
+            mainGrid.Widgets.Add(buttonsStackPanel);
+
+            return mainGrid;
         }
 
         private static Widget GameScreen()
@@ -269,7 +350,7 @@ namespace Pandorai.UI
                 GridRow = 0,
             };
 
-            slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 1));
+            slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 0));
             slotsGrid.RowsProportions.Add(new Proportion(ProportionType.Part, 5));
 
             InventorySlotsGrid = slotsGrid;
@@ -285,7 +366,7 @@ namespace Pandorai.UI
 		{
             Panel mainPanel = new Panel
             {
-                Id = "DialoguePanel"
+                Id = "DialoguePanel",
             };
 
             Label nameLabel = new Label
@@ -352,6 +433,124 @@ namespace Pandorai.UI
             return panel;
 		}
 
+        private static Window TutorialWindow()
+        {
+            Window window = new Window
+            {
+                Id = "tutorialWindow",
+                Title = "Tutorial",
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Width = 900,
+                Height = 600,
+                Opacity = 1f,
+            };
+
+            VerticalStackPanel stackPanel = new VerticalStackPanel
+            {
+                Spacing = 5,
+                Margin = new Thickness(5),
+                GridColumn = 0,
+            };
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "[Insert some corny story about the hero and his goal]",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 20),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "8-way movement with WASD, Arrow keys or Numpad. You can also move clicking on the target tile with your mouse.",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Rest of the stuff is pretty self-explanatory. If you move onto a tile with an item, you collect it. If you bump into a structure or a creature, you interact with it. In case of monsters the default action is attack.",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 10),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Have fun!",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 0),
+            });
+
+            window.Content = stackPanel;
+
+            return window;
+        }
+
+        private static Window CreditsWindow()
+        {
+            Window window = new Window
+            {
+                Id = "creditsWindow",
+                Title = "Credits",
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Width = 900,
+                Height = 600,
+                Opacity = 1f,
+            };
+
+            VerticalStackPanel stackPanel = new VerticalStackPanel
+            {
+                Spacing = 5,
+                Margin = new Thickness(5),
+                GridColumn = 0,
+            };
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Game made by Nikolaj Kuleszow (https://github.com/mikkul)",
+                Wrap = true,
+                Margin = new Thickness(0, 0, 0, 20),
+            });
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Music used:",
+                Margin = new Thickness(0, 0, 0, 5),
+            });
+
+            stackPanel.Widgets.Add(creditLabel("Jordan Hake (https://opengameart.org/users/vwolfdog)", "https://opengameart.org/content/soft-mysterious-harp-loop"));
+            stackPanel.Widgets.Add(creditLabel("Irrational Machines", "https://opengameart.org/content/rpg-title-screen-music-pack"));
+            stackPanel.Widgets.Add(creditLabel("Alexandr Zhelanov (https://soundcloud.com/alexandr-zhelanov)", "hhttps://opengameart.org/content/ancient-temple", "https://opengameart.org/content/mystery-forest"));
+
+            stackPanel.Widgets.Add(new Label
+            {
+                Text = "Sounds used:",
+                Margin = new Thickness(0, 10, 0, 5),
+            });
+
+            stackPanel.Widgets.Add(creditLabel("Jute", "https://opengameart.org/content/foot-walking-step-sounds-on-stone-water-snow-wood-and-dirt"));
+            stackPanel.Widgets.Add(creditLabel("https://opengameart.org/users/arcadeparty", "https://opengameart.org/content/zombie-skeleton-monster-voice-effects"));
+            stackPanel.Widgets.Add(creditLabel("jukeri (https://opengameart.org/users/jukeri12)", "https://opengameart.org/content/dog-sounds-0"));
+            stackPanel.Widgets.Add(creditLabel("Little Robot Sound Factory (www.littlerobotsoundfactory.com)", "https://opengameart.org/content/fantasy-sound-effects-library"));
+            stackPanel.Widgets.Add(creditLabel("Jesús Lastra (https://opengameart.org/users/jalastram)", "https://opengameart.org/content/sound-effects-sfx015"));
+            stackPanel.Widgets.Add(creditLabel("https://opengameart.org/users/ogrebane", "https://opengameart.org/content/monster-sound-pack-volume-1"));
+
+            window.Content = stackPanel;
+
+            return window;
+
+            Widget creditLabel(string author, params string[] assetLinks)
+            {
+                Label label = new Label
+                {
+                    Text = $"{author} : {string.Join(", ", assetLinks)}",
+                    Wrap = true,
+                };
+                return label;
+            }
+        }
+
         private static Dialog OptionsWindow()
         {
             Dialog window = new Dialog
@@ -363,7 +562,7 @@ namespace Pandorai.UI
                 //IsDraggable = true,
                 Width = 500,
                 Height = 300,
-                Opacity = 1f
+                Opacity = 1f,
             };
 
             window.Closed += (s, e) =>
@@ -380,7 +579,7 @@ namespace Pandorai.UI
 
             Grid windowPanel = new Grid
             {
-                Background = new SolidBrush(Color.Gray)
+                Background = new SolidBrush(Color.Black),
             };
 
             windowPanel.ColumnsProportions.Add(new Proportion());
@@ -399,41 +598,77 @@ namespace Pandorai.UI
                 Text = "Resolution:"
             };
 
-            ComboBox resolutionList = new ComboBox
+            HorizontalStackPanel resolutionInputPanel = new HorizontalStackPanel
             {
+                Spacing = 5,
             };
-            resolutionList.Items.Add(new ListItem("1440x900", null, new Point(1440, 900)));
-            resolutionList.Items.Add(new ListItem("800x600", null, new Point(800, 600)));
 
-			foreach (var item in resolutionList.Items)
-			{
-                if((Point)item.Tag == Options.OldResolution)
-				{
-                    resolutionList.SelectedItem = item;
-                    break;
-				}
-			}
+            TextBox resolutionWidthTextBox = new TextBox
+            {
+                Text = "800",
+                Width = 50,
+            };
+
+            Label resolutionDividerLabel = new Label
+            {
+                Text = "x",
+            };
+
+            TextBox resolutionHeightTextBox = new TextBox
+            {
+                Text = "600",
+                Width = 50,
+            };
 
             TextButton applyResolutionButton = new TextButton
             {
                 Text = "Apply"
             };
+            
+            resolutionInputPanel.Widgets.Add(resolutionWidthTextBox);
+            resolutionInputPanel.Widgets.Add(resolutionDividerLabel);
+            resolutionInputPanel.Widgets.Add(resolutionHeightTextBox);
+            resolutionInputPanel.Widgets.Add(applyResolutionButton);
 
             applyResolutionButton.Click += (s, e) =>
             {
-                _game.Options.ChangeResolution((Point)resolutionList.SelectedItem.Tag, window);
+                int resolutionWidth = int.Parse(resolutionWidthTextBox.Text);
+                int resolutionHeight = int.Parse(resolutionHeightTextBox.Text);
+                _game.Options.ChangeResolution(new Point(resolutionWidth, resolutionHeight), window);
             };
 
-            HorizontalSlider zoomSlider = new HorizontalSlider
+            Label musicVolumeLabel = new Label
             {
-                Minimum = 8,
-                Maximum = 128,
-                Value = _game.Options.TileSize,
+                Text = "Music volume:",
             };
 
-            zoomSlider.ValueChanged += (s, a) =>
+            HorizontalSlider musicVolumeSlider = new HorizontalSlider
             {
-                _game.Options.TileSize = (int)a.NewValue;
+                Minimum = 0,
+                Maximum = 100,
+                Value = SoundManager.MusicVolume,
+            };
+
+            musicVolumeSlider.ValueChanged += (s, a) =>
+            {
+                SoundManager.MusicVolume = (int)a.NewValue;
+            };
+        
+            Label soundsVolumeLabel = new Label
+            {
+                Text = "Sounds volume:",
+            };
+
+            HorizontalSlider soundsVolumeSlider = new HorizontalSlider
+            {
+                Minimum = 0,
+                Maximum = 100,
+                Value = SoundManager.SoundsVolume,
+            };
+
+            soundsVolumeSlider.ValueChanged += (s, a) =>
+            {
+                SoundManager.SoundsVolume = (int)a.NewValue;
             };
 
             VerticalStackPanel verticalStackPanel2 = new VerticalStackPanel
@@ -460,9 +695,11 @@ namespace Pandorai.UI
             };
 
             verticalStackPanel1.Widgets.Add(resolutionChoice);
-            verticalStackPanel1.Widgets.Add(resolutionList);
-            verticalStackPanel1.Widgets.Add(applyResolutionButton);
-            verticalStackPanel1.Widgets.Add(zoomSlider);
+            verticalStackPanel1.Widgets.Add(resolutionInputPanel);
+            verticalStackPanel1.Widgets.Add(musicVolumeLabel);
+            verticalStackPanel1.Widgets.Add(musicVolumeSlider);
+            verticalStackPanel1.Widgets.Add(soundsVolumeLabel);
+            verticalStackPanel1.Widgets.Add(soundsVolumeSlider);
 
             verticalStackPanel2.Widgets.Add(fullScreenLabel);
             verticalStackPanel2.Widgets.Add(fullScreenCheckbox);
