@@ -494,4 +494,58 @@
 			<Footstep></Footstep>
 		</sounds>		
 	</creature>
+	<creature id="Hobbit" texture="0" maxHP="100" health="100" strength="13" class="Human" corpseTexture="68" speed="30" level="1">
+		<modifiers>
+			<EnemyClasses>
+				<class>Monster</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>4</index>
+				<index>5</index>
+				<index>6</index>
+				<index>7</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>0</index>
+				<index>1</index>
+				<index>2</index>
+				<index>3</index>
+			</IdleTextureIndices>
+			<Inventory>
+			</Inventory>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>6</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Diagonal</Movement>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>20</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
+			</behaviour>
+		</behaviours>
+		<sounds>
+			<Attack>swing</Attack>
+			<Attack>swing2</Attack>
+			<Attack>swing3</Attack>
+			<Hurt>humanYell1</Hurt>
+			<Hurt>humanYell2</Hurt>
+			<Hurt>humanYell3</Hurt>
+			<Hurt>humanYell4</Hurt>
+			<Hurt>humanYell5</Hurt>
+			<Death>humanDeath1</Death>
+			<Aggro></Aggro>
+			<Ambient></Ambient>
+			<Footstep>stepdirt_1</Footstep>
+			<Footstep>stepdirt_2</Footstep>
+			<Footstep>stepdirt_3</Footstep>
+			<Footstep>stepdirt_4</Footstep>
+		</sounds>		
+	</creature>
 </creatures>
