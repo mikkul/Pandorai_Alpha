@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:creatureTilesheet.png
 
+#begin DayNightCycleMask.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:DayNightCycleMask.png
+
 #begin File.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -175,6 +187,12 @@
 /processor:EffectProcessor
 /processorParam:DebugMode=Auto
 /build:Shaders/combiningShader.fx
+
+#begin Shaders/dayNightEffect.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/dayNightEffect.fx
 
 #begin Shaders/distortionEffect.fx
 /importer:EffectImporter
