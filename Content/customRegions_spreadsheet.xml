@@ -8,4 +8,5 @@
 	<region name="AltarRoom" number="1" />
 	<region name="TeleporterRing" number="1" />
 	<region name="FinalRoom" number="1" />
+	<region name="Crypt" number="1" />
 </map>

@@ -439,7 +439,7 @@
 			</Inventory>
 		</modifiers>
 		<behaviours>
-			<behaviour name="NormalVision">
+			<behaviour name="AllSeeingVision">
 				<RangeLimit>6</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
@@ -490,6 +490,93 @@
 			<Hurt></Hurt>
 			<Death></Death>
 			<Aggro></Aggro>
+			<Ambient></Ambient>
+			<Footstep></Footstep>
+		</sounds>		
+	</creature>
+	<creature id="Zombie" texture="13" maxHP="210" health="210" strength="68" class="Monster" corpseTexture="68" speed="17" level="4">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>5</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Diagonal</Movement>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>3</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
+			</behaviour>
+		</behaviours>
+		<sounds>
+			<Attack>beads</Attack>
+			<Hurt>crack10</Hurt>
+			<Death>crack01</Death>
+			<Death>crack03</Death>
+			<Death>crack04</Death>
+			<Aggro>freeze0</Aggro>
+			<Ambient></Ambient>
+			<Footstep></Footstep>
+		</sounds>		
+	</creature>
+	<creature id="Lich" texture="13" maxHP="92" health="92" strength="20" mana="10000" maxMana="10000" class="Monster" corpseTexture="68" speed="20" level="6" fireResistance="50" iceResistance="50">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+				<class>Temple</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+				<index>13</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>6</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>1</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
+			</behaviour>
+		</behaviours>
+		<sounds>
+			<Attack>beads</Attack>
+			<Hurt>crack10</Hurt>
+			<Death>crack01</Death>
+			<Death>crack03</Death>
+			<Death>crack04</Death>
+			<Aggro>freeze0</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
 		</sounds>		
