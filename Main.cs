@@ -208,6 +208,10 @@ namespace Pandorai
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            squareTexture = Content.Load<Texture2D>("fullSquareTexture");
+            LogoTexture = Content.Load<Texture2D>("logo");
+            MainMenuImage = Content.Load<Texture2D>("mainMenuImage");
+
             MyraEnvironment.Game = this;
             desktop = new Desktop();
             var rootPanel = GUI.LoadGUI(this, desktop);
@@ -259,8 +263,6 @@ namespace Pandorai
                     loadingTextLabel.Text += ".";
                 }
             };
-
-            squareTexture = Content.Load<Texture2D>("fullSquareTexture");
 
             _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false, this);
 
