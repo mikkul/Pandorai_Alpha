@@ -301,7 +301,7 @@ namespace Pandorai
             
             dayNightColorMaskTexture = Content.Load<Texture2D>("DayNightCycleMask");
             dayNightEffect = Content.Load<Effect>("Shaders/dayNightEffect");
-            dayNightEffect.Parameters["colorMask"].SetValue(dayNightColorMaskTexture);
+            LightingManager.LightingMaskEffect.Parameters["dayNightColorMask"].SetValue(dayNightColorMaskTexture);
 
             LightingManager.RefreshRenderTarget(GraphicsDevice, Camera);
 
@@ -365,7 +365,7 @@ namespace Pandorai
                 {
                     _dayNightValue = 0f;
                 }
-                dayNightEffect.Parameters["time"].SetValue(_dayNightValue);
+                LightingManager.LightingMaskEffect.Parameters["timeOfDay"].SetValue(_dayNightValue);
                 //
             }
 
@@ -388,16 +388,24 @@ namespace Pandorai
                 GraphicsDevice.SetRenderTarget(ViewportTarget);
 
                 if (Player.IsDead)
+                {
                     _spriteBatch.Begin(effect: spiritWorldEffectBackground);
+                }
                 else
+                {
                     _spriteBatch.Begin();
+                }
                 _spriteBatch.Draw(backgroundRender, ViewportTarget.Bounds, Color.White);
                 _spriteBatch.End();
 
                 if (Player.IsDead)
+                {
                     _spriteBatch.Begin(effect: spiritWorldEffectForeground);
+                }
                 else
+                {
                     _spriteBatch.Begin();
+                }
                 _spriteBatch.Draw(foregroundRender, ViewportTarget.Bounds, Color.White);
                 Sidekick.Draw(_spriteBatch);
                 _spriteBatch.End();
@@ -412,15 +420,11 @@ namespace Pandorai
                 {
                     _viewportRenderer.ApplyEffect(distortionEffect);
                 }
-                else
-                {
-                    _viewportRenderer.ApplyEffect(dayNightEffect);
-                }
 
                 var lightingMask = LightingManager.CreateLightingMask(GraphicsDevice, _spriteBatch, Camera);
                 LightingManager.LightingMaskEffect.Parameters["intensityMask"].SetValue(lightingMask.IntensityMask);
                 LightingManager.LightingMaskEffect.Parameters["colorMask"].SetValue(lightingMask.ColorMask);
-                LightingManager.LightingMaskEffect.Parameters["ambientLight"].SetValue(LightingManager.AmbientLight);
+                //LightingManager.LightingMaskEffect.Parameters["ambientLight"].SetValue(LightingManager.AmbientLight);
                 distortionEffect.Parameters["distortionScale"].SetValue(0.1f);
                 distortionEffect.Parameters["animationOffset"].SetValue((float)gameTime.TotalGameTime.TotalSeconds);
 
