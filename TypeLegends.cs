@@ -27,6 +27,7 @@ namespace Pandorai
 			{ "ModifyMana", typeof(ModifyMana) },
 			{ "Blink", typeof(Blink) },
 			{ "Slingshot", typeof(Slingshot) },
+			{ "SummonCreature", typeof(SummonCreature) },
 		};
 
         
