@@ -50,5 +50,12 @@
 			<tile color="#ff0000" type="floor" />
 			<tile color="#ffffff" type="empty" />
 		</tileLegend>
-	</sample>	
+	</sample>
+	<sample name="spaceBetweenSample" isPeriodic="true">
+		<tileLegend>
+			<tile color="#ffffff" type="empty" />
+			<tile color="#000000" type="empty" />
+			<tile color="#00ff00" type="empty" />
+		</tileLegend>
+	</sample>
 </samples>

@@ -275,14 +275,14 @@ namespace Pandorai.Tilemaps
 
 					if (isWall)
 					{
-						bool topLeftNeighbour = x - 1 >= 0 && y - 1 >= 0 ? Tiles[x - 1, y - 1].BaseType == 1 : false;
-						bool topNeighbour = y - 1 >= 0 ? Tiles[x, y - 1].BaseType == 1 : false;
-						bool topRightNeighbour = x + 1 < Tiles.GetLength(0) && y - 1 >= 0 ? Tiles[x + 1, y - 1].BaseType == 1 : false;
-						bool leftNeighbour = x - 1 >= 0 ? Tiles[x - 1, y].BaseType == 1 : false;
-						bool rightNeighbour = x + 1 < Tiles.GetLength(0) ? Tiles[x + 1, y].BaseType == 1 : false;
-						bool bottomLeftNeighbour = x - 1 >= 0 && y + 1 < Tiles.GetLength(1) ? Tiles[x - 1, y + 1].BaseType == 1 : false;
-						bool bottomNeighbour = y + 1 < Tiles.GetLength(1) ? Tiles[x, y + 1].BaseType == 1 : false;
-						bool bottomRightNeighbour = x + 1 < Tiles.GetLength(0) && y + 1 < Tiles.GetLength(1) ? Tiles[x + 1, y + 1].BaseType == 1 : false;
+						bool topLeftNeighbour = x - 1 >= 0 && y - 1 >= 0 ? Tiles[x - 1, y - 1].BaseType == 1 && Tiles[x - 1, y - 1].BaseColor == Tiles[x, y].BaseColor : false;
+						bool topNeighbour = y - 1 >= 0 ? Tiles[x, y - 1].BaseType == 1 && Tiles[x, y - 1].BaseColor == Tiles[x, y].BaseColor : false;
+						bool topRightNeighbour = x + 1 < Tiles.GetLength(0) && y - 1 >= 0 ? Tiles[x + 1, y - 1].BaseType == 1 && Tiles[x + 1, y - 1].BaseColor == Tiles[x, y].BaseColor : false;
+						bool leftNeighbour = x - 1 >= 0 ? Tiles[x - 1, y].BaseType == 1 && Tiles[x - 1, y].BaseColor == Tiles[x, y].BaseColor : false;
+						bool rightNeighbour = x + 1 < Tiles.GetLength(0) ? Tiles[x + 1, y].BaseType == 1 && Tiles[x + 1, y].BaseColor == Tiles[x, y].BaseColor : false;
+						bool bottomLeftNeighbour = x - 1 >= 0 && y + 1 < Tiles.GetLength(1) ? Tiles[x - 1, y + 1].BaseType == 1 && Tiles[x - 1, y + 1].BaseColor == Tiles[x, y].BaseColor : false;
+						bool bottomNeighbour = y + 1 < Tiles.GetLength(1) ? Tiles[x, y + 1].BaseType == 1 && Tiles[x, y + 1].BaseColor == Tiles[x, y].BaseColor : false;
+						bool bottomRightNeighbour = x + 1 < Tiles.GetLength(0) && y + 1 < Tiles.GetLength(1) ? Tiles[x + 1, y + 1].BaseType == 1 && Tiles[x + 1, y + 1].BaseColor == Tiles[x, y].BaseColor : false;
 
 						bool[] boolFlags = new bool[] { topLeftNeighbour, topNeighbour, topRightNeighbour, leftNeighbour, rightNeighbour, bottomLeftNeighbour, bottomNeighbour, bottomRightNeighbour };
 						BitArray bitArray = new BitArray(boolFlags);

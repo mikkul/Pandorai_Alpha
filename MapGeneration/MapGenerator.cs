@@ -30,6 +30,8 @@ namespace Pandorai.MapGeneration
 
 		private Color _freeSpaceFloorColor = Helper.GetColorFromHex("#966c4b");
 
+		private List<Point> _freeSpaceTiles = new List<Point>();
+
 		private Dictionary<string, int> _maxAllowedItemCount;
 
 		private Creature _trapCreature;
@@ -80,9 +82,11 @@ namespace Pandorai.MapGeneration
 
             PlaceRegions(filledSpace, usedTiles, createdRegions);
 
-            FillUnusedSpace(usedTiles);
+            MakeRooms(usedTiles);
 
 			ProcessRooms();
+
+			FillSpaceBetween();
 
 			//DoSomethingAboutUnreachableSpace(); nvm it makes things even worse
 
@@ -92,6 +96,39 @@ namespace Pandorai.MapGeneration
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
             return _map;
+        }
+
+        private void FillSpaceBetween()
+        {
+            AreaDataType[,] constraint = new AreaDataType[WorldOptions.Width, WorldOptions.Height];
+            constraint.Populate(AreaDataType.Locked);
+            foreach (var point in _freeSpaceTiles)
+			{
+				constraint[point.X, point.Y] = AreaDataType.Free;
+			}
+
+            var sample = WFCSampleLoader.Samples["spaceBetweenSample"];
+            var output = WFCGenerator.GetOutput(sample, sample.IsPeriodic, false, WorldOptions.Width, WorldOptions.Height, constraint);
+
+            foreach (var point in _freeSpaceTiles)
+			{
+				Color pixelColor = System.Drawing.Color.FromArgb(output[point.X, point.Y]).ToXnaColor();
+
+				if (pixelColor == Color.Black) // stones
+				{
+					_map[point.X, point.Y] = new Tile(1, 9, true)
+					{
+						BaseColor = Color.Gray,
+					};
+				}
+				else if (pixelColor == new Color(0, 255, 0)) // trees
+				{
+					_map[point.X, point.Y] = new Tile(1, 9, true)
+					{
+						BaseColor = new Color(0, 190, 0),
+					};
+				}
+			}
         }
 
         private void DoSomethingAboutUnreachableSpace()
@@ -267,6 +304,7 @@ namespace Pandorai.MapGeneration
 			{
 				_map[point.X, point.Y].BaseColor = _freeSpaceFloorColor;
 			}
+			_freeSpaceTiles = biggestRoom.Area;
 
 			// remove rooms that are too small to be considered rooms
 			List<Region> roomsToBeRemoved = new List<Region>();
@@ -671,7 +709,7 @@ namespace Pandorai.MapGeneration
 			return closedList;
 		}
 
-        private void FillUnusedSpace(List<Point> usedTiles)
+        private void MakeRooms(List<Point> usedTiles)
         {
             AreaDataType[,] constraint = new AreaDataType[WorldOptions.Width, WorldOptions.Height];
             constraint.Populate(AreaDataType.Free);

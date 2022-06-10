@@ -41,6 +41,7 @@ namespace Pandorai
 			{ "Dialogue", typeof(Dialogue) },
 			{ "Teleporter", typeof(Teleporter) },
 			{ "BookStand", typeof(BookStand) },
+			{ "CreatureSpawnPoint", typeof(CreatureSpawnPoint) },
 		};
 
         public static Dictionary<string, Type> CreatureBehaviours = new Dictionary<string, Type>
