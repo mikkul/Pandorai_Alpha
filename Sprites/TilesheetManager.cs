@@ -142,6 +142,9 @@ namespace Pandorai.Sprites
 
 			AddMapSprite(448, 704, 64, 64, 0, 0); // slingshot 96
 			AddMapSprite(512, 704, 64, 64, 0, 0); // stone 97
+
+			AddMapSprite(0, 768, 64, 64, 0, 0); // spikes 99
+			AddMapSprite(0, 768, 64, 64, 0, 0); // spikes 99
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

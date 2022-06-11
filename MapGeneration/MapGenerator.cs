@@ -555,13 +555,12 @@ namespace Pandorai.MapGeneration
 
 			// place traps
 			{
-				bool doPlace = rng.NextFloat() < 0.5f;
+				bool doPlace = rng.NextFloat() < 0.6f;
 				if(doPlace)
 				{
 					var position = GetRandomUntakenPosition(room.Area);
 					_map[position.X, position.Y].Modifier |= TileModifier.Trap;
-					_map[position.X, position.Y].BaseColor = _map[position.X, position.Y].BaseColor.Brighten(-0.2f);
-					_map[position.X, position.Y].AddTexture(8);
+					_map[position.X, position.Y].AddTexture(99);
 					_map[position.X, position.Y].CreatureCame += c =>
 					{
 						c.OnGotHit(_trapCreature);
