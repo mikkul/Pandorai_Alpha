@@ -309,8 +309,7 @@
 			</behaviour>
 			<behaviour name="ParalelPosition">
 			</behaviour>
-			<behaviour name="SpellCaster">
-				<Priority>Offensive</Priority>
+			<behaviour name="ProjectileSpellCaster">
 			</behaviour>
 			<behaviour name="RandomWalk">
 				<MaxDistanceFromHome>0</MaxDistanceFromHome>
@@ -358,8 +357,7 @@
 			<behaviour name="AggroOnDistance">
 				<Range>5</Range>
 			</behaviour>
-			<behaviour name="SpellCaster">
-				<Priority>Offensive</Priority>
+			<behaviour name="ProjectileSpellCaster">
 			</behaviour>
 			<behaviour name="ChaseTarget">
 				<Movement>Orthogonal</Movement>
@@ -403,7 +401,7 @@
 			<behaviour name="Talkative">
 				<DialogueName>elderDial</DialogueName>
 			</behaviour>
-			<behaviour name="SpellCaster">
+			<behaviour name="ProjectileSpellCaster">
 				<Priority>Offensive</Priority>
 			</behaviour>
 		</behaviours>
@@ -539,7 +537,7 @@
 			<Footstep></Footstep>
 		</sounds>		
 	</creature>
-	<creature id="Lich" texture="18" maxHP="92" health="92" strength="20" mana="10000" maxMana="10000" class="Monster" corpseTexture="68" speed="20" level="6" fireResistance="50" iceResistance="50">
+	<creature id="Lich" texture="18" maxHP="92" health="92" strength="20" mana="10000" maxMana="10000" class="Monster" corpseTexture="68" speed="20" level="9" fireResistance="50" iceResistance="50">
 		<modifiers>
 			<EnemyClasses>
 				<class>Human</class>
@@ -571,8 +569,10 @@
 			</behaviour>
 			<behaviour name="ParalelPosition">
 			</behaviour>
-			<behaviour name="SpellCaster">
-				<Priority>Summon</Priority>
+			<behaviour name="SummonSpellCaster">
+				<Frequency>19</Frequency>
+			</behaviour>
+			<behaviour name="ProjectileSpellCaster">
 			</behaviour>
 			<behaviour name="RandomWalk">
 				<MaxDistanceFromHome>1</MaxDistanceFromHome>
