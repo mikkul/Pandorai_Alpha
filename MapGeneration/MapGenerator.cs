@@ -498,6 +498,22 @@ namespace Pandorai.MapGeneration
 				var barrel = PlaceStructure("Barrel", position);
 				var barrelContainer = barrel.GetBehaviour<Container>();
 
+				// some chance for a barrel to be a trap
+				bool isTrap = rng.NextFloat() < 0.34f;
+				if(isTrap)
+				{
+					string creatureName = rng.NextFloat() < 0.5f ? "Spider" : "Rat";
+					int creatureCount = creatureName == "Spider" ? 1 : rng.Next(1, 3);
+					var trap = new CreatureSpawnTrap();
+					trap.Creatures = new Dictionary<string, int>
+					{
+						{ creatureName, creatureCount }
+					};
+					trap.Structure = barrel;
+					trap.Bind();
+					barrel.Behaviours.Add(trap);
+				}
+
 				var itemSet1 = new[] { "", "HealthPotion", "ManaPotion" };
 				var weightsSet1 = new[] { 9, 3, 1 };
 				var chosenItems1 = GetWeightedChoices(itemSet1, weightsSet1, 1);
