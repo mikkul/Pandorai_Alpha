@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.MapGeneration;
@@ -35,6 +36,15 @@ namespace Pandorai.Effects
             }
 
 			Creature creatureInstance = CreatureLoader.GetCreature(CreatureName);
+            // make it friendly to the summoner and hostile against everyone else
+            creatureInstance.Class = usingCreature.Class;
+            creatureInstance.EnemyClasses.Clear();
+            creatureInstance.EnemyClasses.AddRange(Enum.GetValues<CreatureClass>());
+            creatureInstance.EnemyClasses.Remove(usingCreature.Class);
+
+            // set the level to 0 so it doesn't give any experience
+            creatureInstance.Stats.Level = 0;
+
 			creatureInstance.MapIndex = location;
 			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * Main.Game.Options.TileSize;
 			var tile = Main.Game.Map.Tiles[location.X, location.Y];
