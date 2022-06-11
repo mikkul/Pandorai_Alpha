@@ -9,6 +9,9 @@
 		<creature name="Zombie" number="4-5" />
 		<creature name="Lich" number="1" />
 
+		<structure name="WarriorTomb" number="7-8">
+		</structure>
+
 		<choice>
 			<item name="MediumEndurancePotion" number="1"></item>
 			<item name="MediumEnergyPotion" number="1"></item>
