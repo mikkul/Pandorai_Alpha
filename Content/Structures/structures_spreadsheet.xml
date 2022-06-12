@@ -92,4 +92,13 @@
 		<behaviour name="Teleporter">
 		</behaviour>
 	</structure>
+	<structure id="TrapLever" texture="100">
+		<behaviour name="TrapLever">
+			<ActivatedTexture>101</ActivatedTexture>
+		</behaviour>
+	</structure>
+	<structure id="Trap" texture="102">
+		<behaviour name="Trap">
+		</behaviour>
+	</structure>
 </structures>

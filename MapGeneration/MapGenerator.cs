@@ -32,14 +32,16 @@ namespace Pandorai.MapGeneration
 
 		private Dictionary<string, int> _maxAllowedItemCount;
 
-		private Creature _trapCreature;
+		private Creature _spikesCreature;
+
+		private int _trapId;
 
 		public MapGenerator()
 		{
-			_trapCreature = new Creature(Main.Game);
-			_trapCreature.Id = "Trap";
-			_trapCreature.Stats = new CreatureStats(_trapCreature);
-			_trapCreature.Stats.Strength = 45;
+			_spikesCreature = new Creature(Main.Game);
+			_spikesCreature.Id = "Spikes";
+			_spikesCreature.Stats = new CreatureStats(_spikesCreature);
+			_spikesCreature.Stats.Strength = 45;
 		}
 
 		public async Task<Tile[,]> GenerateMapAsync(Main game, string regionSpreadsheet)
@@ -553,7 +555,7 @@ namespace Pandorai.MapGeneration
 				}
 			}
 
-			// place traps
+			// place spikes
 			{
 				bool doPlace = rng.NextFloat() < 0.6f;
 				if(doPlace)
@@ -563,10 +565,29 @@ namespace Pandorai.MapGeneration
 					_map[position.X, position.Y].AddTexture(99);
 					_map[position.X, position.Y].CreatureCame += c =>
 					{
-						c.OnGotHit(_trapCreature);
+						c.OnGotHit(_spikesCreature);
 					};
 				}
-			}				
+			}
+
+			// place traps controlled by a lever
+			{
+				bool doPlace = rng.NextFloat() < 0.4f;
+				if(doPlace)
+				{
+					var leverPosition = GetRandomUntakenPosition(room.InteriorLayers[0]);
+					var trapPosition = GetRandomUntakenPosition(room.Area);
+
+					var lever = PlaceStructure("TrapLever", leverPosition);
+					var trap = PlaceStructure("Trap", trapPosition);
+					_map[trapPosition.X, trapPosition.Y].CollisionFlag = false;
+
+					_trapId++;
+
+					lever.GetBehaviour<TrapLever>().Id = _trapId;
+					trap.GetBehaviour<Trap>().Id = _trapId;
+				}
+			}
 		}
 
 		private List<string> GetWeightedChoices(string[] itemSet, int[] weightsSet, int numberOfItems = 1)

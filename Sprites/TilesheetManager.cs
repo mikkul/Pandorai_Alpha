@@ -145,6 +145,12 @@ namespace Pandorai.Sprites
 
 			AddMapSprite(0, 768, 64, 64, 0, 0); // spikes 99
 			AddMapSprite(0, 768, 64, 64, 0, 0); // spikes 99
+
+			AddMapSprite(64, 768, 64, 64, 0, 0); // trap lever off 100
+			AddMapSprite(128, 768, 64, 64, 0, 0); // trap lever on 101
+			AddMapSprite(192, 768, 64, 64, 0, 0); // trap 102
+
+			AddMapSprite(128, 0, 64, 64, 0, 0); // invisible 103
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)
