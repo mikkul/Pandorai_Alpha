@@ -555,38 +555,31 @@ namespace Pandorai.MapGeneration
 				}
 			}
 
-			// place spikes
+			bool placeSpikeOrTrap = rng.NextFloat() < 0.8f;
+			bool spikeOrTrap = rng.NextFloat() < 0.5f;
+			if(spikeOrTrap) // place spikes
 			{
-				bool doPlace = rng.NextFloat() < 0.6f;
-				if(doPlace)
+				var position = GetRandomUntakenPosition(room.Area);
+				_map[position.X, position.Y].Modifier |= TileModifier.Trap;
+				_map[position.X, position.Y].AddTexture(99);
+				_map[position.X, position.Y].CreatureCame += c =>
 				{
-					var position = GetRandomUntakenPosition(room.Area);
-					_map[position.X, position.Y].Modifier |= TileModifier.Trap;
-					_map[position.X, position.Y].AddTexture(99);
-					_map[position.X, position.Y].CreatureCame += c =>
-					{
-						c.OnGotHit(_spikesCreature);
-					};
-				}
+					c.OnGotHit(_spikesCreature);
+				};
 			}
-
-			// place traps controlled by a lever
+			else // place a trap controlled by a lever
 			{
-				bool doPlace = rng.NextFloat() < 0.4f;
-				if(doPlace)
-				{
-					var leverPosition = GetRandomUntakenPosition(room.InteriorLayers[0]);
-					var trapPosition = GetRandomUntakenPosition(room.Area);
+				var leverPosition = GetRandomUntakenPosition(room.InteriorLayers[0]);
+				var trapPosition = GetRandomUntakenPosition(room.InteriorLayers[^1]);
 
-					var lever = PlaceStructure("TrapLever", leverPosition);
-					var trap = PlaceStructure("Trap", trapPosition);
-					_map[trapPosition.X, trapPosition.Y].CollisionFlag = false;
+				var lever = PlaceStructure("TrapLever", leverPosition);
+				var trap = PlaceStructure("Trap", trapPosition);
+				_map[trapPosition.X, trapPosition.Y].CollisionFlag = false;
 
-					_trapId++;
+				_trapId++;
 
-					lever.GetBehaviour<TrapLever>().Id = _trapId;
-					trap.GetBehaviour<Trap>().Id = _trapId;
-				}
+				lever.GetBehaviour<TrapLever>().Id = _trapId;
+				trap.GetBehaviour<Trap>().Id = _trapId;
 			}
 		}
 

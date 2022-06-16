@@ -1,5 +1,5 @@
-using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
+using Pandorai.Utility;
 
 namespace Pandorai.Structures.Behaviours
 {
@@ -16,8 +16,7 @@ namespace Pandorai.Structures.Behaviours
             }
             Activated = true;
 
-            Structure.Texture = 0;
-            Structure.ColorTint = Color.Black;
+            Structure.Tile.Tile.BaseColor = Structure.Tile.Tile.BaseColor.Brighten(-0.4f);
         }
 
 		public override void Bind()
