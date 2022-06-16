@@ -17,6 +17,7 @@ namespace Pandorai.Structures.Behaviours
             Activated = true;
 
             Structure.Tile.Tile.BaseColor = Structure.Tile.Tile.BaseColor.Brighten(-0.4f);
+            Structure.Tile.Tile.SetTexture(103);
         }
 
 		public override void Bind()

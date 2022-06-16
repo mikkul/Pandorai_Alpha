@@ -1042,7 +1042,36 @@ namespace Pandorai.MapGeneration
 					tileData[rightWallPoint.X, rightWallPoint.Y].CollisionFlag = true;
 					tileData[rightWallPoint.X, rightWallPoint.Y].BaseColor = region.BorderColor;
 				}
-			}			
+			}
+
+			// correct traps and trap levers Ids
+			List<Trap> traps = new();
+			List<TrapLever> trapLevers = new();
+			for (int x = 0; x < tileData.GetLength(0); x++)
+			{
+				for (int y = 0; y < tileData.GetLength(1); y++)
+				{
+					var trap = tileData[x, y].MapObject?.Structure?.GetBehaviour<Trap>();
+					if(trap != null)
+					{
+						tileData[x, y].CollisionFlag = false;
+						traps.Add(trap);
+						continue;
+					}
+					var trapLever = tileData[x, y].MapObject?.Structure?.GetBehaviour<TrapLever>();
+					if(trapLever != null)
+					{
+						trapLevers.Add(trapLever);
+						continue;
+					}
+				}
+			}
+			for (int i = 0; i < traps.Count; i++)
+			{
+				int id = region.Name.GetHashCode() + i;
+				traps[i].Id = id;
+				trapLevers[i].Id = id;
+			}
 
 			//
 			info.TileInfo = tileData;

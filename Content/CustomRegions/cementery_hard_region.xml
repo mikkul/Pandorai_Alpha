@@ -29,6 +29,14 @@
 				<layer where="border" />
 			</location>
 		</structure>
+
+		<structure name="Trap" number="3">
+		</structure>
+		<structure name="TrapLever" number="3">
+			<location>
+				<layer where="border" />
+			</location>
+		</structure>
 		
 		<structure name="YellowDoor" number="12-16">
 		</structure>

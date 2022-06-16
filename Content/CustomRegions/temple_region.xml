@@ -20,6 +20,14 @@
 			</location>
 		</structure>
 
+		<structure name="Trap" number="1">
+		</structure>
+		<structure name="TrapLever" number="1">
+			<location>
+				<layer where="border" />
+			</location>
+		</structure>
+
 		<entrance name="MainEntrance" number="2">
 			<location>
 				<proximity to="Chest" distance="farthest" />
