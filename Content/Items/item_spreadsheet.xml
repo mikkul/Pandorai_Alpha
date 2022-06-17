@@ -155,7 +155,7 @@
 	</item>
 	<item id="Stone" texture="97" consumable="False" name="Stone" tooltipColor="white" description="Can be used as an ammunition" type="Other">
 	</item>
-	<item id="SummonSkeletonRune" texture="98" consumable="False" name="Summon Skeleton Rune" tooltipColor="purple" description="Allows user to summon a skeleton" type="Spell/Summon" requiredMana="20">
+	<item id="SummonSkeletonRune" texture="104" consumable="False" name="Summon Skeleton Rune" tooltipColor="purple" description="Allows user to summon a skeleton" type="Spell/Summon" requiredMana="20">
 		<effect name="SummonCreature">
 			<CreatureName>Skeleton</CreatureName>
 		</effect>
