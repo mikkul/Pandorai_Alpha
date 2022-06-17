@@ -143,8 +143,8 @@ namespace Pandorai.Sprites
 			AddMapSprite(448, 704, 64, 64, 0, 0); // slingshot 96
 			AddMapSprite(512, 704, 64, 64, 0, 0); // stone 97
 
-			AddMapSprite(512, 704, 64, 64, 0, 0); // lantern 98
-			AddMapSprite(512, 704, 64, 64, 0, 0); // campfire 99
+			AddMapSprite(256, 768, 64, 64, 0, 0); // lantern 98
+			AddMapSprite(320, 768, 64, 64, 0, 0); // campfire 99
 
 			AddMapSprite(64, 768, 64, 64, 0, 0); // trap lever off 100
 			AddMapSprite(128, 768, 64, 64, 0, 0); // trap lever on 101

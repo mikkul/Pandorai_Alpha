@@ -131,6 +131,17 @@ namespace Pandorai.MapGeneration
 					};
 				}
 			}
+
+			for (int i = 0; i < 10; i++)
+			{
+				var randomPoint = GetRandomUntakenPosition(_freeSpaceTiles);
+				PlaceStructure("Lantern", randomPoint);
+			}
+			for (int i = 0; i < 15; i++)
+			{
+				var randomPoint = GetRandomUntakenPosition(_freeSpaceTiles);
+				PlaceStructure("Campfire", randomPoint);
+			}
         }
 
         private void DoSomethingAboutUnreachableSpace()

@@ -30,6 +30,8 @@
 			<item name="MediumStrengthPotion" number="1"></item>
 		</choice>
 
+		<structure name="Campfire" number="3-5"></structure>
+
 		<creature name="Spider" number="5">
 			<location>
 			</location>
