@@ -111,10 +111,24 @@
 		</behaviour>
 	</structure>
 	<structure id="Campfire" texture="99">
+		<behaviour name="Campfire">
+			<Damage>10</Damage>
+		</behaviour>
 		<behaviour name="LightEmitter">
 			<Color>#ffbb00</Color>
 			<Radius>275</Radius>
 			<Intensity>0.40</Intensity>
+		</behaviour>
+		<behaviour name="ParticleEmitter">
+			<Type>Fire</Type>
+			<Color>#ffbb00</Color>
+			<NumberOfParticles>100</NumberOfParticles>
+			<ParticleLife>1500</ParticleLife>
+			<ParticleSpeed>35</ParticleSpeed>
+			<ParticleSize>8</ParticleSize>
+			<ParticleRegenTime>500</ParticleRegenTime>
+			<FireWidth>11</FireWidth>
+			<OffsetY>-10</OffsetY>
 		</behaviour>
 	</structure>
 	<structure id="CreatureSpawnPoint" texture="0">

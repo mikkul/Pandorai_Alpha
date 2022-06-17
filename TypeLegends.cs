@@ -45,6 +45,8 @@ namespace Pandorai
 			{ "TrapLever", typeof(TrapLever) },
 			{ "Trap", typeof(Trap) },
 			{ "CreatureSpawnPoint", typeof(CreatureSpawnPoint) },
+			{ "ParticleEmitter", typeof(ParticleEmitter) },
+			{ "Campfire", typeof(Campfire) },
 		};
 
         public static Dictionary<string, Type> CreatureBehaviours = new Dictionary<string, Type>
