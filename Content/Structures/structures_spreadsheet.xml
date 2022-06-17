@@ -74,6 +74,8 @@
 		</behaviour>
 	</structure>
 	<structure id="WarriorTomb" texture="67">
+	</structure>
+	<structure id="WarriorTombInteractive" texture="67">
 		<behaviour name="Dialogue">
 			<DialogueName>warriorTombInteraction</DialogueName>
 		</behaviour>

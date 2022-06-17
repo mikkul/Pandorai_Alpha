@@ -17,6 +17,14 @@ namespace Pandorai.Effects
 			}
 		}
 
+		protected virtual void DisplayMessage(Creature usingCreature, string message)
+		{
+			if(usingCreature.IsPossessedCreature())
+			{
+				MessageLog.DisplayMessage(message);
+			}
+		}
+
 		protected abstract string GetMessage();
 	}
 }

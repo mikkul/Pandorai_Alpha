@@ -1,0 +1,25 @@
+<customRegion name="Crypt" floorColor="#4988b8" borderColor="#347bc2" musicTheme="Forest_dark_theme" sample="wfcSample2">
+	<location>
+	</location>
+	<dimensions>
+		<rectangle width="26-32" height="12-16" />
+	</dimensions>
+	<content>
+
+		<creature name="Zombie" number="4-5" />
+		<creature name="Lich" number="1" />
+
+		<structure name="WarriorTomb" number="7-8">
+		</structure>
+
+		<choice>
+			<item name="MediumEndurancePotion" number="1"></item>
+			<item name="MediumEnergyPotion" number="1"></item>
+			<item name="MediumStrengthPotion" number="1"></item>
+		</choice>
+
+		<entrance name="MainEntrance" number="2">
+		</entrance>
+		
+	</content>
+</customRegion>

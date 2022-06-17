@@ -27,6 +27,7 @@ namespace Pandorai
 			{ "ModifyMana", typeof(ModifyMana) },
 			{ "Blink", typeof(Blink) },
 			{ "Slingshot", typeof(Slingshot) },
+			{ "SummonCreature", typeof(SummonCreature) },
 		};
 
         
@@ -50,7 +51,7 @@ namespace Pandorai
 			{ "AggroOnDistance", typeof(AggroOnDistance) },
 			{ "ChaseTarget", typeof(ChaseTarget) },
 			{ "ParalelPosition", typeof(ParalelPosition) },
-			{ "SpellCaster", typeof(SpellCaster) },
+			{ "ProjectileSpellCaster", typeof(ProjectileSpellCaster) },
 			{ "NormalHitResponse", typeof(NormalHitResponse) },
 			{ "Talkative", typeof(Talkative) },
 			{ "NormalVision", typeof(NormalVision) },
@@ -59,6 +60,7 @@ namespace Pandorai
 			{ "Awakening", typeof(Awakening) },
 			{ "RandomWalk", typeof(RandomWalk) },
 			{ "PlaceWebs", typeof(PlaceWebs) },
+			{ "SummonSpellCaster", typeof(SummonSpellCaster) },
 		};
 
         public static Dictionary<string, Type> Conditions = new Dictionary<string, Type>

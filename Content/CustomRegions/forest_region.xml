@@ -33,7 +33,7 @@
 			<item name="LargeStrengthPotion" number="1"></item>
 		</choice>
 
-		<structure name="WarriorTomb" number="1">
+		<structure name="WarriorTombInteractive" number="1">
 			<location>
 				<layer where="center" />
 			</location>

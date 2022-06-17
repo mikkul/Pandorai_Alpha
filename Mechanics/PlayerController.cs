@@ -111,7 +111,10 @@ namespace Pandorai.Mechanics
 
 		public void MoveByMouse(TileInfo tileInfo)
 		{
-			if (CheatConsole.IsActive || _game.Player.IsInteractingWithSomeone || _game.Map.AreTilesInteractive || HoldingControl || HoldingShift || PossessedCreature.IsMoving) return;
+			if (CheatConsole.IsActive || _game.Player.IsInteractingWithSomeone || _game.Map.AreTilesInteractive || HoldingControl || HoldingShift || PossessedCreature.IsMoving || _game.TurnManager.TurnState != TurnState.WaitingForPlayer)
+			{
+				return;
+			} 
 
 			_mousePath = AStarCreatures.GetShortestPath(_game.Map.Tiles, PossessedCreature.MapIndex, tileInfo.Index, false, true, true);
 

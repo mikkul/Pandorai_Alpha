@@ -143,14 +143,13 @@ namespace Pandorai.Sprites
 			AddMapSprite(448, 704, 64, 64, 0, 0); // slingshot 96
 			AddMapSprite(512, 704, 64, 64, 0, 0); // stone 97
 
-			AddMapSprite(0, 768, 64, 64, 0, 0); // spikes 99
-			AddMapSprite(0, 768, 64, 64, 0, 0); // spikes 99
-
 			AddMapSprite(64, 768, 64, 64, 0, 0); // trap lever off 100
 			AddMapSprite(128, 768, 64, 64, 0, 0); // trap lever on 101
 			AddMapSprite(192, 768, 64, 64, 0, 0); // trap 102
 
 			AddMapSprite(128, 0, 64, 64, 0, 0); // invisible 103
+
+			AddMapSprite(576, 704, 64, 64, 0, 0); // summon skeleton rune 104
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)
@@ -177,6 +176,8 @@ namespace Pandorai.Sprites
 			AddCreatureSprite(0, 512, 64, 64, 0, 0); // shadow warrior idle 14
 			AddCreatureSprite(0, 576, 64, 64, 0, 0); // seeker idle 15
 			AddCreatureSprite(0, 640, 64, 64, 0, 0); // wolf idle 16
+			AddCreatureSprite(0, 704, 64, 64, 0, 0); // zombie idle 17
+			AddCreatureSprite(0, 768, 64, 64, 0, 0); // lich idle 18
 		}
 	}
 }

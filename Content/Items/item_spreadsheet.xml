@@ -5,14 +5,14 @@
 			<Amount>100</Amount>
 		</effect>
 	</item>
-	<item id="FireArrowSpell" texture="69" consumable="True" name="Fire arrow spell" tooltipColor="orange" description="Allows user to cast fire arrows" type="Spell/Offensive" requiredMana="5">
+	<item id="FireArrowSpell" texture="69" consumable="True" name="Fire arrow spell" tooltipColor="orange" description="Allows user to cast fire arrows" type="Spell/Projectile" requiredMana="5">
 		<effect name="CastFireball">
 			<Damage>100</Damage>
 			<Pierce>3</Pierce>
 			<Range>6</Range>
 		</effect>
 	</item>
-	<item id="FireballRune" texture="83" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Offensive" requiredMana="15">
+	<item id="FireballRune" texture="83" consumable="False" name="Fireball Rune" tooltipColor="orange" description="Allows user to cast fireballs" type="Spell/Projectile" requiredMana="15">
 		<effect name="CastFireball">
 			<Damage>100</Damage>
 			<Pierce>3</Pierce>
@@ -51,7 +51,7 @@
 			<Amount>3</Amount>
 		</effect>
 	</item>
-	<item id="IceArrowRune" texture="84" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive" requiredMana="15">
+	<item id="IceArrowRune" texture="84" consumable="False" name="Ice Arrow Rune" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Projectile" requiredMana="15">
 		<effect name="CastIceProjectile">
 			<Damage>90</Damage>
 			<Pierce>3</Pierce>
@@ -77,7 +77,7 @@
 		<effect name="Blink">
 		</effect>
 	</item>
-	<item id="IceArrowSpell" texture="81" consumable="True" name="Ice arrow spell" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Offensive" requiredMana="5">
+	<item id="IceArrowSpell" texture="81" consumable="True" name="Ice arrow spell" tooltipColor="blue" description="Allows user to cast ice arrows" type="Spell/Projectile" requiredMana="5">
 		<effect name="CastIceProjectile">
 			<Damage>90</Damage>
 			<Pierce>3</Pierce>
@@ -154,5 +154,10 @@
 		</effect>
 	</item>
 	<item id="Stone" texture="97" consumable="False" name="Stone" tooltipColor="white" description="Can be used as an ammunition" type="Other">
-	</item>	
+	</item>
+	<item id="SummonSkeletonRune" texture="98" consumable="False" name="Summon Skeleton Rune" tooltipColor="purple" description="Allows user to summon a skeleton" type="Spell/Summon" requiredMana="20">
+		<effect name="SummonCreature">
+			<CreatureName>Skeleton</CreatureName>
+		</effect>
+	</item>
 </items>
