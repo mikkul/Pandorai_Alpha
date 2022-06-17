@@ -92,14 +92,14 @@
 		<behaviour name="Teleporter">
 		</behaviour>
 	</structure>
-	<structure id="Lantern" texture="62">
+	<structure id="Lantern" texture="104">
 		<behaviour name="LightEmitter">
 			<Color>#ffff00</Color>
 			<Radius>300</Radius>
 			<Intensity>0.20</Intensity>
 		</behaviour>
 	</structure>
-	<structure id="Campfire" texture="62">
+	<structure id="Campfire" texture="105">
 		<behaviour name="LightEmitter">
 			<Color>#ffff00</Color>
 			<Radius>300</Radius>
