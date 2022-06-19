@@ -106,7 +106,7 @@
 	<structure id="Lantern" texture="98">
 		<behaviour name="LightEmitter">
 			<Color>#ffff88</Color>
-			<Radius>500</Radius>
+			<Radius>375</Radius>
 			<Intensity>0.15</Intensity>
 		</behaviour>
 	</structure>
@@ -116,7 +116,7 @@
 		</behaviour>
 		<behaviour name="LightEmitter">
 			<Color>#ffbb00</Color>
-			<Radius>275</Radius>
+			<Radius>200</Radius>
 			<Intensity>0.40</Intensity>
 		</behaviour>
 		<behaviour name="ParticleEmitter">
