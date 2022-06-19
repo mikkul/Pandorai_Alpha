@@ -142,6 +142,12 @@ namespace Pandorai.MapGeneration
 				var randomPoint = GetRandomUntakenPosition(_freeSpaceTiles);
 				PlaceStructure("Campfire", randomPoint);
 			}
+
+			for (int i = 0; i < 12; i++)
+			{
+				var randomPoint = GetRandomUntakenPosition(_freeSpaceTiles);
+				PlaceCreature("Hobbit", randomPoint);
+			}
         }
 
         private void DoSomethingAboutUnreachableSpace()

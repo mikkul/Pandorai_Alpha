@@ -590,23 +590,23 @@
 			<Footstep></Footstep>
 		</sounds>		
 	</creature>
-	<creature id="Hobbit" texture="0" maxHP="100" health="100" strength="13" class="Human" corpseTexture="68" speed="30" level="1">
+	<creature id="Hobbit" texture="19" maxHP="150" health="150" strength="24" class="Human" corpseTexture="68" speed="30" level="2">
 		<modifiers>
 			<EnemyClasses>
 				<class>Monster</class>
 				<class>Temple</class>
 			</EnemyClasses>
 			<MovingTextureIndices>
-				<index>4</index>
-				<index>5</index>
-				<index>6</index>
-				<index>7</index>
+				<index>19</index>
+				<index>19</index>
+				<index>19</index>
+				<index>19</index>
 			</MovingTextureIndices>
 			<IdleTextureIndices>
-				<index>0</index>
-				<index>1</index>
-				<index>2</index>
-				<index>3</index>
+				<index>19</index>
+				<index>19</index>
+				<index>19</index>
+				<index>19</index>
 			</IdleTextureIndices>
 			<Inventory>
 			</Inventory>

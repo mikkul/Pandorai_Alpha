@@ -181,6 +181,7 @@ namespace Pandorai.Sprites
 			AddCreatureSprite(0, 640, 64, 64, 0, 0); // wolf idle 16
 			AddCreatureSprite(0, 704, 64, 64, 0, 0); // zombie idle 17
 			AddCreatureSprite(0, 768, 64, 64, 0, 0); // lich idle 18
+			AddCreatureSprite(0, 832, 64, 64, 0, 0); // hobbit idle 19
 		}
 	}
 }
