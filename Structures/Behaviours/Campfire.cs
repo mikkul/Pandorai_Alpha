@@ -9,11 +9,11 @@ namespace Pandorai.Structures.Behaviours
         private static Creature _campfireCreature = new Creature(Main.Game)
         {
             Id = "Fire",
-            Stats = new CreatureStats(_campfireCreature),
         };
 
         public override void Bind()
         {
+            _campfireCreature.Stats = new CreatureStats(_campfireCreature);
             Structure.Tile.Tile.CollisionFlag = false;
             Structure.Tile.Tile.CreatureCame += Interact;
         }

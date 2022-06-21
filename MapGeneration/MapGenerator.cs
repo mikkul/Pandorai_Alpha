@@ -134,19 +134,29 @@ namespace Pandorai.MapGeneration
 
 			for (int i = 0; i < 10; i++)
 			{
-				var randomPoint = GetRandomUntakenPosition(_freeSpaceTiles);
-				PlaceStructure("Lantern", randomPoint);
+                PlaceStructure("Lantern", GetRandomUntakenPosition(_freeSpaceTiles));
 			}
 			for (int i = 0; i < 15; i++)
 			{
-				var randomPoint = GetRandomUntakenPosition(_freeSpaceTiles);
-				PlaceStructure("Campfire", randomPoint);
+                PlaceStructure("Campfire", GetRandomUntakenPosition(_freeSpaceTiles));
 			}
 
 			for (int i = 0; i < 12; i++)
 			{
-				var randomPoint = GetRandomUntakenPosition(_freeSpaceTiles);
-				PlaceCreature("Hobbit", randomPoint);
+                PlaceCreature("Hobbit", GetRandomUntakenPosition(_freeSpaceTiles));
+			}
+
+			AddItems("YellowKey", 12);
+			AddItems("BlueKey", 3);
+			AddItems("SmallHealthPotion", 9);
+			AddItems("SmallManaPotion", 4);
+
+			void AddItems(string name, int count)
+			{
+				for (int i = 0; i < count; i++)
+				{
+					PlaceItem(name, GetRandomUntakenPosition(_freeSpaceTiles));
+				}
 			}
         }
 
