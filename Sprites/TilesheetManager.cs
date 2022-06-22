@@ -153,6 +153,9 @@ namespace Pandorai.Sprites
 			AddMapSprite(128, 0, 64, 64, 0, 0); // invisible 103
 
 			AddMapSprite(576, 704, 64, 64, 0, 0); // summon skeleton rune 104
+
+			AddMapSprite(384, 768, 64, 64, 0, 0); // wind blow spell 105
+			AddMapSprite(448, 768, 64, 64, 0, 0); // wind blow rune 106
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

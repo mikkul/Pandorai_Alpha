@@ -28,6 +28,7 @@ namespace Pandorai
 			{ "Blink", typeof(Blink) },
 			{ "Slingshot", typeof(Slingshot) },
 			{ "SummonCreature", typeof(SummonCreature) },
+			{ "CastWindBlow", typeof(CastWindBlow) },
 		};
 
         

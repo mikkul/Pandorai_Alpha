@@ -160,4 +160,16 @@
 			<CreatureName>Skeleton</CreatureName>
 		</effect>
 	</item>
+	<item id="WindBlowSpell" texture="105" consumable="True" name="Spell of wind blow" tooltipColor="blue" description="Summon wind that pushes back creatures" type="Spell/Offensive" requiredMana="5">
+		<effect name="CastWindBlow">
+			<Damage>3</Damage>
+			<Range>8</Range>
+		</effect>
+	</item>
+	<item id="WindBlowRune" texture="106" consumable="False" name="Rune of wind blow" tooltipColor="blue" description="Summon wind that pushes back creatures" type="Spell/Offensive" requiredMana="15">
+		<effect name="CastWindBlow">
+			<Damage>3</Damage>
+			<Range>8</Range>
+		</effect>
+	</item>
 </items>
