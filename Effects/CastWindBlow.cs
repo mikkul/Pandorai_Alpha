@@ -119,10 +119,16 @@ namespace Pandorai.Effects
 						if (pierceLeft > 0)
 						{
                             // push back
-                            tryCreature.Move(fireballIndex + dir);
+							var nextTile = user.Game.Map.GetTile(fireballIndex + dir);
+							if(!nextTile.CollisionFlag)
+							{
+								user.Game.Map.RequestTileCollisionFlagChange(fireballIndex, false);
+								user.Game.Map.RequestTileCollisionFlagChange(fireballIndex + dir, true);
+								tryCreature.Move(fireballIndex + dir);
+							}
 
                             // deal damage
-							float actualDamage = Damage - Damage * (float)tryCreature.Stats.IceResistance / 100f;
+							float actualDamage = Damage;
 							user.Game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(actualDamage, user));
 							pierceLeft--;
 						}
