@@ -271,6 +271,7 @@ namespace Pandorai
 
         private void LoadGameContent()
         {
+            _firstGameLoad = false;
             ItemLoader.LoadItems(Path.Combine(Content.RootDirectory, "Items/item_spreadsheet.xml"));
             CreatureLoader.LoadCreatures(Path.Combine(Content.RootDirectory, "Creatures/creatures_spreadsheet.xml"), this);
             StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"), this);
