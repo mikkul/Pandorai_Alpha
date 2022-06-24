@@ -9,8 +9,38 @@
 		<creature name="Zombie" number="4-5" />
 		<creature name="Lich" number="1" />
 
-		<structure name="WarriorTomb" number="7-8">
+		<structure name="WarriorTomb" number="13-15">
+			<location>
+				<layer where="mid" thickness="2" />
+			</location>
 		</structure>
+
+		<structure name="Chest" number="1">
+			<location>
+				<layer where="border" />
+				<proximity to="MainEntrance" distance="far"></proximity>
+			</location>
+			<inventory>
+				<choice>
+					<invItem name="HealthPotion" number="1" />
+					<invItem name="ManaPotion" number="1" chance="50" />
+				</choice>
+			</inventory>
+		</structure>
+
+		<structure name="Chest" number="1">
+			<location>
+				<layer where="border" />
+				<proximity to="MainEntrance" distance="very far"></proximity>
+			</location>
+			<inventory>
+				<invItem name="IceArrowSpell" number="2" />
+			</inventory>
+		</structure>
+
+		<item name="BlueKey" number="2"></item>
+
+		<item name="SmallManaPotion" number="3"></item>
 
 		<choice>
 			<item name="MediumEndurancePotion" number="1"></item>

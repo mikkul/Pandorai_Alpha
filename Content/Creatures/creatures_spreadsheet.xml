@@ -565,7 +565,8 @@
 				<RangeLimit>7</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />
-			<behaviour name="AggroOnVision">
+			<behaviour name="AggroOnDistance">
+				<Range>6</Range>
 			</behaviour>
 			<behaviour name="ParalelPosition">
 			</behaviour>
