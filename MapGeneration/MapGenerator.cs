@@ -132,13 +132,33 @@ namespace Pandorai.MapGeneration
 				}
 			}
 
-			for (int i = 0; i < 10; i++)
+			AddStructures("Lantern", 10);
+			AddStructures("Campfire", 15);
+
+			var barrels = AddStructures("Barrel", 15);
+			foreach (var barrel in barrels)
 			{
-                PlaceStructure("Lantern", GetRandomUntakenPosition(_freeSpaceTiles));
-			}
-			for (int i = 0; i < 15; i++)
-			{
-                PlaceStructure("Campfire", GetRandomUntakenPosition(_freeSpaceTiles));
+				bool isTrap = _rng.NextFloat() < 0.34f;
+				if(isTrap)
+				{
+					string creatureName = _rng.NextFloat() < 0.5f ? "Spider" : "Rat";
+					int creatureCount = creatureName == "Spider" ? 1 : _rng.Next(1, 3);
+					var trap = new CreatureSpawnTrap();
+					trap.Creatures = new Dictionary<string, int>
+					{
+						{ creatureName, creatureCount }
+					};
+					trap.Structure = barrel;
+					trap.Bind();
+					barrel.Behaviours.Add(trap);
+				}
+				bool containsPotion = _rng.NextFloat() < 0.68f;
+				if(containsPotion)
+				{
+					var barrelContainer = barrel.GetBehaviour<Container>();
+					var itemInstance = ItemLoader.GetItem("HealthPotion");
+					barrelContainer.Inventory.AddElement(itemInstance);
+				}
 			}
 
 			for (int i = 0; i < 12; i++)
@@ -157,6 +177,16 @@ namespace Pandorai.MapGeneration
 				{
 					PlaceItem(name, GetRandomUntakenPosition(_freeSpaceTiles));
 				}
+			}
+			List<Structure> AddStructures(string name, int count)
+			{
+				List<Structure> structures = new();
+				for (int i = 0; i < count; i++)
+				{
+					var structure = PlaceStructure(name, GetRandomUntakenPosition(_freeSpaceTiles));
+					structures.Add(structure);
+				}
+				return structures;
 			}
         }
 
