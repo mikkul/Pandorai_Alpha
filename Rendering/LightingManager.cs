@@ -68,7 +68,7 @@ namespace Pandorai.Rendering
 			else
 			{
 				lightSources = surfaceLightSources;
-				AmbientLight = 0.70f;
+				AmbientLight = 0.77f;
 			}
 		}
 
