@@ -89,8 +89,6 @@ namespace Pandorai
         private RenderHelper _viewportRenderer;
 
         private bool _firstGameLoad = true;
-
-        private float _dayNightValue = 0f;
         
         public Main()
         {
@@ -358,15 +356,6 @@ namespace Pandorai
                 _mouseSparkle.Update(gameTime);
 
                 ParticleSystemManager.Update(gameTime);
-
-                // only for debugging purposes
-                _dayNightValue += 0.0006f;
-                if(_dayNightValue >= 1f)
-                {
-                    _dayNightValue = 0f;
-                }
-                LightingManager.LightingMaskEffect.Parameters["timeOfDay"].SetValue(_dayNightValue);
-                //
             }
 
             base.Update(gameTime);
