@@ -71,6 +71,9 @@ namespace Pandorai
         public Effect spiritWorldEffectForeground;
         public Effect distortionEffect;
 
+        public Texture2D dayNightColorMaskTexture;
+        public Effect dayNightEffect;
+
         public event EmptyEventHandler GameStarted;
         
         private SmartFramerate _fpsCounter;
@@ -293,6 +296,10 @@ namespace Pandorai
             spiritWorldEffectBackground = Content.Load<Effect>("Shaders/spiritEffectBackground");
             spiritWorldEffectForeground = Content.Load<Effect>("Shaders/spiritEffectForeground");
             distortionEffect = Content.Load<Effect>("Shaders/distortionEffect");
+            
+            dayNightColorMaskTexture = Content.Load<Texture2D>("DayNightCycleMask");
+            dayNightEffect = Content.Load<Effect>("Shaders/dayNightEffect");
+            LightingManager.LightingMaskEffect.Parameters["dayNightColorMask"].SetValue(dayNightColorMaskTexture);
 
             LightingManager.RefreshRenderTarget(GraphicsDevice, Camera);
 
@@ -370,16 +377,24 @@ namespace Pandorai
                 GraphicsDevice.SetRenderTarget(ViewportTarget);
 
                 if (Player.IsDead)
+                {
                     _spriteBatch.Begin(effect: spiritWorldEffectBackground);
+                }
                 else
+                {
                     _spriteBatch.Begin();
+                }
                 _spriteBatch.Draw(backgroundRender, ViewportTarget.Bounds, Color.White);
                 _spriteBatch.End();
 
                 if (Player.IsDead)
+                {
                     _spriteBatch.Begin(effect: spiritWorldEffectForeground);
+                }
                 else
+                {
                     _spriteBatch.Begin();
+                }
                 _spriteBatch.Draw(foregroundRender, ViewportTarget.Bounds, Color.White);
                 Sidekick.Draw(_spriteBatch);
                 _spriteBatch.End();
@@ -390,6 +405,11 @@ namespace Pandorai
 
                 GraphicsDevice.Clear(Options.ClearColor);
 
+                if (Player.IsDead)
+                {
+                    _viewportRenderer.ApplyEffect(distortionEffect);
+                }
+
                 var lightingMask = LightingManager.CreateLightingMask(GraphicsDevice, _spriteBatch, Camera);
                 LightingManager.LightingMaskEffect.Parameters["intensityMask"].SetValue(lightingMask.IntensityMask);
                 LightingManager.LightingMaskEffect.Parameters["colorMask"].SetValue(lightingMask.ColorMask);
@@ -398,8 +418,7 @@ namespace Pandorai
                 distortionEffect.Parameters["animationOffset"].SetValue((float)gameTime.TotalGameTime.TotalSeconds);
 
                 _viewportRenderer.ApplyEffect(LightingManager.LightingMaskEffect);
-                if (Player.IsDead)
-                    _viewportRenderer.ApplyEffect(distortionEffect);
+                    
                 var postProcessTexture = _viewportRenderer.RenderTexture(_spriteBatch, ViewportTarget);
 
                 _spriteBatch.Begin();

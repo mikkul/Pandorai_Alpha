@@ -20,6 +20,12 @@
 			</location>
 		</structure>
 
+		<structure name="Torch" number="2">
+			<location>
+				<layer where="border" />
+			</location>
+		</structure>
+
 		<structure name="BookStand" number="4-5">
 			<location>
 				<layer where="border" />

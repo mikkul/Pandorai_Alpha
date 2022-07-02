@@ -60,7 +60,7 @@
 	</structure>	
 	<structure id="Torch" texture="62">
 		<behaviour name="LightEmitter">
-			<Color>#ffff00</Color>
+			<Color>#ffff77</Color>
 			<Radius>300</Radius>
 			<Intensity>0.20</Intensity>
 		</behaviour>
