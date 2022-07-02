@@ -888,7 +888,8 @@ namespace Pandorai.MapGeneration
                     if (safetyCounter++ > 1000)
                     {
                         Console.WriteLine("Safety counter reached 1000");
-                        Game.CreatureManager.Creatures.Clear(); // first clear everything
+                        Game.CreatureManager.Creatures.Clear();
+                        StructureManager.Structures.Clear();
                         LightingManager.ClearLightSources();
                         ParticleSystemManager.Clear();
                         usedTiles.Clear();
@@ -905,14 +906,13 @@ namespace Pandorai.MapGeneration
 
                 filledSpace.Add(new Rectangle(randomLocationX, randomLocationY, regInfo.TileInfo.GetLength(0), regInfo.TileInfo.GetLength(1)));
 
-                foreach (var tile in regInfo.TileInfo)
+                foreach (var structure in regInfo.StructureInfo)
                 {
-                    // correct map indexes for structures
-                    if (tile.HasStructure())
-                    {
-                        tile.MapObject.Structure.Tile.Index += new Point(randomLocationX, randomLocationY);
-                        tile.MapObject.Structure.BindBehaviours();
-                    }
+					var structureClone = structure.Clone();
+					structureClone.Tile = new TileInfo(structure.Tile.Index + new Point(randomLocationX, randomLocationY), structure.Tile.Tile);
+					structure.Tile.Tile.MapObject.Structure = structureClone;
+					StructureManager.AddStructure(structureClone);
+					structureClone.BindBehaviours();
                 }
 
                 foreach (var creature in regInfo.CreatureInfo)
@@ -1591,7 +1591,6 @@ namespace Pandorai.MapGeneration
 				{
 					Structure structureInstance = StructureLoader.GetStructure(entitySpec.Name);
 					structureInstance.Tile = new TileInfo(index, tile);
-					StructureManager.AddStructure(structureInstance);
 					if (entry.Inventory.Count > 0)
 					{
 						Container container = structureInstance.GetBehaviour<Container>();
@@ -1611,6 +1610,7 @@ namespace Pandorai.MapGeneration
 						// 	Image = TilesheetManager.MapSpritesheetTexture.ExtractSubtexture(TilesheetManager.MapObjectSpritesheet[structureInstance.Texture].Rect, Game1.game.GraphicsDevice),
 						// };
 					}
+					info.StructureInfo.Add(structureInstance);
 				}
 				else if (node.Type == NodeType.Item)
 				{
@@ -1637,6 +1637,7 @@ namespace Pandorai.MapGeneration
 		{
 			public Tile[,] TileInfo;
 			public List<Creature> CreatureInfo = new List<Creature>();
+			public List<Structure> StructureInfo = new List<Structure>();
 			public List<Point> TakenSpace = new List<Point>();
 		}
 
