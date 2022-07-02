@@ -72,7 +72,6 @@ namespace Pandorai
         public Effect distortionEffect;
 
         public Texture2D dayNightColorMaskTexture;
-        public Effect dayNightEffect;
 
         public event EmptyEventHandler GameStarted;
         
@@ -298,7 +297,6 @@ namespace Pandorai
             distortionEffect = Content.Load<Effect>("Shaders/distortionEffect");
             
             dayNightColorMaskTexture = Content.Load<Texture2D>("DayNightCycleMask");
-            dayNightEffect = Content.Load<Effect>("Shaders/dayNightEffect");
             LightingManager.LightingMaskEffect.Parameters["dayNightColorMask"].SetValue(dayNightColorMaskTexture);
 
             LightingManager.RefreshRenderTarget(GraphicsDevice, Camera);
