@@ -172,4 +172,11 @@
 			<Range>8</Range>
 		</effect>
 	</item>
+	<item id="HandTorch" texture="62" consumable="False" name="Torch" tooltipColor="white" description="Light up space around you" type="Other">
+		<effect name="HandTorch">
+			<Radius>350</Radius>
+			<Intensity>0.25</Intensity>
+			<Color>#ffff77</Color>
+		</effect>
+	</item>
 </items>

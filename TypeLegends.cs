@@ -29,6 +29,7 @@ namespace Pandorai
 			{ "Slingshot", typeof(Slingshot) },
 			{ "SummonCreature", typeof(SummonCreature) },
 			{ "CastWindBlow", typeof(CastWindBlow) },
+			{ "HandTorch", typeof(HandTorch) },
 		};
 
         
