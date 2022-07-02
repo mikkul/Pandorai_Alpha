@@ -36,7 +36,7 @@ namespace Pandorai.Mechanics
 
 		private float _timeSinceTurnStart;
 
-		private float _dayNightValue;
+		private float _dayNightValue = 0.5f;
 
 		private Main _game;
 

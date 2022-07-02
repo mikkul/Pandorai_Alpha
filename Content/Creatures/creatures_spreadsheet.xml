@@ -437,7 +437,7 @@
 			</Inventory>
 		</modifiers>
 		<behaviours>
-			<behaviour name="AllSeeingVision">
+			<behaviour name="NormalVision">
 				<RangeLimit>6</RangeLimit>
 			</behaviour>
 			<behaviour name="NormalHitResponse" />

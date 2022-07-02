@@ -61,8 +61,8 @@
 	<structure id="Torch" texture="62">
 		<behaviour name="LightEmitter">
 			<Color>#ffff77</Color>
-			<Radius>300</Radius>
-			<Intensity>0.20</Intensity>
+			<Radius>375</Radius>
+			<Intensity>0.25</Intensity>
 		</behaviour>
 	</structure>
 	<structure id="Grave" texture="66">
@@ -86,8 +86,8 @@
 		</behaviour>
 		<behaviour name="LightEmitter">
 			<Color>#fff67d</Color>
-			<Radius>350</Radius>
-			<Intensity>0.40</Intensity>
+			<Radius>600</Radius>
+			<Intensity>0.35</Intensity>
 		</behaviour>
 	</structure>
 	<structure id="Teleporter" texture="88">
@@ -106,8 +106,8 @@
 	<structure id="Lantern" texture="98">
 		<behaviour name="LightEmitter">
 			<Color>#ffff88</Color>
-			<Radius>375</Radius>
-			<Intensity>0.15</Intensity>
+			<Radius>500</Radius>
+			<Intensity>0.25</Intensity>
 		</behaviour>
 	</structure>
 	<structure id="Campfire" texture="99">
@@ -116,8 +116,8 @@
 		</behaviour>
 		<behaviour name="LightEmitter">
 			<Color>#ffbb00</Color>
-			<Radius>200</Radius>
-			<Intensity>0.40</Intensity>
+			<Radius>300</Radius>
+			<Intensity>0.30</Intensity>
 		</behaviour>
 		<behaviour name="ParticleEmitter">
 			<Type>Fire</Type>
