@@ -26,6 +26,7 @@ using Pandorai.Sounds;
 using Microsoft.Xna.Framework.Media;
 using System.Timers;
 using System.Linq;
+using Pandorai.Persistency;
 
 namespace Pandorai
 {
@@ -208,7 +209,7 @@ namespace Pandorai
 
 		protected override void LoadContent()
         {
-            Persistency.LoadSettings();
+            PersistencyLoader.LoadSettings();
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -456,10 +457,11 @@ namespace Pandorai
 
         protected override void OnExiting(object sender, EventArgs args)
         {
-            Persistency.SaveSettings();
+            PersistencyLoader.SaveSettings();
+            PersistencyLoader.SaveGame();
         }
 
-        public void StartGame()
+        public void StartGame(bool savedGame = false)
 		{
             IsGamePaused = true;
             IsGameStarted = false;
@@ -493,11 +495,16 @@ namespace Pandorai
             MessageLog.Clear();
 
             //
-            var mapGenerator = new MapGenerator();
-            Map.Tiles = mapGenerator.GenerateMap(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
-
-            //Map.SwitchActiveMap(ActiveMap.Surface);
-            Map.UpdateTileTextures();
+            if(savedGame)
+            {
+                PersistencyLoader.LoadSavedGame();
+            }
+            else
+            {
+                var mapGenerator = new MapGenerator();
+                Map.Tiles = mapGenerator.GenerateMap(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
+                Map.UpdateTileTextures();
+            }
 
             var hero = CreatureManager.Creatures.Single(c => c.Id == "Hero");
             Player.PossessedCreature = hero;
@@ -508,12 +515,14 @@ namespace Pandorai
             Sidekick.DisplaySlots();
             Options.AdjustGUI();
 
-            //CreatureManager.FirstLoadCreatures();
             Player.FinishTurn();
 
             GameStarted?.Invoke();
 
-            SoundManager.PlayMusic("Main_theme");
+            if(!savedGame)
+            {
+                SoundManager.PlayMusic("Main_theme");
+            }
             desktop.Root.FindWidgetById("loadingScreen").Visible = false;
             desktop.Root.FindWidgetById("gameScreen").Visible = true;
             _loadingAnimationTimer.Stop();

@@ -216,12 +216,19 @@ namespace Pandorai.UI
                 Text = "Continue",
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                Enabled = false,
+                Enabled = Persistency.IsSavedGame(),
             };
 
             continueButton.Click += (s, a) =>
             {
-                _game.TogglePauseGame();
+                if(_game.IsGameStarted)
+                {
+                    _game.TogglePauseGame();
+                }
+                else
+                {
+                    _game.StartGame(true);
+                }
             };
 
             var playButton = new TextButton
