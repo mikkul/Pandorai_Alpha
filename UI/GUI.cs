@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Myra.Graphics2D.TextureAtlases;
 using System.Linq;
 using Pandorai.Sounds;
+using Pandorai.Persistency;
 
 namespace Pandorai.UI
 {
@@ -216,7 +217,7 @@ namespace Pandorai.UI
                 Text = "Continue",
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                Enabled = Persistency.IsSavedGame(),
+                Enabled = PersistencyLoader.IsSavedGame(),
             };
 
             continueButton.Click += (s, a) =>
