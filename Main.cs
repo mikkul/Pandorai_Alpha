@@ -208,6 +208,8 @@ namespace Pandorai
 
 		protected override void LoadContent()
         {
+            Persistency.LoadSettings();
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             squareTexture = Content.Load<Texture2D>("fullSquareTexture");
@@ -450,6 +452,11 @@ namespace Pandorai
                 _spriteBatch.DrawString(_defaultFont, Math.Round(_fpsCounter.Framerate).ToString(), Vector2.Zero, Color.White);
                 _spriteBatch.End();
 			}
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            Persistency.SaveSettings();
         }
 
         public void StartGame()
