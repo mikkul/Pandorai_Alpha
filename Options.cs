@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Myra.Graphics2D.UI;
 using Myra.Graphics2D.UI.Properties;
 using Pandorai.Rendering;
+using System;
 using System.Collections.Generic;
 
 namespace Pandorai
@@ -102,19 +103,23 @@ namespace Pandorai
 			};
 			foreach (var id in inventoryIds)
 			{
-				Grid inventoryGrid = (Grid)_game.desktop.Root.FindWidgetById(id);
-				if (inventoryGrid != null)
+				try
 				{
-					foreach (var proportion in inventoryGrid.RowsProportions)
+					Grid inventoryGrid = (Grid)_game.desktop.Root.FindWidgetById(id);
+					if (inventoryGrid != null)
 					{
-						proportion.Value = _game.Graphics.PreferredBackBufferWidth / 16;
-					}
-					foreach (var button in inventoryGrid.Widgets)
-					{
-						button.Width = _game.Graphics.PreferredBackBufferWidth / 16;
-						button.Height = _game.Graphics.PreferredBackBufferWidth / 16;
+						foreach (var proportion in inventoryGrid.RowsProportions)
+						{
+							proportion.Value = _game.Graphics.PreferredBackBufferWidth / 16;
+						}
+						foreach (var button in inventoryGrid.Widgets)
+						{
+							button.Width = _game.Graphics.PreferredBackBufferWidth / 16;
+							button.Height = _game.Graphics.PreferredBackBufferWidth / 16;
+						}
 					}
 				}
+				catch (Exception) {}
 			}
 		}
 

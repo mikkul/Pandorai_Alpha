@@ -3,6 +3,7 @@ using Pandorai.Creatures;
 using Pandorai.Items;
 using Pandorai.Tooltips;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Pandorai.Tilemaps
 {
@@ -80,6 +81,11 @@ namespace Pandorai.Tilemaps
 		public bool HasStructure()
 		{
 			return MapObject != null && MapObject.Structure != null;
+		}
+
+		public bool HasStructure(params string[] structureNames)
+		{
+			return MapObject != null && MapObject.Structure != null && structureNames.Any(x => MapObject.Structure.Id == x);
 		}
 
 		public bool HasItem()
