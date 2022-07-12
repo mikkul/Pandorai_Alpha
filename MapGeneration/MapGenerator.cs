@@ -90,8 +90,6 @@ namespace Pandorai.MapGeneration
 
 			FillSpaceBetween();
 
-			//DoSomethingAboutUnreachableSpace(); nvm it makes things even worse
-
 			PlaceTeleporters();
 
             stopwatch.Stop();
@@ -190,89 +188,6 @@ namespace Pandorai.MapGeneration
 			}
         }
 
-        private void DoSomethingAboutUnreachableSpace()
-        {
-			bool isUncreachableSpace = true;
-			while(isUncreachableSpace)
-			{
-				isUncreachableSpace = false;
-				var localOpArea = new int[_map.GetLength(0), _map.GetLength(1)];
-				FloodFill(localOpArea);
-
-				var uncreachablePoints = new List<Point>();
-				for (int x = 0; x < _map.GetLength(0); x++)
-				{
-					for (int y = 0; y < _map.GetLength(1); y++)
-					{
-						if(localOpArea[x, y] == 0 && _map[x, y].BaseType == 0 && _map[x, y].BaseColor == _freeSpaceFloorColor)
-						{
-							isUncreachableSpace = true;
-							uncreachablePoints.Add(new Point(x, y));
-						}
-					}
-				}
-
-				foreach (var point in uncreachablePoints)
-				{
-					var neighbours = GenHelper.GetNeighbours(point);
-					foreach (var neighbour in neighbours)
-					{
-						if(!_map.IsPointInBounds(neighbour))
-						{
-							continue;
-						}
-						_map[neighbour.X, neighbour.Y].CollisionFlag = false;
-						_map[neighbour.X, neighbour.Y].BaseColor = _freeSpaceFloorColor;
-						_map[neighbour.X, neighbour.Y].BaseType = 0;
-						_map[neighbour.X, neighbour.Y].SetTexture(0);
-					}
-				}
-			}
-
-            void FloodFill(int[,] opArea)
-            {
-                Stack<Point> openList = new Stack<Point>();
-                List<Point> closedList = new List<Point>();
-
-                for (int x = 0; x < _map.GetLength(0); x++)
-                {
-                    for (int y = 0; y < _map.GetLength(1); y++)
-                    {
-                        if (opArea[x, y] == 0 && _map[x, y].BaseType == 0 && _map[x, y].BaseColor == _freeSpaceFloorColor)
-                        {
-                            openList.Push(new Point(x, y));
-                            goto EndLoop;
-                        }
-                    }
-                }
-
-            	EndLoop:
-
-                while (openList.Count > 0)
-                {
-                    var currentTile = openList.Pop();
-
-                    var neighbours = GenHelper.Get8Neighbours(currentTile);
-
-                    foreach (var neighbour in neighbours)
-                    {
-						if(!_map.IsPointInBounds(neighbour))
-						{
-							continue;
-						}
-                        if (_map[neighbour.X, neighbour.Y].BaseType == 0 && opArea[neighbour.X, neighbour.Y] == 0)
-                        {
-                            openList.Push(neighbour);
-                        }
-                        opArea[neighbour.X, neighbour.Y] = 1;
-                    }
-
-                    closedList.Add(currentTile);
-                    opArea[currentTile.X, currentTile.Y] = 1;
-                }
-            }
-        }
-
         private void PlaceTeleporters()
 		{
 			var freeSpace = new List<Point>();
@@ -287,21 +202,10 @@ namespace Pandorai.MapGeneration
 				}
 			}
 
-			Color[] brightColors = new Color[]
-			{
-				Color.Yellow,
-				Color.Green,
-				Color.Red,
-				Color.Blue,
-				Color.Purple,
-				Color.Cyan,
-				Color.Orange,
-			};
-
 			int noOfTeleporterPairs = 7;
 			for (int i = 0; i < noOfTeleporterPairs; i++)
 			{
-				var color = brightColors[i];
+				var color = Helper.CreateHSLColor(_rng.Next(0, 255), 1f, 0.5f);
 				for (int j = 0; j < 1; j++)
 				{
 					var randomPoint = freeSpace.GetRandomElement(Main.Game.MainRng);
