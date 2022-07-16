@@ -701,9 +701,15 @@ namespace Pandorai.MapGeneration
 
 		private Point GetRandomUntakenPosition(List<Point> possiblePoints)
 		{
+			int safetyCounter = 0;
 			Point position;
 			do
 			{
+				safetyCounter++;
+				if(safetyCounter > 1000)
+				{
+					return Point.Zero;
+				}
 				position = possiblePoints.GetRandomElement(Main.Game.MainRng);
 			}
 			while(_map[position.X, position.Y].CollisionFlag);
