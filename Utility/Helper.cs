@@ -37,6 +37,52 @@ namespace Pandorai.Utility
 			return xnaColor;
 		}
 
+		public static Color CreateHSLColor(int hue, float saturation, float luminance)
+		{
+			byte r = 0;
+			byte g = 0;
+			byte b = 0;
+
+			if (saturation == 0)
+			{
+				r = g = b = (byte)(luminance * 255);
+			}
+			else
+			{
+				float v1, v2;
+				float h = (float)hue / 360;
+
+				v2 = (luminance < 0.5) ? (luminance * (1 + saturation)) : ((luminance + saturation) - (luminance * saturation));
+				v1 = 2 * luminance - v2;
+
+				r = (byte)(255 * HueToRGB(v1, v2, h + (1.0f / 3)));
+				g = (byte)(255 * HueToRGB(v1, v2, h));
+				b = (byte)(255 * HueToRGB(v1, v2, h - (1.0f / 3)));
+			}
+			
+			return new Color(r, g , b);
+		}
+
+		private static float HueToRGB(float v1, float v2, float vH)
+		{
+			if (vH < 0)
+				vH += 1;
+
+			if (vH > 1)
+				vH -= 1;
+
+			if ((6 * vH) < 1)
+				return (v1 + (v2 - v1) * 6 * vH);
+
+			if ((2 * vH) < 1)
+				return v2;
+
+			if ((3 * vH) < 2)
+				return (v1 + (v2 - v1) * ((2.0f / 3) - vH) * 6);
+
+			return v1;
+		}
+
 		public static void Swap<T>(ref T lhs, ref T rhs)
 		{
 			T temp = lhs;

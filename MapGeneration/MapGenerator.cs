@@ -90,8 +90,6 @@ namespace Pandorai.MapGeneration
 
 			FillSpaceBetween();
 
-			//DoSomethingAboutUnreachableSpace(); nvm it makes things even worse
-
 			PlaceTeleporters();
 
             stopwatch.Stop();
@@ -190,46 +188,24 @@ namespace Pandorai.MapGeneration
 			}
         }
 
-        private void DoSomethingAboutUnreachableSpace()
-        {
+        private void PlaceTeleporters()
+		{
+			List<List<Point>> disjointAreas = new();
 			bool isUncreachableSpace = true;
+			var localOpArea = new int[_map.GetLength(0), _map.GetLength(1)];
 			while(isUncreachableSpace)
 			{
-				isUncreachableSpace = false;
-				var localOpArea = new int[_map.GetLength(0), _map.GetLength(1)];
-				FloodFill(localOpArea);
-
-				var uncreachablePoints = new List<Point>();
-				for (int x = 0; x < _map.GetLength(0); x++)
-				{
-					for (int y = 0; y < _map.GetLength(1); y++)
-					{
-						if(localOpArea[x, y] == 0 && _map[x, y].BaseType == 0 && _map[x, y].BaseColor == _freeSpaceFloorColor)
-						{
-							isUncreachableSpace = true;
-							uncreachablePoints.Add(new Point(x, y));
-						}
-					}
-				}
-
-				foreach (var point in uncreachablePoints)
-				{
-					var neighbours = GenHelper.GetNeighbours(point);
-					foreach (var neighbour in neighbours)
-					{
-						if(!_map.IsPointInBounds(neighbour))
-						{
-							continue;
-						}
-						_map[neighbour.X, neighbour.Y].CollisionFlag = false;
-						_map[neighbour.X, neighbour.Y].BaseColor = _freeSpaceFloorColor;
-						_map[neighbour.X, neighbour.Y].BaseType = 0;
-						_map[neighbour.X, neighbour.Y].SetTexture(0);
-					}
-				}
+				var filledArea = FloodFill(localOpArea);
+				disjointAreas.Add(filledArea);
+				isUncreachableSpace = filledArea.Count > 0;
 			}
 
-            void FloodFill(int[,] opArea)
+			// filter out very small spaces
+			disjointAreas = disjointAreas.Where(x => x.Count > 25).ToList();
+
+			Console.WriteLine($"Disjoint areas: {disjointAreas.Count}");
+
+            List<Point> FloodFill(int[,] opArea)
             {
                 Stack<Point> openList = new Stack<Point>();
                 List<Point> closedList = new List<Point>();
@@ -238,7 +214,7 @@ namespace Pandorai.MapGeneration
                 {
                     for (int y = 0; y < _map.GetLength(1); y++)
                     {
-                        if (opArea[x, y] == 0 && _map[x, y].BaseType == 0 && _map[x, y].BaseColor == _freeSpaceFloorColor)
+                        if (opArea[x, y] == 0 && _map[x, y].BaseType == 0)
                         {
                             openList.Push(new Point(x, y));
                             goto EndLoop;
@@ -260,7 +236,7 @@ namespace Pandorai.MapGeneration
 						{
 							continue;
 						}
-                        if (_map[neighbour.X, neighbour.Y].BaseType == 0 && opArea[neighbour.X, neighbour.Y] == 0)
+                        if (opArea[neighbour.X, neighbour.Y] == 0 && (_map[neighbour.X, neighbour.Y].BaseType == 0 || _map[neighbour.X, neighbour.Y].HasStructure("YellowDoor", "BlueDoor", "RedDoor")))
                         {
                             openList.Push(neighbour);
                         }
@@ -270,47 +246,22 @@ namespace Pandorai.MapGeneration
                     closedList.Add(currentTile);
                     opArea[currentTile.X, currentTile.Y] = 1;
                 }
+
+				return closedList;
             }
-        }
 
-        private void PlaceTeleporters()
-		{
-			var freeSpace = new List<Point>();
-			for (int x = 0; x < _map.GetLength(0); x++)
+			for (int i = 0; i < disjointAreas.Count; i++)
 			{
-				for (int y = 0; y < _map.GetLength(1); y++)
-				{
-					if(!_map[x, y].CollisionFlag && _map[x, y].BaseColor == _freeSpaceFloorColor)
-					{
-						freeSpace.Add(new Point(x, y));
-					}
-				}
-			}
-
-			Color[] brightColors = new Color[]
-			{
-				Color.Yellow,
-				Color.Green,
-				Color.Red,
-				Color.Blue,
-				Color.Purple,
-				Color.Cyan,
-				Color.Orange,
-			};
-
-			int noOfTeleporterPairs = 7;
-			for (int i = 0; i < noOfTeleporterPairs; i++)
-			{
-				var color = brightColors[i];
+				var color = Helper.CreateHSLColor(_rng.Next(0, 255), 1f, 0.5f);
 				for (int j = 0; j < 1; j++)
 				{
-					var randomPoint = freeSpace.GetRandomElement(Main.Game.MainRng);
+					var randomPoint = disjointAreas[i].GetRandomElement(Main.Game.MainRng);
 					var teleporterInstance = PlaceStructure("Teleporter", randomPoint);
 					teleporterInstance.ColorTint = color;
 					var teleporterBehaviour = teleporterInstance.GetBehaviour<Teleporter>();
 					teleporterBehaviour.Id = i;
 
-					var otherCorrespondingTeleporter = StructureManager.Structures.First(x =>
+					var otherCorrespondingTeleporter = StructureManager.Structures.FirstOrDefault(x =>
 					{
 						var otherTelBeh = x.GetBehaviour<Teleporter>();
 						if(otherTelBeh == null)
@@ -319,8 +270,11 @@ namespace Pandorai.MapGeneration
 						}
 						return x != teleporterInstance && x.Id == "Teleporter" && otherTelBeh.Id == -1;
 					});
-					otherCorrespondingTeleporter.ColorTint = color;
-					otherCorrespondingTeleporter.GetBehaviour<Teleporter>().Id = i;
+					if(otherCorrespondingTeleporter != null)
+					{
+						otherCorrespondingTeleporter.ColorTint = color;
+						otherCorrespondingTeleporter.GetBehaviour<Teleporter>().Id = i;
+					}
 				}
 			}
 		}

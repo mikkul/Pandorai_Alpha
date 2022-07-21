@@ -6,7 +6,7 @@
 	</dimensions>
 	<content>
 
-		<structure name="Teleporter" number="7">
+		<structure name="Teleporter" number="10">
 			<location>
 				<layer where="center" offset="2" />
 			</location>
@@ -14,4 +14,3 @@
 
 	</content>
 </customRegion>
-
