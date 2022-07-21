@@ -50,6 +50,8 @@ namespace Pandorai
         public bool IsGameStarted = false;
         public bool IsGamePaused = true;
 
+        public float ExperienceMultiplier = 1f;
+
         public Map Map;
         public PlayerController Player;
         public CreatureManager CreatureManager;
@@ -462,7 +464,7 @@ namespace Pandorai
 
             // display loading sreeen and music
             SoundManager.PlayMusic("Loading");
-            desktop.Root.FindWidgetById("mainMenu").Visible = false;
+            desktop.Root.FindWidgetById("difficultyChoiceScreen").Visible = false;
             desktop.Root.FindWidgetById("loadingScreen").Visible = true;
             _loadingAnimationTimer.Start();
 

@@ -78,7 +78,7 @@ namespace Pandorai.Creatures
 
         public static int GetKillExperience(int level)
         {
-            var experience = (int)(Math.Pow(level, 1.2) * 100);
+            var experience = (int)(Math.Pow(level, 1.2) * 100 * Main.Game.ExperienceMultiplier);
             return experience;
         }
 

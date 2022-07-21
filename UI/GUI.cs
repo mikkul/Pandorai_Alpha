@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Myra.Graphics2D.TextureAtlases;
 using System.Linq;
 using Pandorai.Sounds;
+using System.Globalization;
 
 namespace Pandorai.UI
 {
@@ -47,6 +48,9 @@ namespace Pandorai.UI
 
             var mainMenu = MainMenu();
 
+            var difficultyChoiceScreen = DifficultyChoiceScreen();
+            difficultyChoiceScreen.Visible = false;
+
             var loadingScreen = LoadingScreen();
             loadingScreen.Visible = false;
 
@@ -54,6 +58,7 @@ namespace Pandorai.UI
             gameScreen.Visible = false;
 
             rootPanel.Widgets.Add(mainMenu);
+            rootPanel.Widgets.Add(difficultyChoiceScreen);
             rootPanel.Widgets.Add(gameScreen);
             rootPanel.Widgets.Add(loadingScreen);
 
@@ -161,6 +166,62 @@ namespace Pandorai.UI
             return mainPanel;
         }
 
+        private static Widget DifficultyChoiceScreen()
+        {
+            var mainPanel = new VerticalStackPanel
+            {
+                Id = "difficultyChoiceScreen",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
+            var chooseDifficultyLabel = new Label
+            {
+                Text = "Choose difficulty:",
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Margin = new Thickness(0, 25),
+            };
+
+            var easier = new TextButton
+            {
+                Text = "Easier",
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+            var normal = new TextButton
+            {
+                Text = "Normal",
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+            var challenging = new TextButton
+            {
+                Text = "Challenging",
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+            };
+
+            easier.Click += (s, a) =>
+            {
+                _game.ExperienceMultiplier = 1.25f;
+                Task.Run(() => _game.StartGame());
+            };
+            normal.Click += (s, a) =>
+            {
+                _game.ExperienceMultiplier = 1.0f;
+                Task.Run(() => _game.StartGame());
+            };
+            challenging.Click += (s, a) =>
+            {
+                _game.ExperienceMultiplier = 0.75f;
+                Task.Run(() => _game.StartGame());
+            };
+
+            mainPanel.Widgets.Add(chooseDifficultyLabel);
+            mainPanel.Widgets.Add(challenging);
+            mainPanel.Widgets.Add(normal);
+            mainPanel.Widgets.Add(easier);
+
+            return mainPanel;
+        }
+
         private static Widget MainMenu()
 		{
             Grid mainGrid = new Grid()
@@ -233,7 +294,8 @@ namespace Pandorai.UI
 
             playButton.Click += (s, a) =>
             {
-                Task.Run(() => _game.StartGame());
+                _game.desktop.Root.FindWidgetById("mainMenu").Visible = false;
+                _game.desktop.Root.FindWidgetById("difficultyChoiceScreen").Visible = true;
             };
 
             var tutorialButton = new TextButton

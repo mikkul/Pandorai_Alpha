@@ -46,7 +46,7 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
-            creature.Stats.Experience += ExperienceGained;
+            creature.Stats.Experience += (int)(ExperienceGained * Main.Game.ExperienceMultiplier);
             _isRead = true;
         }
 
