@@ -50,6 +50,7 @@ namespace Pandorai.Rendering
 		public static Effect LightingMaskEffect;
 
 		public static float AmbientLight = 0.0f;
+		public static float DayNightIntensity = 0.70f;
 
 		static List<LightSource> lightSources;
 		static List<LightSource> undergroundLightSources = new List<LightSource>();

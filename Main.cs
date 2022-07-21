@@ -413,6 +413,7 @@ namespace Pandorai
                 LightingManager.LightingMaskEffect.Parameters["intensityMask"].SetValue(lightingMask.IntensityMask);
                 LightingManager.LightingMaskEffect.Parameters["colorMask"].SetValue(lightingMask.ColorMask);
                 LightingManager.LightingMaskEffect.Parameters["ambientLight"].SetValue(LightingManager.AmbientLight);
+                LightingManager.LightingMaskEffect.Parameters["dayNightIntensity"].SetValue(LightingManager.DayNightIntensity);
                 distortionEffect.Parameters["distortionScale"].SetValue(0.1f);
                 distortionEffect.Parameters["animationOffset"].SetValue((float)gameTime.TotalGameTime.TotalSeconds);
 

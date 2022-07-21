@@ -7,6 +7,7 @@
 sampler s0;
 float ambientLight;
 float timeOfDay;
+float dayNightIntensity;
 Texture2D intensityMask;
 Texture2D colorMask;
 Texture2D dayNightColorMask;
@@ -24,7 +25,9 @@ float4 PixelShaderFunction(float2 coords: TEXCOORD0) : COLOR0
     float2 dayNightMaskCoords = float2(timeOfDay, 0);
     float4 dayNightMaskColor = tex2D(dayNightColorMaskSampler, dayNightMaskCoords);
 
-    float4 resultColor = (color * dayNightMaskColor) * (intensity + ambientLight) + lightingColor * intensity;
+    float4 gray = float4(1.0, 1.0, 1.0, 1.0);
+
+    float4 resultColor = color * lerp(gray, dayNightMaskColor, dayNightIntensity) * (intensity + ambientLight) + lightingColor * intensity;
 
     return resultColor;
 }
