@@ -721,7 +721,7 @@ namespace Pandorai.MapGeneration
 			{
 				Item = itemInstance,
 			};
-			ItemManager.AddItem(itemInstance);
+			ItemManager.AddItem(itemInstance, point);
 			return itemInstance;
 		}
 		

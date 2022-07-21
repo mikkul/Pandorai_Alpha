@@ -117,7 +117,7 @@ namespace Pandorai.Creatures
 
         private void SetExperience(int delta)
         {
-            if(_owner.IsPossessedCreature())
+            if(_owner?.IsPossessedCreature() ?? false)
             {
                 MessageLog.DisplayMessage($"You gained {delta} experience", Color.Yellow);
             }
@@ -142,7 +142,7 @@ namespace Pandorai.Creatures
                 SkillPoints += GetSkillPointsFromLevel(i + 1);
             }
 
-            if(_owner.IsPossessedCreature())
+            if(_owner?.IsPossessedCreature() ?? false)
             {
                 MessageLog.DisplayMessage($"You have advanced to level {Level}!", Color.Yellow);
                 SoundManager.PlaySound("FX146");

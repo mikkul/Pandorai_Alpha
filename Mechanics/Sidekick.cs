@@ -51,8 +51,8 @@ namespace Pandorai.Mechanics
 
 		public static void Init()
 		{
-			SlotsSpirit = new Creature();
-			SlotsSpirit.Inventory = new Inventory(new Creature(), 4)
+			SlotsSpirit = new Creature(false);
+			SlotsSpirit.Inventory = new Inventory(new Creature(false), 4)
 			{
 				Collumns = 4,
 				Rows = 1,

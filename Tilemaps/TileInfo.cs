@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace Pandorai.Tilemaps
 {
 	public class TileInfo
 	{
 		public Point Index;
+		[JsonIgnore]
 		public Tile Tile;
 
 		public TileInfo(Point index, Tile tile)

@@ -2,7 +2,9 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 using Pandorai.Creatures;
+using Pandorai.Items;
 using Pandorai.Sounds;
+using Pandorai.Structures;
 using Pandorai.Tilemaps;
 
 namespace Pandorai.Persistency
@@ -69,6 +71,24 @@ namespace Pandorai.Persistency
                 });
             }
 
+            // structures
+            foreach (var structure in StructureManager.Structures)
+            {
+                gameState.Structures.Add(new StructureState
+                {
+                    Structure = structure,
+                });
+            }
+
+            // items
+            foreach (var item in ItemManager.Items)
+            {
+                gameState.Items.Add(new ItemState
+                {
+                    Item = item,
+                });
+            }
+
             // save file
             var json = JsonConvert.SerializeObject(gameState);
             var fullPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), SavedGameFilePath);
@@ -99,7 +119,32 @@ namespace Pandorai.Persistency
             // creatures
             foreach (var creatureState in gameState.Creatures)
             {
+                creatureState.Creature.Stats = creatureState.Creature.Stats.Clone(creatureState.Creature);
                 Main.Game.CreatureManager.Creatures.Add(creatureState.Creature);
+            }
+
+            // structures
+            foreach (var structureState in gameState.Structures)
+            {
+                var tile = Main.Game.Map.GetTile(structureState.Structure.Tile.Index);
+                tile.MapObject = new MapObject(ObjectType.Interactive, 0)
+                {
+                    Structure = structureState.Structure,
+                };
+                structureState.Structure.Tile.Tile = tile;
+
+                StructureManager.Structures.Add(structureState.Structure);
+            }
+
+            // items
+            foreach (var itemState in gameState.Items)
+            {
+                var tile = Main.Game.Map.GetTile(itemState.Item.TileIndex);
+                tile.MapObject = new MapObject(ObjectType.Collectible, 0)
+                {
+                    Item = itemState.Item,
+                };
+                ItemManager.Items.Add(itemState.Item);
             }
         }
     }

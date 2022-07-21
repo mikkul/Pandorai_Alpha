@@ -53,7 +53,6 @@ namespace Pandorai.Creatures
 
 		public int Energy;
 
-		[JsonIgnore]
 		public CreatureStats Stats;
 
 		public CreatureSounds Sounds = new CreatureSounds();
@@ -87,17 +86,16 @@ namespace Pandorai.Creatures
 
 		private bool _savedByGod = false;
 
-		public Creature()
+		public Creature(bool giveStones = true)
 		{
 			Inventory = new Inventory(this);
 
-			try
+			if(giveStones)
 			{
 				var stonesCount = Main.Game.MainRng.Next(0, 3);
 				Inventory.RemoveElement("Stone", 9999);
 				Inventory.AddElement(ItemLoader.GetItem("Stone"), stonesCount);
 			}
-			catch (Exception) { }
 
 			Died += () =>
 			{

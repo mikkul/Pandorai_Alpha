@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using Pandorai.Creatures;
 using Pandorai.Effects;
 using Pandorai.Sounds;
@@ -20,7 +21,9 @@ namespace Pandorai.Items
 		public int RequiredMana { get; set; }
 		public Color TooltipColor { get; set; } = Color.Gray;
 		public Color ColorTint { get; set; } = Color.White;
+		public Point TileIndex { get; set; }
 		public ItemType Type { get; set; }
+		[JsonIgnore]
 		public List<Effect> Effects { get; set; } = new List<Effect>();
 
 		public void Use(Creature creature)
