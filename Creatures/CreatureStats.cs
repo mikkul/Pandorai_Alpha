@@ -44,19 +44,19 @@ namespace Pandorai.Creatures
 
         public int SkillPoints { get; set; }
 
+        public int MaxHealth { get; set; }
         public int Health
         {
             get => _health;
             set => _health = Math.Min(value, MaxHealth);
         }
-        public int MaxHealth { get; set; }
 
+        public int MaxMana { get; set; }
         public int Mana
         {
             get => _mana;
             set => _mana = Math.Min(value, MaxMana);
         }
-        public int MaxMana { get; set; }
 
         public int Speed { get; set; }
         public int Strength { get; set; }
