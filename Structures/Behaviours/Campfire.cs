@@ -8,7 +8,7 @@ namespace Pandorai.Structures.Behaviours
 
         private static Creature _campfireCreature = new Creature(Main.Game)
         {
-            Id = "Fire",
+            TemplateName = "Fire",
         };
 
         public override void Bind()

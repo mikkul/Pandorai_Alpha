@@ -158,7 +158,7 @@ namespace Pandorai.Mechanics
 				return;
 			}
 
-			if (item.Id == SelectedItem.Id)
+			if (item.TemplateName == SelectedItem.TemplateName)
 			{
 				inv1.ReplaceSlot(new EmptyItem(), 1, selectedSlotIndex);
 				inv2.AddElement(SelectedItem, amountFromSelectedItem);

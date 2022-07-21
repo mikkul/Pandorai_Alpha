@@ -33,7 +33,9 @@ namespace Pandorai.Creatures
 		public event CreatureIncomingHandler GotHit;
 		public event CreatureIncomingHandler Interacted;
 
-		public string Id;
+		public int Id { get; set; }
+
+		public string TemplateName;
 
 		public Vector2 Position;
 		public int TextureIndex;
@@ -118,7 +120,7 @@ namespace Pandorai.Creatures
 		{
 			var clone = new Creature(Game)
 			{
-				Id = Id,
+				TemplateName = TemplateName,
 				TextureIndex = TextureIndex,
 				CorpseTextureIndex = CorpseTextureIndex,
 				MovingTextureIndices = MovingTextureIndices,
@@ -311,11 +313,11 @@ namespace Pandorai.Creatures
 		{
 			if(byWhom.IsPossessedCreature())
 			{
-				MessageLog.DisplayMessage($"You hit the {this.Id} for {damage} damage", Color.Green);
+				MessageLog.DisplayMessage($"You hit the {this.TemplateName} for {damage} damage", Color.Green);
 			}
 			else if(this.IsPossessedCreature())
 			{
-				MessageLog.DisplayMessage($"You got hit by a {byWhom.Id} for {damage} damage", Color.Red);
+				MessageLog.DisplayMessage($"You got hit by a {byWhom.TemplateName} for {damage} damage", Color.Red);
 			}
 
 			if(MapIndex.IsInRangeOfPlayer())
@@ -353,11 +355,11 @@ namespace Pandorai.Creatures
             {
                 if (byWhom.IsPossessedCreature())
                 {
-                    MessageLog.DisplayMessage($"You killed the {this.Id}", Color.DarkGreen);
+                    MessageLog.DisplayMessage($"You killed the {this.TemplateName}", Color.DarkGreen);
                 }
                 else if (this.IsPossessedCreature())
                 {
-                    MessageLog.DisplayMessage($"You got killed by a {byWhom.Id}!", Color.DarkRed);
+                    MessageLog.DisplayMessage($"You got killed by a {byWhom.TemplateName}!", Color.DarkRed);
                 }
                 byWhom.Stats.Experience += CreatureStats.GetKillExperience(Stats.Level);
                 Stats.Health = 0;

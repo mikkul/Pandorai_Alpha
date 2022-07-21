@@ -62,7 +62,7 @@ namespace Pandorai.Creatures.Behaviours
 
         private void CatchInWeb(Creature incomingCreature)
         {
-            if(incomingCreature.Id != "Spider")
+            if(incomingCreature.TemplateName != "Spider")
             {
                 incomingCreature.Energy -= EntanglementDurationEnergy;
             }

@@ -41,7 +41,7 @@ namespace Pandorai.MapGeneration
 		public MapGenerator()
 		{
 			_spikesCreature = new Creature(Main.Game);
-			_spikesCreature.Id = "Spikes";
+			_spikesCreature.TemplateName = "Spikes";
 			_spikesCreature.Stats = new CreatureStats(_spikesCreature);
 			_spikesCreature.Stats.Strength = 45;
 		}
@@ -317,7 +317,7 @@ namespace Pandorai.MapGeneration
 						{
 							return false;
 						}
-						return x != teleporterInstance && x.Id == "Teleporter" && otherTelBeh.Id == -1;
+						return x != teleporterInstance && x.TemplateName == "Teleporter" && otherTelBeh.Id == -1;
 					});
 					otherCorrespondingTeleporter.ColorTint = color;
 					otherCorrespondingTeleporter.GetBehaviour<Teleporter>().Id = i;

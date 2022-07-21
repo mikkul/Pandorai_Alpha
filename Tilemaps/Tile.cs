@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using Pandorai.Creatures;
 using Pandorai.Items;
 using Pandorai.Tooltips;
@@ -31,6 +32,7 @@ namespace Pandorai.Tilemaps
 
 		public TooltipInfo TooltipInfo = null;
 
+		[JsonIgnore]
 		public MapObject MapObject;
 
 		public bool Visited = false;

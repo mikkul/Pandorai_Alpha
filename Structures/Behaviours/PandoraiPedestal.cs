@@ -62,7 +62,7 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
-            if (item.Id != "PandoraiGem")
+            if (item.TemplateName != "PandoraiGem")
             {
                 return;
             }

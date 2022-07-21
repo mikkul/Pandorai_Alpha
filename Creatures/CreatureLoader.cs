@@ -24,7 +24,7 @@ namespace Pandorai.Creatures
 			{
 				Creature creature = new Creature(game);
 				creature.Stats = new CreatureStats(creature);
-				creature.Id = node.GetAttribute("id");
+				creature.TemplateName = node.GetAttribute("id");
 				creature.TextureIndex = int.Parse(node.GetAttribute("texture"));
 				creature.Stats.MaxHealth = int.Parse(node.GetAttribute("maxHP"));
 				creature.Stats.Health = int.Parse(node.GetAttribute("health"));
@@ -122,7 +122,7 @@ namespace Pandorai.Creatures
 					}
 				}
 
-				creatureTemplates.Add(creature.Id, creature);
+				creatureTemplates.Add(creature.TemplateName, creature);
 			}
 		}
 	}

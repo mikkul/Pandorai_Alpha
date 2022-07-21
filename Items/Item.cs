@@ -10,7 +10,7 @@ namespace Pandorai.Items
 {
 	public class Item : Entity
 	{
-		public string Id { get; set; }
+		public string TemplateName { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public int Texture { get; set; }
@@ -52,7 +52,7 @@ namespace Pandorai.Items
 		{
 			return new Item
 			{
-				Id = Id,
+				TemplateName = TemplateName,
 				Name = Name,
 				Description = Description,
 				Texture = Texture,

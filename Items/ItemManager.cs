@@ -21,7 +21,7 @@ namespace Pandorai.Items
 
 		public static int GetItemCount(string itemName)
 		{
-			return Items.Where(x => x.Id == itemName).Count();
+			return Items.Where(x => x.TemplateName == itemName).Count();
 		}
 
 		public static void CheckItemInteraction(Creature incomingCreature, TileInfo info)

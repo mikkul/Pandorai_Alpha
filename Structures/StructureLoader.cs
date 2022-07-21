@@ -23,7 +23,7 @@ namespace Pandorai.Structures
 			foreach (XmlElement node in doc.DocumentElement.ChildNodes)
 			{
 				Structure structure = new Structure(game);
-				structure.Id = node.GetAttribute("id");
+				structure.TemplateName = node.GetAttribute("id");
 				structure.Texture = int.Parse(node.GetAttribute("texture"));
 				if (node.HasAttribute("colorTint"))
 					structure.ColorTint = Helper.GetColorFromHex(node.GetAttribute("colorTint"));
@@ -39,7 +39,7 @@ namespace Pandorai.Structures
 					structure.Behaviours.Add(behaviourInstance);
 				}
 
-				structureTemplates.Add(structure.Id, structure);
+				structureTemplates.Add(structure.TemplateName, structure);
 			}
 		}
 	}

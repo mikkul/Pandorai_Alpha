@@ -16,7 +16,7 @@ namespace Pandorai.Structures
 		public event CreatureIncomingHandler Interacted;
 		public event ForceUseHandler UsedForce;
 
-		public string Id { get; set; }
+		public string TemplateName { get; set; }
 
 		public TileInfo Tile { get; set; }
 
@@ -39,7 +39,7 @@ namespace Pandorai.Structures
 		{
 			var clone = new Structure(_game)
 			{
-				Id = Id,
+				TemplateName = TemplateName,
 				Texture = Texture,
 				ColorTint = ColorTint,
 				Behaviours = new List<Behaviour>(Behaviours),

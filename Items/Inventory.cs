@@ -427,22 +427,22 @@ namespace Pandorai.Items
 
         public bool ContainsItem(Item item)
 		{
-            return Items.Any(x => x.Item.Id == item.Id);
+            return Items.Any(x => x.Item.TemplateName == item.TemplateName);
 		}
 
         public bool ContainsItem(string itemName)
 		{
-            return Items.Any(x => x.Item.Id == itemName);
+            return Items.Any(x => x.Item.TemplateName == itemName);
 		}
 
         public InventoryEntry FindItem(Item item)
 		{
-            return Items.Find(i => i.Item.Id == item.Id);
+            return Items.Find(i => i.Item.TemplateName == item.TemplateName);
 		}
 
         public InventoryEntry FindItem(string itemName)
 		{
-            return Items.Find(i => i.Item.Id == itemName);
+            return Items.Find(i => i.Item.TemplateName == itemName);
 		}
 	}
 }

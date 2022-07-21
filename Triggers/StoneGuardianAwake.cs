@@ -13,7 +13,7 @@ namespace Pandorai.Triggers
 		{
 			if(_dummyStoneGuardian == null)
 			{
-				_dummyStoneGuardian = Main.Game.CreatureManager.Creatures.FirstOrDefault(x => x.Id == "StoneGuardian");
+				_dummyStoneGuardian = Main.Game.CreatureManager.Creatures.FirstOrDefault(x => x.TemplateName == "StoneGuardian");
 			}
 
 			if (_dummyStoneGuardian == null || !_dummyStoneGuardian.EnemyClasses.Contains(incomingCreature.Class)) return;
@@ -22,7 +22,7 @@ namespace Pandorai.Triggers
 
 			foreach (var creature in incomingCreature.Game.CreatureManager.Creatures)
 			{
-				if (creature.Id != "StoneGuardian") continue;
+				if (creature.TemplateName != "StoneGuardian") continue;
 
 				float dist = Vector2.DistanceSquared(creature.Position, incomingCreature.Position);
 				if (dist < (range * incomingCreature.Game.Map.TileSize) * (range * incomingCreature.Game.Map.TileSize))

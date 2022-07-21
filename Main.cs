@@ -506,7 +506,7 @@ namespace Pandorai
                 Map.UpdateTileTextures();
             }
 
-            var hero = CreatureManager.Creatures.Single(c => c.Id == "Hero");
+            var hero = CreatureManager.Creatures.Single(c => c.TemplateName == "Hero");
             Player.PossessedCreature = hero;
 
             //
