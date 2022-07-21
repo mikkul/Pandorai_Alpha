@@ -26,9 +26,8 @@ namespace Pandorai.Mechanics
 
         public Vector2 MousePos;
 
-        public InputManager(Main _game)
+        public InputManager()
 		{
-            game = _game;
 		}
 
         public void Update()

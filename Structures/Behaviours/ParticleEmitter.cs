@@ -26,10 +26,10 @@ namespace Pandorai.Structures.Behaviours
             switch (Type)
             {
                 case "Sparkles":
-                    _particleSystem = new PSSparkles(position, NumberOfParticles, Main.Game.squareTexture, ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, Color, true, Main.Game);
+                    _particleSystem = new PSSparkles(position, NumberOfParticles, Main.Game.squareTexture, ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, Color, true);
                     break;
                 case "Fire":
-                    _particleSystem = new PSFire(position, NumberOfParticles, Main.Game.squareTexture, ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, FireWidth, Color, true, Main.Game);
+                    _particleSystem = new PSFire(position, NumberOfParticles, Main.Game.squareTexture, ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, FireWidth, Color, true);
                     break;
                 default:
                     break;

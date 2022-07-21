@@ -21,20 +21,18 @@ namespace Pandorai.Dialogues
 		private List<DialogueOption> _dialogueOptions = new List<DialogueOption>();
 		private List<CustomBool> _customBools = new List<CustomBool>();
 
-		private Main _game;
 		private string _name;
 
-		public Dialogue(string dialogueName, Main game)
+		public Dialogue(string dialogueName)
 		{
 			_name = dialogueName;
 			string fullName = dialogueName + ".txt";
 			_dialogueNodes = DialogueManager.ReadDialogueFile(fullName);
-			_game = game;
 		}
 
 		public Dialogue Clone()
 		{
-			return new Dialogue(_name, _game);
+			return new Dialogue(_name);
 		}
 
 		public DialogueNode GetNode(int index)
@@ -188,11 +186,11 @@ namespace Pandorai.Dialogues
 				if (key == Keys.Space)
 				{
 					ContinueNode(index);
-					_game.InputManager.SingleKeyPress -= handler;
+					Main.Game.InputManager.SingleKeyPress -= handler;
 				}
 			};
 
-			_game.InputManager.SingleKeyPress += handler;
+			Main.Game.InputManager.SingleKeyPress += handler;
 		}
 
 		public void ContinueNode(int index)
@@ -215,7 +213,7 @@ namespace Pandorai.Dialogues
 
 			if(index == -2)
 			{
-				_game.Player.IsInteractingWithSomeone = false;
+				Main.Game.Player.IsInteractingWithSomeone = false;
 				MessageLog.Show();
 			}
 		}
@@ -252,7 +250,7 @@ namespace Pandorai.Dialogues
 
 		public void GiveHeroItem(string itemName)
 		{
-			_game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem(itemName));
+			Main.Game.Player.PossessedCreature.Inventory.AddElement(ItemLoader.GetItem(itemName));
 		}
 
 		public void AddOption(string index)

@@ -26,12 +26,12 @@ namespace Pandorai.Structures
 					if(armor != null && armor.Hits > 0)
 					{
 						info.Tile.MapObject.Structure.UseForce(ForceType.Physical);
-						incomingCreature.Game.TurnManager.PlayerIsReady();
+						Main.Game.TurnManager.PlayerIsReady();
 					}
 					else
 					{
 						info.Tile.MapObject.Structure.Interact(incomingCreature);
-						incomingCreature.Game.TurnManager.PlayerIsReady();
+						Main.Game.TurnManager.PlayerIsReady();
 					}
 				}
 			}

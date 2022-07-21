@@ -33,7 +33,7 @@ namespace Pandorai.Creatures.Behaviours
 
 			if (diffX == 0 || diffY == 0) return;
 
-			var availableTiles = Utility.GenHelper.GetNeighbours(Owner.MapIndex).Where(t => !Owner.Game.Map.GetTile(t).CollisionFlag);
+			var availableTiles = Utility.GenHelper.GetNeighbours(Owner.MapIndex).Where(t => !Main.Game.Map.GetTile(t).CollisionFlag);
 			Point bestTile = Owner.MapIndex;
 			int bestDiff = int.MaxValue;
 			foreach (var tile in availableTiles)

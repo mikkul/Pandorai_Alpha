@@ -39,13 +39,13 @@ namespace Pandorai.Creatures.Behaviours
 
 			Creature targetCreature = null;
 
-			foreach (var creature in Owner.Game.CreatureManager.Creatures)
+			foreach (var creature in Main.Game.CreatureManager.Creatures)
 			{
 				if (Owner.EnemyClasses.Contains(creature.Class))
 				{
 					float dist = Vector2.DistanceSquared(creature.Position, Owner.Position);
 					int realAggroRange = Range - creature.Stats.Stealth;
-					if (dist > (realAggroRange * Owner.Game.Map.TileSize) * (realAggroRange * Owner.Game.Map.TileSize))
+					if (dist > (realAggroRange * Main.Game.Map.TileSize) * (realAggroRange * Main.Game.Map.TileSize))
 					{
 						continue;
 					}
@@ -65,7 +65,7 @@ namespace Pandorai.Creatures.Behaviours
 				if(targetCreature != _lastTargetCreature)
 				{
 					SoundManager.PlaySound(Owner.Sounds.Aggro);
-					var aggroFlash = new PSImplosion(Owner.Position, 25, Main.Game.fireParticleTexture, 1000, Main.Game.Map.TileSize / 2, 20, Color.Purple, true, Main.Game);
+					var aggroFlash = new PSImplosion(Owner.Position, 25, Main.Game.fireParticleTexture, 1000, Main.Game.Map.TileSize / 2, 20, Color.Purple, true);
 					ParticleSystemManager.AddSystem(aggroFlash, true);
 				}
 

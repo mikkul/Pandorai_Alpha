@@ -10,7 +10,7 @@ namespace Pandorai.Creatures.Behaviours
 		{
 			if (name == "DialogueName")
 			{
-				dialogue = new Dialogue(value, Main.Game);
+				dialogue = new Dialogue(value);
 			}
 		}
 

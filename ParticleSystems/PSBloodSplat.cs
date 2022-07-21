@@ -12,7 +12,7 @@ namespace Pandorai.ParticleSystems
 		private Vector2 _gravity;
 		private Random _rng = new Random();
 
-		public PSBloodSplat(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float verticalSpd, float horizontalRange, int partSize, Color color, float gravityValue, bool isWorldCoords, Main game)
+		public PSBloodSplat(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float verticalSpd, float horizontalRange, int partSize, Color color, float gravityValue, bool isWorldCoords)
 		{
 			_centralPosition = position;
 			_numberOfParticles = noOfParticles;
@@ -24,7 +24,6 @@ namespace Pandorai.ParticleSystems
 			_baseColor = color;
 			_gravity = new Vector2(0, gravityValue);
 			_isWorldCoordinates = isWorldCoords;
-			_game = game;
 
 			for (int i = 0; i < _numberOfParticles; i++)
 			{
@@ -40,7 +39,7 @@ namespace Pandorai.ParticleSystems
 			{
 				part = _particles[i];
 
-				part.Update(dt, _gravity, _game.Options.UnitMultiplier);
+				part.Update(dt, _gravity, Main.Game.Options.UnitMultiplier);
 				if (part.LifeTime >= _maxParticleLife)
 				{
 					_particles.RemoveAt(i);

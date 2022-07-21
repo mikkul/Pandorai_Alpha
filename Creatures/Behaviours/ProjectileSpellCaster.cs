@@ -40,7 +40,7 @@ namespace Pandorai.Creatures.Behaviours
 			var spells = Owner.Inventory.Items.FindAll(x => x.Item.Type.HasFlag(ItemType.Spell) && x.Item.Type.HasFlag(ItemType.Projectile));
 			if (spells.Count <= 0) return;
 
-			var spellToUse = spells.GetRandomElement(Owner.Game.MainRng).Item;
+			var spellToUse = spells.GetRandomElement(Main.Game.MainRng).Item;
 
 			spellToUse.Use(Owner);
 			TileInteractionManager.EmulateTileClick(Owner.MapIndex + new Point(Math.Sign(diffX), Math.Sign(diffY)));

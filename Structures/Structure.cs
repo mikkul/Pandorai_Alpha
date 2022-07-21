@@ -28,16 +28,14 @@ namespace Pandorai.Structures
 
 		public ForceResult UsedForceResult = ForceResult.None;
 
-		private Main _game;
 
-		public Structure(Main game)
+		public Structure()
 		{
-			_game = game;
 		}
 
 		public Structure Clone()
 		{
-			var clone = new Structure(_game)
+			var clone = new Structure()
 			{
 				TemplateName = TemplateName,
 				Texture = Texture,
@@ -96,7 +94,7 @@ namespace Pandorai.Structures
 		{
 			Tile.Tile.MapObject = null;
 			Tile.Tile.CollisionFlag = false;
-			ParticleSystemManager.AddSystem(new PSExplosion(Tile.Index.ToVector2() * _game.Options.TileSize, 25, _game.smokeParticleTexture, 1000, 90, 30, Color.Gray, true, _game), true);
+			ParticleSystemManager.AddSystem(new PSExplosion(Tile.Index.ToVector2() * Main.Game.Options.TileSize, 25, Main.Game.smokeParticleTexture, 1000, 90, 30, Color.Gray, true), true);
 			SoundManager.PlaySound("impactwood11");
 		}
 	}

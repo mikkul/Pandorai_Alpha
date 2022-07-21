@@ -43,8 +43,6 @@ namespace Pandorai.Items
         private Panel _currentTooltip = null;
         private bool _isTooltipVisible = false;
 
-        private Main game;
-
         private Proportion _columnProp;
         private Proportion _rowProp;
         private ItemClickHandler _clickHandler;
@@ -53,7 +51,6 @@ namespace Pandorai.Items
         public Inventory(Creature owner, int maxElements = 80)
 		{
             Owner = owner;
-            game = Owner.Game;
             MaxElements = maxElements;
 
             for (int i = 0; i < MaxElements; i++)
@@ -151,7 +148,7 @@ namespace Pandorai.Items
                 ImageTextButton element;
                 if(item.GetType() != typeof(EmptyItem))
 				{
-                    var icon = new TextureRegion(TilesheetManager.MapSpritesheetTexture.ExtractSubtexture(TilesheetManager.MapObjectSpritesheet[item.Texture].Rect, game.GraphicsDevice));
+                    var icon = new TextureRegion(TilesheetManager.MapSpritesheetTexture.ExtractSubtexture(TilesheetManager.MapObjectSpritesheet[item.Texture].Rect, Main.Game.GraphicsDevice));
                     // TODO: make the icon tinted with its item's ColorTint property
                     element = new ImageTextButton
                     {
@@ -206,7 +203,7 @@ namespace Pandorai.Items
                         if(tooltip.Desktop != null)
                             tooltip.RemoveFromDesktop();
                         tooltip = null;
-                        game.InputManager.MouseMove -= moveTooltip;
+                        Main.Game.InputManager.MouseMove -= moveTooltip;
                     };                    
 
                     element.MouseEntered += (s, a) =>
@@ -217,8 +214,8 @@ namespace Pandorai.Items
 
                         _currentTooltip = new Panel
                         {
-                            Left = (int)game.InputManager.MousePos.X,
-                            Top = (int)game.InputManager.MousePos.Y,
+                            Left = (int)Main.Game.InputManager.MousePos.X,
+                            Top = (int)Main.Game.InputManager.MousePos.Y,
                             Background = new SolidBrush(Color.Black * 0.5f),
                             Width = 200,
                             Height = 200,
@@ -254,9 +251,9 @@ namespace Pandorai.Items
                    
                         _currentTooltip.Widgets.Add(stackPanel);
 
-                        game.desktop.Widgets.Add(_currentTooltip);
+                        Main.Game.desktop.Widgets.Add(_currentTooltip);
 
-                        game.InputManager.MouseMove += moveTooltip;
+                        Main.Game.InputManager.MouseMove += moveTooltip;
 
                         var lastTooltip = _currentTooltip;
                         // safety measure
@@ -318,15 +315,15 @@ namespace Pandorai.Items
                 FindItem(item).Amount += amount;
 			}
 
-            if (!game.IsGameStarted) return;
+            if (!Main.Game.IsGameStarted) return;
 
-            if(Owner == Owner.Game.Player.PossessedCreature)
+            if(Owner == Main.Game.Player.PossessedCreature)
 			{
                 DisplayAsMainInventory();
 			}
 
             Sidekick.DisplaySlots();
-            game.Options.AdjustGUI();
+            Main.Game.Options.AdjustGUI();
         }
 
         public void AddElement(Item item, int amount, int slotIndex)
@@ -340,14 +337,14 @@ namespace Pandorai.Items
                 FindItem(item).Amount += amount;
             }
 
-            if (!game.IsGameStarted) return;
+            if (!Main.Game.IsGameStarted) return;
 
-            if (Owner == Owner.Game.Player.PossessedCreature)
+            if (Owner == Main.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }
             Sidekick.DisplaySlots();
-            game.Options.AdjustGUI();
+            Main.Game.Options.AdjustGUI();
         }
 
         public void AddElements(List<Item> items)
@@ -380,12 +377,12 @@ namespace Pandorai.Items
                 ReplaceSlot(new EmptyItem(), 1, index);
 			}
 
-            if (Owner == Owner.Game.Player.PossessedCreature)
+            if (Owner == Main.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }
             Sidekick.DisplaySlots();
-            game.Options.AdjustGUI();
+            Main.Game.Options.AdjustGUI();
         }
 
         public void RemoveElement(string itemName, int amount = 1)
@@ -402,12 +399,12 @@ namespace Pandorai.Items
                 ReplaceSlot(new EmptyItem(), 1, index);
 			}
 
-            if (Owner == Owner.Game.Player.PossessedCreature)
+            if (Owner == Main.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }
             Sidekick.DisplaySlots();
-            game.Options.AdjustGUI();
+            Main.Game.Options.AdjustGUI();
         }
 
         public void ReplaceSlot(Item item, int amount, int slotIndex)
@@ -415,14 +412,14 @@ namespace Pandorai.Items
             Items[slotIndex].Item = item;
             Items[slotIndex].Amount = amount;
 
-            if (!game.IsGameStarted) return;
+            if (!Main.Game.IsGameStarted) return;
 
-            if (Owner == Owner.Game.Player.PossessedCreature)
+            if (Owner == Main.Game.Player.PossessedCreature)
             {
                 DisplayAsMainInventory();
             }
             Sidekick.DisplaySlots();
-            game.Options.AdjustGUI();
+            Main.Game.Options.AdjustGUI();
 		}
 
         public bool ContainsItem(Item item)

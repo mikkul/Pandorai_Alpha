@@ -109,17 +109,7 @@ namespace Pandorai
             CheatConsole.Game = this;
             CheatConsole.InitCommands();
 
-            DialogueManager.game = this;
-
-            CheatShortcuts.Game = this;
-
-            TileInteractionManager.Game = this;
-
-            ParticleSystemManager.game = this;
-
-            MapTooltip.Init(this);
-
-            Options = new Options(this);
+            Options = new Options();
 
             Camera = new Camera();
 
@@ -128,22 +118,22 @@ namespace Pandorai
             Camera.UpdateViewport(Options);
             ViewportTarget = new RenderTarget2D(GraphicsDevice, Camera.Viewport.Width, Camera.Viewport.Height);
 
-            CreatureManager = new CreatureManager(this); 
+            CreatureManager = new CreatureManager(); 
 
             Camera.UpdateViewport(Options);
             ViewportTarget = new RenderTarget2D(GraphicsDevice, Camera.Viewport.Width, Camera.Viewport.Height);
 
-            InputManager = new InputManager(this);
+            InputManager = new InputManager();
 
-            TurnManager = new TurnManager(this);
+            TurnManager = new TurnManager();
 
-            GameStateManager = new GameStateManager(this);
+            GameStateManager = new GameStateManager();
 
-            Player = new PlayerController(this);
+            Player = new PlayerController();
 
             BasicTrivia = new Trivia("defaultTrivia.txt");
 
-            _viewportRenderer = new RenderHelper(this, () => ViewportTarget.Width, () => ViewportTarget.Height);
+            _viewportRenderer = new RenderHelper(() => ViewportTarget.Width, () => ViewportTarget.Height);
 
             TurnManager.PlayerTurnEnded += Player.FinishTurn;
             TurnManager.PlayerTurnEnded += Sidekick.ConsiderTips;
@@ -219,10 +209,10 @@ namespace Pandorai
 
             MyraEnvironment.Game = this;
             desktop = new Desktop();
-            var rootPanel = GUI.LoadGUI(this, desktop);
+            var rootPanel = GUI.LoadGUI(desktop);
             desktop.Root = rootPanel;
 
-            Map = new Map(_spriteBatch, this);
+            Map = new Map(_spriteBatch);
 
             Map.ActiveMapSwitched += LightingManager.MapSwitchHandler;
             Map.ActiveMapSwitched += ParticleSystemManager.MapSwitchHandler;
@@ -269,7 +259,7 @@ namespace Pandorai
                 }
             };
 
-            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false, this);
+            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false);
 
             Sidekick.Init();
         }
@@ -278,8 +268,8 @@ namespace Pandorai
         {
             _firstGameLoad = false;
             ItemLoader.LoadItems(Path.Combine(Content.RootDirectory, "Items/item_spreadsheet.xml"));
-            CreatureLoader.LoadCreatures(Path.Combine(Content.RootDirectory, "Creatures/creatures_spreadsheet.xml"), this);
-            StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"), this);
+            CreatureLoader.LoadCreatures(Path.Combine(Content.RootDirectory, "Creatures/creatures_spreadsheet.xml"));
+            StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"));
 
             LightingManager.LightSourceMask = Content.Load<Texture2D>("lightSource");
             LightingManager.LightingMaskEffect = Content.Load<Effect>("Shaders/lightingMask");
@@ -458,7 +448,10 @@ namespace Pandorai
         protected override void OnExiting(object sender, EventArgs args)
         {
             PersistencyLoader.SaveSettings();
-            PersistencyLoader.SaveGame();
+            if(IsGameStarted)
+            {
+                PersistencyLoader.SaveGame();
+            }
         }
 
         public void StartGame(bool savedGame = false)
@@ -502,7 +495,7 @@ namespace Pandorai
             else
             {
                 var mapGenerator = new MapGenerator();
-                Map.Tiles = mapGenerator.GenerateMap(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
+                Map.Tiles = mapGenerator.GenerateMap(Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
                 Map.UpdateTileTextures();
             }
 

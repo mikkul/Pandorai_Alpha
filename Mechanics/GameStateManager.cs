@@ -14,11 +14,9 @@ namespace Pandorai.Mechanics
 
 		private Queue<Action> _synchronizedActionsQueue = new Queue<Action>();
 
-		private Main _game;
 
-		public GameStateManager(Main game)
+		public GameStateManager()
 		{
-			_game = game;
 		}
 
 		public void AddSynchronizedAction(Action action)
@@ -40,7 +38,7 @@ namespace Pandorai.Mechanics
 
 		public void CheckIfMouseOverViewport(Vector2 pos)
 		{
-			if(_game.Camera.IsInViewport(pos))
+			if(Main.Game.Camera.IsInViewport(pos))
 			{
 				MouseOverViewport?.Invoke(pos);
 			}
@@ -48,7 +46,7 @@ namespace Pandorai.Mechanics
 
 		public void CheckIfLMBClickInViewport(Vector2 pos)
 		{
-			if (_game.Camera.IsInViewport(pos))
+			if (Main.Game.Camera.IsInViewport(pos))
 			{
 				LMBClickInViewport?.Invoke(pos);
 			}
@@ -56,7 +54,7 @@ namespace Pandorai.Mechanics
 
 		public void CheckIfRMBClickInViewport(Vector2 pos)
 		{
-			if (_game.Camera.IsInViewport(pos))
+			if (Main.Game.Camera.IsInViewport(pos))
 			{
 				RMBClickInViewport?.Invoke(pos);
 			}
@@ -78,32 +76,32 @@ namespace Pandorai.Mechanics
 
 		public void PausePlayerMovementHandler()
 		{
-			if (!CheatConsole.IsActive && !_game.Player.IsInteractingWithSomeone)
+			if (!CheatConsole.IsActive && !Main.Game.Player.IsInteractingWithSomeone)
 			{
-				if (_game.Player._isMovingByMouse)
+				if (Main.Game.Player._isMovingByMouse)
 				{
-					_game.Player._isMovingByMouse = false;
+					Main.Game.Player._isMovingByMouse = false;
 				}
-				else if(_game.TurnManager.PercentageCompleted <= 0 || _game.TurnManager.PercentageCompleted >= 1)
+				else if(Main.Game.TurnManager.PercentageCompleted <= 0 || Main.Game.TurnManager.PercentageCompleted >= 1)
 				{
-					_game.TurnManager.SkipHeroTurn();
+					Main.Game.TurnManager.SkipHeroTurn();
 				}
 			}
 		}
 
 		public void DisableMapInteractionHandler()
 		{
-			if(_game.Map.AreTilesInteractive)
+			if(Main.Game.Map.AreTilesInteractive)
 			{
-				_game.Map.DisableTileInteraction();
+				Main.Game.Map.DisableTileInteraction();
 			}
 		}
 
 		public void PauseHandler()
 		{
-			if(!_game.Map.AreTilesInteractive && !CheatConsole.IsActive && !_game.Player.IsInteractingWithSomeone && _game.IsGameStarted)
+			if(!Main.Game.Map.AreTilesInteractive && !CheatConsole.IsActive && !Main.Game.Player.IsInteractingWithSomeone && Main.Game.IsGameStarted)
 			{
-				_game.TogglePauseGame();
+				Main.Game.TogglePauseGame();
 			}
 		}
 	}

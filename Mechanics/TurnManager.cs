@@ -38,14 +38,12 @@ namespace Pandorai.Mechanics
 
 		private float _dayNightValue = 0.5f;
 
-		private Main _game;
 
 		private TurnState _previousState = TurnState.OnHold;
         private TurnState _turnState = TurnState.WaitingForPlayer;
 
-        public TurnManager(Main game)
+        public TurnManager()
 		{
-			_game = game;
 		}
 
         public TurnState TurnState 
@@ -117,7 +115,7 @@ namespace Pandorai.Mechanics
 					TurnState = TurnState.WaitingForPlayer;
 					EnemyTurnEnded?.Invoke();
 					TurnCount++;
-					_game.BasicTrivia.DisplayRandomTrivia(_game);
+					Main.Game.BasicTrivia.DisplayRandomTrivia(Main.Game);
 
 					// day-night cycle
 					_dayNightValue += 1f / DayDurationTurns;
@@ -152,7 +150,7 @@ namespace Pandorai.Mechanics
 
         public void HandleCreatureMovementRequest(Creature creature, Point desiredPoint)
 		{
-			if(creature == _game.Player.PossessedCreature)
+			if(creature == Main.Game.Player.PossessedCreature)
 			{
 				if(TurnState == TurnState.WaitingForPlayer)
 				{
@@ -191,7 +189,7 @@ namespace Pandorai.Mechanics
 			TurnState = TurnState.WaitingForPlayer;
 			_previousState = TurnState.EnemyTurn;
 			TurnCount++;
-			_game.BasicTrivia.DisplayRandomTrivia(_game);
+			Main.Game.BasicTrivia.DisplayRandomTrivia(Main.Game);
 		}
 	}
 }

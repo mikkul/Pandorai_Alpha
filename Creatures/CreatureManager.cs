@@ -18,19 +18,16 @@ namespace Pandorai.Creatures
 		public List<Creature> UndergroundCreatures = new List<Creature>();
 		public List<Creature> SurfaceCreatures = new List<Creature>();
 
-		private Main _game;
-
 		private RenderTarget2D _renderTarget;
 
-		public CreatureManager(Main game)
+		public CreatureManager()
 		{
-			_game = game;
-            _renderTarget = new RenderTarget2D(this._game.GraphicsDevice, this._game.Camera.Viewport.Width, this._game.Camera.Viewport.Height);
+            _renderTarget = new RenderTarget2D(Main.Game.GraphicsDevice, Main.Game.Camera.Viewport.Width, Main.Game.Camera.Viewport.Height);
 		}
 
 		public void RefreshRenderTarget()
 		{
-			_renderTarget = new RenderTarget2D(_game.GraphicsDevice, _game.Camera.Viewport.Width, _game.Camera.Viewport.Height);
+			_renderTarget = new RenderTarget2D(Main.Game.GraphicsDevice, Main.Game.Camera.Viewport.Width, Main.Game.Camera.Viewport.Height);
 		}
 
 		public void CheckCreatureInteraction(Creature incomingCreature, TileInfo info)
@@ -47,9 +44,9 @@ namespace Pandorai.Creatures
 					targetCreature.Interact(incomingCreature);
 				}
 
-				if(incomingCreature == _game.Player.PossessedCreature)
+				if(incomingCreature == Main.Game.Player.PossessedCreature)
 				{
-					_game.TurnManager.PlayerIsReady();
+					Main.Game.TurnManager.PlayerIsReady();
 				}
 			}
 		}
@@ -62,8 +59,8 @@ namespace Pandorai.Creatures
 		public void FinishCreatureMovement(Creature creature)
 		{
 			Point tileIndex = creature.MapIndex;
-			CreatureFinishedMovement?.Invoke(creature, new TileInfo(tileIndex, _game.Map.Tiles[tileIndex.X, tileIndex.Y]));
-			_game.Map.Tiles[tileIndex.X, tileIndex.Y].OnCreatureCame(creature);
+			CreatureFinishedMovement?.Invoke(creature, new TileInfo(tileIndex, Main.Game.Map.Tiles[tileIndex.X, tileIndex.Y]));
+			Main.Game.Map.Tiles[tileIndex.X, tileIndex.Y].OnCreatureCame(creature);
 		}
 
 		public void AdjustPositionsToTileSize(int oldSize, int newSize)
@@ -110,7 +107,7 @@ namespace Pandorai.Creatures
 		public void RemoveCreature(Creature creature)
 		{
 			Creatures.Remove(creature);
-			_game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
+			Main.Game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
 		}
 
 		public void UpdateCreatures()
@@ -128,7 +125,7 @@ namespace Pandorai.Creatures
 					continue;
 				}
 
-				if (Creatures[i] == _game.Player.PossessedCreature)
+				if (Creatures[i] == Main.Game.Player.PossessedCreature)
 				{
 					Creatures[i].UpdatePossessed();
 				}
@@ -141,18 +138,18 @@ namespace Pandorai.Creatures
 
 		public RenderTarget2D DrawCreatures(SpriteBatch spriteBatch)
 		{
-			_game.GraphicsDevice.SetRenderTarget(_renderTarget);
-			_game.GraphicsDevice.Clear(Color.Transparent);
+			Main.Game.GraphicsDevice.SetRenderTarget(_renderTarget);
+			Main.Game.GraphicsDevice.Clear(Color.Transparent);
 			spriteBatch.Begin();
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
-				if(_game.Player.TilesInFOV.Contains(Creatures[i].MapIndex))
+				if(Main.Game.Player.TilesInFOV.Contains(Creatures[i].MapIndex))
 				{
 					Creatures[i].Draw(spriteBatch);
 				}
 			}
 			spriteBatch.End();
-			_game.GraphicsDevice.SetRenderTarget(null);
+			Main.Game.GraphicsDevice.SetRenderTarget(null);
 			return _renderTarget;
 		}
 
@@ -174,14 +171,14 @@ namespace Pandorai.Creatures
 				}
 			}
 
-			_game.TurnManager.EnemyIsReady();
+			Main.Game.TurnManager.EnemyIsReady();
 		}
 
 		public void EndCreaturesTurn()
 		{
 			for (int i = Creatures.Count - 1; i >= 0; i--)
 			{
-				if (Creatures[i] == _game.Player.PossessedCreature) continue;
+				if (Creatures[i] == Main.Game.Player.PossessedCreature) continue;
 
 				Creatures[i].EndTurn();
 			}

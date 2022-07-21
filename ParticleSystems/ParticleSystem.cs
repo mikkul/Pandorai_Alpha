@@ -15,7 +15,6 @@ namespace Pandorai.ParticleSystems
 		protected int _numberOfParticles;
 		protected float _particleSize;
 		protected bool _isWorldCoordinates;
-		protected Main _game;
 		protected float _maxRange = 100;
 
 		protected abstract Particle GenerateParticle();
@@ -34,7 +33,7 @@ namespace Pandorai.ParticleSystems
 				}
 				else
 				{
-					batch.Draw(_baseTexture, GetParticleDisplayRectangle(_game.Camera.GetViewportPosition(particle.Position)), new Color(_baseColor, alpha));
+					batch.Draw(_baseTexture, GetParticleDisplayRectangle(Main.Game.Camera.GetViewportPosition(particle.Position)), new Color(_baseColor, alpha));
 				}
 			}
 			batch.End();
@@ -42,15 +41,15 @@ namespace Pandorai.ParticleSystems
 
 		protected Rectangle GetParticleDisplayRectangle(Vector2 position)
 		{
-			var trueSize = _particleSize * _game.Map.TileSize / Options.DefaultUnitSize;
+			var trueSize = _particleSize * Main.Game.Map.TileSize / Options.DefaultUnitSize;
 			return new Rectangle(position.ToPoint() - new Point((int)(trueSize / 2)), new Point((int)trueSize));
 		}
 
 		public bool IsInViewport()
 		{
-			var viewportPos = _game.Camera.GetViewportPosition(CentralPosition);
-			return (_isWorldCoordinates && _game.Camera.Viewport.Enlarge((int)_maxRange, (int)_maxRange).Contains(viewportPos))
-				|| (!_isWorldCoordinates && _game.Camera.Viewport.Enlarge((int)_maxRange, (int)_maxRange).Contains(_centralPosition));
+			var viewportPos = Main.Game.Camera.GetViewportPosition(CentralPosition);
+			return (_isWorldCoordinates && Main.Game.Camera.Viewport.Enlarge((int)_maxRange, (int)_maxRange).Contains(viewportPos))
+				|| (!_isWorldCoordinates && Main.Game.Camera.Viewport.Enlarge((int)_maxRange, (int)_maxRange).Contains(_centralPosition));
 		}
 
 		public Vector2 CentralPosition {

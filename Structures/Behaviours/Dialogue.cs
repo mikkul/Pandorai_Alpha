@@ -10,7 +10,7 @@ namespace Pandorai.Structures.Behaviours
         {
             if (name == "DialogueName")
 			{
-				_dialogue = new Pandorai.Dialogues.Dialogue(value, Main.Game);
+				_dialogue = new Pandorai.Dialogues.Dialogue(value);
 			}
         }
 

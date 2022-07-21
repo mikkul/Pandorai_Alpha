@@ -37,6 +37,10 @@ namespace Pandorai.Tilemaps
 
 		public bool Visited = false;
 
+		private Tile()
+		{
+		}
+
 		public Tile(int baseType, int texture, bool flag)
 		{
 			BaseType = baseType;

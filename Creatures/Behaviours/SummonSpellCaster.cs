@@ -53,7 +53,7 @@ namespace Pandorai.Creatures.Behaviours
                 return;
             }
 
-			var spellToUse = spells.GetRandomElement(Owner.Game.MainRng).Item;
+			var spellToUse = spells.GetRandomElement(Main.Game.MainRng).Item;
 			spellToUse.Use(Owner);
 		}
 	}

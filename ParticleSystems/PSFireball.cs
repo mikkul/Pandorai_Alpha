@@ -14,7 +14,7 @@ namespace Pandorai.ParticleSystems
 
 		private PSFireball _centralParticle;
 
-		public PSFireball(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, Vector2 particleVelocity, int partSize, float fireballRadius, Color color, bool isWorldCoords, Main game, bool isCenter = false)
+		public PSFireball(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, Vector2 particleVelocity, int partSize, float fireballRadius, Color color, bool isWorldCoords, bool isCenter = false)
 		{
 			_centralPosition = position;
 			_numberOfParticles = noOfParticles;
@@ -25,13 +25,12 @@ namespace Pandorai.ParticleSystems
 			_radius = fireballRadius;
 			_baseColor = color;
 			_isWorldCoordinates = isWorldCoords;
-			_game = game;
 			_isCentralParticle = isCenter;
 
 			// add one big particle in the middle
 			if(!isCenter)
 			{
-				_centralParticle = new PSFireball(position, 1, particleTexture, particleLifeMs, particleVelocity, (int)(_particleSize * 3), 0, color, isWorldCoords, _game, true);
+				_centralParticle = new PSFireball(position, 1, particleTexture, particleLifeMs, particleVelocity, (int)(_particleSize * 3), 0, color, isWorldCoords, true);
 				ParticleSystemManager.AddSystem(_centralParticle, true);
 			}
 
@@ -61,7 +60,7 @@ namespace Pandorai.ParticleSystems
 			{
 				part = _particles[i];
 
-				part.Update(dt, Vector2.Zero, _game.Options.UnitMultiplier);
+				part.Update(dt, Vector2.Zero, Main.Game.Options.UnitMultiplier);
 				if (part.LifeTime >= _maxParticleLife * 0.8f)
 				{
 					_particles.RemoveAt(i);

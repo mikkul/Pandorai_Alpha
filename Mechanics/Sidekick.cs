@@ -23,8 +23,6 @@ namespace Pandorai.Mechanics
 
 		public static Vector2 Position;
 
-		private static Main _game;
-
 		private static Widget _previousGUI = null;
 
 		private static Creature _selectedItemOwner;
@@ -53,17 +51,15 @@ namespace Pandorai.Mechanics
 
 		public static void Init()
 		{
-			_game = Main.Game;
-
-			SlotsSpirit = new Creature(_game);
-			SlotsSpirit.Inventory = new Inventory(new Creature(_game), 4)
+			SlotsSpirit = new Creature();
+			SlotsSpirit.Inventory = new Inventory(new Creature(), 4)
 			{
 				Collumns = 4,
 				Rows = 1,
 				Id = "sidekickInventory"
 			};
 
-			_sparkles = new PSSparkles(Vector2.Zero, 100, _game.squareTexture, 1500, 35, 5, 1000, Color.Violet, true, _game);
+			_sparkles = new PSSparkles(Vector2.Zero, 100, Main.Game.squareTexture, 1500, 35, 5, 1000, Color.Violet, true);
 
 			_noise = new OpenSimplexNoise();
 			
@@ -72,7 +68,7 @@ namespace Pandorai.Mechanics
 
 		public static void InitLate()
 		{
-			Position = _game.Player.PossessedCreature.Position - new Vector2(100, 100);
+			Position = Main.Game.Player.PossessedCreature.Position - new Vector2(100, 100);
 			ParticleSystemManager.AddSystem(_sparkles, false);
 			_thinkingTimer = 0;
 			_newMovementChangeTime = 2500;
@@ -99,7 +95,7 @@ namespace Pandorai.Mechanics
 			_isDraggedItemDetached = false;
 			DraggedItem = null;
 
-			_game.InputManager.MouseMove -= HandleItemDrag;
+			Main.Game.InputManager.MouseMove -= HandleItemDrag;
 		}
 
 		public static void HandleItemSelection(Item item, Creature user, ImageTextButton button)
@@ -107,7 +103,7 @@ namespace Pandorai.Mechanics
 			SelectedItem = item;
 			_selectedItemOwner = user;
 			_selectedItemButton = button;
-			_game.InputManager.MouseMove += HandleItemDrag;
+			Main.Game.InputManager.MouseMove += HandleItemDrag;
 			WasItemDragged = false;
 		}
 
@@ -118,13 +114,13 @@ namespace Pandorai.Mechanics
 			{
 				DraggedItem = new Panel
 				{
-					Left = (int)_game.InputManager.MousePos.X,
-					Top = (int)_game.InputManager.MousePos.Y,
+					Left = (int)Main.Game.InputManager.MousePos.X,
+					Top = (int)Main.Game.InputManager.MousePos.Y,
 					Width = _selectedItemButton.Width,
 					Height = _selectedItemButton.Height,
 					Background = _selectedItemButton.Image,
 				};
-				var root = (Panel)_game.desktop.Root;
+				var root = (Panel)Main.Game.desktop.Root;
 				root.Widgets.Add(DraggedItem);
 				_isDraggedItemDetached = true;
 			}
@@ -208,8 +204,8 @@ namespace Pandorai.Mechanics
 
 		public static void Update(GameTime dt)
 		{
-			SlotsSpirit.Position = _game.Player.PossessedCreature.Position;
-			SlotsSpirit.MapIndex = _game.Player.PossessedCreature.MapIndex;
+			SlotsSpirit.Position = Main.Game.Player.PossessedCreature.Position;
+			SlotsSpirit.MapIndex = Main.Game.Player.PossessedCreature.MapIndex;
 
 			Move(dt);
 
@@ -218,7 +214,7 @@ namespace Pandorai.Mechanics
 
 		public static void Draw(SpriteBatch batch)
 		{
-			var destRect = new Rectangle(_game.Camera.GetViewportPosition(Position - new Vector2(_game.Map.TileSize / 2, _game.Map.TileSize / 2)).ToPoint(), new Point(_game.Map.TileSize));
+			var destRect = new Rectangle(Main.Game.Camera.GetViewportPosition(Position - new Vector2(Main.Game.Map.TileSize / 2, Main.Game.Map.TileSize / 2)).ToPoint(), new Point(Main.Game.Map.TileSize));
 			batch.Draw(Sprite, destRect, Color.White);
 		}
 
@@ -226,7 +222,7 @@ namespace Pandorai.Mechanics
 		{
 			_thinkingTimer += (float)dt.ElapsedGameTime.TotalMilliseconds;
 
-			var playerPos = _game.Player.PossessedCreature.Position;
+			var playerPos = Main.Game.Player.PossessedCreature.Position;
 
 			if (_thinkingTimer >= _movementChangeTime) // changing movement
 			{
@@ -236,15 +232,15 @@ namespace Pandorai.Mechanics
 				_choiceOffset += 1;
 				var choiceNum = _noise.Evaluate(_choiceOffset, 0);
 				//var choiceNum = rng.NextDouble();
-				if(choiceNum < 0.25 || Vector2.Distance(playerPos, Position) > _maxDistance * _game.Map.TileSize)
+				if(choiceNum < 0.25 || Vector2.Distance(playerPos, Position) > _maxDistance * Main.Game.Map.TileSize)
 				{
 					_currentAction = Action.Following;
-					_desiredPos = playerPos + Vector2.Normalize(Position - playerPos) * _safeDistance * _game.Map.TileSize;
+					_desiredPos = playerPos + Vector2.Normalize(Position - playerPos) * _safeDistance * Main.Game.Map.TileSize;
 				}
 				else if(choiceNum < 0.50)
 				{
 					_currentAction = Action.SwitchingSide;
-					_desiredPos = playerPos - Vector2.Normalize(Position - playerPos) * _safeDistance * _game.Map.TileSize;
+					_desiredPos = playerPos - Vector2.Normalize(Position - playerPos) * _safeDistance * Main.Game.Map.TileSize;
 				}
 				else if(choiceNum < 0.80)
 				{
@@ -253,7 +249,7 @@ namespace Pandorai.Mechanics
 					float randomX = (float)_noise.Evaluate(Position.X, Position.Y);
 					float randomY = (float)_noise.Evaluate(Position.Y, Position.X);
 
-					_desiredPos = Position + Vector2.Normalize(new Vector2(randomX, randomY)) * _strafeDistance * _game.Map.TileSize;
+					_desiredPos = Position + Vector2.Normalize(new Vector2(randomX, randomY)) * _strafeDistance * Main.Game.Map.TileSize;
 				}
 				else
 				{
@@ -266,7 +262,7 @@ namespace Pandorai.Mechanics
 			if(_currentAction == Action.Following)
 			{
 				_lerpValue += (float)dt.ElapsedGameTime.TotalMilliseconds / _movementChangeTime;
-				_desiredPos = playerPos + Vector2.Normalize(Position - playerPos) * _safeDistance * _game.Map.TileSize;
+				_desiredPos = playerPos + Vector2.Normalize(Position - playerPos) * _safeDistance * Main.Game.Map.TileSize;
 				Position = Vector2.Lerp(Position, _desiredPos, _lerpValue);
 			}
 			else if(_currentAction == Action.SwitchingSide)

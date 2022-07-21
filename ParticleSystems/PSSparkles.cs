@@ -13,7 +13,7 @@ namespace Pandorai.ParticleSystems
 
 		private float _regenCounter = 0;
 
-		public PSSparkles(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, Color color, bool isWorldCoords, Main game)
+		public PSSparkles(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, Color color, bool isWorldCoords)
 		{
 			_centralPosition = position;
 			_numberOfParticles = noOfParticles;
@@ -24,7 +24,6 @@ namespace Pandorai.ParticleSystems
 			_regenSpan = regenSpanMs;
 			_baseColor = color;
 			_isWorldCoordinates = isWorldCoords;
-			_game = game;
 		}
 
 		protected override Particle GenerateParticle()
@@ -47,7 +46,7 @@ namespace Pandorai.ParticleSystems
 			{
 				part = _particles[i];
 
-				part.Update(dt, Vector2.Zero, _game.Options.UnitMultiplier);
+				part.Update(dt, Vector2.Zero, Main.Game.Options.UnitMultiplier);
 				if(part.LifeTime >= _maxParticleLife)
 				{
 					_particles.RemoveAt(i);

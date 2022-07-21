@@ -15,8 +15,6 @@ namespace Pandorai.ParticleSystems
 
 		static List<ParticleSystem> independentParticleSystems = new List<ParticleSystem>();
 
-		public static Main game;
-
 		public static void MapSwitchHandler(ActiveMap activeMap)
 		{
 			if (activeMap == ActiveMap.Underground)

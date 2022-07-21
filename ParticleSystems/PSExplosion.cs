@@ -12,7 +12,7 @@ namespace Pandorai.ParticleSystems
 		private float _particleSpeed;
 		private Random _rng = new Random();
 
-		public PSExplosion(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, Color color, bool isWorldCoords, Main game)
+		public PSExplosion(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, Color color, bool isWorldCoords)
 		{
 			_centralPosition = position;
 			_numberOfParticles = noOfParticles;
@@ -22,7 +22,6 @@ namespace Pandorai.ParticleSystems
 			_particleSize = partSize;
 			_baseColor = color;
 			_isWorldCoordinates = isWorldCoords;
-			_game = game;
 
 			for (int i = 0; i < _numberOfParticles; i++)
 			{
@@ -39,7 +38,7 @@ namespace Pandorai.ParticleSystems
 				part = _particles[i];
 
 				Vector2 friction = -part.Velocity * FrictionValue;
-				part.Update(dt, friction, _game.Options.UnitMultiplier);
+				part.Update(dt, friction, Main.Game.Options.UnitMultiplier);
 				if (part.LifeTime >= _maxParticleLife)
 				{
 					_particles.RemoveAt(i);

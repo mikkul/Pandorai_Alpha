@@ -16,13 +16,13 @@ namespace Pandorai.Creatures
 			return newCreature;
 		}
 
-		public static void LoadCreatures(string spreadsheetPath, Main game)
+		public static void LoadCreatures(string spreadsheetPath)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.Load(spreadsheetPath);
 			foreach (XmlElement node in doc.DocumentElement.ChildNodes)
 			{
-				Creature creature = new Creature(game);
+				Creature creature = new Creature();
 				creature.Stats = new CreatureStats(creature);
 				creature.TemplateName = node.GetAttribute("id");
 				creature.TextureIndex = int.Parse(node.GetAttribute("texture"));

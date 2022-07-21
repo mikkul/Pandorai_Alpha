@@ -19,7 +19,6 @@ namespace Pandorai.MapGeneration
 {
 	public class MapGenerator
 	{
-		public Main Game;
 		public Regions Rooms = new Regions();
 
 		private Random _rng = new Random();
@@ -40,22 +39,20 @@ namespace Pandorai.MapGeneration
 
 		public MapGenerator()
 		{
-			_spikesCreature = new Creature(Main.Game);
+			_spikesCreature = new Creature();
 			_spikesCreature.TemplateName = "Spikes";
 			_spikesCreature.Stats = new CreatureStats(_spikesCreature);
 			_spikesCreature.Stats.Strength = 45;
 		}
 
-		public async Task<Tile[,]> GenerateMapAsync(Main game, string regionSpreadsheet)
+		public async Task<Tile[,]> GenerateMapAsync(string regionSpreadsheet)
 		{
-			var map = await Task.FromResult(GenerateMap(game, regionSpreadsheet));
+			var map = await Task.FromResult(GenerateMap(regionSpreadsheet));
 			return map;
 		}
 
-		public Tile[,] GenerateMap(Main game, string regionSpreadsheet)
+		public Tile[,] GenerateMap(string regionSpreadsheet)
         {
-			Game = game;
-
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -446,7 +443,7 @@ namespace Pandorai.MapGeneration
 					Point randomBorderPoint;
 					do
 					{
-						randomBorderPoint = room.Border.GetRandomElement(Game.MainRng);
+						randomBorderPoint = room.Border.GetRandomElement(Main.Game.MainRng);
 						safetyCounter++;
 					}
 					while(!isGoodEntrance(randomBorderPoint) && safetyCounter < 1000);
@@ -732,10 +729,10 @@ namespace Pandorai.MapGeneration
 		{
 			Creature creatureInstance = CreatureLoader.GetCreature(creatureName);
 			creatureInstance.MapIndex = point;
-			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * Game.Options.TileSize;
+			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * Main.Game.Options.TileSize;
 			var tile = _map[point.X, point.Y];
 			tile.CollisionFlag = true;
-			Game.CreatureManager.AddCreature(creatureInstance);
+			Main.Game.CreatureManager.AddCreature(creatureInstance);
 			return creatureInstance;
 		}
 
@@ -888,7 +885,7 @@ namespace Pandorai.MapGeneration
                     if (safetyCounter++ > 1000)
                     {
                         Console.WriteLine("Safety counter reached 1000");
-                        Game.CreatureManager.Creatures.Clear();
+                        Main.Game.CreatureManager.Creatures.Clear();
                         StructureManager.Structures.Clear();
                         LightingManager.ClearLightSources();
                         ParticleSystemManager.Clear();
@@ -921,8 +918,8 @@ namespace Pandorai.MapGeneration
                     var creatureClone = creature.Clone();
                     creatureClone.MapIndex = creature.MapIndex;
                     creatureClone.MapIndex += new Point(randomLocationX, randomLocationY);
-                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * Game.Options.TileSize;
-                    Game.CreatureManager.AddCreature(creatureClone);
+                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * Main.Game.Options.TileSize;
+                    Main.Game.CreatureManager.AddCreature(creatureClone);
                 }
 
                 regInfo.TileInfo.CopyTo(_map, randomLocationX, randomLocationY);

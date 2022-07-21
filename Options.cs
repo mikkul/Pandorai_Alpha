@@ -39,23 +39,19 @@ namespace Pandorai
 				value = value < 1 ? 1 : value;
 				TileSizeChanged?.Invoke(tileSize, value);
 				tileSize = value;
-				_game.Map.TileSize = value;
+				Main.Game.Map.TileSize = value;
 			}
 		}
 
 		public float UnitMultiplier => (float)TileSize / (float)DefaultUnitSize;
 
-		private Main _game;
-
 		private Point _newResolution;
 		private bool _newIsFullscreen;
 
-		public Options(Main thisGame)
+		public Options()
 		{
-			_game = thisGame;
-
-			OldResolution = new Point(_game.Graphics.PreferredBackBufferWidth, _game.Graphics.PreferredBackBufferHeight);
-			OldIsFullScreen = _game.Graphics.IsFullScreen;
+			OldResolution = new Point(Main.Game.Graphics.PreferredBackBufferWidth, Main.Game.Graphics.PreferredBackBufferHeight);
+			OldIsFullScreen = Main.Game.Graphics.IsFullScreen;
 
 			_newResolution = OldResolution;
 			_newIsFullscreen = OldIsFullScreen;
@@ -70,10 +66,10 @@ namespace Pandorai
 			OldResolution = _newResolution;
 			OldIsFullScreen = _newIsFullscreen;
 
-			_game.Camera.UpdateViewport(this);
-			_game.Map.SetAmountTilesRendered(_game.Camera.Viewport.Width / _game.Map.TileSize / 2 + 2, _game.Camera.Viewport.Height / _game.Map.TileSize / 2 + 2);
-			_game.ViewportTarget = new RenderTarget2D(_game.GraphicsDevice, _game.Camera.Viewport.Width, _game.Camera.Viewport.Height);
-			_game.Map.OffsetToMiddle = new Vector2(_game.Camera.Viewport.X + _game.Camera.Viewport.Width / 2 - _game.Map.TileSize / 2, _game.Camera.Viewport.Y + _game.Camera.Viewport.Height / 2 - _game.Map.TileSize / 2);
+			Main.Game.Camera.UpdateViewport(this);
+			Main.Game.Map.SetAmountTilesRendered(Main.Game.Camera.Viewport.Width / Main.Game.Map.TileSize / 2 + 2, Main.Game.Camera.Viewport.Height / Main.Game.Map.TileSize / 2 + 2);
+			Main.Game.ViewportTarget = new RenderTarget2D(Main.Game.GraphicsDevice, Main.Game.Camera.Viewport.Width, Main.Game.Camera.Viewport.Height);
+			Main.Game.Map.OffsetToMiddle = new Vector2(Main.Game.Camera.Viewport.X + Main.Game.Camera.Viewport.Width / 2 - Main.Game.Map.TileSize / 2, Main.Game.Camera.Viewport.Y + Main.Game.Camera.Viewport.Height / 2 - Main.Game.Map.TileSize / 2);
 
 			AdjustGUI();
 			SettingsApplied?.Invoke();
@@ -102,17 +98,17 @@ namespace Pandorai
 			};
 			foreach (var id in inventoryIds)
 			{
-				Grid inventoryGrid = (Grid)_game.desktop.Root.FindWidgetById(id);
+				Grid inventoryGrid = (Grid)Main.Game.desktop.Root.FindWidgetById(id);
 				if (inventoryGrid != null)
 				{
 					foreach (var proportion in inventoryGrid.RowsProportions)
 					{
-						proportion.Value = _game.Graphics.PreferredBackBufferWidth / 16;
+						proportion.Value = Main.Game.Graphics.PreferredBackBufferWidth / 16;
 					}
 					foreach (var button in inventoryGrid.Widgets)
 					{
-						button.Width = _game.Graphics.PreferredBackBufferWidth / 16;
-						button.Height = _game.Graphics.PreferredBackBufferWidth / 16;
+						button.Width = Main.Game.Graphics.PreferredBackBufferWidth / 16;
+						button.Height = Main.Game.Graphics.PreferredBackBufferWidth / 16;
 					}
 				}
 			}
@@ -122,39 +118,39 @@ namespace Pandorai
 		{
 			_newResolution = newResolutionArg;
 
-			_game.Graphics.PreferredBackBufferWidth = _newResolution.X;
-			_game.Graphics.PreferredBackBufferHeight = _newResolution.Y;
-			_game.Graphics.ApplyChanges();
+			Main.Game.Graphics.PreferredBackBufferWidth = _newResolution.X;
+			Main.Game.Graphics.PreferredBackBufferHeight = _newResolution.Y;
+			Main.Game.Graphics.ApplyChanges();
 
 			CenterGameWindow();
 
 			// center the options window
 			optionsWindow?.OnKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter);
-			optionsWindow?.ShowModal(_game.desktop, new Point(OldResolution.X / 2 - (int)optionsWindow.Width / 2, OldResolution.Y / 2 - (int)optionsWindow.Height / 2));
+			optionsWindow?.ShowModal(Main.Game.desktop, new Point(OldResolution.X / 2 - (int)optionsWindow.Width / 2, OldResolution.Y / 2 - (int)optionsWindow.Height / 2));
 
-			LightingManager.RefreshRenderTarget(_game.GraphicsDevice, _game.Camera);
+			LightingManager.RefreshRenderTarget(Main.Game.GraphicsDevice, Main.Game.Camera);
 		}
 
 		public void ToggleFullscreen()
 		{
-			_game.Graphics.ToggleFullScreen();
+			Main.Game.Graphics.ToggleFullScreen();
 
 			CenterGameWindow();
 
-			_newIsFullscreen = _game.Graphics.IsFullScreen;
+			_newIsFullscreen = Main.Game.Graphics.IsFullScreen;
 		}
 
 		public void CenterGameWindow()
 		{
-			int windowWidth = _game.Graphics.PreferredBackBufferWidth;
-			int windowHeight = _game.Graphics.PreferredBackBufferHeight;
-			int screenWidth = _game.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
-			int screenHeight = _game.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+			int windowWidth = Main.Game.Graphics.PreferredBackBufferWidth;
+			int windowHeight = Main.Game.Graphics.PreferredBackBufferHeight;
+			int screenWidth = Main.Game.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+			int screenHeight = Main.Game.Graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
 
 			int x = screenWidth / 2 - windowWidth / 2;
 			int y = screenHeight / 2 - windowHeight / 2;
 
-			_game.Window.Position = new Point(x, y);
+			Main.Game.Window.Position = new Point(x, y);
 		}
 	}
 }

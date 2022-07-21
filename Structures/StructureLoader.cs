@@ -16,13 +16,13 @@ namespace Pandorai.Structures
 			return clone;
 		}
 
-		public static void LoadStructures(string spreadsheetPath, Main game)
+		public static void LoadStructures(string spreadsheetPath)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.Load(spreadsheetPath);
 			foreach (XmlElement node in doc.DocumentElement.ChildNodes)
 			{
-				Structure structure = new Structure(game);
+				Structure structure = new Structure();
 				structure.TemplateName = node.GetAttribute("id");
 				structure.Texture = int.Parse(node.GetAttribute("texture"));
 				if (node.HasAttribute("colorTint"))
