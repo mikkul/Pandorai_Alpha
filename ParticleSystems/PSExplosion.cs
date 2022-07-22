@@ -14,16 +14,16 @@ namespace Pandorai.ParticleSystems
 
 		public PSExplosion(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, Color color, bool isWorldCoords)
 		{
-			_centralPosition = position;
-			_numberOfParticles = noOfParticles;
-			_baseTexture = particleTexture;
-			_maxParticleLife = particleLifeMs;
+			CentralPosition = position;
+			NumberOfParticles = noOfParticles;
+			BaseTexture = particleTexture;
+			MaxParticleLife = particleLifeMs;
 			_particleSpeed = particleSpd;
-			_particleSize = partSize;
-			_baseColor = color;
-			_isWorldCoordinates = isWorldCoords;
+			ParticleSize = partSize;
+			BaseColor = color;
+			IsWorldCoordinates = isWorldCoords;
 
-			for (int i = 0; i < _numberOfParticles; i++)
+			for (int i = 0; i < NumberOfParticles; i++)
 			{
 				_particles.Add(GenerateParticle());
 			}
@@ -39,7 +39,7 @@ namespace Pandorai.ParticleSystems
 
 				Vector2 friction = -part.Velocity * FrictionValue;
 				part.Update(dt, friction, Main.Game.Options.UnitMultiplier);
-				if (part.LifeTime >= _maxParticleLife)
+				if (part.LifeTime >= MaxParticleLife)
 				{
 					_particles.RemoveAt(i);
 				}
@@ -59,7 +59,7 @@ namespace Pandorai.ParticleSystems
 			float velY = (float)Math.Sin(randAngle) * _particleSpeed + _rng.NextFloat(0, randomnessRange);
 			Vector2 velocity = new Vector2(velX, velY);
 			float randomLife = _rng.Next(0, 50);
-			return new Particle(_centralPosition, velocity, randomLife);
+			return new Particle(CentralPosition, velocity, randomLife);
 		}
 	}
 }

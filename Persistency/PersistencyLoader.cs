@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Pandorai.Creatures;
@@ -133,6 +134,14 @@ namespace Pandorai.Persistency
                     Structure = structureState.Structure,
                 };
                 structureState.Structure.Tile.Tile = tile;
+                var armors = structureState.Structure.Behaviours.Where(x => x.TypeName == "Armor");
+                structureState.Structure.Behaviours.RemoveAll(x => armors.Contains(x));
+                structureState.Structure.Behaviours.AddRange(armors);
+                foreach (var behaviour in structureState.Structure.Behaviours)
+                {
+                    behaviour.Structure = structureState.Structure;
+                    behaviour.Bind();
+                }
 
                 StructureManager.Structures.Add(structureState.Structure);
             }

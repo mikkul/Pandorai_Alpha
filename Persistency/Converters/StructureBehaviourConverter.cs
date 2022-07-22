@@ -2,34 +2,34 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using Pandorai.Effects;
+using Pandorai.Structures.Behaviours;
 
 namespace Pandorai.Persistency.Converters
 {
-    public class EffectSpecifiedConcreteClassConverter : DefaultContractResolver
+    public class StructureBehaviourSpecifiedConcreteClassConverter : DefaultContractResolver
     {
         protected override JsonConverter ResolveContractConverter(Type objectType)
         {
-            if (typeof(Effect).IsAssignableFrom(objectType) && !objectType.IsAbstract)
+            if (typeof(Behaviour).IsAssignableFrom(objectType) && !objectType.IsAbstract)
                 return null; // pretend TableSortRuleConvert is not specified (thus avoiding a stack overflow)
             return base.ResolveContractConverter(objectType);
         }
     }
 
-    public class EffectConverter : JsonConverter
+    public class StructureBehaviourConverter : JsonConverter
     {
-        static JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new EffectSpecifiedConcreteClassConverter() };
+        static JsonSerializerSettings SpecifiedSubclassConversion = new JsonSerializerSettings() { ContractResolver = new StructureBehaviourSpecifiedConcreteClassConverter() };
 
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(Effect));
+            return (objectType == typeof(Behaviour));
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JObject jo = JObject.Load(reader);
-            string effectId = jo["TypeName"].Value<string>();
-            return JsonConvert.DeserializeObject(jo.ToString(), TypeLegends.Effects[effectId], SpecifiedSubclassConversion);
+            string structureBehaviour = jo["TypeName"].Value<string>();
+            return JsonConvert.DeserializeObject(jo.ToString(), TypeLegends.StructureBehaviours[structureBehaviour], SpecifiedSubclassConversion);
         }
 
         public override bool CanWrite

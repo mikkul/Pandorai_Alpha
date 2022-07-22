@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Pandorai.Conditions;
 using Pandorai.Creatures.Behaviours;
 using Pandorai.Effects;
+using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
 
 namespace Pandorai
@@ -49,6 +50,7 @@ namespace Pandorai
 			{ "CreatureSpawnPoint", typeof(CreatureSpawnPoint) },
 			{ "ParticleEmitter", typeof(ParticleEmitter) },
 			{ "Campfire", typeof(Campfire) },
+			{ "CreatureSpawnTrap", typeof(CreatureSpawnTrap) },
 		};
 
         public static Dictionary<string, Type> CreatureBehaviours = new Dictionary<string, Type>
@@ -71,6 +73,16 @@ namespace Pandorai
         public static Dictionary<string, Type> Conditions = new Dictionary<string, Type>
 		{
 			{ "RequiredSkillPoints", typeof(RequiredSkillPointsCondition) },
+		};	
+
+        public static Dictionary<string, Type> ParticleSystems = new Dictionary<string, Type>
+		{
+			{ "PSBloodSplat", typeof(PSBloodSplat) },
+			{ "PSExplosion", typeof(PSExplosion) },
+			{ "PSFire", typeof(PSFire) },
+			{ "PSFireball", typeof(PSFireball) },
+			{ "PSImplosion", typeof(PSImplosion) },
+			{ "PSSparkles", typeof(PSSparkles) },
 		};		
     }
 }

@@ -17,27 +17,33 @@ namespace Pandorai.Dialogues
 		public string NPCName;
 		public string PlayerName;
 
-		private List<DialogueNode> _dialogueNodes = new List<DialogueNode>();
-		private List<DialogueOption> _dialogueOptions = new List<DialogueOption>();
-		private List<CustomBool> _customBools = new List<CustomBool>();
+		public List<DialogueNode> DialogueNodes = new List<DialogueNode>();
+		public List<DialogueOption> DialogueOptions = new List<DialogueOption>();
+		public List<CustomBool> CustomBools = new List<CustomBool>();
 
-		private string _name;
+		public string Name;
 
 		public Dialogue(string dialogueName)
 		{
-			_name = dialogueName;
-			string fullName = dialogueName + ".txt";
-			_dialogueNodes = DialogueManager.ReadDialogueFile(fullName);
+			Name = dialogueName;
+		}
+
+		public void Init()
+		{
+			string fullName = $"{Name}.txt";
+			DialogueNodes = DialogueManager.ReadDialogueFile(fullName);
 		}
 
 		public Dialogue Clone()
 		{
-			return new Dialogue(_name);
+			var clone = new Dialogue(Name);
+			clone.Init();
+			return clone;
 		}
 
 		public DialogueNode GetNode(int index)
 		{
-			return _dialogueNodes.Find(node => node.Index == index);
+			return DialogueNodes.Find(node => node.Index == index);
 		}
 
 		public void ReadNode(int index)
@@ -61,7 +67,7 @@ namespace Pandorai.Dialogues
 
 				if (action.Type == "if")
 				{
-					CustomBool check = _customBools.Find(cBool => cBool.Name == action.Value);
+					CustomBool check = CustomBools.Find(cBool => cBool.Name == action.Value);
 
 					if (check != null && !check.Value)
 					{
@@ -145,7 +151,7 @@ namespace Pandorai.Dialogues
 			{
 				DialogueManager.SetNameLabel(NPCName);
 				DialogueManager.SetTextContent();
-				DialogueManager.ShowOptions(_dialogueOptions, this);
+				DialogueManager.ShowOptions(DialogueOptions, this);
 
 				ReadNode(ourNode.Lead);
 			}
@@ -203,7 +209,7 @@ namespace Pandorai.Dialogues
 				DialogueManager.HideOptions();
 				DialogueManager.SetNameLabel(NPCName);
 				DialogueManager.SetTextContent();
-				DialogueManager.ShowOptions(_dialogueOptions, this);
+				DialogueManager.ShowOptions(DialogueOptions, this);
 			}
 			else
 			{
@@ -233,13 +239,13 @@ namespace Pandorai.Dialogues
 		{
 			bool boolValue = value == "true";
 
-			if (_customBools.Find(cBool => cBool.Name == name) == null)
+			if (CustomBools.Find(cBool => cBool.Name == name) == null)
 			{
-				_customBools.Add(new CustomBool(name, boolValue));
+				CustomBools.Add(new CustomBool(name, boolValue));
 			}
 			else
 			{
-				_customBools.Find(cBool => cBool.Name == name).Value = boolValue;
+				CustomBools.Find(cBool => cBool.Name == name).Value = boolValue;
 			}
 		}
 
@@ -257,13 +263,13 @@ namespace Pandorai.Dialogues
 		{
 			int intIndex = int.Parse(index);
 
-			if (_dialogueOptions.Any(item => item.NodeIndex == intIndex))
+			if (DialogueOptions.Any(item => item.NodeIndex == intIndex))
 			{
 				Console.WriteLine(string.Format("Option nr {0} already exists", intIndex));
 				return;
 			}
 
-			DialogueNode optionNode = _dialogueNodes.Find(item => item.Index == intIndex);
+			DialogueNode optionNode = DialogueNodes.Find(item => item.Index == intIndex);
 			bool isForever = optionNode.Type == "ForeverHeroOption";
 			string optContent = optionNode.Content;
 
@@ -292,13 +298,13 @@ namespace Pandorai.Dialogues
 				dialogueOption.Conditions.Add(conditionInstance);
 			}
 
-			_dialogueOptions.Add(dialogueOption);
+			DialogueOptions.Add(dialogueOption);
 		}
 
 		public void RemoveOption(string index)
 		{
 			int intIndex = int.Parse(index);
-			_dialogueOptions.Remove(_dialogueOptions.Find(item => item.NodeIndex == intIndex));
+			DialogueOptions.Remove(DialogueOptions.Find(item => item.NodeIndex == intIndex));
 		}
 	}
 }

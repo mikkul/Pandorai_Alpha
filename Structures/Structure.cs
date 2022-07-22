@@ -25,7 +25,6 @@ namespace Pandorai.Structures
 
 		public Color ColorTint { get; set; } = Color.White;
 
-		[JsonIgnore]
 		public List<Behaviour> Behaviours = new List<Behaviour>();
 
 		public ForceResult UsedForceResult = ForceResult.None;

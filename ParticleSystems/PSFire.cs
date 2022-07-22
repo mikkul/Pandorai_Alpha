@@ -16,15 +16,15 @@ namespace Pandorai.ParticleSystems
 
 		public PSFire(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, float fireWidth, Color color, bool isWorldCoords)
 		{
-			_centralPosition = position;
-			_numberOfParticles = noOfParticles;
-			_baseTexture = particleTexture;
-			_maxParticleLife = particleLifeMs;
+			CentralPosition = position;
+			NumberOfParticles = noOfParticles;
+			BaseTexture = particleTexture;
+			MaxParticleLife = particleLifeMs;
 			_particleSpeed = particleSpd;
-			_particleSize = partSize;
+			ParticleSize = partSize;
 			_regenSpan = regenSpanMs;
-			_baseColor = color;
-			_isWorldCoordinates = isWorldCoords;
+			BaseColor = color;
+			IsWorldCoordinates = isWorldCoords;
 			_displacementOffsetX = fireWidth;
 		}
 
@@ -34,7 +34,7 @@ namespace Pandorai.ParticleSystems
 			var velY = _rng.NextFloat(-_particleSpeed * 0.1f, -_particleSpeed);
 			Vector2 velocity = new Vector2(velX, velY);
 			float randomLife = _rng.Next(0, 50);
-			Vector2 pos = new Vector2(_centralPosition.X + _rng.NextFloat(-_displacementOffsetX, _displacementOffsetX), _centralPosition.Y);
+			Vector2 pos = new Vector2(CentralPosition.X + _rng.NextFloat(-_displacementOffsetX, _displacementOffsetX), CentralPosition.Y);
 			return new Particle(pos, velocity, randomLife);
 		}
 
@@ -47,15 +47,15 @@ namespace Pandorai.ParticleSystems
 				part = _particles[i];
 
 				part.Update(dt, Vector2.Zero, Main.Game.Options.UnitMultiplier);
-				if (part.LifeTime >= _maxParticleLife)
+				if (part.LifeTime >= MaxParticleLife)
 				{
 					_particles.RemoveAt(i);
 				}
 			}
 
-			if (_particles.Count < _numberOfParticles)
+			if (_particles.Count < NumberOfParticles)
 			{
-				int particlesToAdd = _numberOfParticles - _particles.Count;
+				int particlesToAdd = NumberOfParticles - _particles.Count;
 				float timePerParticle = _regenSpan / particlesToAdd;
 				_regenCounter += (float)dt.ElapsedGameTime.TotalMilliseconds;
 				if (_regenCounter >= timePerParticle)

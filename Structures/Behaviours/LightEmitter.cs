@@ -10,16 +10,16 @@ namespace Pandorai.Structures.Behaviours
 		public int Radius;
 		public float Intesity = 1.0f;
 
-		private LightSource _lightSource;
+		public LightSource LightSource;
 
 		public override void Bind()
 		{
-			_lightSource = LightingManager.AddLightSource(Structure.Tile.Index.ToVector2() * Main.Game.Map.TileSize, Radius, Color, Intesity);
+			LightSource = LightingManager.AddLightSource(Structure.Tile.Index.ToVector2() * Main.Game.Map.TileSize, Radius, Color, Intesity);
 		}
 
 		public override void Unbind()
 		{
-			LightingManager.RemoveLightSource(_lightSource);
+			LightingManager.RemoveLightSource(LightSource);
 		}
 
 		public override void SetAttribute(string name, string value)

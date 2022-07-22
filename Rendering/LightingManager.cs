@@ -13,6 +13,10 @@ namespace Pandorai.Rendering
 		public Color Color;
 		public float Intensity;
 
+		private LightSource()
+		{
+		}
+
 		public LightSource(Vector2 pos, float radius)
 		{
 			Position = pos;

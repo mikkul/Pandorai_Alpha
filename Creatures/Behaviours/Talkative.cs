@@ -11,6 +11,7 @@ namespace Pandorai.Creatures.Behaviours
 			if (name == "DialogueName")
 			{
 				dialogue = new Dialogue(value);
+				dialogue.Init();
 			}
 		}
 

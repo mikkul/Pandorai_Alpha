@@ -10,7 +10,7 @@ namespace Pandorai.Structures.Behaviours
 	{
         public Dictionary<string, int> Creatures { get; set; } = new ();
 
-        private bool _interacted;
+        public bool Interacted { get; set; }
 
 		public override Behaviour Clone()
 		{
@@ -36,12 +36,12 @@ namespace Pandorai.Structures.Behaviours
 
         public override void Interact(Creature creature)
 		{
-            if(_interacted)
+            if(Interacted)
             {
                 return;
             }
 
-            _interacted = true;
+            Interacted = true;
 
             var neighbours = GenHelper.Get8Neighbours(Structure.Tile.Index);
 

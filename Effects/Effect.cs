@@ -8,7 +8,7 @@ namespace Pandorai.Effects
 	[JsonConverter(typeof(EffectConverter))]
 	public abstract class Effect
 	{
-		public string Id => GetType().Name;
+		public string TypeName => GetType().Name;
 
 		public abstract void Use(Creature usingCreature);
 

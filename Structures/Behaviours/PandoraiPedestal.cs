@@ -11,7 +11,7 @@ namespace Pandorai.Structures.Behaviours
 {
 	public class PandoraiPedestal : Behaviour
 	{
-		private bool _activated = false;
+		public bool Activated { get; set; }
 
 		public override void Bind()
 		{
@@ -40,7 +40,7 @@ namespace Pandorai.Structures.Behaviours
 
 		public override void Interact(Creature creature)
 		{
-			if(!_activated)
+			if(!Activated)
 			{
 				return;
 			}
@@ -57,7 +57,7 @@ namespace Pandorai.Structures.Behaviours
 
 		public void ItemInteract(Item item)
         {
-            if (_activated)
+            if (Activated)
             {
                 return;
             }
