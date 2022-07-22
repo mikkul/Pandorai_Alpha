@@ -29,15 +29,14 @@ namespace Pandorai.Mechanics
 
 		public int DayDurationTurns = 750;
 
+		public float DayNightValue = 0.5f;
+
 		public int heroTurnTime = 60;
 		public int enemyTurnTime = 20;
 
 		public int EnergyThreshold = 100;
 
 		private float _timeSinceTurnStart;
-
-		private float _dayNightValue = 0.5f;
-
 
 		private TurnState _previousState = TurnState.OnHold;
         private TurnState _turnState = TurnState.WaitingForPlayer;
@@ -118,12 +117,12 @@ namespace Pandorai.Mechanics
 					Main.Game.BasicTrivia.DisplayRandomTrivia(Main.Game);
 
 					// day-night cycle
-					_dayNightValue += 1f / DayDurationTurns;
-					if(_dayNightValue >= 1f)
+					DayNightValue += 1f / DayDurationTurns;
+					if(DayNightValue >= 1f)
 					{
-						_dayNightValue = 0f;
+						DayNightValue = 0f;
 					}
-					Rendering.LightingManager.LightingMaskEffect.Parameters["timeOfDay"].SetValue(_dayNightValue);
+					Rendering.LightingManager.LightingMaskEffect.Parameters["timeOfDay"].SetValue(DayNightValue);
 				}
 			}
 		}

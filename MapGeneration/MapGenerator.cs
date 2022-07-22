@@ -1525,6 +1525,7 @@ namespace Pandorai.MapGeneration
 					foreach (var point in placementPoints)
 					{
 						tileData[point.X, point.Y].CreatureCame += triggerSpec.Handler;
+						tileData[point.X, point.Y].ActiveTriggers.Add(triggerSpec.Name);
 					}
 					return;
 				}

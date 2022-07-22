@@ -20,6 +20,8 @@ namespace Pandorai.Tilemaps
 		public bool CollisionFlag; // true - solid object, there is collision; false - no collision, is passable
 		public bool IgnoreCollisionFlagOnSearch = false;
 
+		public List<string> ActiveTriggers = new();
+
 		public TileModifier Modifier;
 
 		public bool IsDecal = false;

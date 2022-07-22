@@ -5,6 +5,8 @@ using Pandorai.Creatures.Behaviours;
 using Pandorai.Effects;
 using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
+using Pandorai.Tilemaps;
+using Pandorai.Triggers;
 
 namespace Pandorai
 {
@@ -83,6 +85,12 @@ namespace Pandorai
 			{ "PSFireball", typeof(PSFireball) },
 			{ "PSImplosion", typeof(PSImplosion) },
 			{ "PSSparkles", typeof(PSSparkles) },
-		};		
+		};
+
+        public static Dictionary<string, CreatureIncomingHandler> Triggers = new Dictionary<string, CreatureIncomingHandler>
+		{
+			{ "StoneGuardianAwake", Trigger.StoneGuardianAwake },
+			{ "LeaveLibraryTrigger", Trigger.LeaveLibraryTrigger },
+		};
     }
 }

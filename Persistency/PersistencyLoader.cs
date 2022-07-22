@@ -49,6 +49,13 @@ namespace Pandorai.Persistency
         {
             var gameState = new GameState();
 
+            gameState.DayNightValue = Main.Game.TurnManager.DayNightValue;
+            gameState.TurnCount = Main.Game.TurnManager.TurnCount;
+
+            // TODO: triggers
+            // TODO: particle system textures
+            // TODO: disable save file on death
+
             // tiles
             gameState.Tiles = new TileState[Main.Game.Map.Tiles.GetLength(0), Main.Game.Map.Tiles.GetLength(1)];
             for (int x = 0; x < gameState.Tiles.GetLength(0); x++)
@@ -106,6 +113,9 @@ namespace Pandorai.Persistency
             var json = File.ReadAllText(fullPath);
             var gameState = JsonConvert.DeserializeObject<GameState>(json);
 
+            Main.Game.TurnManager.DayNightValue = gameState.DayNightValue;
+            Main.Game.TurnManager.TurnCount = gameState.TurnCount;
+
             // tiles
             Main.Game.Map.Tiles = new Tile[gameState.Tiles.GetLength(0), gameState.Tiles.GetLength(1)];
             for (int x = 0; x < gameState.Tiles.GetLength(0); x++)
@@ -113,6 +123,10 @@ namespace Pandorai.Persistency
                 for (int y = 0; y < gameState.Tiles.GetLength(1); y++)
                 {
                     Main.Game.Map.Tiles[x, y] = gameState.Tiles[x, y].Tile;
+                    foreach (var triggerName in Main.Game.Map.Tiles[x, y].ActiveTriggers)
+                    {
+                        Main.Game.Map.Tiles[x, y].CreatureCame += TypeLegends.Triggers[triggerName];
+                    }
                 }
             }
 
