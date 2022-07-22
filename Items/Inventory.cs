@@ -148,7 +148,7 @@ namespace Pandorai.Items
                 var item = itemEntry.Item;
 
                 ImageTextButton element;
-                if(item.GetType() != typeof(EmptyItem))
+                if(item.TemplateName != "EmptyItem")
 				{
                     var icon = new TextureRegion(TilesheetManager.MapSpritesheetTexture.ExtractSubtexture(TilesheetManager.MapObjectSpritesheet[item.Texture].Rect, Main.Game.GraphicsDevice));
                     // TODO: make the icon tinted with its item's ColorTint property
@@ -187,7 +187,7 @@ namespace Pandorai.Items
                 element.TouchUp += releaseClickHandler;
 
                 // tooltips
-                if(item.GetType() != typeof(EmptyItem))
+                if(item.TemplateName != "EmptyItem")
 				{
                     MouseHandler moveTooltip = pos =>
                     {

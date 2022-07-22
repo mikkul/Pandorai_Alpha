@@ -72,7 +72,7 @@ namespace Pandorai
 
         public static Dictionary<string, Type> Conditions = new Dictionary<string, Type>
 		{
-			{ "RequiredSkillPoints", typeof(RequiredSkillPointsCondition) },
+			{ "RequiredSkillPointsCondition", typeof(RequiredSkillPointsCondition) },
 		};	
 
         public static Dictionary<string, Type> ParticleSystems = new Dictionary<string, Type>
