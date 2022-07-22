@@ -4,14 +4,14 @@ namespace Pandorai.Creatures.Behaviours
 {
 	public class Talkative : Behaviour
 	{
-		private Dialogue dialogue;
+		public Dialogue Dialogue;
 
 		public override void SetAttribute(string name, string value)
 		{
 			if (name == "DialogueName")
 			{
-				dialogue = new Dialogue(value);
-				dialogue.Init();
+				Dialogue = new Dialogue(value);
+				Dialogue.Init();
 			}
 		}
 
@@ -19,7 +19,7 @@ namespace Pandorai.Creatures.Behaviours
 		{
 			return new Talkative
 			{
-				dialogue = dialogue.Clone(),
+				Dialogue = Dialogue.Clone(),
 			};
 		}
 
@@ -36,7 +36,7 @@ namespace Pandorai.Creatures.Behaviours
 			}
 
 			Main.Game.Player.IsInteractingWithSomeone = true;
-			dialogue.ReadNode(0);
+			Dialogue.ReadNode(0);
 		}
 	}
 }

@@ -2,7 +2,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
-using Pandorai.Creatures;
 using Pandorai.Items;
 using Pandorai.Sounds;
 using Pandorai.Structures;
@@ -120,9 +119,14 @@ namespace Pandorai.Persistency
             // creatures
             foreach (var creatureState in gameState.Creatures)
             {
-                creatureState.Creature.Stats = creatureState.Creature.Stats.Clone(creatureState.Creature);
-                creatureState.Creature.Inventory.Owner = creatureState.Creature;
-                Main.Game.CreatureManager.Creatures.Add(creatureState.Creature);
+                var creature = creatureState.Creature;
+                creature.Stats = creature.Stats.Clone(creature);
+                creature.Inventory.Owner = creature;
+                for (int i = 0; i < creature.Behaviours.Count; i++)
+                {
+                    creature.Behaviours[i].Owner = creature;
+                }
+                Main.Game.CreatureManager.AddCreature(creature);
             }
 
             // structures

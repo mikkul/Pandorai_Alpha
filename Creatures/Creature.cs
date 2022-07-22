@@ -70,7 +70,6 @@ namespace Pandorai.Creatures
 
 		public Point Target;
 
-		[JsonIgnore]
 		public List<Behaviour> Behaviours = new List<Behaviour>();
 
 		public int[] MovingTextureIndices = new int[4];
