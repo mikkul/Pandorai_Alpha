@@ -7,7 +7,8 @@ namespace Pandorai.Items
 		public EmptyItem()
 		{
 			var id = Guid.NewGuid();
-			TemplateName = $"EmptyItem{id}";
+			TemplateName = $"EmptyItem";
+			Id = $"EmptyItem{id}";
 			Texture = 0;
 		}
 	}

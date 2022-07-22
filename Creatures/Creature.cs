@@ -57,7 +57,6 @@ namespace Pandorai.Creatures
 
 		public CreatureSounds Sounds = new CreatureSounds();
 
-		[JsonIgnore]
 		public Inventory Inventory;
 
 		public ActiveMap LevelPresent;

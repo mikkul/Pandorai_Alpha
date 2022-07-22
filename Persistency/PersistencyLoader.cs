@@ -120,6 +120,7 @@ namespace Pandorai.Persistency
             foreach (var creatureState in gameState.Creatures)
             {
                 creatureState.Creature.Stats = creatureState.Creature.Stats.Clone(creatureState.Creature);
+                creatureState.Creature.Inventory.Owner = creatureState.Creature;
                 Main.Game.CreatureManager.Creatures.Add(creatureState.Creature);
             }
 

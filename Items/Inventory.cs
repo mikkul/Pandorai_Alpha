@@ -12,6 +12,7 @@ using System.Timers;
 using Myra.Graphics2D;
 using Pandorai.UI;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Pandorai.Items
 {
@@ -32,6 +33,7 @@ namespace Pandorai.Items
 
         public List<InventoryEntry> Items = new List<InventoryEntry>();
 
+        [JsonIgnore]
         public Creature Owner;
 
         public int Collumns = 4;
@@ -308,7 +310,7 @@ namespace Pandorai.Items
 		{
             if(!ContainsItem(item))
 			{
-                ReplaceSlot(item, amount, Items.IndexOf(Items.Find(i => i.Item.GetType() == typeof(EmptyItem))));
+                ReplaceSlot(item, amount, Items.IndexOf(Items.Find(i => i.Item.TemplateName == "EmptyItem")));
 			}
             else
 			{
