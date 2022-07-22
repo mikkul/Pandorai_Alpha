@@ -24,7 +24,6 @@ namespace Pandorai.Items
 		public Color ColorTint { get; set; } = Color.White;
 		public Point TileIndex { get; set; }
 		public ItemType Type { get; set; }
-		[JsonIgnore]
 		public List<Effect> Effects { get; set; } = new List<Effect>();
 
 		public void Use(Creature creature)
