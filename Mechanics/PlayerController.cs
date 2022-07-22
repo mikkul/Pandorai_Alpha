@@ -7,6 +7,7 @@ using Pandorai.Tilemaps;
 using Pandorai.AStarSearchAlgorithm;
 using System.Collections.Generic;
 using System.Linq;
+using Pandorai.Persistency;
 
 namespace Pandorai.Mechanics
 {
@@ -29,6 +30,7 @@ namespace Pandorai.Mechanics
 
 				possessedCreature = value;
 				possessedCreature.Died += SpawnGhost;
+				possessedCreature.Died += PersistencyLoader.RemoveSaveFile;
 				possessedCreature.Inventory.DisplayAsMainInventory();
 			}
 		}

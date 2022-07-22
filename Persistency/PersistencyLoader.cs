@@ -44,6 +44,12 @@ namespace Pandorai.Persistency
             var fullPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), SavedGameFilePath);
             return File.Exists(fullPath);
         }
+
+        public static void RemoveSaveFile()
+        {
+            var fullPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), SavedGameFilePath);
+            File.Delete(fullPath);
+        }
         
         public static void SaveGame()
         {
@@ -52,9 +58,8 @@ namespace Pandorai.Persistency
             gameState.DayNightValue = Main.Game.TurnManager.DayNightValue;
             gameState.TurnCount = Main.Game.TurnManager.TurnCount;
 
-            // TODO: triggers
+            // TODO: music triggers
             // TODO: particle system textures
-            // TODO: disable save file on death
 
             // tiles
             gameState.Tiles = new TileState[Main.Game.Map.Tiles.GetLength(0), Main.Game.Map.Tiles.GetLength(1)];

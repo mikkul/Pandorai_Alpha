@@ -448,7 +448,7 @@ namespace Pandorai
         protected override void OnExiting(object sender, EventArgs args)
         {
             PersistencyLoader.SaveSettings();
-            if(IsGameStarted)
+            if(IsGameStarted && !Player.IsDead)
             {
                 PersistencyLoader.SaveGame();
             }
