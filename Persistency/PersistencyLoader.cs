@@ -58,8 +58,6 @@ namespace Pandorai.Persistency
             gameState.DayNightValue = Main.Game.TurnManager.DayNightValue;
             gameState.TurnCount = Main.Game.TurnManager.TurnCount;
 
-            // TODO: particle system textures
-
             // tiles
             gameState.Tiles = new TileState[Main.Game.Map.Tiles.GetLength(0), Main.Game.Map.Tiles.GetLength(1)];
             for (int x = 0; x < gameState.Tiles.GetLength(0); x++)
