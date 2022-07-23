@@ -168,7 +168,7 @@ namespace Pandorai.Persistency
                     Structure = structureState.Structure,
                 };
                 structureState.Structure.Tile.Tile = tile;
-                var armors = structureState.Structure.Behaviours.Where(x => x.TypeName == "Armor");
+                var armors = structureState.Structure.Behaviours.Where(x => x.TypeName == "Armor").ToList();
                 structureState.Structure.Behaviours.RemoveAll(x => armors.Contains(x));
                 structureState.Structure.Behaviours.AddRange(armors);
                 foreach (var behaviour in structureState.Structure.Behaviours)
