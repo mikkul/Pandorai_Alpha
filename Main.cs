@@ -469,6 +469,7 @@ namespace Pandorai
             // display loading sreeen and music
             SoundManager.PlayMusic("Loading");
             desktop.Root.FindWidgetById("difficultyChoiceScreen").Visible = false;
+            desktop.Root.FindWidgetById("mainMenu").Visible = false;
             desktop.Root.FindWidgetById("loadingScreen").Visible = true;
             _loadingAnimationTimer.Start();
 

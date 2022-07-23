@@ -94,7 +94,7 @@ namespace Pandorai.Tilemaps
 
 		public bool HasStructure(params string[] structureNames)
 		{
-			return MapObject != null && MapObject.Structure != null && structureNames.Any(x => MapObject.Structure.Id == x);
+			return MapObject != null && MapObject.Structure != null && structureNames.Any(x => MapObject.Structure.TemplateName == x);
 		}
 
 		public bool HasItem()
