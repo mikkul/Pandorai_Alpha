@@ -57,6 +57,7 @@ namespace Pandorai.Persistency
 
             gameState.DayNightValue = Main.Game.TurnManager.DayNightValue;
             gameState.TurnCount = Main.Game.TurnManager.TurnCount;
+            gameState.ExperienceMultiplier = Main.Game.ExperienceMultiplier;
 
             // tiles
             gameState.Tiles = new TileState[Main.Game.Map.Tiles.GetLength(0), Main.Game.Map.Tiles.GetLength(1)];
@@ -117,6 +118,7 @@ namespace Pandorai.Persistency
 
             Main.Game.TurnManager.DayNightValue = gameState.DayNightValue;
             Main.Game.TurnManager.TurnCount = gameState.TurnCount;
+            Main.Game.ExperienceMultiplier = gameState.ExperienceMultiplier;
 
             // tiles
             Main.Game.Map.Tiles = new Tile[gameState.Tiles.GetLength(0), gameState.Tiles.GetLength(1)];

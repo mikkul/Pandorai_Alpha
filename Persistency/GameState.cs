@@ -10,5 +10,6 @@ namespace Pandorai.Persistency
         public List<ItemState> Items { get; set; } = new();
         public float DayNightValue { get; set; }
         public int TurnCount { get; set; }
+        public float ExperienceMultiplier { get; set; }
     }
 }
