@@ -91,6 +91,7 @@ namespace Pandorai
 		{
 			{ "StoneGuardianAwake", Trigger.StoneGuardianAwake },
 			{ "LeaveLibraryTrigger", Trigger.LeaveLibraryTrigger },
+			{ "SpikesTrigger", Trigger.SpikesTrigger },
 		};
     }
 }

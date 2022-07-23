@@ -14,6 +14,7 @@ using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Sounds;
 using System.Threading.Tasks;
+using Pandorai.Triggers;
 
 namespace Pandorai.MapGeneration
 {
@@ -33,16 +34,10 @@ namespace Pandorai.MapGeneration
 
 		private Dictionary<string, int> _maxAllowedItemCount;
 
-		private Creature _spikesCreature;
-
 		private int _trapId;
 
 		public MapGenerator()
 		{
-			_spikesCreature = new Creature();
-			_spikesCreature.TemplateName = "Spikes";
-			_spikesCreature.Stats = new CreatureStats(_spikesCreature);
-			_spikesCreature.Stats.Strength = 45;
 		}
 
 		public async Task<Tile[,]> GenerateMapAsync(string regionSpreadsheet)
@@ -654,10 +649,8 @@ namespace Pandorai.MapGeneration
 				var position = GetRandomUntakenPosition(room.Area);
 				_map[position.X, position.Y].Modifier |= TileModifier.Trap;
 				_map[position.X, position.Y].AddTexture(99);
-				_map[position.X, position.Y].CreatureCame += c =>
-				{
-					c.OnGotHit(_spikesCreature);
-				};
+				_map[position.X, position.Y].ActiveTriggers.Add("SpikesTrigger"); 
+				_map[position.X, position.Y].CreatureCame += Trigger.SpikesTrigger;
 			}
 			else // place a trap controlled by a lever
 			{
