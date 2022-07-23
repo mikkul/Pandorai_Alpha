@@ -602,7 +602,7 @@ namespace Pandorai.MapGeneration
 			{
 				var position = GetRandomUntakenPosition(room.Area);
 				_map[position.X, position.Y].Modifier |= TileModifier.Trap;
-				_map[position.X, position.Y].AddTexture(99);
+				_map[position.X, position.Y].AddTexture(107);
 				_map[position.X, position.Y].ActiveTriggers.Add("SpikesTrigger"); 
 				_map[position.X, position.Y].CreatureCame += Trigger.SpikesTrigger;
 			}
