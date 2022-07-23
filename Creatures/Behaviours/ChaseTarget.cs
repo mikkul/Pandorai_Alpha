@@ -32,7 +32,7 @@ namespace Pandorai.Creatures.Behaviours
 			if (Owner.Target == Owner.MapIndex) return;
 
 			var eightDirections = Movement == "Diagonal";
-			var pathToTarget = AStarCreatures.GetShortestPath(Owner.Game.Map.Tiles, Owner.MapIndex, Owner.Target, true, true, eightDirections);
+			var pathToTarget = AStarCreatures.GetShortestPath(Main.Game.Map.Tiles, Owner.MapIndex, Owner.Target, true, true, eightDirections);
 			if (pathToTarget.Count > 0)
 				Owner.RequestMovement(pathToTarget[0]);
 		}

@@ -6,7 +6,7 @@ namespace Pandorai.Structures.Behaviours
     {
         public int ExperienceGained { get; set; }
 
-        private bool _isRead = false;
+        public bool IsRead { get; set; }
 
         public override void SetAttribute(string name, string value)
         {
@@ -41,13 +41,13 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
-            if(_isRead)
+            if(IsRead)
             {
                 return;
             }
 
             creature.Stats.Experience += (int)(ExperienceGained * Main.Game.ExperienceMultiplier);
-            _isRead = true;
+            IsRead = true;
         }
 
         public override void ForceHandler(ForceType force)

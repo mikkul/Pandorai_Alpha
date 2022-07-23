@@ -17,7 +17,7 @@ namespace Pandorai.Structures.Behaviours
         public int OffsetX = 0;
         public int OffsetY = 0;
 
-        private ParticleSystem _particleSystem;
+        public ParticleSystem ParticleSystem;
 
         public override void Bind()
         {
@@ -26,16 +26,16 @@ namespace Pandorai.Structures.Behaviours
             switch (Type)
             {
                 case "Sparkles":
-                    _particleSystem = new PSSparkles(position, NumberOfParticles, Main.Game.squareTexture, ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, Color, true, Main.Game);
+                    ParticleSystem = new PSSparkles(position, NumberOfParticles, "SquareTexture", ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, Color, true);
                     break;
                 case "Fire":
-                    _particleSystem = new PSFire(position, NumberOfParticles, Main.Game.squareTexture, ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, FireWidth, Color, true, Main.Game);
+                    ParticleSystem = new PSFire(position, NumberOfParticles, "SquareTexture", ParticleLife, ParticleSpeed, ParticleSize, ParticleRegenTime, FireWidth, Color, true);
                     break;
                 default:
                     break;
             }
             
-            ParticleSystemManager.AddSystem(_particleSystem, false);
+            ParticleSystemManager.AddSystem(ParticleSystem, false);
         }
 
         public override void Unbind()

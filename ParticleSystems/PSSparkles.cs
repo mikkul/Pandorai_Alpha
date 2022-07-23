@@ -13,18 +13,17 @@ namespace Pandorai.ParticleSystems
 
 		private float _regenCounter = 0;
 
-		public PSSparkles(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, Color color, bool isWorldCoords, Main game)
+		public PSSparkles(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, Color color, bool isWorldCoords)
 		{
-			_centralPosition = position;
-			_numberOfParticles = noOfParticles;
-			_baseTexture = particleTexture;
-			_maxParticleLife = particleLifeMs;
+			CentralPosition = position;
+			NumberOfParticles = noOfParticles;
+			BaseTextureName = particleTextureName;
+			MaxParticleLife = particleLifeMs;
 			_particleSpeed = particleSpd;
-			_particleSize = partSize;
+			ParticleSize = partSize;
 			_regenSpan = regenSpanMs;
-			_baseColor = color;
-			_isWorldCoordinates = isWorldCoords;
-			_game = game;
+			BaseColor = color;
+			IsWorldCoordinates = isWorldCoords;
 		}
 
 		protected override Particle GenerateParticle()
@@ -36,7 +35,7 @@ namespace Pandorai.ParticleSystems
 			velY += (float)Math.Max(Math.Sign(velY) * range, velY);
 			Vector2 velocity = new Vector2(velX, velY);
 			float randomLife = _rng.Next(0, 50);
-			return new Particle(_centralPosition, velocity, randomLife);
+			return new Particle(CentralPosition, velocity, randomLife);
 		}
 
 		public override bool Update(GameTime dt)
@@ -47,16 +46,16 @@ namespace Pandorai.ParticleSystems
 			{
 				part = _particles[i];
 
-				part.Update(dt, Vector2.Zero, _game.Options.UnitMultiplier);
-				if(part.LifeTime >= _maxParticleLife)
+				part.Update(dt, Vector2.Zero, Main.Game.Options.UnitMultiplier);
+				if(part.LifeTime >= MaxParticleLife)
 				{
 					_particles.RemoveAt(i);
 				}
 			}
 
-			if(_particles.Count < _numberOfParticles)
+			if(_particles.Count < NumberOfParticles)
 			{
-				int particlesToAdd = _numberOfParticles - _particles.Count;
+				int particlesToAdd = NumberOfParticles - _particles.Count;
 				float timePerParticle = _regenSpan / particlesToAdd;
 				_regenCounter += (float)dt.ElapsedGameTime.TotalMilliseconds;
 				if(_regenCounter >= timePerParticle)

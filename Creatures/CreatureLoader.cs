@@ -16,15 +16,15 @@ namespace Pandorai.Creatures
 			return newCreature;
 		}
 
-		public static void LoadCreatures(string spreadsheetPath, Main game)
+		public static void LoadCreatures(string spreadsheetPath)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.Load(spreadsheetPath);
 			foreach (XmlElement node in doc.DocumentElement.ChildNodes)
 			{
-				Creature creature = new Creature(game);
+				Creature creature = new Creature();
 				creature.Stats = new CreatureStats(creature);
-				creature.Id = node.GetAttribute("id");
+				creature.TemplateName = node.GetAttribute("id");
 				creature.TextureIndex = int.Parse(node.GetAttribute("texture"));
 				creature.Stats.MaxHealth = int.Parse(node.GetAttribute("maxHP"));
 				creature.Stats.Health = int.Parse(node.GetAttribute("health"));
@@ -122,7 +122,7 @@ namespace Pandorai.Creatures
 					}
 				}
 
-				creatureTemplates.Add(creature.Id, creature);
+				creatureTemplates.Add(creature.TemplateName, creature);
 			}
 		}
 	}

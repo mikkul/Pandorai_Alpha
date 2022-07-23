@@ -24,7 +24,7 @@ namespace Pandorai.Creatures.Behaviours
 
 			foreach (var tile in vision.VisibleTiles)
 			{
-				var tryCreature = Owner.Game.CreatureManager.GetCreature(tile);
+				var tryCreature = Main.Game.CreatureManager.GetCreature(tile);
 				if (tryCreature == null) continue;
 
 				float dist = Vector2.DistanceSquared(tryCreature.Position, Owner.Position);
@@ -32,7 +32,7 @@ namespace Pandorai.Creatures.Behaviours
 				if(normalVision != null)
 				{
 					int realAggroRange = normalVision.RangeLimit - tryCreature.Stats.Stealth;
-					if (dist > (realAggroRange * Owner.Game.Map.TileSize) * (realAggroRange * Owner.Game.Map.TileSize))
+					if (dist > (realAggroRange * Main.Game.Map.TileSize) * (realAggroRange * Main.Game.Map.TileSize))
 					{
 						continue;
 					}
@@ -43,7 +43,7 @@ namespace Pandorai.Creatures.Behaviours
 					if(_lastTargetCreature != tryCreature)
 					{
 						SoundManager.PlaySound(Owner.Sounds.Aggro);
-						var aggroFlash = new PSImplosion(Owner.Position, 25, Main.Game.fireParticleTexture, 1000, Main.Game.Map.TileSize / 2, 20, Color.Purple, true, Main.Game);
+						var aggroFlash = new PSImplosion(Owner.Position, 25, "FireParticleTexture", 1000, Main.Game.Map.TileSize / 2, 20, Color.Purple, true);
 						ParticleSystemManager.AddSystem(aggroFlash, true);
 					}
 

@@ -11,6 +11,7 @@ using Pandorai.Sounds;
 using Pandorai.UI;
 using Pandorai.ParticleSystems;
 using System;
+using Newtonsoft.Json;
 
 namespace Pandorai.Creatures
 {
@@ -33,7 +34,9 @@ namespace Pandorai.Creatures
 		public event CreatureIncomingHandler GotHit;
 		public event CreatureIncomingHandler Interacted;
 
-		public string Id;
+		public int Id { get; set; }
+
+		public string TemplateName;
 
 		public Vector2 Position;
 		public int TextureIndex;
@@ -65,8 +68,6 @@ namespace Pandorai.Creatures
 
 		public bool IsMoving = false;
 
-		public Main Game;
-
 		public Point Target;
 
 		public List<Behaviour> Behaviours = new List<Behaviour>();
@@ -83,18 +84,16 @@ namespace Pandorai.Creatures
 
 		private bool _savedByGod = false;
 
-		public Creature(Main game)
+		public Creature(bool giveStones = true)
 		{
-			Game = game;
 			Inventory = new Inventory(this);
 
-			try
+			if(giveStones)
 			{
 				var stonesCount = Main.Game.MainRng.Next(0, 3);
 				Inventory.RemoveElement("Stone", 9999);
 				Inventory.AddElement(ItemLoader.GetItem("Stone"), stonesCount);
 			}
-			catch (Exception) { }
 
 			Died += () =>
 			{
@@ -103,10 +102,10 @@ namespace Pandorai.Creatures
 					SoundManager.PlaySound(Sounds.Death);
 				}
 				var corpse = StructureLoader.GetStructure("Corpse");
-				corpse.Tile = TileInfo.GetInfo(MapIndex, Game);
+				corpse.Tile = TileInfo.GetInfo(MapIndex, Main.Game);
 				var container = corpse.GetBehaviour<Pandorai.Structures.Behaviours.Container>();
 				container.Inventory.AddElements(Inventory.Items);
-				Game.Map.GetTile(MapIndex).MapObject = new MapObject(ObjectType.Interactive, CorpseTextureIndex)
+				Main.Game.Map.GetTile(MapIndex).MapObject = new MapObject(ObjectType.Interactive, CorpseTextureIndex)
 				{
 					Structure = corpse,
 				};
@@ -116,9 +115,9 @@ namespace Pandorai.Creatures
 
 		public Creature Clone()
 		{
-			var clone = new Creature(Game)
+			var clone = new Creature()
 			{
-				Id = Id,
+				TemplateName = TemplateName,
 				TextureIndex = TextureIndex,
 				CorpseTextureIndex = CorpseTextureIndex,
 				MovingTextureIndices = MovingTextureIndices,
@@ -156,7 +155,7 @@ namespace Pandorai.Creatures
 			{
 				SetIdleTexture(desiredPosition);
 			}
-			Game.CreatureManager.RequestCreatureMovement(this, desiredPosition);
+			Main.Game.CreatureManager.RequestCreatureMovement(this, desiredPosition);
 		}
 
 		public virtual bool ReadyForTurn()
@@ -170,18 +169,18 @@ namespace Pandorai.Creatures
 
 		public virtual void ReadyForTurn(Vector2 input)
 		{
-			var desiredPosition = Position + (input * Game.Map.TileSize);
+			var desiredPosition = Position + (input * Main.Game.Map.TileSize);
 
-			Point targetTile = Game.Map.GetTileIndexByPosition(desiredPosition);
+			Point targetTile = Main.Game.Map.GetTileIndexByPosition(desiredPosition);
 
 			RequestMovement(targetTile);
 		}
 
 		public virtual void EndTurn()
 		{
-			Position = Game.Map.SnapToGrid(Position);
+			Position = Main.Game.Map.SnapToGrid(Position);
 
-			var newIndex = Game.Map.GetTileIndexByPosition(Position);
+			var newIndex = Main.Game.Map.GetTileIndexByPosition(Position);
 
 			if(newIndex == MapIndex)
 			{
@@ -196,7 +195,7 @@ namespace Pandorai.Creatures
 
 			TurnEnded?.Invoke();
 
-			Game.CreatureManager.FinishCreatureMovement(this);
+			Main.Game.CreatureManager.FinishCreatureMovement(this);
 		}
 
 		public void OnDeath()
@@ -222,25 +221,25 @@ namespace Pandorai.Creatures
 
 		public void Update()
 		{
-			if (Game.TurnManager.TurnState == Mechanics.TurnState.EnemyTurn)
+			if (Main.Game.TurnManager.TurnState == Mechanics.TurnState.EnemyTurn)
 			{
-				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, Game.TurnManager.PercentageCompleted);
+				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, Main.Game.TurnManager.PercentageCompleted);
 				Position = new Vector2(lerpVector2.X, lerpVector2.Y);
 			}
 		}
 
 		public void UpdatePossessed()
 		{
-			if (Game.TurnManager.TurnState == Mechanics.TurnState.PlayerTurn)
+			if (Main.Game.TurnManager.TurnState == Mechanics.TurnState.PlayerTurn)
 			{
-				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, Game.TurnManager.PercentageCompleted);
+				Vector2 lerpVector2 = Vector2.Lerp(StartPosition, TargetPosition, Main.Game.TurnManager.PercentageCompleted);
 				Position = new Vector2(lerpVector2.X, lerpVector2.Y);
 			}
 		}
 
 		public bool IsPossessedCreature()
 		{
-			return this == Game.Player.PossessedCreature;
+			return this == Main.Game.Player.PossessedCreature;
 		}
 
 		public void SetMovementTexture(Point targetPos)
@@ -311,11 +310,11 @@ namespace Pandorai.Creatures
 		{
 			if(byWhom.IsPossessedCreature())
 			{
-				MessageLog.DisplayMessage($"You hit the {this.Id} for {damage} damage", Color.Green);
+				MessageLog.DisplayMessage($"You hit the {this.TemplateName} for {damage} damage", Color.Green);
 			}
 			else if(this.IsPossessedCreature())
 			{
-				MessageLog.DisplayMessage($"You got hit by a {byWhom.Id} for {damage} damage", Color.Red);
+				MessageLog.DisplayMessage($"You got hit by a {byWhom.TemplateName} for {damage} damage", Color.Red);
 			}
 
 			if(MapIndex.IsInRangeOfPlayer())
@@ -335,7 +334,7 @@ namespace Pandorai.Creatures
 						Stats.Health = 1;
 						MessageLog.DisplayMessage("You have miraculously avoided death", Color.Pink);
 						SoundManager.PlaySound("FX148");
-						var particleSystemEffect = new PSImplosion(this.Position, 100, Main.Game.fireParticleTexture, 2000, Main.Game.Map.TileSize, 40, Color.Green, true, Main.Game);
+						var particleSystemEffect = new PSImplosion(this.Position, 100, "FireParticleTexture", 2000, Main.Game.Map.TileSize, 40, Color.Green, true);
 						ParticleSystemManager.AddSystem(particleSystemEffect, true);
 					}
 					else
@@ -353,11 +352,11 @@ namespace Pandorai.Creatures
             {
                 if (byWhom.IsPossessedCreature())
                 {
-                    MessageLog.DisplayMessage($"You killed the {this.Id}", Color.DarkGreen);
+                    MessageLog.DisplayMessage($"You killed the {this.TemplateName}", Color.DarkGreen);
                 }
                 else if (this.IsPossessedCreature())
                 {
-                    MessageLog.DisplayMessage($"You got killed by a {byWhom.Id}!", Color.DarkRed);
+                    MessageLog.DisplayMessage($"You got killed by a {byWhom.TemplateName}!", Color.DarkRed);
                 }
                 byWhom.Stats.Experience += CreatureStats.GetKillExperience(Stats.Level);
                 Stats.Health = 0;
@@ -369,7 +368,7 @@ namespace Pandorai.Creatures
 		public void Move(Point index)
 		{
 			MapIndex = index;
-			Position = MapIndex.ToVector2() * Game.Map.TileSize;
+			Position = MapIndex.ToVector2() * Main.Game.Map.TileSize;
 		}
 
 		public void DamageFlash()
@@ -408,11 +407,11 @@ namespace Pandorai.Creatures
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			var hpBarRect = new Rectangle(Game.Camera.GetViewportPosition(Position - new Vector2(Game.Map.TileSize * 0.375f, Game.Map.TileSize * 0.5f)).ToPoint(), new Point((int)((float)Stats.Health / (float)Stats.MaxHealth * Game.Map.TileSize * 0.75f), Game.Map.TileSize / 10));
-			var destRect = new Rectangle(Game.Camera.GetViewportPosition(Position - new Vector2(Game.Map.TileSize / 2, Game.Map.TileSize / 2)).ToPoint(), new Point(Game.Map.TileSize));
+			var hpBarRect = new Rectangle(Main.Game.Camera.GetViewportPosition(Position - new Vector2(Main.Game.Map.TileSize * 0.375f, Main.Game.Map.TileSize * 0.5f)).ToPoint(), new Point((int)((float)Stats.Health / (float)Stats.MaxHealth * Main.Game.Map.TileSize * 0.75f), Main.Game.Map.TileSize / 10));
+			var destRect = new Rectangle(Main.Game.Camera.GetViewportPosition(Position - new Vector2(Main.Game.Map.TileSize / 2, Main.Game.Map.TileSize / 2)).ToPoint(), new Point(Main.Game.Map.TileSize));
 			if(ShowHPBar)
 			{
-				spriteBatch.Draw(Game.squareTexture, hpBarRect, Color.Red);
+				spriteBatch.Draw(Main.Game.squareTexture, hpBarRect, Color.Red);
 			}
 			spriteBatch.Draw(TilesheetManager.CreatureSpritesheetTexture, destRect, TilesheetManager.CreatureSpritesheet[TextureIndex].Rect, this.Color);
 			// if(Id == "Spider")

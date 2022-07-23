@@ -29,6 +29,8 @@ namespace Pandorai.Mechanics
 
 		public int DayDurationTurns = 750;
 
+		public float DayNightValue = 0.5f;
+
 		public int heroTurnTime = 60;
 		public int enemyTurnTime = 20;
 
@@ -36,16 +38,11 @@ namespace Pandorai.Mechanics
 
 		private float _timeSinceTurnStart;
 
-		private float _dayNightValue = 0.5f;
-
-		private Main _game;
-
 		private TurnState _previousState = TurnState.OnHold;
         private TurnState _turnState = TurnState.WaitingForPlayer;
 
-        public TurnManager(Main game)
+        public TurnManager()
 		{
-			_game = game;
 		}
 
         public TurnState TurnState 
@@ -117,15 +114,15 @@ namespace Pandorai.Mechanics
 					TurnState = TurnState.WaitingForPlayer;
 					EnemyTurnEnded?.Invoke();
 					TurnCount++;
-					_game.BasicTrivia.DisplayRandomTrivia(_game);
+					Main.Game.BasicTrivia.DisplayRandomTrivia(Main.Game);
 
 					// day-night cycle
-					_dayNightValue += 1f / DayDurationTurns;
-					if(_dayNightValue >= 1f)
+					DayNightValue += 1f / DayDurationTurns;
+					if(DayNightValue >= 1f)
 					{
-						_dayNightValue = 0f;
+						DayNightValue = 0f;
 					}
-					Rendering.LightingManager.LightingMaskEffect.Parameters["timeOfDay"].SetValue(_dayNightValue);
+					Rendering.LightingManager.LightingMaskEffect.Parameters["timeOfDay"].SetValue(DayNightValue);
 				}
 			}
 		}
@@ -152,7 +149,7 @@ namespace Pandorai.Mechanics
 
         public void HandleCreatureMovementRequest(Creature creature, Point desiredPoint)
 		{
-			if(creature == _game.Player.PossessedCreature)
+			if(creature == Main.Game.Player.PossessedCreature)
 			{
 				if(TurnState == TurnState.WaitingForPlayer)
 				{
@@ -191,7 +188,7 @@ namespace Pandorai.Mechanics
 			TurnState = TurnState.WaitingForPlayer;
 			_previousState = TurnState.EnemyTurn;
 			TurnCount++;
-			_game.BasicTrivia.DisplayRandomTrivia(_game);
+			Main.Game.BasicTrivia.DisplayRandomTrivia(Main.Game);
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace Pandorai.Structures.Behaviours
 {
 	public class PandoraiPedestal : Behaviour
 	{
-		private bool _activated = false;
+		public bool Activated { get; set; }
 
 		public override void Bind()
 		{
@@ -40,7 +40,7 @@ namespace Pandorai.Structures.Behaviours
 
 		public override void Interact(Creature creature)
 		{
-			if(!_activated)
+			if(!Activated)
 			{
 				return;
 			}
@@ -57,12 +57,12 @@ namespace Pandorai.Structures.Behaviours
 
 		public void ItemInteract(Item item)
         {
-            if (_activated)
+            if (Activated)
             {
                 return;
             }
 
-            if (item.Id != "PandoraiGem")
+            if (item.TemplateName != "PandoraiGem")
             {
                 return;
             }
@@ -95,11 +95,11 @@ namespace Pandorai.Structures.Behaviours
                 PSExplosion wavePS;
                 if (rangeCovered % 2 == 0)
                 {
-                    wavePS = new PSExplosion(position, 150, Main.Game.smokeParticleTexture, time * 1.4f, 64 * range, 100, Helper.GetColorFromHex("#3f6aeb"), true, Main.Game);
+                    wavePS = new PSExplosion(position, 150, "SmokeParticleTexture", time * 1.4f, 64 * range, 100, Helper.GetColorFromHex("#3f6aeb"), true);
                 }
                 else
                 {
-                    wavePS = new PSExplosion(position, 150, Main.Game.smokeParticleTexture, time * 1.4f, 64 * range, 85, Helper.GetColorFromHex("#819ae6"), true, Main.Game);
+                    wavePS = new PSExplosion(position, 150, "SmokeParticleTexture", time * 1.4f, 64 * range, 85, Helper.GetColorFromHex("#819ae6"), true);
                 }
 
                 ParticleSystemManager.AddSystem(wavePS, true);

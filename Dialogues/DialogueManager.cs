@@ -9,8 +9,6 @@ namespace Pandorai.Dialogues
 {
 	public class DialogueManager
 	{
-		public static Main game;
-
 		public static Label NameLabel;
 		public static Label TextLabel;
 		public static VerticalStackPanel OptionsStack;
@@ -19,7 +17,7 @@ namespace Pandorai.Dialogues
 		{
 			List<DialogueNode> nodes = new List<DialogueNode>();
 
-			string filePath = Path.Combine(game.Content.RootDirectory, "DialogueFiles", fileName);
+			string filePath = Path.Combine(Main.Game.Content.RootDirectory, "DialogueFiles", fileName);
 
 			string fileContent = File.ReadAllText(filePath);
 

@@ -1,9 +1,15 @@
-﻿using Pandorai.Creatures;
+﻿using Newtonsoft.Json;
+using Pandorai.Creatures;
+using Pandorai.Persistency.Converters;
 
 namespace Pandorai.Structures.Behaviours
 {
+	[JsonConverter(typeof(StructureBehaviourConverter))]
 	public abstract class Behaviour
 	{
+		public string TypeName => GetType().Name;
+
+		[JsonIgnore]
 		public Structure Structure { get; set; }
 
 		public abstract void Bind();

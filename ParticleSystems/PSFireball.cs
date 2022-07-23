@@ -14,28 +14,27 @@ namespace Pandorai.ParticleSystems
 
 		private PSFireball _centralParticle;
 
-		public PSFireball(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, Vector2 particleVelocity, int partSize, float fireballRadius, Color color, bool isWorldCoords, Main game, bool isCenter = false)
+		public PSFireball(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, Vector2 particleVelocity, int partSize, float fireballRadius, Color color, bool isWorldCoords, bool isCenter = false)
 		{
-			_centralPosition = position;
-			_numberOfParticles = noOfParticles;
-			_baseTexture = particleTexture;
-			_maxParticleLife = particleLifeMs * 1.2f;
+			CentralPosition = position;
+			NumberOfParticles = noOfParticles;
+			BaseTextureName = particleTextureName;
+			MaxParticleLife = particleLifeMs * 1.2f;
 			_velocity = particleVelocity * 1000 / particleLifeMs;
-			_particleSize = partSize;
+			ParticleSize = partSize;
 			_radius = fireballRadius;
-			_baseColor = color;
-			_isWorldCoordinates = isWorldCoords;
-			_game = game;
+			BaseColor = color;
+			IsWorldCoordinates = isWorldCoords;
 			_isCentralParticle = isCenter;
 
 			// add one big particle in the middle
 			if(!isCenter)
 			{
-				_centralParticle = new PSFireball(position, 1, particleTexture, particleLifeMs, particleVelocity, (int)(_particleSize * 3), 0, color, isWorldCoords, _game, true);
+				_centralParticle = new PSFireball(position, 1, particleTextureName, particleLifeMs, particleVelocity, (int)(ParticleSize * 3), 0, color, isWorldCoords, true);
 				ParticleSystemManager.AddSystem(_centralParticle, true);
 			}
 
-			for (int i = 0; i < _numberOfParticles; i++)
+			for (int i = 0; i < NumberOfParticles; i++)
 			{
 				_particles.Add(GenerateParticle());
 			}
@@ -45,7 +44,7 @@ namespace Pandorai.ParticleSystems
 		{
 			for (int i = _particles.Count - 1; i >= 0; i--)
 			{
-				_particles[i].LifeTime = _maxParticleLife - 100;
+				_particles[i].LifeTime = MaxParticleLife - 100;
 			}
 			if(!_isCentralParticle)
 			{
@@ -61,8 +60,8 @@ namespace Pandorai.ParticleSystems
 			{
 				part = _particles[i];
 
-				part.Update(dt, Vector2.Zero, _game.Options.UnitMultiplier);
-				if (part.LifeTime >= _maxParticleLife * 0.8f)
+				part.Update(dt, Vector2.Zero, Main.Game.Options.UnitMultiplier);
+				if (part.LifeTime >= MaxParticleLife * 0.8f)
 				{
 					_particles.RemoveAt(i);
 				}
@@ -79,7 +78,7 @@ namespace Pandorai.ParticleSystems
 			double angle = _rng.NextDouble(0, 2 * Math.PI);
 			float x = (float)Math.Cos(angle) * _radius;
 			float y = (float)Math.Sin(angle) * _radius;
-			Vector2 position = _isCentralParticle ? _centralPosition : new Vector2(_centralPosition.X + x, _centralPosition.Y + y);
+			Vector2 position = _isCentralParticle ? CentralPosition : new Vector2(CentralPosition.X + x, CentralPosition.Y + y);
 			return new Particle(position, _velocity, 0);
 		}
 	}

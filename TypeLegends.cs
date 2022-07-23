@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 using Pandorai.Conditions;
 using Pandorai.Creatures.Behaviours;
 using Pandorai.Effects;
+using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
+using Pandorai.Tilemaps;
+using Pandorai.Triggers;
 
 namespace Pandorai
 {
@@ -49,6 +53,7 @@ namespace Pandorai
 			{ "CreatureSpawnPoint", typeof(CreatureSpawnPoint) },
 			{ "ParticleEmitter", typeof(ParticleEmitter) },
 			{ "Campfire", typeof(Campfire) },
+			{ "CreatureSpawnTrap", typeof(CreatureSpawnTrap) },
 		};
 
         public static Dictionary<string, Type> CreatureBehaviours = new Dictionary<string, Type>
@@ -70,7 +75,36 @@ namespace Pandorai
 
         public static Dictionary<string, Type> Conditions = new Dictionary<string, Type>
 		{
-			{ "RequiredSkillPoints", typeof(RequiredSkillPointsCondition) },
-		};		
+			{ "RequiredSkillPointsCondition", typeof(RequiredSkillPointsCondition) },
+		};	
+
+        public static Dictionary<string, Type> ParticleSystems = new Dictionary<string, Type>
+		{
+			{ "PSBloodSplat", typeof(PSBloodSplat) },
+			{ "PSExplosion", typeof(PSExplosion) },
+			{ "PSFire", typeof(PSFire) },
+			{ "PSFireball", typeof(PSFireball) },
+			{ "PSImplosion", typeof(PSImplosion) },
+			{ "PSSparkles", typeof(PSSparkles) },
+		};
+
+        public static Dictionary<string, CreatureIncomingHandler> Triggers = new Dictionary<string, CreatureIncomingHandler>
+		{
+			{ "StoneGuardianAwake", Trigger.StoneGuardianAwake },
+			{ "LeaveLibraryTrigger", Trigger.LeaveLibraryTrigger },
+			{ "SpikesTrigger", Trigger.SpikesTrigger },
+		};
+
+        public static Dictionary<string, Texture2D> Textures;
+
+		public static void InitTextures()
+		{
+			Textures = new Dictionary<string, Texture2D>
+			{
+				{ "SquareTexture", Main.Game.squareTexture },
+				{ "FireParticleTexture", Main.Game.fireParticleTexture },
+				{ "SmokeParticleTexture", Main.Game.smokeParticleTexture },
+			};
+		}
     }
 }

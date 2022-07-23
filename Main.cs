@@ -26,6 +26,7 @@ using Pandorai.Sounds;
 using Microsoft.Xna.Framework.Media;
 using System.Timers;
 using System.Linq;
+using Pandorai.Persistency;
 
 namespace Pandorai
 {
@@ -110,17 +111,7 @@ namespace Pandorai
             CheatConsole.Game = this;
             CheatConsole.InitCommands();
 
-            DialogueManager.game = this;
-
-            CheatShortcuts.Game = this;
-
-            TileInteractionManager.Game = this;
-
-            ParticleSystemManager.game = this;
-
-            MapTooltip.Init(this);
-
-            Options = new Options(this);
+            Options = new Options();
 
             Camera = new Camera();
 
@@ -129,22 +120,22 @@ namespace Pandorai
             Camera.UpdateViewport(Options);
             ViewportTarget = new RenderTarget2D(GraphicsDevice, Camera.Viewport.Width, Camera.Viewport.Height);
 
-            CreatureManager = new CreatureManager(this); 
+            CreatureManager = new CreatureManager(); 
 
             Camera.UpdateViewport(Options);
             ViewportTarget = new RenderTarget2D(GraphicsDevice, Camera.Viewport.Width, Camera.Viewport.Height);
 
-            InputManager = new InputManager(this);
+            InputManager = new InputManager();
 
-            TurnManager = new TurnManager(this);
+            TurnManager = new TurnManager();
 
-            GameStateManager = new GameStateManager(this);
+            GameStateManager = new GameStateManager();
 
-            Player = new PlayerController(this);
+            Player = new PlayerController();
 
             BasicTrivia = new Trivia("defaultTrivia.txt");
 
-            _viewportRenderer = new RenderHelper(this, () => ViewportTarget.Width, () => ViewportTarget.Height);
+            _viewportRenderer = new RenderHelper(() => ViewportTarget.Width, () => ViewportTarget.Height);
 
             TurnManager.PlayerTurnEnded += Player.FinishTurn;
             TurnManager.PlayerTurnEnded += Sidekick.ConsiderTips;
@@ -210,6 +201,8 @@ namespace Pandorai
 
 		protected override void LoadContent()
         {
+            PersistencyLoader.LoadSettings();
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             squareTexture = Content.Load<Texture2D>("fullSquareTexture");
@@ -218,10 +211,10 @@ namespace Pandorai
 
             MyraEnvironment.Game = this;
             desktop = new Desktop();
-            var rootPanel = GUI.LoadGUI(this, desktop);
+            var rootPanel = GUI.LoadGUI(desktop);
             desktop.Root = rootPanel;
 
-            Map = new Map(_spriteBatch, this);
+            Map = new Map(_spriteBatch);
 
             Map.ActiveMapSwitched += LightingManager.MapSwitchHandler;
             Map.ActiveMapSwitched += ParticleSystemManager.MapSwitchHandler;
@@ -268,7 +261,7 @@ namespace Pandorai
                 }
             };
 
-            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false, this);
+            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, "SquareTexture", 500, 40, 5, 750, Color.Yellow, false);
 
             Sidekick.Init();
         }
@@ -277,8 +270,8 @@ namespace Pandorai
         {
             _firstGameLoad = false;
             ItemLoader.LoadItems(Path.Combine(Content.RootDirectory, "Items/item_spreadsheet.xml"));
-            CreatureLoader.LoadCreatures(Path.Combine(Content.RootDirectory, "Creatures/creatures_spreadsheet.xml"), this);
-            StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"), this);
+            CreatureLoader.LoadCreatures(Path.Combine(Content.RootDirectory, "Creatures/creatures_spreadsheet.xml"));
+            StructureLoader.LoadStructures(Path.Combine(Content.RootDirectory, "Structures/structures_spreadsheet.xml"));
 
             LightingManager.LightSourceMask = Content.Load<Texture2D>("lightSource");
             LightingManager.LightingMaskEffect = Content.Load<Effect>("Shaders/lightingMask");
@@ -287,6 +280,8 @@ namespace Pandorai
 
             fireParticleTexture = Content.Load<Texture2D>("fireParticleTexture");
             smokeParticleTexture = Content.Load<Texture2D>("smokeParticle");
+
+            TypeLegends.InitTextures();
 
             _defaultFont = Content.Load<SpriteFont>("defaultFont");
 
@@ -455,7 +450,16 @@ namespace Pandorai
 			}
         }
 
-        public void StartGame()
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            PersistencyLoader.SaveSettings();
+            if(IsGameStarted && !Player.IsDead)
+            {
+                PersistencyLoader.SaveGame();
+            }
+        }
+
+        public void StartGame(bool savedGame = false)
 		{
             IsGamePaused = true;
             IsGameStarted = false;
@@ -489,13 +493,18 @@ namespace Pandorai
             MessageLog.Clear();
 
             //
-            var mapGenerator = new MapGenerator();
-            Map.Tiles = mapGenerator.GenerateMap(this, Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
+            if(savedGame)
+            {
+                PersistencyLoader.LoadSavedGame();
+            }
+            else
+            {
+                var mapGenerator = new MapGenerator();
+                Map.Tiles = mapGenerator.GenerateMap(Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
+                Map.UpdateTileTextures();
+            }
 
-            //Map.SwitchActiveMap(ActiveMap.Surface);
-            Map.UpdateTileTextures();
-
-            var hero = CreatureManager.Creatures.Single(c => c.Id == "Hero");
+            var hero = CreatureManager.Creatures.Single(c => c.TemplateName == "Hero");
             Player.PossessedCreature = hero;
 
             //
@@ -504,12 +513,14 @@ namespace Pandorai
             Sidekick.DisplaySlots();
             Options.AdjustGUI();
 
-            //CreatureManager.FirstLoadCreatures();
             Player.FinishTurn();
 
             GameStarted?.Invoke();
 
-            SoundManager.PlayMusic("Main_theme");
+            if(!savedGame)
+            {
+                SoundManager.PlayMusic("Main_theme");
+            }
             desktop.Root.FindWidgetById("loadingScreen").Visible = false;
             desktop.Root.FindWidgetById("gameScreen").Visible = true;
             _loadingAnimationTimer.Stop();

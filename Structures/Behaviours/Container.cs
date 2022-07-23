@@ -8,7 +8,7 @@ namespace Pandorai.Structures.Behaviours
 	{
 		public int ClosedTexture;
 		public int OpenTexture;
-		public Inventory Inventory = new Inventory(new Creature(Main.Game));
+		public Inventory Inventory;
 		public bool IsOpened = false;
 
 		public override void SetAttribute(string name, string value)
@@ -29,7 +29,7 @@ namespace Pandorai.Structures.Behaviours
 			{
 				ClosedTexture = ClosedTexture,
 				OpenTexture = OpenTexture,
-				Inventory = new Inventory(new Creature(Main.Game)),
+				Inventory = new Inventory(new Creature()),
 			};
 			return clone;
 		}

@@ -16,11 +16,9 @@ namespace Pandorai.Rendering
 		private Func<int> _widthCalculationFunc;
 		private Func<int> _heightCalculationFunc;
 
-		private Main _game;
 
-		public RenderHelper(Main _game, Func<int> widthCalc, Func<int> heightCalc)
+		public RenderHelper(Func<int> widthCalc, Func<int> heightCalc)
 		{
-			this._game = _game;
 			_widthCalculationFunc = widthCalc;
 			_heightCalculationFunc = heightCalc;
 			RefreshRenderTargets();
@@ -28,9 +26,9 @@ namespace Pandorai.Rendering
 
 		public void RefreshRenderTargets()
 		{
-			_renderTarget = new RenderTarget2D(_game.GraphicsDevice, _widthCalculationFunc(), _heightCalculationFunc());
-			_postprocessingBuffer1 = new RenderTarget2D(_game.GraphicsDevice, _widthCalculationFunc(), _heightCalculationFunc());
-			_postprocessingBuffer2 = new RenderTarget2D(_game.GraphicsDevice, _widthCalculationFunc(), _heightCalculationFunc());
+			_renderTarget = new RenderTarget2D(Main.Game.GraphicsDevice, _widthCalculationFunc(), _heightCalculationFunc());
+			_postprocessingBuffer1 = new RenderTarget2D(Main.Game.GraphicsDevice, _widthCalculationFunc(), _heightCalculationFunc());
+			_postprocessingBuffer2 = new RenderTarget2D(Main.Game.GraphicsDevice, _widthCalculationFunc(), _heightCalculationFunc());
 		}
 
 		public void ApplyEffect(Effect fx)
@@ -43,7 +41,7 @@ namespace Pandorai.Rendering
 			RenderTarget2D lastBuffer = null;
 			RenderTarget2D currentBuffer = _postprocessingBuffer1;
 
-			_game.GraphicsDevice.SetRenderTarget(_postprocessingBuffer1);
+			Main.Game.GraphicsDevice.SetRenderTarget(_postprocessingBuffer1);
 			spriteBatch.Begin();
 			spriteBatch.Draw(texture, _renderTarget.Bounds, Color.White);
 			spriteBatch.End();
@@ -61,17 +59,17 @@ namespace Pandorai.Rendering
 					lastBuffer = _postprocessingBuffer2;
 				}
 
-				_game.GraphicsDevice.SetRenderTarget(currentBuffer);
+				Main.Game.GraphicsDevice.SetRenderTarget(currentBuffer);
 				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, effect: _postprocessingEffects[i]);
 				spriteBatch.Draw(lastBuffer, _renderTarget.Bounds, Color.White);
 				spriteBatch.End();
 			}
 
-			_game.GraphicsDevice.SetRenderTarget(_renderTarget);
+			Main.Game.GraphicsDevice.SetRenderTarget(_renderTarget);
 			spriteBatch.Begin();
 			spriteBatch.Draw(currentBuffer, _renderTarget.Bounds, Color.White);
 			spriteBatch.End();
-			_game.GraphicsDevice.SetRenderTarget(null);
+			Main.Game.GraphicsDevice.SetRenderTarget(null);
 
 			_postprocessingEffects.Clear();
 

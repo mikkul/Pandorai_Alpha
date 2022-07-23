@@ -12,21 +12,20 @@ namespace Pandorai.ParticleSystems
 		private Vector2 _gravity;
 		private Random _rng = new Random();
 
-		public PSBloodSplat(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float verticalSpd, float horizontalRange, int partSize, Color color, float gravityValue, bool isWorldCoords, Main game)
+		public PSBloodSplat(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, float verticalSpd, float horizontalRange, int partSize, Color color, float gravityValue, bool isWorldCoords)
 		{
-			_centralPosition = position;
-			_numberOfParticles = noOfParticles;
-			_baseTexture = particleTexture;
-			_maxParticleLife = particleLifeMs;
+			CentralPosition = position;
+			NumberOfParticles = noOfParticles;
+			BaseTextureName = particleTextureName;
+			MaxParticleLife = particleLifeMs;
 			_verticalSpeed = verticalSpd;
 			_horizontalScatter = horizontalRange;
-			_particleSize = partSize;
-			_baseColor = color;
+			ParticleSize = partSize;
+			BaseColor = color;
 			_gravity = new Vector2(0, gravityValue);
-			_isWorldCoordinates = isWorldCoords;
-			_game = game;
+			IsWorldCoordinates = isWorldCoords;
 
-			for (int i = 0; i < _numberOfParticles; i++)
+			for (int i = 0; i < NumberOfParticles; i++)
 			{
 				_particles.Add(GenerateParticle());
 			}
@@ -40,8 +39,8 @@ namespace Pandorai.ParticleSystems
 			{
 				part = _particles[i];
 
-				part.Update(dt, _gravity, _game.Options.UnitMultiplier);
-				if (part.LifeTime >= _maxParticleLife)
+				part.Update(dt, _gravity, Main.Game.Options.UnitMultiplier);
+				if (part.LifeTime >= MaxParticleLife)
 				{
 					_particles.RemoveAt(i);
 				}
@@ -61,7 +60,7 @@ namespace Pandorai.ParticleSystems
 			float velY = -(float)_rng.NextDouble(_verticalSpeed * 0.5, _verticalSpeed);
 			Vector2 velocity = new Vector2(velX, velY);
 			float randomLife = _rng.Next(0, 50);
-			return new Particle(_centralPosition, velocity, randomLife);
+			return new Particle(CentralPosition, velocity, randomLife);
 		}
 	}
 }

@@ -30,7 +30,7 @@ namespace Pandorai.Items
 			foreach (XmlElement node in doc.DocumentElement.ChildNodes)
 			{
 				Item item = new Item();
-				item.Id = node.GetAttribute("id");
+				item.TemplateName = node.GetAttribute("id");
 				item.Texture = int.Parse(node.GetAttribute("texture"));
 				item.Consumable = bool.Parse(node.GetAttribute("consumable"));
 				if (node.HasAttribute("name"))
@@ -63,7 +63,7 @@ namespace Pandorai.Items
 					item.Effects.Add(effectInstance);
 				}
 
-				_itemTemplates.Add(item.Id, item);
+				_itemTemplates.Add(item.TemplateName, item);
 			}
 		}
 

@@ -8,9 +8,8 @@ using Myra.Graphics2D.UI.Properties;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using Myra.Graphics2D.TextureAtlases;
-using System.Linq;
 using Pandorai.Sounds;
-using System.Globalization;
+using Pandorai.Persistency;
 
 namespace Pandorai.UI
 {
@@ -18,7 +17,6 @@ namespace Pandorai.UI
 	{
         public static Grid InventorySlotsGrid;
 
-        private static Main _game;
         private static Desktop _desktop;
 
         private static Panel _oldInventoryPanel = null;
@@ -26,7 +24,7 @@ namespace Pandorai.UI
         private static bool _isCharacterStatsWindowOpen = false;
         private static Window _characterStatsWindow;
 
-        public static Widget LoadGUI(Main thisGame, Desktop thisDesktop)
+        public static Widget LoadGUI(Desktop thisDesktop)
 		{
             Stylesheet.Current.ButtonStyle.DisabledBackground = new SolidBrush(new Color(0.6f, 0.6f, 0.6f, 1f));
             Stylesheet.Current.ButtonStyle.Height = 25;
@@ -39,7 +37,6 @@ namespace Pandorai.UI
             Stylesheet.Current.HorizontalSeparatorStyle.Image = new TextureRegion(Main.Game.squareTexture);
             Stylesheet.Current.HorizontalSeparatorStyle.Margin = new Thickness(0, 5);
 
-            _game = thisGame;
             _desktop = thisDesktop;
 
             InitCharacterStatsWindow();
@@ -75,7 +72,7 @@ namespace Pandorai.UI
             InventorySlotsGrid.Widgets.Add(inventory);
             _oldInventoryPanel = inventory;
 
-            _game.Options.AdjustGUI();
+            Main.Game.Options.AdjustGUI();
         }
 
         public static void ShowCheatsModifyStatsWindow()
@@ -200,18 +197,18 @@ namespace Pandorai.UI
 
             easier.Click += (s, a) =>
             {
-                _game.ExperienceMultiplier = 1.25f;
-                Task.Run(() => _game.StartGame());
+                Main.Game.ExperienceMultiplier = 1.25f;
+                Task.Run(() => Main.Game.StartGame());
             };
             normal.Click += (s, a) =>
             {
-                _game.ExperienceMultiplier = 1.0f;
-                Task.Run(() => _game.StartGame());
+                Main.Game.ExperienceMultiplier = 1.0f;
+                Task.Run(() => Main.Game.StartGame());
             };
             challenging.Click += (s, a) =>
             {
-                _game.ExperienceMultiplier = 0.75f;
-                Task.Run(() => _game.StartGame());
+                Main.Game.ExperienceMultiplier = 0.75f;
+                Task.Run(() => Main.Game.StartGame());
             };
 
             mainPanel.Widgets.Add(chooseDifficultyLabel);
@@ -235,7 +232,7 @@ namespace Pandorai.UI
 
             Image logo = new Image
             {
-                Background = new TextureRegion(_game.LogoTexture),
+                Background = new TextureRegion(Main.Game.LogoTexture),
                 GridRow = 0,
                 GridColumnSpan = 2,
                 Width = 800,
@@ -246,7 +243,7 @@ namespace Pandorai.UI
 
             Image sampleImage = new Image
             {
-                Background = new TextureRegion(_game.MainMenuImage),
+                Background = new TextureRegion(Main.Game.MainMenuImage),
                 GridRow = 1,
                 GridColumn = 1,
                 Width = 1325,
@@ -277,12 +274,19 @@ namespace Pandorai.UI
                 Text = "Continue",
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                Enabled = false,
+                Enabled = PersistencyLoader.IsSavedGame(),
             };
 
             continueButton.Click += (s, a) =>
             {
-                _game.TogglePauseGame();
+                if(Main.Game.IsGameStarted)
+                {
+                    Main.Game.TogglePauseGame();
+                }
+                else
+                {
+                    Main.Game.StartGame(true);
+                }
             };
 
             var playButton = new TextButton
@@ -294,8 +298,8 @@ namespace Pandorai.UI
 
             playButton.Click += (s, a) =>
             {
-                _game.desktop.Root.FindWidgetById("mainMenu").Visible = false;
-                _game.desktop.Root.FindWidgetById("difficultyChoiceScreen").Visible = true;
+                Main.Game.desktop.Root.FindWidgetById("mainMenu").Visible = false;
+                Main.Game.desktop.Root.FindWidgetById("difficultyChoiceScreen").Visible = true;
             };
 
             var tutorialButton = new TextButton
@@ -349,7 +353,7 @@ namespace Pandorai.UI
 
             exitButton.Click += (s, a) =>
             {
-                _game.Exit();
+                Main.Game.Exit();
             };
 
             buttonsStackPanel.Widgets.Add(continueButton);
@@ -631,11 +635,11 @@ namespace Pandorai.UI
             {
                 if(window.Result)
 				{
-                    _game.Options.ApplyChanges();
+                    Main.Game.Options.ApplyChanges();
 				}
                 else
 				{
-                    _game.Options.RevertChanges();
+                    Main.Game.Options.RevertChanges();
 				}
             };
 
@@ -696,7 +700,7 @@ namespace Pandorai.UI
             {
                 int resolutionWidth = int.Parse(resolutionWidthTextBox.Text);
                 int resolutionHeight = int.Parse(resolutionHeightTextBox.Text);
-                _game.Options.ChangeResolution(new Point(resolutionWidth, resolutionHeight), window);
+                Main.Game.Options.ChangeResolution(new Point(resolutionWidth, resolutionHeight), window);
             };
 
             Label musicVolumeLabel = new Label
@@ -749,11 +753,11 @@ namespace Pandorai.UI
             {
             };
 
-            fullScreenCheckbox.IsPressed = _game.Options.OldIsFullScreen;
+            fullScreenCheckbox.IsPressed = Main.Game.Options.OldIsFullScreen;
 
             fullScreenCheckbox.Click += (s, e) =>
             {
-                _game.Options.ToggleFullscreen();
+                Main.Game.Options.ToggleFullscreen();
             };
 
             verticalStackPanel1.Widgets.Add(resolutionChoice);

@@ -14,12 +14,12 @@ using Pandorai.ParticleSystems;
 using Pandorai.Structures.Behaviours;
 using Pandorai.Sounds;
 using System.Threading.Tasks;
+using Pandorai.Triggers;
 
 namespace Pandorai.MapGeneration
 {
 	public class MapGenerator
 	{
-		public Main Game;
 		public Regions Rooms = new Regions();
 
 		private Random _rng = new Random();
@@ -34,28 +34,20 @@ namespace Pandorai.MapGeneration
 
 		private Dictionary<string, int> _maxAllowedItemCount;
 
-		private Creature _spikesCreature;
-
 		private int _trapId;
 
 		public MapGenerator()
 		{
-			_spikesCreature = new Creature(Main.Game);
-			_spikesCreature.Id = "Spikes";
-			_spikesCreature.Stats = new CreatureStats(_spikesCreature);
-			_spikesCreature.Stats.Strength = 45;
 		}
 
-		public async Task<Tile[,]> GenerateMapAsync(Main game, string regionSpreadsheet)
+		public async Task<Tile[,]> GenerateMapAsync(string regionSpreadsheet)
 		{
-			var map = await Task.FromResult(GenerateMap(game, regionSpreadsheet));
+			var map = await Task.FromResult(GenerateMap(regionSpreadsheet));
 			return map;
 		}
 
-		public Tile[,] GenerateMap(Main game, string regionSpreadsheet)
+		public Tile[,] GenerateMap(string regionSpreadsheet)
         {
-			Game = game;
-
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -268,7 +260,7 @@ namespace Pandorai.MapGeneration
 						{
 							return false;
 						}
-						return x != teleporterInstance && x.Id == "Teleporter" && otherTelBeh.Id == -1;
+						return x != teleporterInstance && x.TemplateName == "Teleporter" && otherTelBeh.Id == -1;
 					});
 					if(otherCorrespondingTeleporter != null)
 					{
@@ -400,7 +392,7 @@ namespace Pandorai.MapGeneration
 					Point randomBorderPoint;
 					do
 					{
-						randomBorderPoint = room.Border.GetRandomElement(Game.MainRng);
+						randomBorderPoint = room.Border.GetRandomElement(Main.Game.MainRng);
 						safetyCounter++;
 					}
 					while(!isGoodEntrance(randomBorderPoint) && safetyCounter < 1000);
@@ -611,10 +603,8 @@ namespace Pandorai.MapGeneration
 				var position = GetRandomUntakenPosition(room.Area);
 				_map[position.X, position.Y].Modifier |= TileModifier.Trap;
 				_map[position.X, position.Y].AddTexture(99);
-				_map[position.X, position.Y].CreatureCame += c =>
-				{
-					c.OnGotHit(_spikesCreature);
-				};
+				_map[position.X, position.Y].ActiveTriggers.Add("SpikesTrigger"); 
+				_map[position.X, position.Y].CreatureCame += Trigger.SpikesTrigger;
 			}
 			else // place a trap controlled by a lever
 			{
@@ -684,7 +674,7 @@ namespace Pandorai.MapGeneration
 			{
 				Item = itemInstance,
 			};
-			ItemManager.AddItem(itemInstance);
+			ItemManager.AddItem(itemInstance, point);
 			return itemInstance;
 		}
 		
@@ -692,10 +682,10 @@ namespace Pandorai.MapGeneration
 		{
 			Creature creatureInstance = CreatureLoader.GetCreature(creatureName);
 			creatureInstance.MapIndex = point;
-			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * Game.Options.TileSize;
+			creatureInstance.Position = creatureInstance.MapIndex.ToVector2() * Main.Game.Options.TileSize;
 			var tile = _map[point.X, point.Y];
 			tile.CollisionFlag = true;
-			Game.CreatureManager.AddCreature(creatureInstance);
+			Main.Game.CreatureManager.AddCreature(creatureInstance);
 			return creatureInstance;
 		}
 
@@ -808,6 +798,7 @@ namespace Pandorai.MapGeneration
                         _map[x, y] = new Tile(1, 9, true);
 
 					// play main music theme
+					_map[x, y].MusicTheme = "Main_theme";
 					_map[x, y].CreatureCame += incomingCreature =>
 					{
 						if(!incomingCreature.IsPossessedCreature())
@@ -848,7 +839,7 @@ namespace Pandorai.MapGeneration
                     if (safetyCounter++ > 1000)
                     {
                         Console.WriteLine("Safety counter reached 1000");
-                        Game.CreatureManager.Creatures.Clear();
+                        Main.Game.CreatureManager.Creatures.Clear();
                         StructureManager.Structures.Clear();
                         LightingManager.ClearLightSources();
                         ParticleSystemManager.Clear();
@@ -881,8 +872,8 @@ namespace Pandorai.MapGeneration
                     var creatureClone = creature.Clone();
                     creatureClone.MapIndex = creature.MapIndex;
                     creatureClone.MapIndex += new Point(randomLocationX, randomLocationY);
-                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * Game.Options.TileSize;
-                    Game.CreatureManager.AddCreature(creatureClone);
+                    creatureClone.Position = creatureClone.MapIndex.ToVector2() * Main.Game.Options.TileSize;
+                    Main.Game.CreatureManager.AddCreature(creatureClone);
                 }
 
                 regInfo.TileInfo.CopyTo(_map, randomLocationX, randomLocationY);
@@ -1136,6 +1127,7 @@ namespace Pandorai.MapGeneration
 			{
 				foreach (var tile in info.TileInfo)
 				{
+					tile.MusicTheme = region.MusicThemeName;
 					tile.CreatureCame += incomingCreature =>
 					{
 						if(!incomingCreature.IsPossessedCreature())
@@ -1488,6 +1480,7 @@ namespace Pandorai.MapGeneration
 					foreach (var point in placementPoints)
 					{
 						tileData[point.X, point.Y].CreatureCame += triggerSpec.Handler;
+						tileData[point.X, point.Y].ActiveTriggers.Add(triggerSpec.Name);
 					}
 					return;
 				}

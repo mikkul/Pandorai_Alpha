@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 using Pandorai.Creatures;
 using Pandorai.Items;
 using Pandorai.Tooltips;
@@ -20,6 +21,9 @@ namespace Pandorai.Tilemaps
 		public bool CollisionFlag; // true - solid object, there is collision; false - no collision, is passable
 		public bool IgnoreCollisionFlagOnSearch = false;
 
+		public List<string> ActiveTriggers = new();
+		public string MusicTheme { get; set; }
+
 		public TileModifier Modifier;
 
 		public bool IsDecal = false;
@@ -32,9 +36,14 @@ namespace Pandorai.Tilemaps
 
 		public TooltipInfo TooltipInfo = null;
 
+		[JsonIgnore]
 		public MapObject MapObject;
 
 		public bool Visited = false;
+
+		private Tile()
+		{
+		}
 
 		public Tile(int baseType, int texture, bool flag)
 		{

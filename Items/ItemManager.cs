@@ -1,4 +1,5 @@
-﻿using Pandorai.Creatures;
+﻿using Microsoft.Xna.Framework;
+using Pandorai.Creatures;
 using Pandorai.Tilemaps;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,15 @@ namespace Pandorai.Items
 
 		public static List<Item> Items = new();
 
-		public static void AddItem(Item item)
+		public static void AddItem(Item item, Point tileIndex)
 		{
+			item.TileIndex = tileIndex;
 			Items.Add(item);
 		}
 
 		public static int GetItemCount(string itemName)
 		{
-			return Items.Where(x => x.Id == itemName).Count();
+			return Items.Where(x => x.TemplateName == itemName).Count();
 		}
 
 		public static void CheckItemInteraction(Creature incomingCreature, TileInfo info)

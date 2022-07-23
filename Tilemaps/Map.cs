@@ -67,21 +67,19 @@ namespace Pandorai.Tilemaps
 		private Color _mouseHiglightDecalColor = Color.Black * 0.1f;
 		private Color _mouseInteractDecalColor = Color.Red * 0.5f;
 
-		private Main _game;
 
-		public Map(SpriteBatch batch, Main _game)
+		public Map(SpriteBatch batch)
 		{
 			_spriteBatch = batch;
-			this._game = _game;
 			TileOffset = Vector2.Zero;
 			CenterTile = Point.Zero;
 			DefaultTileColor = Color.White;
-            _renderTarget = new RenderTarget2D(this._game.GraphicsDevice, this._game.Camera.Viewport.Width, this._game.Camera.Viewport.Height);
+            _renderTarget = new RenderTarget2D(Main.Game.GraphicsDevice, Main.Game.Camera.Viewport.Width, Main.Game.Camera.Viewport.Height);
 		}
 
 		public void RefreshRenderTarget()
 		{
-			_renderTarget = new RenderTarget2D(_game.GraphicsDevice, _game.Camera.Viewport.Width, _game.Camera.Viewport.Height);
+			_renderTarget = new RenderTarget2D(Main.Game.GraphicsDevice, Main.Game.Camera.Viewport.Width, Main.Game.Camera.Viewport.Height);
 		}
 
 		public void UpdateMapRenderingOptions(int oldSize, int newSize)
@@ -89,8 +87,8 @@ namespace Pandorai.Tilemaps
 			TileOffset = Vector2.Zero;
 			CenterTile = Point.Zero;
 			TileSize = newSize;
-			SetAmountTilesRendered(_game.Camera.Viewport.Width / TileSize / 2 + 2, _game.Camera.Viewport.Height / TileSize / 2 + 2);
-			OffsetToMiddle = new Vector2(_game.Camera.Viewport.X + _game.Camera.Viewport.Width / 2 - TileSize / 2, _game.Camera.Viewport.Y + _game.Camera.Viewport.Height / 2 - TileSize / 2);
+			SetAmountTilesRendered(Main.Game.Camera.Viewport.Width / TileSize / 2 + 2, Main.Game.Camera.Viewport.Height / TileSize / 2 + 2);
+			OffsetToMiddle = new Vector2(Main.Game.Camera.Viewport.X + Main.Game.Camera.Viewport.Width / 2 - TileSize / 2, Main.Game.Camera.Viewport.Y + Main.Game.Camera.Viewport.Height / 2 - TileSize / 2);
 			_oldReferencePoint = Vector2.Zero;
 			//game.Options.ApplyChanges();
 		}
@@ -126,14 +124,14 @@ namespace Pandorai.Tilemaps
 
 		public void InteractWithMapObjects(TileInfo info)
 		{
-			if (!_game.Player.HoldingShift) return;
+			if (!Main.Game.Player.HoldingShift) return;
 
-			float distToClickedTile = (_game.Player.PossessedCreature.MapIndex - info.Index).ToVector2().LengthSquared();
+			float distToClickedTile = (Main.Game.Player.PossessedCreature.MapIndex - info.Index).ToVector2().LengthSquared();
 			if (distToClickedTile <= 2)
 			{
-				info.Tile.MapObject?.Structure?.Interact(_game.Player.PossessedCreature);
-				_game.CreatureManager.GetCreature(info.Index)?.Interact(_game.Player.PossessedCreature);
-				_game.TurnManager.SkipHeroTurn();
+				info.Tile.MapObject?.Structure?.Interact(Main.Game.Player.PossessedCreature);
+				Main.Game.CreatureManager.GetCreature(info.Index)?.Interact(Main.Game.Player.PossessedCreature);
+				Main.Game.TurnManager.SkipHeroTurn();
 			}
 		}
 
@@ -152,7 +150,7 @@ namespace Pandorai.Tilemaps
 				info.Tile.IsDecal = true;
 				info.Tile.HighlightColor = _mouseHighlightColor;
 
-				if (_game.Player.HoldingShift && !_game.Player.HoldingControl)
+				if (Main.Game.Player.HoldingShift && !Main.Game.Player.HoldingControl)
 				{
 					info.Tile.DecalColor = _mouseInteractDecalColor;
 				}
@@ -511,7 +509,7 @@ namespace Pandorai.Tilemaps
 			int currentTileY;
 			Vector2 tilePosition;
 
-			_game.GraphicsDevice.SetRenderTarget(_renderTarget);
+			Main.Game.GraphicsDevice.SetRenderTarget(_renderTarget);
 
 			_spriteBatch.Begin(blendState: BlendState.AlphaBlend);
 
@@ -539,7 +537,7 @@ namespace Pandorai.Tilemaps
 					Tile tile = GetTile(tileIndex);
 
 					bool isVisible = false;
-					if (_game.Player.TilesInFOV.Contains(tileIndex))
+					if (Main.Game.Player.TilesInFOV.Contains(tileIndex))
 					{
 						isVisible = true;
 					}
@@ -573,7 +571,7 @@ namespace Pandorai.Tilemaps
 
 						if(!isVisible)
 						{
-							_spriteBatch.Draw(_game.squareTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize)), Color.Black * _game.Options.TilesOutsideFOVDarkening);
+							_spriteBatch.Draw(Main.Game.squareTexture, new Rectangle(tilePosition.ToPoint(), new Point(TileSize)), Color.Black * Main.Game.Options.TilesOutsideFOVDarkening);
 						}						
 					}
 
@@ -583,7 +581,7 @@ namespace Pandorai.Tilemaps
 					}
 					if(tile.IsHighlighted)
 					{
-						_spriteBatch.Draw(_game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), tile.HighlightColor);
+						_spriteBatch.Draw(Main.Game.squareTexture, new Rectangle(tilePosition.ToPoint() + new Point(1), new Point(TileSize - 2)), tile.HighlightColor);
 					}
 					// used to debug stuff
 					// if(tile.HasStructure() && tile.MapObject.Structure.Id == "Teleporter")
@@ -595,7 +593,7 @@ namespace Pandorai.Tilemaps
 
 			_spriteBatch.End();
 
-			_game.GraphicsDevice.SetRenderTarget(null);
+			Main.Game.GraphicsDevice.SetRenderTarget(null);
 
 			return _renderTarget;
 		}

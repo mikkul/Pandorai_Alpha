@@ -51,7 +51,7 @@ namespace Pandorai.UI
 				var tryCreature = Main.Game.CreatureManager.GetCreature(info.Index);
 				if (tryCreature != null)
 				{
-					objectName = tryCreature.Id;
+					objectName = tryCreature.TemplateName;
 
 					options.Add(new ContextMenuOption
 					{
@@ -75,7 +75,7 @@ namespace Pandorai.UI
 
 				else if(info.Tile.HasStructure())
 				{
-					objectName = info.Tile.MapObject.Structure.Id;
+					objectName = info.Tile.MapObject.Structure.TemplateName;
 					options.Add(new ContextMenuOption
 					{
 						Text = "Interact",

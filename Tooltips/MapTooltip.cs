@@ -11,14 +11,8 @@ namespace Pandorai.Tooltips
 {
 	public static class MapTooltip
 	{
-		private static Main _game;
 		private static Panel _currentTooltip = null;
 		private static Point _lastTile;
-
-		public static void Init(Main _game)
-		{
-            MapTooltip._game = _game;
-		}
 
 		public static void DisplayMapTooltip(TileInfo info)
 		{
@@ -31,7 +25,7 @@ namespace Pandorai.Tooltips
 
 			_lastTile = info.Index;
 
-			var playerNeighbouringTiles = GenHelper.Get8Neighbours(_game.Player.PossessedCreature.MapIndex);
+			var playerNeighbouringTiles = GenHelper.Get8Neighbours(Main.Game.Player.PossessedCreature.MapIndex);
 			if (_currentTooltip != null || !playerNeighbouringTiles.Contains(info.Index)) return;
 
 			var width = 200;
@@ -39,8 +33,8 @@ namespace Pandorai.Tooltips
 
 			_currentTooltip = new Panel
 			{
-				Left = (int)_game.InputManager.MousePos.X,
-				Top = (int)_game.InputManager.MousePos.Y,
+				Left = (int)Main.Game.InputManager.MousePos.X,
+				Top = (int)Main.Game.InputManager.MousePos.Y,
 				Background = new SolidBrush(Color.Black * 0.5f),
 				Width = width,
 				Height = height,
@@ -88,7 +82,7 @@ namespace Pandorai.Tooltips
 			}
 
 			_currentTooltip.Widgets.Add(stackPanel);
-			_game.desktop.Widgets.Add(_currentTooltip);
+			Main.Game.desktop.Widgets.Add(_currentTooltip);
 		}
 	}
 }

@@ -257,15 +257,7 @@ namespace Pandorai.MapGeneration.CustomRegions
 			{
 				var nodeType = (TriggerSpecifier)node.Object;
 				nodeType.Name = element.GetAttribute("name");
-				switch(nodeType.Name)
-				{
-					case "StoneGuardianAwake":
-						nodeType.Handler = Trigger.StoneGuardianAwake;
-						break;
-					case "LeaveLibraryTrigger":
-						nodeType.Handler = Trigger.LeaveLibraryTrigger;
-						break;
-				}
+				nodeType.Handler = TypeLegends.Triggers[nodeType.Name];
 			}
 			else if(node.Type == NodeType.ElementModifier)
 			{

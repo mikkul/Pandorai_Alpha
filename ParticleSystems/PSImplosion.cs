@@ -11,20 +11,19 @@ namespace Pandorai.ParticleSystems
 		private Random _rng = new Random();
 		private float _acceleration;
 
-		public PSImplosion(Vector2 position, int noOfParticles, Texture2D particleTexture, float implosionTime, float implosionRadius, int partSize, Color color, bool isWorldCoords, Main game)
+		public PSImplosion(Vector2 position, int noOfParticles, string particleTextureName, float implosionTime, float implosionRadius, int partSize, Color color, bool isWorldCoords)
 		{
-			_centralPosition = position;
-			_numberOfParticles = noOfParticles;
-			_baseTexture = particleTexture;
-			_maxParticleLife = implosionTime;
-			_particleSize = partSize;
+			CentralPosition = position;
+			NumberOfParticles = noOfParticles;
+			BaseTextureName = particleTextureName;
+			MaxParticleLife = implosionTime;
+			ParticleSize = partSize;
 			_radius = implosionRadius;
-			_baseColor = color;
-			_isWorldCoordinates = isWorldCoords;
-			_game = game;
+			BaseColor = color;
+			IsWorldCoordinates = isWorldCoords;
 			_acceleration = 2 * implosionRadius / (float)Math.Pow(implosionTime / 1000, 2);
 
-			for (int i = 0; i < _numberOfParticles; i++)
+			for (int i = 0; i < NumberOfParticles; i++)
 			{
 				_particles.Add(GenerateParticle());
 			}
@@ -39,8 +38,8 @@ namespace Pandorai.ParticleSystems
 				part = _particles[i];
 
 				Vector2 accelTowards = Vector2.Normalize(part.Velocity) * _acceleration;
-				part.Update(dt, accelTowards, _game.Options.UnitMultiplier);
-				if (part.LifeTime >= _maxParticleLife)
+				part.Update(dt, accelTowards, Main.Game.Options.UnitMultiplier);
+				if (part.LifeTime >= MaxParticleLife)
 				{
 					_particles.RemoveAt(i);
 				}
@@ -58,13 +57,13 @@ namespace Pandorai.ParticleSystems
 			foreach (var particle in _particles)
 			{
 				float alpha = 1;
-				if (!_isWorldCoordinates)
+				if (!IsWorldCoordinates)
 				{
-					batch.Draw(_baseTexture, GetParticleDisplayRectangle(particle.Position), new Color(_baseColor, alpha));
+					batch.Draw(BaseTexture, GetParticleDisplayRectangle(particle.Position), new Color(BaseColor, alpha));
 				}
 				else
 				{
-					batch.Draw(_baseTexture, GetParticleDisplayRectangle(_game.Camera.GetViewportPosition(particle.Position)), new Color(_baseColor, alpha));
+					batch.Draw(BaseTexture, GetParticleDisplayRectangle(Main.Game.Camera.GetViewportPosition(particle.Position)), new Color(BaseColor, alpha));
 				}
 			}
 			batch.End();
@@ -78,7 +77,7 @@ namespace Pandorai.ParticleSystems
 			float y = (float)Math.Sin(randAngle) * _radius;
 
 			Vector2 velocity = Vector2.Normalize(new Vector2(-x, -y)) * 0.001f;
-			return new Particle(_centralPosition + new Vector2(x, y), velocity, 0);
+			return new Particle(CentralPosition + new Vector2(x, y), velocity, 0);
 		}
 	}
 }

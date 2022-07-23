@@ -44,19 +44,19 @@ namespace Pandorai.Creatures
 
         public int SkillPoints { get; set; }
 
+        public int MaxHealth { get; set; }
         public int Health
         {
             get => _health;
             set => _health = Math.Min(value, MaxHealth);
         }
-        public int MaxHealth { get; set; }
 
+        public int MaxMana { get; set; }
         public int Mana
         {
             get => _mana;
             set => _mana = Math.Min(value, MaxMana);
         }
-        public int MaxMana { get; set; }
 
         public int Speed { get; set; }
         public int Strength { get; set; }
@@ -117,7 +117,7 @@ namespace Pandorai.Creatures
 
         private void SetExperience(int delta)
         {
-            if(_owner.IsPossessedCreature())
+            if(_owner?.IsPossessedCreature() ?? false)
             {
                 MessageLog.DisplayMessage($"You gained {delta} experience", Color.Yellow);
             }
@@ -142,7 +142,7 @@ namespace Pandorai.Creatures
                 SkillPoints += GetSkillPointsFromLevel(i + 1);
             }
 
-            if(_owner.IsPossessedCreature())
+            if(_owner?.IsPossessedCreature() ?? false)
             {
                 MessageLog.DisplayMessage($"You have advanced to level {Level}!", Color.Yellow);
                 SoundManager.PlaySound("FX146");
@@ -152,7 +152,7 @@ namespace Pandorai.Creatures
                 Main.Game.Camera.CameraShake = new Rendering.Shake(effectTime, 40, 15, Main.Game.MainRng);
                 Main.Game.Camera.ShakeCamera();
 
-                var wavePS = new PSExplosion(Main.Game.Player.PossessedCreature.Position, 300, Main.Game.smokeParticleTexture, effectTime, 200f, 100, Helper.GetColorFromHex("#f5dd42"), true, Main.Game);
+                var wavePS = new PSExplosion(Main.Game.Player.PossessedCreature.Position, 300, "SmokeParticleTexture", effectTime, 200f, 100, Helper.GetColorFromHex("#f5dd42"), true);
                 ParticleSystemManager.AddSystem(wavePS, true);
             }
         }

@@ -1,61 +1,63 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
+using Pandorai.Persistency.Converters;
 using Pandorai.Utility;
 using System.Collections.Generic;
 
 namespace Pandorai.ParticleSystems
 {
-	public abstract class ParticleSystem
-	{
-		protected List<Particle> _particles = new List<Particle>();
-		protected Vector2 _centralPosition;
-		protected Texture2D _baseTexture;
-		protected Color _baseColor;
-		protected float _maxParticleLife;
-		protected int _numberOfParticles;
-		protected float _particleSize;
-		protected bool _isWorldCoordinates;
-		protected Main _game;
-		protected float _maxRange = 100;
+    [JsonConverter(typeof(ParticleSystemConverter))]
+    public abstract class ParticleSystem
+    {
+        public string TypeName => GetType().Name;
 
-		protected abstract Particle GenerateParticle();
+        public Vector2 CentralPosition;
+        [JsonIgnore]
+        public Texture2D BaseTexture => TypeLegends.Textures[BaseTextureName];
+        public string BaseTextureName { get; set; }
+        public Color BaseColor;
+        public float MaxParticleLife;
+        public int NumberOfParticles;
+        public float ParticleSize;
+        public bool IsWorldCoordinates;
+        public float MaxRange = 100;
 
-		public abstract bool Update(GameTime dt);
+        protected List<Particle> _particles = new List<Particle>();
 
-		public virtual void Draw(SpriteBatch batch)
-		{
-			batch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
-			foreach (var particle in _particles)
-			{
-				float alpha = 1 - particle.LifeTime / _maxParticleLife;
-				if(!_isWorldCoordinates)
-				{
-					batch.Draw(_baseTexture, GetParticleDisplayRectangle(particle.Position), new Color(_baseColor, alpha));
-				}
-				else
-				{
-					batch.Draw(_baseTexture, GetParticleDisplayRectangle(_game.Camera.GetViewportPosition(particle.Position)), new Color(_baseColor, alpha));
-				}
-			}
-			batch.End();
-		}
+        protected abstract Particle GenerateParticle();
 
-		protected Rectangle GetParticleDisplayRectangle(Vector2 position)
-		{
-			var trueSize = _particleSize * _game.Map.TileSize / Options.DefaultUnitSize;
-			return new Rectangle(position.ToPoint() - new Point((int)(trueSize / 2)), new Point((int)trueSize));
-		}
+        public abstract bool Update(GameTime dt);
 
-		public bool IsInViewport()
-		{
-			var viewportPos = _game.Camera.GetViewportPosition(CentralPosition);
-			return (_isWorldCoordinates && _game.Camera.Viewport.Enlarge((int)_maxRange, (int)_maxRange).Contains(viewportPos))
-				|| (!_isWorldCoordinates && _game.Camera.Viewport.Enlarge((int)_maxRange, (int)_maxRange).Contains(_centralPosition));
-		}
+        public virtual void Draw(SpriteBatch batch)
+        {
+            batch.Begin(SpriteSortMode.Immediate, BlendState.Additive);
+            foreach (var particle in _particles)
+            {
+                float alpha = 1 - particle.LifeTime / MaxParticleLife;
+                if (!IsWorldCoordinates)
+                {
+                    batch.Draw(BaseTexture, GetParticleDisplayRectangle(particle.Position), new Color(BaseColor, alpha));
+                }
+                else
+                {
+                    batch.Draw(BaseTexture, GetParticleDisplayRectangle(Main.Game.Camera.GetViewportPosition(particle.Position)), new Color(BaseColor, alpha));
+                }
+            }
+            batch.End();
+        }
 
-		public Vector2 CentralPosition {
-			get => _centralPosition;
-			set => _centralPosition = value;
-		}
-	}
+        protected Rectangle GetParticleDisplayRectangle(Vector2 position)
+        {
+            var trueSize = ParticleSize * Main.Game.Map.TileSize / Options.DefaultUnitSize;
+            return new Rectangle(position.ToPoint() - new Point((int)(trueSize / 2)), new Point((int)trueSize));
+        }
+
+        public bool IsInViewport()
+        {
+            var viewportPos = Main.Game.Camera.GetViewportPosition(CentralPosition);
+            return (IsWorldCoordinates && Main.Game.Camera.Viewport.Enlarge((int)MaxRange, (int)MaxRange).Contains(viewportPos))
+                || (!IsWorldCoordinates && Main.Game.Camera.Viewport.Enlarge((int)MaxRange, (int)MaxRange).Contains(CentralPosition));
+        }
+    }
 }

@@ -4,13 +4,14 @@ namespace Pandorai.Structures.Behaviours
 {
     public class Dialogue : Behaviour
     {
-        private Pandorai.Dialogues.Dialogue _dialogue;
+        public Pandorai.Dialogues.Dialogue DialogueObject;
 
         public override void SetAttribute(string name, string value)
         {
             if (name == "DialogueName")
 			{
-				_dialogue = new Pandorai.Dialogues.Dialogue(value, Main.Game);
+				DialogueObject = new Pandorai.Dialogues.Dialogue(value);
+                DialogueObject.Init();
 			}
         }
 
@@ -18,7 +19,7 @@ namespace Pandorai.Structures.Behaviours
         {
             return new Dialogue
             {
-                _dialogue = _dialogue.Clone(),
+                DialogueObject = DialogueObject.Clone(),
             };
         }
 
@@ -40,7 +41,7 @@ namespace Pandorai.Structures.Behaviours
             }
 
             Main.Game.Player.IsInteractingWithSomeone = true;
-            _dialogue.ReadNode(0);
+            DialogueObject.ReadNode(0);
         }
 
         public override void ForceHandler(ForceType force)

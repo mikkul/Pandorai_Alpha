@@ -6,9 +6,9 @@ namespace Pandorai.Structures.Behaviours
     {
         public int Damage;
 
-        private static Creature _campfireCreature = new Creature(Main.Game)
+        private static Creature _campfireCreature = new Creature()
         {
-            Id = "Fire",
+            TemplateName = "Fire",
         };
 
         public override void Bind()

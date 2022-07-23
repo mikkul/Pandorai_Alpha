@@ -40,13 +40,13 @@ namespace Pandorai.Effects
 
 		public override void Use(Creature user)
 		{
-			if (user == user.Game.Player.PossessedCreature && user.Game.Player.IsInteractingWithSomeone) return;
+			if (user == Main.Game.Player.PossessedCreature && Main.Game.Player.IsInteractingWithSomeone) return;
 
 			var interactableTiles = GenHelper.GetNeighbours(user.MapIndex).ToList();
 
-			user.Game.Map.HighlightTiles(interactableTiles);
+			Main.Game.Map.HighlightTiles(interactableTiles);
 
-			user.Game.Map.EnableTileInteraction();
+			Main.Game.Map.EnableTileInteraction();
 
 			TileEventHandler UseHandler = null;
 
@@ -54,7 +54,7 @@ namespace Pandorai.Effects
 			{
 				if (!interactableTiles.Contains(tile.Index))
 				{
-					user.Game.Map.DisableTileInteraction();
+					Main.Game.Map.DisableTileInteraction();
 					TileInteractionManager.TileClick -= UseHandler;
 					return;
 				}
@@ -77,25 +77,25 @@ namespace Pandorai.Effects
 				}
 				Vector2 velocity = dir.ToVector2() * 64 * Range;
 
-				user.Game.Player.IsInteractingWithSomeone = true;
-				user.Game.Map.DisableTileInteraction();
+				Main.Game.Player.IsInteractingWithSomeone = true;
+				Main.Game.Map.DisableTileInteraction();
 				TileInteractionManager.TileClick -= UseHandler;
 
-				float time = user.Game.TurnManager.enemyTurnTime * 2;
+				float time = Main.Game.TurnManager.enemyTurnTime * 2;
 
-				var fireballPS = new PSFireball(user.Position, 35, user.Game.smokeParticleTexture, time, velocity, 40, 30, Color.Cyan, true, user.Game);
+				var fireballPS = new PSFireball(user.Position, 35, "SmokeParticleTexture", time, velocity, 40, 30, Color.Cyan, true);
 
 				ParticleSystemManager.AddSystem(fireballPS, true);
 
 				Timer effectTimer = new Timer(time);
 				effectTimer.Elapsed += (s, a) =>
 				{
-					if (user == user.Game.Player.PossessedCreature)
+					if (user == Main.Game.Player.PossessedCreature)
 					{
-						user.Game.TurnManager.PlayerIsReady();
+						Main.Game.TurnManager.PlayerIsReady();
 					}
 
-					user.Game.Player.IsInteractingWithSomeone = false;
+					Main.Game.Player.IsInteractingWithSomeone = false;
 
 					effectTimer.Stop();
 					effectTimer.Dispose();
@@ -118,27 +118,27 @@ namespace Pandorai.Effects
 
 					fireballIndex += dir;
 
-					if (user.Game.Map.GetTile(fireballIndex) == null) return;
+					if (Main.Game.Map.GetTile(fireballIndex) == null) return;
 
-					var tryCreature = user.Game.CreatureManager.GetCreature(fireballIndex);
+					var tryCreature = Main.Game.CreatureManager.GetCreature(fireballIndex);
 					if (tryCreature != null)
 					{
 						if (pierceLeft > 0)
 						{
 							float actualDamage = Damage - Damage * (float)tryCreature.Stats.IceResistance / 100f;
-							user.Game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(actualDamage, user));
+							Main.Game.GameStateManager.AddSynchronizedAction(() => tryCreature.GetHit(actualDamage, user));
 							pierceLeft--;
 						}
 					}
-					else if (user.Game.Map.GetTile(fireballIndex).MapObject != null && user.Game.Map.GetTile(fireballIndex).MapObject.Structure != null)
+					else if (Main.Game.Map.GetTile(fireballIndex).MapObject != null && Main.Game.Map.GetTile(fireballIndex).MapObject.Structure != null)
 					{
 						if (pierceLeft > 0)
 						{
-							user.Game.GameStateManager.AddSynchronizedAction(() =>
+							Main.Game.GameStateManager.AddSynchronizedAction(() =>
 							{
-								if (user.Game.Map.GetTile(fireballIndex).MapObject == null) return;
+								if (Main.Game.Map.GetTile(fireballIndex).MapObject == null) return;
 
-								if (user.Game.Map.GetTile(fireballIndex).MapObject.Structure.UseForce(Force) == ForceResult.None)
+								if (Main.Game.Map.GetTile(fireballIndex).MapObject.Structure.UseForce(Force) == ForceResult.None)
 								{
 									pierceLeft = 0;
 									fireballPS.Disintegrate();
@@ -147,7 +147,7 @@ namespace Pandorai.Effects
 							pierceLeft--;
 						}
 					}
-					else if (user.Game.Map.GetTile(fireballIndex).CollisionFlag)
+					else if (Main.Game.Map.GetTile(fireballIndex).CollisionFlag)
 					{
 						pierceLeft = 0;
 						fireballPS.Disintegrate();
