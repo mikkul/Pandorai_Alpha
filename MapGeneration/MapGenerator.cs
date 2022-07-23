@@ -845,6 +845,7 @@ namespace Pandorai.MapGeneration
                         _map[x, y] = new Tile(1, 9, true);
 
 					// play main music theme
+					_map[x, y].MusicTheme = "Main_theme";
 					_map[x, y].CreatureCame += incomingCreature =>
 					{
 						if(!incomingCreature.IsPossessedCreature())
@@ -1173,6 +1174,7 @@ namespace Pandorai.MapGeneration
 			{
 				foreach (var tile in info.TileInfo)
 				{
+					tile.MusicTheme = region.MusicThemeName;
 					tile.CreatureCame += incomingCreature =>
 					{
 						if(!incomingCreature.IsPossessedCreature())

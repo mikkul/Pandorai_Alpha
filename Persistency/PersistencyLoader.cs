@@ -58,7 +58,6 @@ namespace Pandorai.Persistency
             gameState.DayNightValue = Main.Game.TurnManager.DayNightValue;
             gameState.TurnCount = Main.Game.TurnManager.TurnCount;
 
-            // TODO: music triggers
             // TODO: particle system textures
 
             // tiles
@@ -128,9 +127,21 @@ namespace Pandorai.Persistency
                 for (int y = 0; y < gameState.Tiles.GetLength(1); y++)
                 {
                     Main.Game.Map.Tiles[x, y] = gameState.Tiles[x, y].Tile;
-                    foreach (var triggerName in Main.Game.Map.Tiles[x, y].ActiveTriggers)
+                    var tile = Main.Game.Map.Tiles[x, y];
+                    if(!string.IsNullOrEmpty(tile.MusicTheme))
                     {
-                        Main.Game.Map.Tiles[x, y].CreatureCame += TypeLegends.Triggers[triggerName];
+                        tile.CreatureCame += incomingCreature =>
+                        {
+                            if(!incomingCreature.IsPossessedCreature())
+                            {
+                                return;
+                            }
+                            SoundManager.PlayMusic(tile.MusicTheme);
+                        };
+                    }
+                    foreach (var triggerName in tile.ActiveTriggers)
+                    {
+                        tile.CreatureCame += TypeLegends.Triggers[triggerName];
                     }
                 }
             }

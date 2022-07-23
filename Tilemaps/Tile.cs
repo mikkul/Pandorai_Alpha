@@ -21,6 +21,7 @@ namespace Pandorai.Tilemaps
 		public bool IgnoreCollisionFlagOnSearch = false;
 
 		public List<string> ActiveTriggers = new();
+		public string MusicTheme { get; set; }
 
 		public TileModifier Modifier;
 
