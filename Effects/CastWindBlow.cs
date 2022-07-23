@@ -76,7 +76,7 @@ namespace Pandorai.Effects
 
 				float time = Main.Game.TurnManager.enemyTurnTime * 2;
 
-				var fireballPS = new PSFireball(user.Position, 35, Main.Game.smokeParticleTexture, time, velocity, 40, 30, Color.Azure, true);
+				var fireballPS = new PSFireball(user.Position, 35, "SmokeParticleTexture", time, velocity, 40, 30, Color.Azure, true);
 
 				ParticleSystemManager.AddSystem(fireballPS, true);
 

@@ -12,11 +12,11 @@ namespace Pandorai.ParticleSystems
 		private float _particleSpeed;
 		private Random _rng = new Random();
 
-		public PSExplosion(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, Color color, bool isWorldCoords)
+		public PSExplosion(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, float particleSpd, int partSize, Color color, bool isWorldCoords)
 		{
 			CentralPosition = position;
 			NumberOfParticles = noOfParticles;
-			BaseTexture = particleTexture;
+			BaseTextureName = particleTextureName;
 			MaxParticleLife = particleLifeMs;
 			_particleSpeed = particleSpd;
 			ParticleSize = partSize;

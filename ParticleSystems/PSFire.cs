@@ -14,11 +14,11 @@ namespace Pandorai.ParticleSystems
 
 		private float _regenCounter = 0;
 
-		public PSFire(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, float fireWidth, Color color, bool isWorldCoords)
+		public PSFire(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, float fireWidth, Color color, bool isWorldCoords)
 		{
 			CentralPosition = position;
 			NumberOfParticles = noOfParticles;
-			BaseTexture = particleTexture;
+			BaseTextureName = particleTextureName;
 			MaxParticleLife = particleLifeMs;
 			_particleSpeed = particleSpd;
 			ParticleSize = partSize;

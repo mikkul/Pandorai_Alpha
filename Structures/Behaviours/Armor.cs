@@ -74,7 +74,7 @@ namespace Pandorai.Structures.Behaviours
 				return;
 			}
 
-			ParticleSystemManager.AddSystem(new PSExplosion(Structure.Tile.Index.ToVector2() * Main.Game.Options.TileSize, 25, Main.Game.smokeParticleTexture, 350, 90, 30, Color.Gray, true), true);
+			ParticleSystemManager.AddSystem(new PSExplosion(Structure.Tile.Index.ToVector2() * Main.Game.Options.TileSize, 25, "SmokeParticleTexture", 350, 90, 30, Color.Gray, true), true);
 
 			Hits -= damage;
 			if (Hits <= 0)

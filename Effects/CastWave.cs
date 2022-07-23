@@ -57,11 +57,11 @@ namespace Pandorai.Effects
 				PSExplosion wavePS;
 				if(rangeCovered % 2 == 0)
 				{
-					wavePS = new PSExplosion(user.Position, 150, Main.Game.smokeParticleTexture, time * 1.4f, 64 * Range + 128, 100, Helper.GetColorFromHex("#8610e0"), true);
+					wavePS = new PSExplosion(user.Position, 150, "SmokeParticleTexture", time * 1.4f, 64 * Range + 128, 100, Helper.GetColorFromHex("#8610e0"), true);
 				}
 				else
 				{
-					wavePS = new PSExplosion(user.Position, 150, Main.Game.smokeParticleTexture, time * 1.4f, 64 * Range + 128, 85, Helper.GetColorFromHex("#5f00b3"), true);
+					wavePS = new PSExplosion(user.Position, 150, "SmokeParticleTexture", time * 1.4f, 64 * Range + 128, 85, Helper.GetColorFromHex("#5f00b3"), true);
 				}
 
 				ParticleSystemManager.AddSystem(wavePS, true);

@@ -59,7 +59,7 @@ namespace Pandorai.Mechanics
 				Id = "sidekickInventory"
 			};
 
-			_sparkles = new PSSparkles(Vector2.Zero, 100, Main.Game.squareTexture, 1500, 35, 5, 1000, Color.Violet, true);
+			_sparkles = new PSSparkles(Vector2.Zero, 100, "SquareTexture", 1500, 35, 5, 1000, Color.Violet, true);
 
 			_noise = new OpenSimplexNoise();
 			

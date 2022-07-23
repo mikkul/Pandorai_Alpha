@@ -334,7 +334,7 @@ namespace Pandorai.Creatures
 						Stats.Health = 1;
 						MessageLog.DisplayMessage("You have miraculously avoided death", Color.Pink);
 						SoundManager.PlaySound("FX148");
-						var particleSystemEffect = new PSImplosion(this.Position, 100, Main.Game.fireParticleTexture, 2000, Main.Game.Map.TileSize, 40, Color.Green, true);
+						var particleSystemEffect = new PSImplosion(this.Position, 100, "FireParticleTexture", 2000, Main.Game.Map.TileSize, 40, Color.Green, true);
 						ParticleSystemManager.AddSystem(particleSystemEffect, true);
 					}
 					else

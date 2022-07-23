@@ -259,7 +259,7 @@ namespace Pandorai
                 }
             };
 
-            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, squareTexture, 500, 40, 5, 750, Color.Yellow, false);
+            _mouseSparkle = new PSSparkles(Vector2.Zero, 10, "SquareTexture", 500, 40, 5, 750, Color.Yellow, false);
 
             Sidekick.Init();
         }
@@ -278,6 +278,8 @@ namespace Pandorai
 
             fireParticleTexture = Content.Load<Texture2D>("fireParticleTexture");
             smokeParticleTexture = Content.Load<Texture2D>("smokeParticle");
+
+            TypeLegends.InitTextures();
 
             _defaultFont = Content.Load<SpriteFont>("defaultFont");
 

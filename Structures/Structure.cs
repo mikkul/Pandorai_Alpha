@@ -95,7 +95,7 @@ namespace Pandorai.Structures
 		{
 			Tile.Tile.MapObject = null;
 			Tile.Tile.CollisionFlag = false;
-			ParticleSystemManager.AddSystem(new PSExplosion(Tile.Index.ToVector2() * Main.Game.Options.TileSize, 25, Main.Game.smokeParticleTexture, 1000, 90, 30, Color.Gray, true), true);
+			ParticleSystemManager.AddSystem(new PSExplosion(Tile.Index.ToVector2() * Main.Game.Options.TileSize, 25, "SmokeParticleTexture", 1000, 90, 30, Color.Gray, true), true);
 			SoundManager.PlaySound("impactwood11");
 		}
 	}

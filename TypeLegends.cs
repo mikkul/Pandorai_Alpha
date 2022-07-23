@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 using Pandorai.Conditions;
 using Pandorai.Creatures.Behaviours;
 using Pandorai.Effects;
@@ -93,5 +94,17 @@ namespace Pandorai
 			{ "LeaveLibraryTrigger", Trigger.LeaveLibraryTrigger },
 			{ "SpikesTrigger", Trigger.SpikesTrigger },
 		};
+
+        public static Dictionary<string, Texture2D> Textures;
+
+		public static void InitTextures()
+		{
+			Textures = new Dictionary<string, Texture2D>
+			{
+				{ "SquareTexture", Main.Game.squareTexture },
+				{ "FireParticleTexture", Main.Game.fireParticleTexture },
+				{ "SmokeParticleTexture", Main.Game.smokeParticleTexture },
+			};
+		}
     }
 }

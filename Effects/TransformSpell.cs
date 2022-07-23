@@ -47,7 +47,7 @@ namespace Pandorai.Effects
                     Main.Game.Map.DisableTileInteraction();
                     TileInteractionManager.TileClick -= useHandler;
 
-                    ParticleSystemManager.AddSystem(new PSExplosion(user.Position, 30, Main.Game.smokeParticleTexture, 1500, 150, 35, Color.Purple, true), true);
+                    ParticleSystemManager.AddSystem(new PSExplosion(user.Position, 30, "SmokeParticleTexture", 1500, 150, 35, Color.Purple, true), true);
 
                     var effectTimer = new Timer(1000);
                     effectTimer.Elapsed += (s, a) =>
@@ -59,7 +59,7 @@ namespace Pandorai.Effects
                             Main.Game.TurnManager.PlayerIsReady();
                         }
 
-                        ParticleSystemManager.AddSystem(new PSImplosion(tile.Index.ToVector2() * Main.Game.Options.TileSize, 50, Main.Game.smokeParticleTexture, 800, 200, 25, Color.Purple, true), true);
+                        ParticleSystemManager.AddSystem(new PSImplosion(tile.Index.ToVector2() * Main.Game.Options.TileSize, 50, "SmokeParticleTexture", 800, 200, 25, Color.Purple, true), true);
 
                         Main.Game.Player.IsInteractingWithSomeone = false;
 

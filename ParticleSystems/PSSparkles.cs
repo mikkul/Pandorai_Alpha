@@ -13,11 +13,11 @@ namespace Pandorai.ParticleSystems
 
 		private float _regenCounter = 0;
 
-		public PSSparkles(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, Color color, bool isWorldCoords)
+		public PSSparkles(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, float particleSpd, int partSize, int regenSpanMs, Color color, bool isWorldCoords)
 		{
 			CentralPosition = position;
 			NumberOfParticles = noOfParticles;
-			BaseTexture = particleTexture;
+			BaseTextureName = particleTextureName;
 			MaxParticleLife = particleLifeMs;
 			_particleSpeed = particleSpd;
 			ParticleSize = partSize;

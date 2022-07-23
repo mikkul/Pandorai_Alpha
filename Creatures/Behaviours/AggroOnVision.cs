@@ -43,7 +43,7 @@ namespace Pandorai.Creatures.Behaviours
 					if(_lastTargetCreature != tryCreature)
 					{
 						SoundManager.PlaySound(Owner.Sounds.Aggro);
-						var aggroFlash = new PSImplosion(Owner.Position, 25, Main.Game.fireParticleTexture, 1000, Main.Game.Map.TileSize / 2, 20, Color.Purple, true);
+						var aggroFlash = new PSImplosion(Owner.Position, 25, "FireParticleTexture", 1000, Main.Game.Map.TileSize / 2, 20, Color.Purple, true);
 						ParticleSystemManager.AddSystem(aggroFlash, true);
 					}
 

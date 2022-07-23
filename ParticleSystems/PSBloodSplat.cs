@@ -12,11 +12,11 @@ namespace Pandorai.ParticleSystems
 		private Vector2 _gravity;
 		private Random _rng = new Random();
 
-		public PSBloodSplat(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, float verticalSpd, float horizontalRange, int partSize, Color color, float gravityValue, bool isWorldCoords)
+		public PSBloodSplat(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, float verticalSpd, float horizontalRange, int partSize, Color color, float gravityValue, bool isWorldCoords)
 		{
 			CentralPosition = position;
 			NumberOfParticles = noOfParticles;
-			BaseTexture = particleTexture;
+			BaseTextureName = particleTextureName;
 			MaxParticleLife = particleLifeMs;
 			_verticalSpeed = verticalSpd;
 			_horizontalScatter = horizontalRange;

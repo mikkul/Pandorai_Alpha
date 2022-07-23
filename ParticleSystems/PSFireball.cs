@@ -14,11 +14,11 @@ namespace Pandorai.ParticleSystems
 
 		private PSFireball _centralParticle;
 
-		public PSFireball(Vector2 position, int noOfParticles, Texture2D particleTexture, float particleLifeMs, Vector2 particleVelocity, int partSize, float fireballRadius, Color color, bool isWorldCoords, bool isCenter = false)
+		public PSFireball(Vector2 position, int noOfParticles, string particleTextureName, float particleLifeMs, Vector2 particleVelocity, int partSize, float fireballRadius, Color color, bool isWorldCoords, bool isCenter = false)
 		{
 			CentralPosition = position;
 			NumberOfParticles = noOfParticles;
-			BaseTexture = particleTexture;
+			BaseTextureName = particleTextureName;
 			MaxParticleLife = particleLifeMs * 1.2f;
 			_velocity = particleVelocity * 1000 / particleLifeMs;
 			ParticleSize = partSize;
@@ -30,7 +30,7 @@ namespace Pandorai.ParticleSystems
 			// add one big particle in the middle
 			if(!isCenter)
 			{
-				_centralParticle = new PSFireball(position, 1, particleTexture, particleLifeMs, particleVelocity, (int)(ParticleSize * 3), 0, color, isWorldCoords, true);
+				_centralParticle = new PSFireball(position, 1, particleTextureName, particleLifeMs, particleVelocity, (int)(ParticleSize * 3), 0, color, isWorldCoords, true);
 				ParticleSystemManager.AddSystem(_centralParticle, true);
 			}
 
