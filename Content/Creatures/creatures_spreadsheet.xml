@@ -528,12 +528,12 @@
 			</behaviour>
 		</behaviours>
 		<sounds>
-			<Attack>beads</Attack>
-			<Hurt>crack10</Hurt>
-			<Death>crack01</Death>
-			<Death>crack03</Death>
-			<Death>crack04</Death>
-			<Aggro>freeze0</Aggro>
+			<Attack>zombie-24</Attack>
+			<Hurt>zombie-7</Hurt>
+			<Hurt>zombie-11</Hurt>
+			<Hurt>zombie-11</Hurt>
+			<Death>zombie-16</Death>
+			<Aggro>zombie-20</Aggro>
 			<Ambient></Ambient>
 			<Footstep></Footstep>
 		</sounds>		
@@ -558,7 +558,6 @@
 			</IdleTextureIndices>
 			<Inventory>
 				<item name="SummonSkeletonRune" number="1" />
-				<item name="IceArrowRune" number="1" />
 			</Inventory>
 		</modifiers>
 		<behaviours>
@@ -573,8 +572,6 @@
 			</behaviour>
 			<behaviour name="SummonSpellCaster">
 				<Frequency>19</Frequency>
-			</behaviour>
-			<behaviour name="ProjectileSpellCaster">
 			</behaviour>
 			<behaviour name="RandomWalk">
 				<MaxDistanceFromHome>1</MaxDistanceFromHome>
