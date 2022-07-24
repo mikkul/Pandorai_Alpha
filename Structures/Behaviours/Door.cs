@@ -1,4 +1,6 @@
 using Pandorai.Creatures;
+using Pandorai.Sounds;
+using Pandorai.Utility;
 
 namespace Pandorai.Structures.Behaviours
 {
@@ -56,10 +58,11 @@ namespace Pandorai.Structures.Behaviours
 					Main.Game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, false);
 					Structure.ColorTint *= OpacityMultiplier;
 					IsOpened = true;
+					SoundManager.PlaySound("door", Structure.Tile.Index.IndexToWorldPosition(), 0.5f);
 				}
 				else
 				{
-					// play sound or something
+					SoundManager.PlaySound("interface6", Structure.Tile.Index.IndexToWorldPosition(), 0.5f);
 				}
 			}
 			else
@@ -67,6 +70,7 @@ namespace Pandorai.Structures.Behaviours
 				IsOpened = false;
 				Structure.ColorTint *= 1 / OpacityMultiplier;
 				Main.Game.Map.RequestTileCollisionFlagChange(Structure.Tile.Index, true);
+				SoundManager.PlaySound("door_close", Structure.Tile.Index.IndexToWorldPosition(), 0.8f);
 			}
         }
 

@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Input;
 using Pandorai.Creatures;
 using Pandorai.Items;
+using Pandorai.Sounds;
+using Pandorai.Utility;
 
 namespace Pandorai.Structures.Behaviours
 {
@@ -9,6 +11,7 @@ namespace Pandorai.Structures.Behaviours
 	{
 		public int ClosedTexture;
 		public int OpenTexture;
+		public string OpeningSound;
 		public Inventory Inventory = new Inventory(new Creature());
 		public bool IsOpened = false;
 
@@ -22,6 +25,10 @@ namespace Pandorai.Structures.Behaviours
 			{
 				OpenTexture = int.Parse(value);
 			}
+			else if (name == "OpeningSound")
+			{
+				OpeningSound = value;
+			}
 		}
 
 		public override Behaviour Clone()
@@ -30,6 +37,7 @@ namespace Pandorai.Structures.Behaviours
 			{
 				ClosedTexture = ClosedTexture,
 				OpenTexture = OpenTexture,
+				OpeningSound = OpeningSound,
 			};
 			return clone;
 		}
@@ -50,6 +58,7 @@ namespace Pandorai.Structures.Behaviours
 			{
 				IsOpened = true;
 				Structure.Texture = OpenTexture;
+				SoundManager.PlaySound(OpeningSound ?? string.Empty, Structure.Tile.Index.IndexToWorldPosition(), 1f);
 			}
 
 			if (!creature.IsPossessedCreature()) return;

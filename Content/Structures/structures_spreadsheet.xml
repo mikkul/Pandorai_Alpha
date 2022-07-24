@@ -3,6 +3,7 @@
 		<behaviour name="Container">
 			<ClosedTexture>60</ClosedTexture>
 			<OpenTexture>61</OpenTexture>
+			<OpeningSound>Inventory_Open_01</OpeningSound>
 		</behaviour>
 	</structure>
 	<structure id="Corpse" texture="68">

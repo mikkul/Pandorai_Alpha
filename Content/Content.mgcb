@@ -446,6 +446,12 @@
 /processorParam:Quality=Best
 /build:Sounds/Crunch_sound_pack_1/impactwood25.wav
 
+#begin Sounds/door_close.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/door_close.wav
+
 #begin Sounds/explosion_low.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

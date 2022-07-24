@@ -1,9 +1,7 @@
-using System;
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
 using Pandorai.Rendering;
 using Pandorai.Sounds;
-using Pandorai.Tilemaps;
 using Pandorai.Utility;
 
 namespace Pandorai.Effects
@@ -22,6 +20,7 @@ namespace Pandorai.Effects
         public override void Use(Creature user)
         {
             Activated ^= true;
+            SoundManager.PlaySound("fireball0", user.Position, 1f);
 
             if(Activated)
             {
