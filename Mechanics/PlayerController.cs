@@ -31,6 +31,10 @@ namespace Pandorai.Mechanics
 				possessedCreature = value;
 				possessedCreature.Died += SpawnGhost;
 				possessedCreature.Died += PersistencyLoader.RemoveSaveFile;
+				possessedCreature.Died += () =>
+				{
+					Main.Game.desktop.Root.FindWidgetById("saveGameButton").Enabled = false;
+				};
 				possessedCreature.Inventory.DisplayAsMainInventory();
 			}
 		}

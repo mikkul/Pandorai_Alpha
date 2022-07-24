@@ -453,10 +453,6 @@ namespace Pandorai
         protected override void OnExiting(object sender, EventArgs args)
         {
             PersistencyLoader.SaveSettings();
-            if(IsGameStarted && !Player.IsDead)
-            {
-                PersistencyLoader.SaveGame();
-            }
         }
 
         public void StartGame(bool savedGame = false)
@@ -464,6 +460,7 @@ namespace Pandorai
             IsGamePaused = true;
             IsGameStarted = false;
             desktop.Root.FindWidgetById("continueButton").Enabled = true;
+            desktop.Root.FindWidgetById("saveGameButton").Enabled = true;
             Player.IsDead = false;
 
             // display loading sreeen and music
@@ -492,6 +489,7 @@ namespace Pandorai
             LightingManager.ClearLightSources();
             ParticleSystemManager.Clear();
             MessageLog.Clear();
+            TurnManager.DayNightValue = 0.35f;
 
             //
             if(savedGame)

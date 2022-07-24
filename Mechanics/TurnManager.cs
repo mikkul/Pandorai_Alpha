@@ -29,7 +29,7 @@ namespace Pandorai.Mechanics
 
 		public int DayDurationTurns = 750;
 
-		public float DayNightValue = 0.5f;
+		public float DayNightValue = 0.35f;
 
 		public int heroTurnTime = 60;
 		public int enemyTurnTime = 20;

@@ -274,7 +274,7 @@ namespace Pandorai.UI
                 Text = "Continue",
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                Enabled = PersistencyLoader.IsSavedGame(),
+                Enabled = false,
             };
 
             continueButton.Click += (s, a) =>
@@ -282,10 +282,6 @@ namespace Pandorai.UI
                 if(Main.Game.IsGameStarted)
                 {
                     Main.Game.TogglePauseGame();
-                }
-                else
-                {
-                    Main.Game.StartGame(true);
                 }
             };
 
@@ -300,6 +296,34 @@ namespace Pandorai.UI
             {
                 Main.Game.desktop.Root.FindWidgetById("mainMenu").Visible = false;
                 Main.Game.desktop.Root.FindWidgetById("difficultyChoiceScreen").Visible = true;
+            };
+
+            var saveGameButton = new TextButton
+            {
+                Id = "saveGameButton",
+                Text = "Save game",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Enabled = false,
+            };
+
+            saveGameButton.Click += (s, a) =>
+            {
+                PersistencyLoader.SaveGame();
+            };
+
+            var loadGameButton = new TextButton
+            {
+                Id = "loadGameButton",
+                Text = "Load game",
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                Enabled = PersistencyLoader.IsSavedGame(),
+            };
+
+            loadGameButton.Click += (s, a) =>
+            {
+                Main.Game.StartGame(true);
             };
 
             var tutorialButton = new TextButton
@@ -358,6 +382,9 @@ namespace Pandorai.UI
 
             buttonsStackPanel.Widgets.Add(continueButton);
             buttonsStackPanel.Widgets.Add(playButton);
+            buttonsStackPanel.Widgets.Add(new HorizontalSeparator());
+            buttonsStackPanel.Widgets.Add(saveGameButton);
+            buttonsStackPanel.Widgets.Add(loadGameButton);
             buttonsStackPanel.Widgets.Add(new HorizontalSeparator());
             buttonsStackPanel.Widgets.Add(tutorialButton);
             buttonsStackPanel.Widgets.Add(optionsButton);
