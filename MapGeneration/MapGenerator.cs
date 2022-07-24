@@ -859,7 +859,12 @@ namespace Pandorai.MapGeneration
 
                 foreach (var structure in regInfo.StructureInfo)
                 {
-					var structureClone = structure;
+					var structureClone = structure.Clone();
+					var container = structure.GetBehaviour<Container>();
+					if(container != null)
+					{
+						structureClone.GetBehaviour<Container>().Inventory = container.Inventory;
+					}
 					structureClone.Tile = new TileInfo(structure.Tile.Index + new Point(randomLocationX, randomLocationY), structure.Tile.Tile);
 					structure.Tile.Tile.MapObject.Structure = structureClone;
 					StructureManager.AddStructure(structureClone);

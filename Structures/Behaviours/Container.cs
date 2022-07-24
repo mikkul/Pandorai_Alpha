@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 using Pandorai.Creatures;
 using Pandorai.Items;
 
@@ -8,7 +9,7 @@ namespace Pandorai.Structures.Behaviours
 	{
 		public int ClosedTexture;
 		public int OpenTexture;
-		public Inventory Inventory;
+		public Inventory Inventory = new Inventory(new Creature());
 		public bool IsOpened = false;
 
 		public override void SetAttribute(string name, string value)
@@ -29,7 +30,6 @@ namespace Pandorai.Structures.Behaviours
 			{
 				ClosedTexture = ClosedTexture,
 				OpenTexture = OpenTexture,
-				Inventory = new Inventory(new Creature()),
 			};
 			return clone;
 		}
