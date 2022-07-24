@@ -501,6 +501,15 @@ namespace Pandorai
                 var mapGenerator = new MapGenerator();
                 Map.Tiles = mapGenerator.GenerateMap(Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
                 Map.UpdateTileTextures();
+
+                // make the power altar visible from the start
+                var powerAltar = StructureManager.Structures.Single(x => x.TemplateName == "PowerAltar");
+                var powerAltarNeighbouringTiles = MapGeneration.GenHelper.Get8Neighbours(powerAltar.Tile.Index);
+                powerAltar.Tile.Tile.Visited = true;
+                foreach (var point in powerAltarNeighbouringTiles)
+                {
+                    Map.GetTile(point).Visited = true;
+                }
             }
 
             var hero = CreatureManager.Creatures.Single(c => c.TemplateName == "Hero");
