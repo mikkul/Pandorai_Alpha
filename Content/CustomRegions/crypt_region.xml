@@ -1,4 +1,4 @@
-<customRegion name="Crypt" floorColor="#4988b8" borderColor="#347bc2" musicTheme="Forest_dark_theme" sample="wfcSample2">
+<customRegion name="Crypt" floorColor="#4988b8" borderColor="#347bc2" musicTheme="Crypt_theme" sample="wfcSample2">
 	<location>
 	</location>
 	<dimensions>
@@ -8,6 +8,12 @@
 
 		<creature name="Zombie" number="4-5" />
 		<creature name="Lich" number="1" />
+
+		<item name="MediumEnergyPotion" number="1">
+			<location>
+				<proximity to="Lich" distance="very close"></proximity>
+			</location>
+		</item>
 
 		<structure name="WarriorTomb" number="13-15">
 			<location>
@@ -21,10 +27,8 @@
 				<proximity to="MainEntrance" distance="far"></proximity>
 			</location>
 			<inventory>
-				<choice>
-					<invItem name="HealthPotion" number="1" />
-					<invItem name="ManaPotion" number="1" chance="50" />
-				</choice>
+				<invItem name="HealthPotion" number="1" />
+				<invItem name="ManaPotion" number="1" chance="50" />
 			</inventory>
 		</structure>
 
