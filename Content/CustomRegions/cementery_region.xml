@@ -1,10 +1,10 @@
-<customRegion name="Cementery" floorColor="#a9c2b0" borderColor="#5b7d6b" musicTheme="Cementery_theme" sample="wfcSample2">
+<customRegion name="Cementery" floorColor="#a9c2b0" borderColor="#5b7d6b" musicTheme="Cementery_theme_2" sample="wfcSample2">
 	<location>
 	</location>
 	<dimensions>
-		<rectangle width="30-40" height="15">
-			<rectangle width="10" height="25-30" placement="left" offsetX="-10" offsetY="5" />
-			<rectangle width="10" height="25-30" placement="right" offsetX="-10" offsetY="5" />
+		<rectangle width="33-40" height="15">
+			<rectangle width="9" height="20-25" placement="left" offsetX="-10" offsetY="5" />
+			<rectangle width="9" height="20-25" placement="right" offsetX="-10" offsetY="5" />
 		</rectangle>
 	</dimensions>
 	<content>

@@ -122,6 +122,18 @@
 /processorParam:Quality=Best
 /build:Music/Break_theme.wav
 
+#begin Music/Cementery_hard_theme.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Cementery_hard_theme.wav
+
+#begin Music/Cementery_theme_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Cementery_theme_2.wav
+
 #begin Music/Cementery_theme.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
