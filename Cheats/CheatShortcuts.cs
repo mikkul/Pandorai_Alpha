@@ -7,7 +7,7 @@ namespace Pandorai.Cheats
 {
 	public static class CheatShortcuts
 	{
-		public static bool Activated = true;
+		public static bool Activated = false;
 
 		public static void HandleKeyInput(Keys key)
 		{
