@@ -55,6 +55,15 @@
 			</inventory>
 		</structure>
 
+		<structure name="Chest" number="1">
+			<location>
+				<stripe direction="across" position="100" />
+			</location>
+			<inventory>
+				<invItem name="IceArrowRune" number="1" />
+			</inventory>
+		</structure>
+
 		<item name="HealthPotion" number="2">
 			<location>
 				<proximity to="Chest" distance="very close" />
@@ -62,12 +71,6 @@
 		</item>
 
 		<item name="ManaPotion" number="1">
-			<location>
-				<proximity to="Chest" distance="very close" />
-			</location>
-		</item>		
-
-		<item name="TransformSpell" number="2">
 			<location>
 				<proximity to="Chest" distance="very close" />
 			</location>

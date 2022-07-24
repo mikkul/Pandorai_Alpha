@@ -1,4 +1,4 @@
-﻿<customRegion name="Forest" floorColor="#4b9c50" borderColor="#2c693d" musicTheme="Forest_theme" sample="forestSample">
+﻿<customRegion name="Forest" floorColor="#4b9c50" borderColor="#2c693d" musicTheme="Forest_dark_theme" sample="forestSample">
 	<location>
 	</location>
 	<dimensions>
