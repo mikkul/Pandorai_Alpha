@@ -125,7 +125,7 @@ namespace Pandorai.MapGeneration
 			AddStructures("Lantern", 10);
 			AddStructures("Campfire", 15);
 
-			var barrels = AddStructures("Barrel", 15);
+			var barrels = AddStructures("Barrel", 16);
 			foreach (var barrel in barrels)
 			{
 				bool isTrap = _rng.NextFloat() < 0.34f;
@@ -147,6 +147,14 @@ namespace Pandorai.MapGeneration
 				{
 					var barrelContainer = barrel.GetBehaviour<Container>();
 					var itemInstance = ItemLoader.GetItem("HealthPotion");
+					barrelContainer.Inventory.AddElement(itemInstance);
+				}
+
+				bool containsSpell = _rng.NextFloat() < 0.42f;
+				if(containsSpell)
+				{
+					var barrelContainer = barrel.GetBehaviour<Container>();
+					var itemInstance = ItemLoader.GetItem("WindBlowSpell");
 					barrelContainer.Inventory.AddElement(itemInstance);
 				}
 			}

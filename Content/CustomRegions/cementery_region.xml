@@ -64,6 +64,7 @@
 					<invItem name="ManaPotion" number="1" chance="50" />
 				</choice>
 				<invItem name="StoneSpikesSpell" number="1" />
+				<invItem name="WindBlowRune" number="1" />
 			</inventory>
 		</structure>
 

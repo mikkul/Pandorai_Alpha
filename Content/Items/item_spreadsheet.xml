@@ -73,7 +73,7 @@
 			<Amount>5</Amount>
 		</effect>
 	</item>
-	<item id="BlinkPotion" texture="92" consumable="True" name="Potion of blink" tooltipColor="purple" description="Teleports you to a random location on the map" type="Food">
+	<item id="BlinkPotion" texture="92" consumable="True" name="Potion of blink" tooltipColor="purple" description="Teleports you to a random location on the map" type="Food" sound="bottle">
 		<effect name="Blink">
 		</effect>
 	</item>
@@ -84,22 +84,22 @@
 			<Range>6</Range>
 		</effect>
 	</item>
-	<item id="SmallStrengthPotion" texture="95" consumable="True" name="Strength potion" tooltipColor="green" description="Increases your strength by 1" type="Food">
+	<item id="SmallStrengthPotion" texture="95" consumable="True" name="Strength potion" tooltipColor="green" description="Increases your strength by 1" type="Food" sound="bottle">
 		<effect name="ModifyStrength">
 			<Amount>1</Amount>
 		</effect>
 	</item>
-	<item id="MediumStrengthPotion" texture="95" consumable="True" name="Strength potion" tooltipColor="green" description="Increases your strength by 2" type="Food">
+	<item id="MediumStrengthPotion" texture="95" consumable="True" name="Strength potion" tooltipColor="green" description="Increases your strength by 2" type="Food" sound="bottle">
 		<effect name="ModifyStrength">
 			<Amount>2</Amount>
 		</effect>
 	</item>	
-	<item id="LargeStrengthPotion" texture="95" consumable="True" name="Strength potion" tooltipColor="green" description="Increases your strength by 3" type="Food">
+	<item id="LargeStrengthPotion" texture="95" consumable="True" name="Strength potion" tooltipColor="green" description="Increases your strength by 3" type="Food" sound="bottle">
 		<effect name="ModifyStrength">
 			<Amount>3</Amount>
 		</effect>
 	</item>	
-	<item id="SmallEndurancePotion" texture="93" consumable="True" name="Potion of endurance" tooltipColor="green" description="Increases your max health by 10" type="Food">
+	<item id="SmallEndurancePotion" texture="93" consumable="True" name="Potion of endurance" tooltipColor="green" description="Increases your max health by 10" type="Food" sound="bottle">
 		<effect name="ModifyMaxHP">
 			<Amount>10</Amount>
 		</effect>
@@ -107,7 +107,7 @@
 			<Amount>10</Amount>
 		</effect>
 	</item>
-	<item id="MediumEndurancePotion" texture="93" consumable="True" name="Potion of endurance" tooltipColor="green" description="Increases your max health by 20" type="Food">
+	<item id="MediumEndurancePotion" texture="93" consumable="True" name="Potion of endurance" tooltipColor="green" description="Increases your max health by 20" type="Food" sound="bottle">
 		<effect name="ModifyMaxHP">
 			<Amount>20</Amount>
 		</effect>
@@ -115,7 +115,7 @@
 			<Amount>20</Amount>
 		</effect>
 	</item>	
-	<item id="LargeEndurancePotion" texture="93" consumable="True" name="Potion of endurance" tooltipColor="green" description="Increases your max health by 30" type="Food">
+	<item id="LargeEndurancePotion" texture="93" consumable="True" name="Potion of endurance" tooltipColor="green" description="Increases your max health by 30" type="Food" sound="bottle">
 		<effect name="ModifyMaxHP">
 			<Amount>30</Amount>
 		</effect>
@@ -123,7 +123,7 @@
 			<Amount>30</Amount>
 		</effect>
 	</item>	
-	<item id="SmallEnergyPotion" texture="94" consumable="True" name="Potion of energy" tooltipColor="green" description="Increases your max mana by 2" type="Food">
+	<item id="SmallEnergyPotion" texture="94" consumable="True" name="Potion of energy" tooltipColor="green" description="Increases your max mana by 2" type="Food" sound="bottle">
 		<effect name="ModifyMaxMana">
 			<Amount>2</Amount>
 		</effect>
@@ -131,7 +131,7 @@
 			<Amount>2</Amount>
 		</effect>
 	</item>
-	<item id="MediumEnergyPotion" texture="94" consumable="True" name="Potion of energy" tooltipColor="green" description="Increases your max mana by 4" type="Food">
+	<item id="MediumEnergyPotion" texture="94" consumable="True" name="Potion of energy" tooltipColor="green" description="Increases your max mana by 4" type="Food" sound="bottle">
 		<effect name="ModifyMaxMana">
 			<Amount>4</Amount>
 		</effect>
@@ -139,7 +139,7 @@
 			<Amount>4</Amount>
 		</effect>
 	</item>	
-	<item id="LargeEnergyPotion" texture="94" consumable="True" name="Potion of energy" tooltipColor="green" description="Increases your max mana by 6" type="Food">
+	<item id="LargeEnergyPotion" texture="94" consumable="True" name="Potion of energy" tooltipColor="green" description="Increases your max mana by 6" type="Food" sound="bottle">
 		<effect name="ModifyMaxMana">
 			<Amount>6</Amount>
 		</effect>
