@@ -15,7 +15,7 @@ namespace Pandorai.Mechanics
 
 			creature.IsMoving = true;
 			creature.SetMovementTexture(desiredPoint);
-			SoundManager.PlaySound(creature.Sounds.Footstep, 0.35f);
+			SoundManager.PlaySound(creature.Sounds.Footstep, creature.Position, 0.35f);
 
 			Main.Game.Map.RequestTileCollisionFlagChange(creature.MapIndex, false);
 			Main.Game.Map.RequestTileCollisionFlagChange(desiredPoint, true);

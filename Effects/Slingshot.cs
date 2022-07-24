@@ -47,7 +47,7 @@ namespace Pandorai.Effects
 
                     user.Inventory.RemoveElement("Stone", 1);
 
-                    SoundManager.PlaySound("spell");
+                    SoundManager.PlaySound("spell", user.Position);
                     DisplayMessage(user);
 
                     tryCreature.GetHit(Damage, user);

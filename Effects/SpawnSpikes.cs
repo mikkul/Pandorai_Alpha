@@ -43,7 +43,7 @@ namespace Pandorai.Effects
 
             if(user.MapIndex.IsInRangeOfPlayer())
             {
-                SoundManager.PlaySound("Trap_01");
+                SoundManager.PlaySound("Trap_01", user.Position);
             }
 
             DisplayMessage(user);

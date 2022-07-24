@@ -41,7 +41,7 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
-            SoundManager.PlaySound("teleport");
+            SoundManager.PlaySound("teleport", Structure.Tile.Index.IndexToWorldPosition());
             creature.RequestMovement(freeTile);
         }
 

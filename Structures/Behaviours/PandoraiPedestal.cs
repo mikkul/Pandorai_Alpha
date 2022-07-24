@@ -114,8 +114,8 @@ namespace Pandorai.Structures.Behaviours
             effectTimer.Start();
 
 			SoundManager.StopMusic();
-            SoundManager.PlaySound("FX150");
-            SoundManager.PlaySound("Jingle_Win_00");
+            SoundManager.PlaySound("FX150", Structure.Tile.Index.IndexToWorldPosition());
+            SoundManager.PlaySound("Jingle_Win_00", Structure.Tile.Index.IndexToWorldPosition());
         }
     }
 }

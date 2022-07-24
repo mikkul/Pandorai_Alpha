@@ -17,7 +17,7 @@ namespace Pandorai.Creatures.Behaviours
             IsAwake = true;
             Main.Game.Camera.CameraShake = new Shake(1000, 120, 25, Main.Game.MainRng);
 			Main.Game.Camera.ShakeCamera();
-            SoundManager.PlaySound("explosion_low");
+            SoundManager.PlaySound("explosion_low", Owner.Position);
             EnableVision();
 
             var hpBarTimer = new System.Timers.Timer(1000);

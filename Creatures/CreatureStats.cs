@@ -145,7 +145,7 @@ namespace Pandorai.Creatures
             if(_owner?.IsPossessedCreature() ?? false)
             {
                 MessageLog.DisplayMessage($"You have advanced to level {Level}!", Color.Yellow);
-                SoundManager.PlaySound("FX146");
+                SoundManager.PlaySound("FX146", _owner.Position);
 
                 var effectTime = 4000;
 

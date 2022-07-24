@@ -68,7 +68,7 @@ namespace Pandorai.Effects
                     };
                     effectTimer.Start();
 
-                    SoundManager.PlaySound("spell");
+                    SoundManager.PlaySound("spell", user.Position);
                     DisplayMessage(user);
                 }
             }

@@ -99,7 +99,7 @@ namespace Pandorai.Creatures
 			{
 				if(MapIndex.IsInRangeOfPlayer())
 				{
-					SoundManager.PlaySound(Sounds.Death);
+					SoundManager.PlaySound(Sounds.Death, Position);
 				}
 				var corpse = StructureLoader.GetStructure("Corpse");
 				corpse.Tile = TileInfo.GetInfo(MapIndex, Main.Game);
@@ -210,7 +210,7 @@ namespace Pandorai.Creatures
 
 		public void Hit(Creature incomingCreature)
 		{
-			SoundManager.PlaySound(incomingCreature.Sounds.Attack);
+			SoundManager.PlaySound(incomingCreature.Sounds.Attack, incomingCreature.Position);
 			GotHit?.Invoke(incomingCreature);
 		}
 
@@ -317,10 +317,7 @@ namespace Pandorai.Creatures
 				MessageLog.DisplayMessage($"You got hit by a {byWhom.TemplateName} for {damage} damage", Color.Red);
 			}
 
-			if(MapIndex.IsInRangeOfPlayer())
-			{
-				SoundManager.PlaySound(Sounds.Hurt);
-			}
+			SoundManager.PlaySound(Sounds.Hurt, Position);
 			Stats.Health -= (int)damage;
 			DamageFlash();
 			if (Stats.Health <= 0)
@@ -333,7 +330,7 @@ namespace Pandorai.Creatures
 					{
 						Stats.Health = 1;
 						MessageLog.DisplayMessage("You have miraculously avoided death", Color.Pink);
-						SoundManager.PlaySound("FX148");
+						SoundManager.PlaySound("FX148", Position);
 						var particleSystemEffect = new PSImplosion(this.Position, 100, "FireParticleTexture", 2000, Main.Game.Map.TileSize, 40, Color.Green, true);
 						ParticleSystemManager.AddSystem(particleSystemEffect, true);
 					}

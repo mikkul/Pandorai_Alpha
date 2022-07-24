@@ -334,5 +334,10 @@ namespace Pandorai.Utility
 			list.RemoveAt(list.Count - 1);
 			return poppedElement;
         }
+
+		public static Vector2 IndexToWorldPosition(this Point index)
+		{
+			return new Vector2(index.X * Main.Game.Options.TileSize, index.Y * Main.Game.Options.TileSize);
+		}
 	}
 }

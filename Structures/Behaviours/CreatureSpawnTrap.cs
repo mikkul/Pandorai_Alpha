@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Pandorai.Creatures;
-using Pandorai.MapGeneration;
 using Pandorai.Sounds;
+using Pandorai.Utility;
 
 namespace Pandorai.Structures.Behaviours
 {
@@ -71,7 +71,7 @@ namespace Pandorai.Structures.Behaviours
                 }
             }
 
-            SoundManager.PlaySound("teleport");
+            SoundManager.PlaySound("teleport", Structure.Tile.Index.IndexToWorldPosition());
 		}
 
 		public override void ForceHandler(ForceType force)

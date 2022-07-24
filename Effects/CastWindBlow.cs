@@ -142,7 +142,7 @@ namespace Pandorai.Effects
 
 				effectTimer.Start();
 				damageTimer.Start();
-				SoundManager.PlaySound("fireball0");
+				SoundManager.PlaySound("fireball0", user.Position);
 				DisplayMessage(user);
 			};
 

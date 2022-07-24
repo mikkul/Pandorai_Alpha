@@ -20,7 +20,7 @@ namespace Pandorai.Effects
             while(Main.Game.Map.GetTile(randomX, randomY).CollisionFlag);
 
             usingCreature.RequestMovement(new Point(randomX, randomY));
-            SoundManager.PlaySound("teleport");
+            SoundManager.PlaySound("teleport", usingCreature.Position);
             DisplayMessage(usingCreature);
         }
 

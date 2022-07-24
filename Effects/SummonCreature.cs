@@ -51,7 +51,7 @@ namespace Pandorai.Effects
 			tile.CollisionFlag = true;
 			Main.Game.CreatureManager.AddCreature(creatureInstance);
 
-            SoundManager.PlaySound("teleport");
+            SoundManager.PlaySound("teleport", usingCreature.Position);
             DisplayMessage(usingCreature);
         }
 

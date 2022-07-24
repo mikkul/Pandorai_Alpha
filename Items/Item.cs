@@ -38,7 +38,7 @@ namespace Pandorai.Items
 
 			if(!string.IsNullOrEmpty(SoundEffectName))
 			{
-				SoundManager.PlaySound(SoundEffectName);
+				SoundManager.PlaySound(SoundEffectName, creature.Position);
 			}
 
 			foreach (var effect in Effects)

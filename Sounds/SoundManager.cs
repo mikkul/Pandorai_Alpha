@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Timers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Pandorai.Utility;
 
 namespace Pandorai.Sounds
 {
@@ -66,9 +68,10 @@ namespace Pandorai.Sounds
             }
         }
 
-        public static void PlaySound(string name, float volume = 1f)
+        public static void PlaySound(string name, Vector2 position, float volume = 1f)
         {
-            if (_sounds.ContainsKey(name))
+            bool isSoundInRange = Main.Game.Camera.Viewport.Displace(Main.Game.Camera.Position).Contains(position);
+            if (_sounds.ContainsKey(name) && isSoundInRange)
             {
                 var soundInstance = _sounds[name].CreateInstance();
                 soundInstance.Volume = volume * (SoundsVolume / 100f);

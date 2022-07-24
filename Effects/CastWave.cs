@@ -34,7 +34,7 @@ namespace Pandorai.Effects
 
 			Main.Game.Camera.CameraShake = new Rendering.Shake((int)time + 250, 60, 30, Main.Game.MainRng);
 			Main.Game.Camera.ShakeCamera();
-			SoundManager.PlaySound("explosion_low");
+			SoundManager.PlaySound("explosion_low", user.Position);
 
 			Timer effectTimer = new Timer(time);
 			effectTimer.Elapsed += (s, a) =>
@@ -87,7 +87,7 @@ namespace Pandorai.Effects
 			effectTimer.Start();
 			damageTimer.Start();
 
-			SoundManager.PlaySound("Spell_02");
+			SoundManager.PlaySound("Spell_02", user.Position);
 			DisplayMessage(user);
 		}
 
