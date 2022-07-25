@@ -152,6 +152,12 @@
 /processorParam:Quality=Best
 /build:Music/Forest_dark_theme.wav
 
+#begin Music/Forest_dark_theme_loop_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/Forest_dark_theme_loop_2.wav;Music/Forest_dark_theme_loop_2.wav
+
 #begin Music/Forest_theme.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

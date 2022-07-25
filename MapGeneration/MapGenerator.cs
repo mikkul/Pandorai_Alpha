@@ -52,7 +52,7 @@ namespace Pandorai.MapGeneration
             stopwatch.Start();
 
 			_maxAllowedItemCount = new();
-			_maxAllowedItemCount["BlinkPotion"] = 2;
+			_maxAllowedItemCount["BlinkPotion"] = 3;
 
             _map = new Tile[WorldOptions.Width, WorldOptions.Height];
             _map.Populate(() => null);

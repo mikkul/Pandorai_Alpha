@@ -158,6 +158,8 @@ namespace Pandorai.Sprites
 			AddMapSprite(448, 768, 64, 64, 0, 0); // wind blow rune 106
 
 			AddMapSprite(0, 768, 64, 64, 0, 0); // spikes 107
+
+			AddMapSprite(512, 768, 64, 64, 0, 0); // book stand read 108
 		}
 
 		public static void AddCreatureSprite(int startX, int startY, int spriteWidth, int spriteHeight, int frameCount, float timePerFrame)

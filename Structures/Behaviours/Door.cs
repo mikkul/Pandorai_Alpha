@@ -62,7 +62,7 @@ namespace Pandorai.Structures.Behaviours
 				}
 				else
 				{
-					SoundManager.PlaySound("interface6", Structure.Tile.Index.IndexToWorldPosition(), 0.5f);
+					SoundManager.PlaySound("interface6", Structure.Tile.Index.IndexToWorldPosition(), 1f);
 				}
 			}
 			else

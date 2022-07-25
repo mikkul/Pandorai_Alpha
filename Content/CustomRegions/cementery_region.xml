@@ -17,7 +17,7 @@
 		<creature name="Spider" number="2-3" />
 		<creature name="Rat" number="2-4" />
 
-		<structure name="Grave" number="100-115">
+		<structure name="Grave" number="85-100">
 		</structure>
 		
 		<structure name="Torch" number="6-8">

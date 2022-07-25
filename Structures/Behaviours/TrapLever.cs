@@ -1,4 +1,6 @@
 using Pandorai.Creatures;
+using Pandorai.Sounds;
+using Pandorai.Utility;
 
 namespace Pandorai.Structures.Behaviours
 {
@@ -39,6 +41,7 @@ namespace Pandorai.Structures.Behaviours
             }
 
             correspondingTrap.GetBehaviour<Trap>().Activate();
+            SoundManager.PlaySound("interface4", Structure.Tile.Index.IndexToWorldPosition(), 0.5f);
         }
 
         public override Behaviour Clone()

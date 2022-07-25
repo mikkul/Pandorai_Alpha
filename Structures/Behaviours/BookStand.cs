@@ -7,6 +7,7 @@ namespace Pandorai.Structures.Behaviours
     public class BookStand : Behaviour
     {
         public int ExperienceGained { get; set; }
+        public int TextureWhenRead { get; set; }
 
         public bool IsRead { get; set; }
 
@@ -16,6 +17,10 @@ namespace Pandorai.Structures.Behaviours
 			{
 				ExperienceGained = int.Parse(value);
 			}
+            else if (name == "TextureWhenRead")
+			{
+				TextureWhenRead = int.Parse(value);
+			}
         }
 
         public override Behaviour Clone()
@@ -23,6 +28,7 @@ namespace Pandorai.Structures.Behaviours
             return new BookStand
             {
                 ExperienceGained = ExperienceGained,
+                TextureWhenRead = TextureWhenRead,
             };
         }
 
@@ -48,6 +54,7 @@ namespace Pandorai.Structures.Behaviours
                 return;
             }
 
+            Structure.Texture = TextureWhenRead;
             creature.Stats.Experience += (int)(ExperienceGained * Main.Game.ExperienceMultiplier);
             IsRead = true;
             SoundManager.PlaySound("metal-ringing", Structure.Tile.Index.IndexToWorldPosition(), 0.25f);
