@@ -131,8 +131,8 @@ namespace Pandorai.MapGeneration
 				bool isTrap = _rng.NextFloat() < 0.34f;
 				if(isTrap)
 				{
-					string creatureName = _rng.NextFloat() < 0.5f ? "Spider" : "Rat";
-					int creatureCount = creatureName == "Spider" ? 1 : _rng.Next(1, 3);
+					string creatureName = "Bat";
+					int creatureCount = _rng.Next(1, 3);
 					var trap = new CreatureSpawnTrap();
 					trap.Creatures = new Dictionary<string, int>
 					{
@@ -553,8 +553,8 @@ namespace Pandorai.MapGeneration
 				bool isTrap = rng.NextFloat() < 0.34f;
 				if(isTrap)
 				{
-					string creatureName = rng.NextFloat() < 0.5f ? "Spider" : "Rat";
-					int creatureCount = creatureName == "Spider" ? 1 : rng.Next(1, 3);
+					string creatureName = "Bat";
+					int creatureCount = rng.Next(1, 3);
 					var trap = new CreatureSpawnTrap();
 					trap.Creatures = new Dictionary<string, int>
 					{

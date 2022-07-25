@@ -643,4 +643,47 @@
 			<Footstep>stepdirt_4</Footstep>
 		</sounds>		
 	</creature>
+
+	<creature id="Bat" texture="20" maxHP="40" health="40" strength="8" class="Monster" corpseTexture="68" speed="36" level="1">
+		<modifiers>
+			<EnemyClasses>
+				<class>Human</class>
+			</EnemyClasses>
+			<MovingTextureIndices>
+				<index>20</index>
+				<index>20</index>
+				<index>20</index>
+				<index>20</index>
+			</MovingTextureIndices>
+			<IdleTextureIndices>
+				<index>20</index>
+				<index>20</index>
+				<index>20</index>
+				<index>20</index>
+			</IdleTextureIndices>
+		</modifiers>
+		<behaviours>
+			<behaviour name="NormalVision">
+				<RangeLimit>3</RangeLimit>
+			</behaviour>
+			<behaviour name="NormalHitResponse" />
+			<behaviour name="AggroOnVision">
+			</behaviour>
+			<behaviour name="ChaseTarget">
+				<Movement>Diagonal</Movement>
+			</behaviour>
+			<behaviour name="RandomWalk">
+				<MaxDistanceFromHome>2</MaxDistanceFromHome>
+				<Movement>Diagonal</Movement>
+			</behaviour>
+		</behaviours>
+		<sounds>
+			<Attack>Monster-4</Attack>
+			<Hurt>monster-10</Hurt>
+			<Death>monster-16</Death>
+			<Aggro>Monster-1</Aggro>
+			<Ambient></Ambient>
+			<Footstep></Footstep>
+		</sounds>		
+	</creature>
 </creatures>
