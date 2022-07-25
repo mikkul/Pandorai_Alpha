@@ -8,6 +8,8 @@ using Pandorai.AStarSearchAlgorithm;
 using System.Collections.Generic;
 using System.Linq;
 using Pandorai.Persistency;
+using Pandorai.Structures.Behaviours;
+using Pandorai.Sounds;
 
 namespace Pandorai.Mechanics
 {
@@ -109,6 +111,23 @@ namespace Pandorai.Mechanics
 				if(rangedWeapon != null)
 				{
 					rangedWeapon.Item.Use(Main.Game.Player.PossessedCreature);
+				}
+			}
+			else if(key == Keys.C) // loot corpse
+			{
+				if(Main.Game.Map.GetTile(PossessedCreature.MapIndex).HasStructure())
+				{
+					var container = Main.Game.Map.GetTile(PossessedCreature.MapIndex).MapObject.Structure.GetBehaviour<Container>();
+					if(container != null)
+					{
+						var transferredItems = container.Inventory.Items.Where(x => x.Item.TemplateName != "EmptyItem").ToList();
+						foreach (var item in transferredItems)
+						{
+							PossessedCreature.Inventory.AddElement(item.Item, item.Amount);
+							container.Inventory.RemoveElement(item.Item, item.Amount);
+						}
+						SoundManager.PlaySound("cloth-heavy", PossessedCreature.Position);
+					}
 				}
 			}
         }		

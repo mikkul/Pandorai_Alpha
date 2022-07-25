@@ -97,10 +97,7 @@ namespace Pandorai.Creatures
 
 			Died += () =>
 			{
-				if(MapIndex.IsInRangeOfPlayer())
-				{
-					SoundManager.PlaySound(Sounds.Death, Position);
-				}
+				SoundManager.PlaySound(Sounds.Death, Position);
 				var corpse = StructureLoader.GetStructure("Corpse");
 				corpse.Tile = TileInfo.GetInfo(MapIndex, Main.Game);
 				var container = corpse.GetBehaviour<Pandorai.Structures.Behaviours.Container>();

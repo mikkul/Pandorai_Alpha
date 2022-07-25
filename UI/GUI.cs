@@ -120,7 +120,7 @@ namespace Pandorai.UI
 
             Main.Game.InputManager.SingleKeyPress += k =>
             {
-                if(k == Keys.C)
+                if(k == Keys.P)
                 {
                     if(_isCharacterStatsWindowOpen)
                     {
