@@ -500,6 +500,7 @@ namespace Pandorai
             {
                 var mapGenerator = new MapGenerator();
                 Map.Tiles = mapGenerator.GenerateMap(Path.Combine(Content.RootDirectory, "customRegions_spreadsheet.xml"));
+                Console.WriteLine("Generated the map");
                 Map.UpdateTileTextures();
 
                 // make the power altar visible from the start

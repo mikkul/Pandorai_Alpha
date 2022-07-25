@@ -65,6 +65,8 @@ namespace Pandorai.MapGeneration
 
             List<RegMapInfo> createdRegions = new List<RegMapInfo>();
 
+			Console.WriteLine("Generating regions...");
+
             foreach (var reg in customRegLoader.Regions)
             {
                 for (int i = 0; i < reg.number; i++)
@@ -74,15 +76,27 @@ namespace Pandorai.MapGeneration
                 }
             }
 
+			Console.WriteLine("Generated all regions");
+
             PlaceRegions(filledSpace, usedTiles, createdRegions);
+
+			Console.WriteLine("Placed regions");
 
             MakeRooms(usedTiles);
 
+			Console.WriteLine("Made rooms");
+
 			ProcessRooms();
+
+			Console.WriteLine("Processed rooms");
 
 			FillSpaceBetween();
 
+			Console.WriteLine("Filled space between");
+
 			PlaceTeleporters();
+
+			Console.WriteLine("Placed teleporters");
 
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
